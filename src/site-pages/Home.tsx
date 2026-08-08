@@ -181,13 +181,19 @@ function AnimatedCounter({ target, suffix = '', duration = 2000 }: { target: num
 
 /* ──────────────────────── Hero Section ──────────────────────── */
 
-function HeroSection() {
+function HeroSection({ settings = {} }: { settings?: Record<string, string> }) {
   const heroRef = useRef<HTMLDivElement>(null)
   const badgeRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLHeadingElement>(null)
   const subtitleRef = useRef<HTMLParagraphElement>(null)
   const ctaRef = useRef<HTMLDivElement>(null)
   const imageColumnRef = useRef<HTMLDivElement>(null)
+
+  const companyName = (settings.company_name || 'ME2I').toUpperCase()
+  const tagline = settings.tagline || 'Solutions Digitales & Industrie de Demain'
+  const address = settings.address || 'Douala / Yaoundé, Cameroun'
+  const email = settings.email || 'contact@me2i.cm'
+  const phone = settings.phone || '+237 699 00 00 00'
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -283,15 +289,15 @@ function HeroSection() {
                 className="rounded-xl bg-white p-6 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between h-full opacity-0"
               >
                 <div>
-                  <h2 className="text-2xl font-bold text-bleu-marianne">m2i</h2>
-                  <p className="text-xs text-slate-400 mt-1">Solutions Digitales &amp; Industrie de Demain</p>
+                  <h2 className="text-2xl font-bold text-bleu-marianne uppercase tracking-wider">{companyName}</h2>
+                  <p className="text-xs text-slate-400 mt-1">{tagline}</p>
                   
                   <div className="mt-8 space-y-4">
                     <div className="flex items-start gap-3">
                       <MapPin className="h-4 w-4 text-bleu-marianne/60 mt-0.5 shrink-0" />
                       <div className="text-xs">
                         <span className="block font-bold text-bleu-marianne/60 uppercase tracking-wider text-[9px]">Adresse</span>
-                        <span className="text-slate-700 mt-0.5 block leading-normal">1 Place de l'Hôtel de Ville, 42000 Saint-Étienne</span>
+                        <span className="text-slate-700 mt-0.5 block leading-normal">{address}</span>
                       </div>
                     </div>
                     
@@ -299,7 +305,7 @@ function HeroSection() {
                       <Mail className="h-4 w-4 text-bleu-marianne/60 mt-0.5 shrink-0" />
                       <div className="text-xs">
                         <span className="block font-bold text-bleu-marianne/60 uppercase tracking-wider text-[9px]">E-mail</span>
-                        <a href="mailto:contact@m2i.fr" className="text-slate-700 hover:text-bleu-marianne mt-0.5 block underline underline-offset-2">contact@m2i.fr</a>
+                        <a href={`mailto:${email}`} className="text-slate-700 hover:text-bleu-marianne mt-0.5 block underline underline-offset-2">{email}</a>
                       </div>
                     </div>
 
@@ -307,7 +313,7 @@ function HeroSection() {
                       <Phone className="h-4 w-4 text-bleu-marianne/60 mt-0.5 shrink-0" />
                       <div className="text-xs">
                         <span className="block font-bold text-bleu-marianne/60 uppercase tracking-wider text-[9px]">Téléphone</span>
-                        <a href="tel:0477123456" className="text-slate-700 hover:text-bleu-marianne mt-0.5 block font-medium">04 77 12 34 56</a>
+                        <a href={`tel:${phone}`} className="text-slate-700 hover:text-bleu-marianne mt-0.5 block font-medium">{phone}</a>
                       </div>
                     </div>
                   </div>
@@ -585,10 +591,10 @@ function NewsSection() {
 
 /* ──────────────────────── Home Page ──────────────────────── */
 
-export default function Home() {
+export default function Home({ settings = {} }: { settings?: Record<string, string> }) {
   return (
     <>
-      <HeroSection />
+      <HeroSection settings={settings} />
       <WhoWeAreSection />
       <VisionSection />
       <ServicesSection />
