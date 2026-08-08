@@ -53,8 +53,8 @@ export default function ArticleListClient({
       )
       toast.success(`"${title}" a été déplacé dans la corbeille`)
       router.refresh()
-    } catch {
-      toast.error('Erreur lors du déplacement dans la corbeille')
+    } catch (err: any) {
+      toast.error(err?.message || 'Erreur lors du déplacement dans la corbeille')
     } finally {
       setLoadingId(null)
     }
@@ -70,8 +70,8 @@ export default function ArticleListClient({
       )
       toast.success(`"${title}" a été rétabli`)
       router.refresh()
-    } catch {
-      toast.error('Erreur lors de la restauration')
+    } catch (err: any) {
+      toast.error(err?.message || 'Erreur lors de la restauration')
     } finally {
       setLoadingId(null)
     }
@@ -89,8 +89,8 @@ export default function ArticleListClient({
       setArticles((prev) => prev.filter((a) => a.id !== id))
       toast.success('Article supprimé définitivement')
       router.refresh()
-    } catch {
-      toast.error('Erreur lors de la suppression définitive')
+    } catch (err: any) {
+      toast.error(err?.message || 'Erreur lors de la suppression définitive')
     } finally {
       setLoadingId(null)
     }
@@ -108,8 +108,8 @@ export default function ArticleListClient({
       setArticles((prev) => prev.filter((a) => a.status !== 'trash'))
       toast.success('Corbeille vidée')
       router.refresh()
-    } catch {
-      toast.error('Erreur lors du vidage de la corbeille')
+    } catch (err: any) {
+      toast.error(err?.message || 'Erreur lors du vidage de la corbeille')
     } finally {
       setEmptying(false)
     }
