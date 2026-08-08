@@ -75,13 +75,8 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
         </div>
       </div>
 
-      {/* Right side profile & status */}
+      {/* Right side profile */}
       <div className="flex items-center gap-3">
-        <div className="flex items-center gap-1.5 text-xs text-[#a7aaad] bg-[#101517] px-2.5 py-0.5 rounded border border-[#2c3338]">
-          <ShieldCheck className="h-3.5 w-3.5 text-[#00a32a]" />
-          <span className="font-mono text-[11px] text-emerald-400">Administrateur</span>
-        </div>
-
         {/* User profile dropdown */}
         <div className="relative">
           <button
