@@ -50,12 +50,12 @@ export default function Contact({ settings = {} }: { settings?: Record<string, s
 
   return (
     <div className="pt-20 min-h-[100dvh] bg-white">
-      <section className="bg-[#1E3A5F] py-16">
-        <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
-          <h1 className="text-4xl sm:text-5xl font-normal text-white mb-4">
+      <section className="py-12 bg-white text-center border-b border-[#f0f0f1]">
+        <div className="mx-auto max-w-3xl px-6">
+          <h1 className="text-3xl sm:text-4xl font-normal text-[#1d2327] mb-3">
             Contactez {companyName}
           </h1>
-          <p className="text-white/80 max-w-[560px] font-normal text-base">
+          <p className="text-[#646970] font-normal text-base leading-relaxed">
             Une étude technique, un devis de maintenance ou une commande ? Notre équipe d'ingénieurs et techniciens est à votre écoute.
           </p>
         </div>
