@@ -1,7 +1,9 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { Link } from '@/src/lib/router-compat'
-import { Linkedin, Facebook, Mail, Phone, MapPin } from 'lucide-react'
+import { Linkedin, Facebook, Mail, Phone, MapPin, ArrowRight } from 'lucide-react'
+import { createClientSupabase } from '@/src/admin/lib/supabase-client'
 
 const expertiseLinks = [
   { label: 'Groupes électrogènes', path: '/services' },
@@ -20,65 +22,65 @@ const companyLinks = [
   { label: 'Mentions légales', path: '/a-propos' },
 ]
 
-const socialLinks = [
-  { icon: Linkedin, label: 'LinkedIn', href: '#' },
-  { icon: Facebook, label: 'Facebook', href: '#' },
-]
-
 export default function Footer() {
+  const [settings, setSettings] = useState<Record<string, string>>({
+    company_name: 'ME2I',
+    tagline: 'Maintenance Industrielle & Énergie sans Interruption',
+    email: 'contact@me2i.cm',
+    phone: '+237 699 00 00 00',
+    emergency_phone: '+237 677 00 00 00',
+    address: 'Douala / Yaoundé, Cameroun',
+    linkedin_url: '',
+    facebook_url: '',
+  })
+
+  useEffect(() => {
+    async function loadSettings() {
+      try {
+        const supabase = createClientSupabase()
+        const { data } = await supabase.from('company_settings').select('*')
+        if (data && data.length > 0) {
+          const map: Record<string, string> = {}
+          data.forEach((item: any) => {
+            if (item.key && item.value) map[item.key] = item.value
+          })
+          setSettings((prev) => ({ ...prev, ...map }))
+        }
+      } catch (err) {
+        console.error('Error fetching settings for footer:', err)
+      }
+    }
+    loadSettings()
+  }, [])
+
+  const companyName = settings.company_name || 'ME2I'
+  const tagline = settings.tagline || 'Maintenance Industrielle & Énergie sans Interruption'
+  const address = settings.address || 'Douala / Yaoundé, Cameroun'
+  const email = settings.email || 'contact@me2i.cm'
+  const phone = settings.phone || '+237 699 00 00 00'
+  const emergencyPhone = settings.emergency_phone || ''
+  const linkedinUrl = settings.linkedin_url || ''
+  const facebookUrl = settings.facebook_url || ''
+
   return (
     <footer className="bg-bleu-marianne text-white" role="contentinfo">
       <div className="mx-auto max-w-[1280px] px-6 lg:px-12 pt-16 pb-8">
-
         {/* Main footer grid */}
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
-
           {/* Column 1: Company info */}
           <div className="lg:col-span-1">
             <div className="mb-5">
               <p className="text-[11px] font-semibold uppercase tracking-widest text-white/60 mb-1">
                 Entreprise
               </p>
-              <p className="text-xl font-bold tracking-tight">ME2I</p>
-              <p className="text-sm text-white/70 mt-1 leading-snug">
-                Maintenance Industrielle &amp; Énergie sans Interruption
+              <p className="text-2xl font-bold tracking-tight uppercase">{companyName}</p>
+              <p className="text-xs text-white/70 mt-1.5 leading-relaxed font-normal">
+                {tagline}
               </p>
             </div>
-
-            <address className="not-italic text-sm text-white/70 leading-relaxed space-y-2">
-              <p className="flex items-start gap-2">
-                <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-white/50" />
-                Cameroun - Afrique centrale
-              </p>
-              <p className="flex items-center gap-2">
-                <Phone className="h-4 w-4 shrink-0 text-white/50" />
-                <a href="tel:+237000000000" className="hover:text-white transition-colors underline">
-                  +237 000 000 000
-                </a>
-              </p>
-              <p className="flex items-center gap-2">
-                <Mail className="h-4 w-4 shrink-0 text-white/50" />
-                <a href="mailto:contact@me2i.cm" className="hover:text-white transition-colors underline">
-                  contact@me2i.cm
-                </a>
-              </p>
-            </address>
-
-            {/* Social links */}
-            <div className="mt-6 flex gap-2">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  className="flex h-9 w-9 items-center justify-center border border-white/20 text-white/60 hover:bg-white/10 hover:text-white transition-colors duration-200"
-                  aria-label={social.label}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <social.icon className="h-4 w-4" />
-                </a>
-              ))}
-            </div>
+            <p className="text-xs text-white/60 leading-relaxed font-normal">
+              Votre partenaire de confiance au Cameroun et en Afrique centrale pour la fourniture, l'installation et la maintenance d'équipements industriels et de centrales électriques.
+            </p>
           </div>
 
           {/* Column 2: Expertise */}
@@ -91,7 +93,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     to={link.path}
-                    className="text-sm text-white/70 hover:text-white transition-colors duration-200"
+                    className="text-xs text-white/70 hover:text-white transition-colors duration-200 font-normal"
                   >
                     {link.label}
                   </Link>
@@ -110,7 +112,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     to={link.path}
-                    className="text-sm text-white/70 hover:text-white transition-colors duration-200"
+                    className="text-xs text-white/70 hover:text-white transition-colors duration-200 font-normal"
                   >
                     {link.label}
                   </Link>
@@ -119,41 +121,108 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 4: CTA */}
+          {/* Column 4: Contact Info (Replaces old Disponibilité section) */}
           <div>
             <h3 className="text-[11px] font-semibold uppercase tracking-widest text-white/60 mb-5">
-              Besoin d&apos;une intervention ?
+              Contact &amp; Assistance
             </h3>
-            <p className="text-sm text-white/70 leading-relaxed mb-6">
-              Nos techniciens sont disponibles pour répondre à vos besoins en maintenance industrielle et en solutions énergétiques.
-            </p>
+            <address className="not-italic text-xs text-white/70 leading-relaxed space-y-3 font-normal mb-6">
+              <p className="flex items-start gap-2.5">
+                <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-white/60" />
+                <span>{address}</span>
+              </p>
+              <p className="flex items-center gap-2.5">
+                <Phone className="h-4 w-4 shrink-0 text-white/60" />
+                <a href={`tel:${phone.replace(/\s+/g, '')}`} className="hover:text-white transition-colors underline">
+                  {phone}
+                </a>
+              </p>
+              {emergencyPhone && (
+                <p className="flex items-center gap-2.5 text-emerald-400">
+                  <Phone className="h-4 w-4 shrink-0 text-emerald-400" />
+                  <span>Astreinte : {emergencyPhone}</span>
+                </p>
+              )}
+              <p className="flex items-center gap-2.5">
+                <Mail className="h-4 w-4 shrink-0 text-white/60" />
+                <a href={`mailto:${email}`} className="hover:text-white transition-colors underline">
+                  {email}
+                </a>
+              </p>
+            </address>
+
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 border border-white/40 px-5 py-2.5 text-sm font-medium text-white hover:bg-white/10 transition-colors"
+              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2.5 text-xs font-normal text-white transition-colors rounded-none"
             >
-              Nous contacter
+              <span>Demander un devis</span>
+              <ArrowRight className="h-3.5 w-3.5" />
             </Link>
-            <div className="mt-6 pt-6 border-t border-white/10">
-              <p className="text-xs text-white/50 mb-1">Disponibilité</p>
-              <p className="text-sm text-white/70">Lundi – Vendredi : 7h30 – 18h00</p>
-              <p className="text-sm text-white/70">Astreinte 24h/24 – 7j/7</p>
-            </div>
           </div>
         </div>
 
         {/* Separator */}
         <div className="my-8 h-px bg-white/10" />
 
-        {/* Bottom bar */}
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-white/40">
-            &copy; {new Date().getFullYear()} ME2I - Maintenance Industrielle &amp; Énergie sans Interruption. Tous droits réservés.
+        {/* Bottom bar with Social Networks placed LOWER down */}
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-white/50 font-normal">
+            &copy; {new Date().getFullYear()} {companyName} - {tagline}. Tous droits réservés.
           </p>
+
+          {/* Social Links dynamically populated from admin database */}
+          <div className="flex items-center gap-3">
+            <span className="text-xs text-white/50 font-normal mr-1">Suivez-nous :</span>
+            {linkedinUrl ? (
+              <a
+                href={linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-8 w-8 items-center justify-center border border-white/20 rounded-sm text-white/70 hover:bg-white/15 hover:text-white transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-4 w-4" />
+              </a>
+            ) : (
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-8 w-8 items-center justify-center border border-white/20 rounded-sm text-white/70 hover:bg-white/15 hover:text-white transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="h-4 w-4" />
+              </a>
+            )}
+
+            {facebookUrl ? (
+              <a
+                href={facebookUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-8 w-8 items-center justify-center border border-white/20 rounded-sm text-white/70 hover:bg-white/15 hover:text-white transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-4 w-4" />
+              </a>
+            ) : (
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex h-8 w-8 items-center justify-center border border-white/20 rounded-sm text-white/70 hover:bg-white/15 hover:text-white transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-4 w-4" />
+              </a>
+            )}
+          </div>
+
           <div className="flex flex-wrap gap-x-4 gap-y-1">
-            <Link to="/a-propos" className="text-xs text-white/40 hover:text-white transition-colors">
+            <Link to="/a-propos" className="text-xs text-white/50 hover:text-white transition-colors font-normal">
               Mentions légales
             </Link>
-            <Link to="/a-propos" className="text-xs text-white/40 hover:text-white transition-colors">
+            <Link to="/a-propos" className="text-xs text-white/50 hover:text-white transition-colors font-normal">
               Politique de confidentialité
             </Link>
           </div>
