@@ -66,8 +66,8 @@ export default function NewProductPage() {
 
   return (
     <div className="space-y-4 w-full">
-      {/* Top Header sans gras */}
-      <div className="flex items-center justify-between pb-2 border-b border-[#dcdcde] w-full">
+      {/* Top Header Card: bg-white and non-bold title */}
+      <div className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-sm flex items-center justify-between w-full">
         <div className="flex items-center gap-2">
           <Link
             href="/admin/produits"

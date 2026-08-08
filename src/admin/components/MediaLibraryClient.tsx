@@ -150,11 +150,11 @@ export default function MediaLibraryClient() {
 
   return (
     <div className="space-y-4 w-full">
-      {/* Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[#dcdcde] gap-3">
+      {/* Header Card: bg-white and non-bold title */}
+      <div className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 w-full">
         <div>
           <h1 className="text-xl font-normal text-[#1d2327]">Médiathèque</h1>
-          <p className="text-xs text-[#646970] mt-0.5">
+          <p className="text-xs text-[#646970] font-normal mt-0.5">
             Gérez la galerie d'images et tous les fichiers médias de votre site.
           </p>
         </div>

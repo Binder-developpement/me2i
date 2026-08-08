@@ -29,11 +29,11 @@ export default async function ArticlesListPage({
 
   return (
     <div className="space-y-4 w-full">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-[#c3c4c7] pb-3">
+      {/* Header Card: bg-white and non-bold title */}
+      <div className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 w-full">
         <div>
           <h1 className="text-xl font-normal text-[#1d2327]">Articles</h1>
-          <p className="text-xs text-[#646970] mt-0.5">
+          <p className="text-xs text-[#646970] font-normal mt-0.5">
             Gérez les publications et actualités de votre site
           </p>
         </div>
