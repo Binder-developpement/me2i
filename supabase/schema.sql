@@ -134,6 +134,29 @@ ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE contacts ENABLE ROW LEVEL SECURITY;
 ALTER TABLE company_settings ENABLE ROW LEVEL SECURITY;
 
+-- ─── Realisations ─────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS realisations (
+  id           TEXT PRIMARY KEY,
+  title        TEXT NOT NULL,
+  slug         TEXT UNIQUE NOT NULL,
+  category     TEXT,
+  subtitle     TEXT,
+  description  TEXT,
+  content      TEXT,
+  cover_url    TEXT,
+  client       TEXT,
+  location     TEXT,
+  status       TEXT DEFAULT 'published' CHECK (status IN ('published', 'draft', 'trash')),
+  created_at   TIMESTAMPTZ DEFAULT now(),
+  updated_at   TIMESTAMPTZ DEFAULT now()
+);
+
+ALTER TABLE realisations ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Public realisations read" ON realisations FOR SELECT USING (true);
+CREATE POLICY "Public realisations insert" ON realisations FOR INSERT WITH CHECK (true);
+CREATE POLICY "Public realisations update" ON realisations FOR UPDATE USING (true);
+CREATE POLICY "Public realisations delete" ON realisations FOR DELETE USING (true);
+
 -- Public read for published articles, services, products
 CREATE POLICY "Public read articles" ON articles FOR SELECT USING (status = 'published');
 CREATE POLICY "Public read services" ON services FOR SELECT USING (status = 'published');

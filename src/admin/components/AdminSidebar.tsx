@@ -7,6 +7,7 @@ import {
   FileText,
   Wrench,
   Package,
+  FolderCheck,
   ImageIcon,
   Trash2,
   ShoppingCart,
@@ -19,6 +20,11 @@ const navItems = [
     title: 'Tableau de bord',
     icon: LayoutDashboard,
     href: '/admin',
+  },
+  {
+    title: 'Réalisations',
+    icon: FolderCheck,
+    href: '/admin/realisations',
   },
   {
     title: 'Articles',
