@@ -729,40 +729,37 @@ function NewsSection({ articles = [] }: { articles?: ArticleItem[] }) {
   }
 
   return (
-    <section className="bg-[#f8fafc] py-16 lg:py-24 border-t border-slate-200" aria-labelledby="news-title">
+    <section className="bg-white py-16 lg:py-20 border-t border-slate-100" aria-labelledby="news-title">
       <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
         {/* Section Header */}
         <motion.div
           ref={ref}
-          className="mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
+          className="mb-10 pb-6 border-b border-slate-100 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={fadeInUp}
         >
           <div>
-            <span className="text-[11px] font-bold uppercase tracking-widest text-bleu-marianne/80 mb-3 inline-block bg-bleu-marianne/10 px-3 py-1">
+            <span className="text-[11px] font-bold uppercase tracking-widest text-bleu-marianne mb-1.5 block">
               Actualités &amp; Publications
             </span>
-            <h2 id="news-title" className="font-heading text-[32px] font-bold text-bleu-marianne md:text-[40px] tracking-tight">
-              Dernières actualités ME2I
+            <h2 id="news-title" className="font-heading text-2xl sm:text-3xl font-normal text-[#1d2327]">
+              Dernières actualités
             </h2>
-            <p className="mt-2 text-sm text-slate-500 font-normal max-w-xl">
-              Retrouvez nos retours d'expériences du terrain, guides d'ingénierie et actualités sectorielles.
-            </p>
           </div>
 
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 self-start md:self-end rounded-none bg-bleu-marianne px-5 py-3 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-bleu-marianne-clair shadow-sm shrink-0"
+            className="inline-flex items-center gap-1.5 text-xs font-normal text-[#2271b1] hover:underline shrink-0"
           >
-            <span>Voir tous les articles</span>
-            <ArrowRight className="h-4 w-4" />
+            <span>Consulter tous les articles</span>
+            <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </motion.div>
 
-        {/* Cards Grid */}
+        {/* Sleek Refined Cards Grid */}
         <motion.div
-          className="grid gap-8 grid-cols-1 md:grid-cols-3"
+          className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
@@ -771,44 +768,47 @@ function NewsSection({ articles = [] }: { articles?: ArticleItem[] }) {
             <motion.article
               key={item.id || item.title}
               variants={staggerItem}
-              className="group bg-white border border-slate-200 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-bleu-marianne transition-all duration-200 flex flex-col justify-between"
+              className="group bg-white p-4 border border-slate-200/80 rounded-sm hover:border-[#2271b1] transition-all duration-200 flex flex-col justify-between"
             >
-              <Link to={`/blog/${item.id}`} className="flex flex-col h-full">
-                {/* Article Cover Image */}
-                <div className="aspect-[16/10] overflow-hidden relative bg-slate-100">
-                  <img
-                    src={item.cover_url || 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80'}
-                    alt={item.title}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <span className="bg-bleu-marianne text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-none shadow-sm">
+              <Link to={`/blog/${item.id}`} className="flex flex-col h-full justify-between">
+                <div>
+                  {/* Subtle Compact Image */}
+                  <div className="h-44 w-full overflow-hidden rounded-sm relative bg-slate-100 mb-4">
+                    <img
+                      src={item.cover_url || 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80'}
+                      alt={item.title}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      loading="lazy"
+                    />
+                  </div>
+
+                  {/* Date & Category */}
+                  <div className="flex items-center justify-between text-[11px] mb-2">
+                    <span className="font-normal uppercase tracking-wider text-[#2271b1]">
                       {item.category || 'Général'}
                     </span>
-                  </div>
-                </div>
-
-                {/* Article Body Content */}
-                <div className="p-6 flex flex-col flex-1 justify-between">
-                  <div>
-                    <time className="text-xs text-slate-400 font-normal block mb-2">
+                    <time className="text-slate-400 font-normal">
                       {formatDate(item.published_at || item.created_at)}
                     </time>
-                    <h3 className="font-heading text-lg font-bold text-slate-800 leading-snug line-clamp-2 group-hover:text-bleu-marianne transition-colors">
-                      {item.title}
-                    </h3>
-                    {item.excerpt && (
-                      <p className="mt-2 text-xs text-slate-600 line-clamp-3 leading-relaxed font-normal">
-                        {item.excerpt}
-                      </p>
-                    )}
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-1.5 text-xs font-bold text-bleu-marianne group-hover:gap-2.5 transition-all">
-                    <span>Lire la suite</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </div>
+                  {/* Title */}
+                  <h3 className="font-heading text-base font-normal text-[#1d2327] group-hover:text-[#2271b1] transition-colors leading-snug line-clamp-2">
+                    {item.title}
+                  </h3>
+
+                  {/* Excerpt */}
+                  {item.excerpt && (
+                    <p className="mt-2 text-xs text-slate-500 font-normal line-clamp-2 leading-relaxed">
+                      {item.excerpt}
+                    </p>
+                  )}
+                </div>
+
+                {/* Read link */}
+                <div className="mt-4 pt-3 border-t border-slate-100 flex items-center gap-1 text-xs font-normal text-[#2271b1] group-hover:gap-2 transition-all">
+                  <span>En savoir plus</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
                 </div>
               </Link>
             </motion.article>
