@@ -5,12 +5,6 @@ import { MapPin, Phone, Mail, Clock, HelpCircle, Loader2 } from 'lucide-react'
 import { createContactAction } from '@/src/admin/lib/contact-actions'
 import { toast } from 'sonner'
 
-const faqs = [
-  { q: 'Quel est le délai de réponse à une demande de devis ?', a: 'Nos équipes techniques vous répondent sous 24 à 48 heures ouvrées.' },
-  { q: 'Intervenez-vous en urgence pour la maintenance ?', a: 'Oui, notre service d\'astreinte est disponible 24h/24 et 7j/7 pour les contrats de maintenance.' },
-  { q: 'Fournissez-vous des groupes électrogènes sur mesure ?', a: 'Nous proposons la vente, l\'installation et l\'hybridation de groupes électrogènes de toutes puissances.' },
-]
-
 export default function Contact({ settings = {} }: { settings?: Record<string, string> }) {
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' })
   const [loading, setLoading] = useState(false)
@@ -22,6 +16,23 @@ export default function Contact({ settings = {} }: { settings?: Record<string, s
   const emergencyPhone = settings.emergency_phone || '+237 677 00 00 00'
   const address = settings.address || 'Douala / Yaoundé, Cameroun'
   const openingHours = settings.opening_hours || 'Lundi – Vendredi : 7h30 – 18h00'
+
+  // Dynamic FAQ list from admin settings
+  const faqsList: Array<{ id?: string; q: string; a: string }> = (() => {
+    if (settings.faq_items) {
+      try {
+        const parsed = JSON.parse(settings.faq_items)
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed
+      } catch (e) {
+        console.error('Error parsing contact faqs:', e)
+      }
+    }
+    return [
+      { q: 'Quel est le délai de réponse à une demande de devis ?', a: 'Nos équipes techniques vous répondent sous 24 à 48 heures ouvrées.' },
+      { q: 'Intervenez-vous en urgence pour la maintenance ?', a: 'Oui, notre service d\'astreinte est disponible 24h/24 et 7j/7 pour les contrats de maintenance.' },
+      { q: 'Fournissez-vous des groupes électrogènes sur mesure ?', a: 'Nous proposons la vente, l\'installation et l\'hybridation de groupes électrogènes de toutes puissances.' },
+    ]
+  })()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -51,7 +62,7 @@ export default function Contact({ settings = {} }: { settings?: Record<string, s
   return (
     <div className="pt-24 pb-16 min-h-[100dvh] bg-white">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-12">
-        {/* Header Title styled exactly like /demarches */}
+        {/* Header Title styled like /demarches */}
         <div className="mb-12 text-center max-w-3xl mx-auto">
           <span className="inline-block px-3 py-1 rounded-none bg-[#1E3A5F]/10 text-[#1E3A5F] text-xs font-semibold uppercase tracking-wider mb-3">
             Contact {companyName}
@@ -156,21 +167,23 @@ export default function Contact({ settings = {} }: { settings?: Record<string, s
               </form>
             )}
 
-            {/* FAQ */}
-            <div className="mt-12">
-              <h2 className="text-xl font-normal text-[#1d2327] mb-6 flex items-center gap-2">
-                <HelpCircle size={20} className="text-[#2271b1]" />
-                Questions fréquentes
-              </h2>
-              <div className="space-y-3">
-                {faqs.map((faq) => (
-                  <div key={faq.q} className="p-4 bg-gray-50 border border-gray-200 rounded-sm">
-                    <p className="font-normal text-[#1d2327] text-sm mb-1">{faq.q}</p>
-                    <p className="text-xs text-[#646970] font-normal">{faq.a}</p>
-                  </div>
-                ))}
+            {/* Dynamic FAQ list */}
+            {faqsList.length > 0 && (
+              <div className="mt-12">
+                <h2 className="text-xl font-normal text-[#1d2327] mb-6 flex items-center gap-2">
+                  <HelpCircle size={20} className="text-[#2271b1]" />
+                  Questions fréquentes
+                </h2>
+                <div className="space-y-3">
+                  {faqsList.map((faq, index) => (
+                    <div key={faq.id || index} className="p-4 bg-gray-50 border border-gray-200 rounded-sm">
+                      <p className="font-normal text-[#1d2327] text-sm mb-1">{faq.q}</p>
+                      <p className="text-xs text-[#646970] font-normal">{faq.a}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Info sidebar dynamically populated from admin parameters */}

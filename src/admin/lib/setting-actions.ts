@@ -21,6 +21,7 @@ export async function updateCompanySettingsAction(settings: Record<string, strin
   }
 
   revalidatePath('/admin/parametres')
+  revalidatePath('/contact')
   revalidatePath('/')
   return { success: true }
 }
