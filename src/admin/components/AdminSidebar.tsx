@@ -8,7 +8,7 @@ import {
   Wrench,
   Package,
   Image as ImageIcon,
-  Images,
+  Trash2,
   ShoppingCart,
   MessageSquare,
   Settings,
@@ -26,14 +26,14 @@ const navItems = [
     href: '/admin/articles',
   },
   {
-    title: 'Médiathèque',
+    title: 'Médiathèque & Galerie',
     icon: ImageIcon,
     href: '/admin/media',
   },
   {
-    title: 'Galerie d\'images',
-    icon: Images,
-    href: '/admin/media',
+    title: 'Corbeille',
+    icon: Trash2,
+    href: '/admin/articles?tab=trash',
   },
   {
     title: 'Services',

@@ -14,12 +14,14 @@ import { Search, Edit, Trash2, ExternalLink, RefreshCw, AlertTriangle } from 'lu
 
 export default function ArticleListClient({
   initialArticles,
+  defaultTab = 'all',
 }: {
   initialArticles: any[]
+  defaultTab?: 'all' | 'published' | 'draft' | 'trash'
 }) {
   const router = useRouter()
   const [articles, setArticles] = useState(initialArticles)
-  const [activeTab, setActiveTab] = useState<'all' | 'published' | 'draft' | 'trash'>('all')
+  const [activeTab, setActiveTab] = useState<'all' | 'published' | 'draft' | 'trash'>(defaultTab)
   const [search, setSearch] = useState('')
   const [loadingId, setLoadingId] = useState<string | null>(null)
   const [emptying, setEmptying] = useState(false)
