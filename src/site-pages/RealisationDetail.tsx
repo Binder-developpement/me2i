@@ -67,18 +67,16 @@ export default function RealisationDetail({
                 )}
               </div>
 
-              {/* Cover Image */}
-              <div className="relative w-full h-80 sm:h-96 bg-[#f0f0f1] border border-[#c3c4c7] rounded-sm overflow-hidden">
+              {/* Cover Image - Uncropped full width natural height */}
+              <div className="w-full bg-[#f8fafc] border border-[#c3c4c7] rounded-sm overflow-hidden">
                 {realisation.cover_url ? (
-                  <Image
+                  <img
                     src={realisation.cover_url}
                     alt={realisation.title}
-                    fill
-                    className="object-cover"
-                    priority
+                    className="w-full h-auto block"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-xs text-[#646970]">
+                  <div className="w-full h-48 flex items-center justify-center text-xs text-[#646970]">
                     Photo non disponible
                   </div>
                 )}
