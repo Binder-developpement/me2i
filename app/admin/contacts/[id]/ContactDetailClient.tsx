@@ -18,7 +18,7 @@ export default function ContactDetailClient({ contact }: { contact: any }) {
       setLoading(true)
       await updateContactStatusAction(contact.id, newStatus)
       setStatus(newStatus)
-      toast.success('Statut mis à jour !')
+      toast.success('Statut du message mis à jour !')
       router.refresh()
     } catch {
       toast.error('Erreur lors de la mise à jour')
