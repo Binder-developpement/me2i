@@ -1,5 +1,5 @@
-import Actualites from "@/src/site-pages/Actualites";
+import { redirect } from 'next/navigation'
 
-export default function Page() {
-  return <Actualites />;
+export default function ActualitesPage() {
+  redirect('/blog')
 }

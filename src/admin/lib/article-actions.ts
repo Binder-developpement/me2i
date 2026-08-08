@@ -32,7 +32,7 @@ export async function createArticleAction(formData: {
   }
 
   revalidatePath('/admin/articles')
-  revalidatePath('/actualites')
+  revalidatePath('/blog')
   return data?.[0]
 }
 
@@ -71,7 +71,7 @@ export async function updateArticleAction(
 
   revalidatePath('/admin/articles')
   revalidatePath(`/admin/articles/${id}`)
-  revalidatePath('/actualites')
+  revalidatePath('/blog')
   return data?.[0]
 }
 
@@ -85,6 +85,6 @@ export async function deleteArticleAction(id: string) {
   }
 
   revalidatePath('/admin/articles')
-  revalidatePath('/actualites')
+  revalidatePath('/blog')
   return { success: true }
 }

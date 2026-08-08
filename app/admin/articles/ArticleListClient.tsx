@@ -165,7 +165,7 @@ export default function ArticleListClient({
                         </button>
                         <span className="text-[#c3c4c7]">|</span>
                         <Link
-                          href={`/actualites`}
+                          href={`/blog/${article.id}`}
                           target="_blank"
                           className="text-[#2271b1] hover:underline"
                         >

@@ -15,7 +15,7 @@ const expertiseLinks = [
 const companyLinks = [
   { label: 'Qui sommes-nous', path: '/a-propos' },
   { label: 'Nos réalisations', path: '/services' },
-  { label: 'Actualités', path: '/actualites' },
+  { label: 'Blog', path: '/blog' },
   { label: 'Contact', path: '/contact' },
   { label: 'Mentions légales', path: '/a-propos' },
 ]
