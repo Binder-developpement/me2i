@@ -646,7 +646,7 @@ function SectorsSection() {
 
         {/* Concluding Banner Callout */}
         <motion.div
-          className="mt-12 p-6 bg-white border-l-4 border-bleu-marianne border-y border-r border-slate-200 rounded-sm shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+          className="mt-12 p-6 bg-white rounded-sm shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={fadeInUp}
