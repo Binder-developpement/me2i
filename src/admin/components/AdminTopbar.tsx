@@ -7,7 +7,7 @@ import { createClientSupabase } from '@/src/admin/lib/supabase-client'
 import { ExternalLink, Plus, LogOut, User, Bell, Home, ShieldCheck } from 'lucide-react'
 
 export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
-  const router = Router() || useRouter()
+  const router = useRouter()
   const [showCreateMenu, setShowCreateMenu] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
 
