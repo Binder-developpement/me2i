@@ -595,26 +595,49 @@ function SectorsSection() {
           animate={isInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
         >
-          {sectorsData.map((sector) => {
+          {sectorsData.map((sector, index) => {
             const Icon = sector.icon
+            const isPrimary = index % 2 === 1
+
             return (
               <motion.div
                 key={sector.title}
                 variants={staggerItem}
-                className="group bg-white border border-slate-200 rounded-sm p-6 shadow-sm hover:shadow-md hover:border-bleu-marianne transition-all duration-200 flex flex-col justify-between"
+                className={`group rounded-sm p-6 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between ${
+                  isPrimary
+                    ? 'bg-bleu-marianne text-white border border-bleu-marianne hover:bg-[#132c4a]'
+                    : 'bg-white text-slate-800 border border-slate-200 hover:border-bleu-marianne'
+                }`}
               >
-                <div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="p-2.5 rounded-sm bg-bleu-marianne/10 text-bleu-marianne shrink-0 group-hover:bg-bleu-marianne group-hover:text-white transition-colors duration-200">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <h3 className="font-heading text-base font-bold text-slate-800 leading-snug">
+                <div className="flex items-start gap-4">
+                  {/* Icon positioned on extreme left of both title & description */}
+                  <div
+                    className={`p-3 rounded-sm shrink-0 transition-colors duration-200 ${
+                      isPrimary
+                        ? 'bg-white/15 text-white group-hover:bg-white group-hover:text-bleu-marianne'
+                        : 'bg-bleu-marianne/10 text-bleu-marianne group-hover:bg-bleu-marianne group-hover:text-white'
+                    }`}
+                  >
+                    <Icon className="h-6 w-6" />
+                  </div>
+
+                  {/* Title and Description stacked to the right of icon */}
+                  <div>
+                    <h3
+                      className={`font-heading text-base font-bold leading-snug mb-2 ${
+                        isPrimary ? 'text-white' : 'text-slate-800'
+                      }`}
+                    >
                       {sector.title}
                     </h3>
+                    <p
+                      className={`text-xs leading-relaxed font-normal ${
+                        isPrimary ? 'text-white/85' : 'text-slate-600'
+                      }`}
+                    >
+                      {sector.desc}
+                    </p>
                   </div>
-                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
-                    {sector.desc}
-                  </p>
                 </div>
               </motion.div>
             )
