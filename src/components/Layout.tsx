@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import { ArrowUp } from 'lucide-react'
 import Navbar from './Navbar'
 import Footer from './Footer'
@@ -10,6 +11,8 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
+  const pathname = usePathname()
+  const isAdmin = pathname?.startsWith('/admin')
   const [showScrollTop, setShowScrollTop] = useState(false)
 
   useEffect(() => {
@@ -22,6 +25,11 @@ export default function Layout({ children }: LayoutProps) {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  // Do not render public Navbar, Footer or scroll-to-top on /admin pages
+  if (isAdmin) {
+    return <>{children}</>
   }
 
   return (

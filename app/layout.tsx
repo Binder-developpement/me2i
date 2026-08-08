@@ -3,8 +3,8 @@ import "./globals.css";
 import Layout from "@/src/components/Layout";
 
 export const metadata: Metadata = {
-  title: "Portail Institutionnel - Ville de Saint-Etienne",
-  description: "Site officiel de la Ville de Saint-Etienne - Services, démarches et actualités.",
+  title: "ME2I - Maintenance Industrielle & Solutions Énergétiques",
+  description: "Site officiel de ME2I - Groupes électrogènes, hybridation énergétique, automatisme et maintenance industrielle au Cameroun.",
 };
 
 export default function RootLayout({
