@@ -7,6 +7,7 @@ import {
   FileText,
   Wrench,
   Package,
+  Image as ImageIcon,
   ShoppingCart,
   MessageSquare,
   Settings,
@@ -22,6 +23,11 @@ const navItems = [
     title: 'Articles',
     icon: FileText,
     href: '/admin/articles',
+  },
+  {
+    title: 'Médiathèque',
+    icon: ImageIcon,
+    href: '/admin/media',
   },
   {
     title: 'Services',

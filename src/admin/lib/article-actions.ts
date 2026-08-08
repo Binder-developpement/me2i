@@ -10,7 +10,7 @@ export async function createArticleAction(formData: {
   content?: string
   cover_url?: string
   category?: string
-  status: 'draft' | 'published' | 'archived'
+  status: 'draft' | 'published' | 'archived' | 'trash'
 }) {
   const supabase = await createServerClient()
 
@@ -45,7 +45,7 @@ export async function updateArticleAction(
     content?: string
     cover_url?: string
     category?: string
-    status: 'draft' | 'published' | 'archived'
+    status: 'draft' | 'published' | 'archived' | 'trash'
   }
 ) {
   const supabase = await createServerClient()
@@ -75,7 +75,44 @@ export async function updateArticleAction(
   return data?.[0]
 }
 
-export async function deleteArticleAction(id: string) {
+// Move article to Corbeille (Trash)
+export async function trashArticleAction(id: string) {
+  const supabase = await createServerClient()
+
+  const { error } = await supabase
+    .from('articles')
+    .update({ status: 'trash', updated_at: new Date().toISOString() })
+    .eq('id', id)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/admin/articles')
+  revalidatePath('/blog')
+  return { success: true }
+}
+
+// Restore article from Corbeille (Trash)
+export async function restoreArticleAction(id: string) {
+  const supabase = await createServerClient()
+
+  const { error } = await supabase
+    .from('articles')
+    .update({ status: 'draft', updated_at: new Date().toISOString() })
+    .eq('id', id)
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/admin/articles')
+  revalidatePath('/blog')
+  return { success: true }
+}
+
+// Delete article permanently from DB
+export async function deleteArticlePermanentlyAction(id: string) {
   const supabase = await createServerClient()
 
   const { error } = await supabase.from('articles').delete().eq('id', id)
@@ -87,4 +124,24 @@ export async function deleteArticleAction(id: string) {
   revalidatePath('/admin/articles')
   revalidatePath('/blog')
   return { success: true }
+}
+
+// Empty all trashed articles permanently
+export async function emptyTrashAction() {
+  const supabase = await createServerClient()
+
+  const { error } = await supabase.from('articles').delete().eq('status', 'trash')
+
+  if (error) {
+    throw new Error(error.message)
+  }
+
+  revalidatePath('/admin/articles')
+  revalidatePath('/blog')
+  return { success: true }
+}
+
+// Backward compatibility helper
+export async function deleteArticleAction(id: string) {
+  return trashArticleAction(id)
 }
