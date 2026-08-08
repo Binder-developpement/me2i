@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Zap, Sun, Settings, Wrench, Shield, CheckCircle, ArrowRight } from 'lucide-react'
+import { Zap, Sun, Settings, Shield, CheckCircle } from 'lucide-react'
 
 interface ServiceItem {
   id: string
@@ -34,7 +34,7 @@ export default function ServicesClient({ initialServices }: { initialServices: S
       <section className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-12">
         {/* Header Title */}
         <div className="mb-12 text-center max-w-3xl mx-auto">
-          <span className="inline-block px-3 py-1 rounded-full bg-[#1E3A5F]/10 text-[#1E3A5F] text-xs font-semibold uppercase tracking-wider mb-3">
+          <span className="inline-block px-3 py-1 rounded-none bg-[#1E3A5F]/10 text-[#1E3A5F] text-xs font-semibold uppercase tracking-wider mb-3">
             Nos Expertises Métiers
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight mb-4">
@@ -53,23 +53,20 @@ export default function ServicesClient({ initialServices }: { initialServices: S
             return (
               <div
                 key={service.id}
-                className="group bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                className="group bg-white border border-gray-200 p-6 hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  {/* Cover image or Icon */}
+                  {/* Cover image without badge */}
                   {service.cover_url ? (
-                    <div className="aspect-[16/9] rounded-xl overflow-hidden mb-6 relative">
+                    <div className="aspect-[16/9] overflow-hidden mb-6 relative">
                       <img
                         src={service.cover_url}
                         alt={service.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
-                      <div className="absolute top-3 left-3 bg-[#1E3A5F] text-white p-2 rounded-lg shadow-md">
-                        <IconComp className="h-5 w-5" />
-                      </div>
                     </div>
                   ) : (
-                    <div className="h-12 w-12 rounded-xl bg-[#1E3A5F]/10 text-[#1E3A5F] flex items-center justify-center mb-6">
+                    <div className="h-12 w-12 bg-[#1E3A5F]/10 text-[#1E3A5F] flex items-center justify-center mb-6">
                       <IconComp className="h-6 w-6" />
                     </div>
                   )}
@@ -80,7 +77,7 @@ export default function ServicesClient({ initialServices }: { initialServices: S
                   <h3 className="text-xl font-bold text-gray-900 mt-1 mb-3 group-hover:text-[#1E3A5F] transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed mb-6">
+                  <p className="text-sm text-gray-600 leading-relaxed mb-6 font-normal">
                     {service.description || 'Intervention rapide et expertise technique garantie par les ingénieurs ME2I.'}
                   </p>
                 </div>
@@ -91,11 +88,10 @@ export default function ServicesClient({ initialServices }: { initialServices: S
                     Disponible 24h/7
                   </span>
                   <Link
-                    href="/contact"
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-[#1E3A5F] hover:underline"
+                    href={`/commander?type=service&id=${service.id}`}
+                    className="bg-[#1E3A5F] hover:bg-[#2A5DB0] text-white text-xs font-semibold px-4 py-2.5 rounded-none transition-colors shadow-sm"
                   >
-                    <span>Demander un devis</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
+                    Demander un devis
                   </Link>
                 </div>
               </div>
@@ -104,7 +100,7 @@ export default function ServicesClient({ initialServices }: { initialServices: S
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-r from-[#1E3A5F] via-[#1A3354] to-[#13253e] rounded-3xl p-8 sm:p-12 text-white text-center shadow-xl">
+        <div className="bg-gradient-to-r from-[#1E3A5F] via-[#1A3354] to-[#13253e] p-8 sm:p-12 text-white text-center shadow-xl">
           <h2 className="text-2xl sm:text-3xl font-bold mb-4">
             Besoin d'un audit technique ou d'une intervention d'urgence ?
           </h2>
@@ -113,10 +109,9 @@ export default function ServicesClient({ initialServices }: { initialServices: S
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 bg-white text-[#1E3A5F] hover:bg-gray-100 font-bold text-sm px-6 py-3 rounded-xl transition-colors shadow-md"
+            className="inline-block bg-white text-[#1E3A5F] hover:bg-gray-100 font-bold text-sm px-6 py-3 rounded-none transition-colors shadow-md"
           >
-            <span>Contacter nos équipes techniques</span>
-            <ArrowRight className="h-4 w-4" />
+            Contacter nos équipes techniques
           </Link>
         </div>
       </section>

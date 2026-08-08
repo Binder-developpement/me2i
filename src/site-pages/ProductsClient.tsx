@@ -2,7 +2,6 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Package, ShoppingCart, CheckCircle, ArrowRight, ShieldCheck } from 'lucide-react'
 
 interface ProductItem {
   id: string
@@ -39,7 +38,7 @@ export default function ProductsClient({ initialProducts }: { initialProducts: P
       <section className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-12">
         {/* Header Title */}
         <div className="mb-12 text-center max-w-3xl mx-auto">
-          <span className="inline-block px-3 py-1 rounded-full bg-[#1E3A5F]/10 text-[#1E3A5F] text-xs font-semibold uppercase tracking-wider mb-3">
+          <span className="inline-block px-3 py-1 rounded-none bg-[#1E3A5F]/10 text-[#1E3A5F] text-xs font-semibold uppercase tracking-wider mb-3">
             Catalogue ME2I
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight mb-4">
@@ -57,7 +56,7 @@ export default function ProductsClient({ initialProducts }: { initialProducts: P
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-full text-xs font-semibold transition-all ${
+                className={`px-4 py-2 rounded-none text-xs font-semibold transition-all ${
                   activeCategory === cat
                     ? 'bg-[#1E3A5F] text-white shadow-sm'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -74,7 +73,7 @@ export default function ProductsClient({ initialProducts }: { initialProducts: P
           {filtered.map((product) => (
             <div
               key={product.id}
-              className="group bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+              className="group bg-white border border-gray-200 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
             >
               <div>
                 <div className="aspect-[4/3] bg-gray-100 relative overflow-hidden">
@@ -85,14 +84,10 @@ export default function ProductsClient({ initialProducts }: { initialProducts: P
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (
-                    <div className="w-full h-full bg-[#1E3A5F]/10 flex items-center justify-center text-[#1E3A5F]">
-                      <Package className="h-12 w-12" />
+                    <div className="w-full h-full bg-[#1E3A5F]/10 flex items-center justify-center text-[#1E3A5F] font-bold text-xl">
+                      ME2I
                     </div>
                   )}
-                  <div className="absolute top-3 right-3 bg-emerald-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-md flex items-center gap-1">
-                    <ShieldCheck className="h-3 w-3" />
-                    Garantie ME2I
-                  </div>
                 </div>
 
                 <div className="p-6">
@@ -102,7 +97,7 @@ export default function ProductsClient({ initialProducts }: { initialProducts: P
                   <h3 className="text-lg font-bold text-gray-900 mt-1 mb-2 group-hover:text-[#1E3A5F] transition-colors">
                     {product.name}
                   </h3>
-                  <p className="text-xs text-gray-600 line-clamp-3 mb-4 leading-relaxed">
+                  <p className="text-xs text-gray-600 line-clamp-3 mb-4 leading-relaxed font-normal">
                     {product.description || 'Matériel de haute fiabilité pour installations industrielles exigeantes.'}
                   </p>
                 </div>
@@ -117,11 +112,10 @@ export default function ProductsClient({ initialProducts }: { initialProducts: P
                 </div>
 
                 <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-1.5 bg-[#1E3A5F] hover:bg-[#2A5DB0] text-white text-xs font-semibold px-4 py-2.5 rounded-xl transition-colors shadow-sm"
+                  href={`/commander?type=product&id=${product.id}`}
+                  className="bg-[#1E3A5F] hover:bg-[#2A5DB0] text-white text-xs font-semibold px-4 py-2.5 rounded-none transition-colors shadow-sm"
                 >
-                  <ShoppingCart className="h-3.5 w-3.5" />
-                  <span>Commander</span>
+                  Commander
                 </Link>
               </div>
             </div>
