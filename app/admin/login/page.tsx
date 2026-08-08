@@ -47,16 +47,14 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-[#f0f0f1] flex flex-col items-center justify-center p-4 select-none font-sans text-[#2c3338]">
       <div className="w-full max-w-[320px] sm:max-w-[340px]">
-        {/* WordPress Style Logo */}
+        {/* Logo ME2I en texte simple couleur primaire */}
         <div className="text-center mb-6">
           <Link
             href="/"
-            className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-[#1d2327] text-white shadow-md hover:bg-[#2271b1] transition-colors group"
-            title="Aller sur ME2I"
+            className="inline-block text-3xl font-bold tracking-tight text-[#1E3A5F] hover:opacity-80 transition-opacity"
+            title="Aller sur le site ME2I"
           >
-            <span className="font-black text-2xl tracking-wider text-white group-hover:scale-105 transition-transform">
-              M2I
-            </span>
+            ME2I
           </Link>
         </div>
 
