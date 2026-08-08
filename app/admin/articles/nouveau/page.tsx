@@ -18,7 +18,7 @@ export default function NewArticlePage() {
   const [excerpt, setExcerpt] = useState('')
   const [content, setContent] = useState('')
   const [coverUrl, setCoverUrl] = useState<string | null>(null)
-  const [status, setStatus] = useState<'draft' | 'published'>('draft')
+  const [status, setStatus] = useState<'draft' | 'published'>('published')
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value

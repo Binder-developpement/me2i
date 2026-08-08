@@ -22,7 +22,7 @@ export async function createArticleAction(formData: {
       content: formData.content || null,
       cover_url: formData.cover_url || null,
       category: formData.category || 'Général',
-      status: formData.status || 'draft',
+      status: formData.status || 'published',
       published_at: formData.status === 'published' ? new Date().toISOString() : null,
     },
   ]).select()
