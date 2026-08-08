@@ -131,7 +131,7 @@ export default function ArticleListClient({
           <button
             type="button"
             onClick={() => setActiveTab('all')}
-            className={`pb-1 px-1 font-semibold transition-colors ${
+            className={`pb-1 px-1 font-normal transition-colors ${
               activeTab === 'all'
                 ? 'text-[#1d2327] border-b-2 border-[#2271b1]'
                 : 'text-[#2271b1] hover:text-[#135e96]'
@@ -143,7 +143,7 @@ export default function ArticleListClient({
           <button
             type="button"
             onClick={() => setActiveTab('published')}
-            className={`pb-1 px-1 font-semibold transition-colors ${
+            className={`pb-1 px-1 font-normal transition-colors ${
               activeTab === 'published'
                 ? 'text-[#1d2327] border-b-2 border-[#2271b1]'
                 : 'text-[#2271b1] hover:text-[#135e96]'
@@ -155,7 +155,7 @@ export default function ArticleListClient({
           <button
             type="button"
             onClick={() => setActiveTab('draft')}
-            className={`pb-1 px-1 font-semibold transition-colors ${
+            className={`pb-1 px-1 font-normal transition-colors ${
               activeTab === 'draft'
                 ? 'text-[#1d2327] border-b-2 border-[#2271b1]'
                 : 'text-[#2271b1] hover:text-[#135e96]'
@@ -169,7 +169,7 @@ export default function ArticleListClient({
               <button
                 type="button"
                 onClick={() => setActiveTab('trash')}
-                className={`pb-1 px-1 font-semibold transition-colors ${
+                className={`pb-1 px-1 font-normal transition-colors ${
                   activeTab === 'trash'
                     ? 'text-red-700 border-b-2 border-red-600'
                     : 'text-red-600 hover:text-red-800'
@@ -211,7 +211,7 @@ export default function ArticleListClient({
       <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-x-auto">
         <table className="w-full text-left text-xs border-collapse">
           <thead>
-            <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] font-semibold">
+            <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] font-normal">
               <th className="p-3 w-1/2">Titre</th>
               <th className="p-3">Catégorie</th>
               <th className="p-3">Statut</th>
@@ -233,7 +233,7 @@ export default function ArticleListClient({
                   <td className="p-3 align-top">
                     <Link
                       href={activeTab === 'trash' ? '#' : `/admin/articles/${article.id}`}
-                      className="font-bold text-[#2271b1] hover:text-[#135e96] text-sm block mb-1"
+                      className="font-normal text-[#2271b1] hover:text-[#135e96] text-sm block mb-1"
                     >
                       {article.title}
                     </Link>
@@ -246,7 +246,7 @@ export default function ArticleListClient({
                             type="button"
                             onClick={() => handleRestore(article.id, article.title)}
                             disabled={loadingId === article.id}
-                            className="text-[#2271b1] hover:underline font-semibold"
+                            className="text-[#2271b1] hover:underline font-normal"
                           >
                             Rétablir
                           </button>
@@ -255,7 +255,7 @@ export default function ArticleListClient({
                             type="button"
                             onClick={() => handleDeletePermanently(article.id, article.title)}
                             disabled={loadingId === article.id}
-                            className="text-red-600 hover:underline font-semibold"
+                            className="text-red-600 hover:underline font-normal"
                           >
                             Supprimer définitivement
                           </button>
@@ -264,7 +264,7 @@ export default function ArticleListClient({
                         <>
                           <Link
                             href={`/admin/articles/${article.id}`}
-                            className="text-[#2271b1] hover:underline font-semibold"
+                            className="text-[#2271b1] hover:underline font-normal"
                           >
                             Modifier
                           </Link>
@@ -273,7 +273,7 @@ export default function ArticleListClient({
                             type="button"
                             onClick={() => handleTrash(article.id, article.title)}
                             disabled={loadingId === article.id}
-                            className="text-[#d63638] hover:underline font-semibold"
+                            className="text-[#d63638] hover:underline font-normal"
                           >
                             Déplacer dans la corbeille
                           </button>
@@ -289,20 +289,20 @@ export default function ArticleListClient({
                       )}
                     </div>
                   </td>
-                  <td className="p-3 text-[#50575e] align-top">
+                  <td className="p-3 text-[#50575e] align-top font-normal">
                     {article.category || 'Général'}
                   </td>
                   <td className="p-3 align-top">
                     {article.status === 'published' ? (
-                      <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-100 text-emerald-800">
+                      <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-normal bg-emerald-100 text-emerald-800">
                         Publié
                       </span>
                     ) : article.status === 'trash' ? (
-                      <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-semibold bg-red-100 text-red-800">
+                      <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-normal bg-red-100 text-red-800">
                         Corbeille
                       </span>
                     ) : (
-                      <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-semibold bg-gray-100 text-gray-700">
+                      <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-normal bg-gray-100 text-gray-700">
                         Brouillon
                       </span>
                     )}

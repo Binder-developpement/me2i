@@ -253,7 +253,7 @@ export default function MediaLibraryClient() {
         <div className="bg-white border border-[#c3c4c7] rounded-sm overflow-hidden shadow-sm">
           <table className="w-full text-left text-xs border-collapse">
             <thead>
-              <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] font-semibold">
+              <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] font-normal">
                 <th className="p-3 w-16">Aperçu</th>
                 <th className="p-3">Nom du fichier</th>
                 <th className="p-3">Bucket</th>

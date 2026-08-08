@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { updateContactStatusAction, deleteContactAction } from '@/src/admin/lib/contact-actions'
 import { toast } from 'sonner'
-import { Search, MessageSquare, Mail, Trash2, CheckCircle2 } from 'lucide-react'
+import { Search, MessageSquare } from 'lucide-react'
 
 export default function ContactListClient({
   initialContacts,
@@ -62,7 +62,7 @@ export default function ContactListClient({
               key={tab}
               type="button"
               onClick={() => setActiveTab(tab)}
-              className={`pb-1 px-1 font-semibold transition-colors capitalize ${
+              className={`pb-1 px-1 font-normal transition-colors capitalize ${
                 activeTab === tab
                   ? 'text-[#1d2327] border-b-2 border-[#2271b1]'
                   : 'text-[#2271b1] hover:text-[#135e96]'
@@ -80,7 +80,7 @@ export default function ContactListClient({
             placeholder="Rechercher par nom, email..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-8 pr-3 py-1.5 border border-[#8c8f94] rounded-sm text-xs w-full sm:w-64 focus:outline-none focus:border-[#2271b1] bg-white"
+            className="pl-8 pr-3 py-1.5 border border-[#8c8f94] rounded-sm text-xs w-full sm:w-64 focus:outline-none focus:border-[#2271b1] bg-white font-normal"
           />
         </div>
       </div>
@@ -89,11 +89,11 @@ export default function ContactListClient({
       <div className="bg-white border border-[#c3c4c7] rounded-sm overflow-hidden shadow-sm">
         <table className="w-full text-left text-xs border-collapse">
           <thead>
-            <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] uppercase tracking-wider font-semibold">
-              <th className="p-3">Expéditeur</th>
-              <th className="p-3">Sujet / Message</th>
-              <th className="p-3">Statut</th>
-              <th className="p-3">Date</th>
+            <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] uppercase tracking-wider font-normal">
+              <th className="p-3 font-normal">Expéditeur</th>
+              <th className="p-3 font-normal">Sujet / Message</th>
+              <th className="p-3 font-normal">Statut</th>
+              <th className="p-3 font-normal">Date</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[#c3c4c7]/50 text-[#2c3338]">
@@ -108,14 +108,14 @@ export default function ContactListClient({
               filteredContacts.map((contact) => (
                 <tr
                   key={contact.id}
-                  className={`transition-colors group ${
-                    contact.status === 'unread' ? 'bg-[#f0f6fc]/80 font-bold' : 'hover:bg-[#f6f7f7]'
+                  className={`transition-colors group font-normal ${
+                    contact.status === 'unread' ? 'bg-[#f0f6fc]/80' : 'hover:bg-[#f6f7f7]'
                   }`}
                 >
-                  <td className="p-3">
+                  <td className="p-3 font-normal">
                     <Link
                       href={`/admin/contacts/${contact.id}`}
-                      className="font-bold text-[#2271b1] hover:text-[#135e96] text-sm block"
+                      className="font-normal text-[#2271b1] hover:text-[#135e96] text-sm block"
                     >
                       {contact.name}
                     </Link>
@@ -123,7 +123,7 @@ export default function ContactListClient({
                     <div className="flex items-center gap-2 text-[11px] mt-1 opacity-0 group-hover:opacity-100 transition-opacity font-normal">
                       <Link
                         href={`/admin/contacts/${contact.id}`}
-                        className="text-[#2271b1] hover:underline font-semibold"
+                        className="text-[#2271b1] hover:underline font-normal"
                       >
                         Consulter
                       </Link>
@@ -133,7 +133,7 @@ export default function ContactListClient({
                           <button
                             type="button"
                             onClick={() => handleMarkAsRead(contact.id)}
-                            className="text-[#2271b1] hover:underline"
+                            className="text-[#2271b1] hover:underline font-normal"
                           >
                             Marquer comme lu
                           </button>
@@ -143,30 +143,30 @@ export default function ContactListClient({
                       <button
                         type="button"
                         onClick={() => handleDelete(contact.id, contact.name)}
-                        className="text-[#d63638] hover:underline font-semibold"
+                        className="text-[#d63638] hover:underline font-normal"
                       >
                         Supprimer
                       </button>
                     </div>
                   </td>
                   <td className="p-3 font-normal">
-                    <p className="font-semibold text-[#1d2327]">{contact.subject || 'Demande de contact'}</p>
-                    <p className="text-[#646970] truncate max-w-md">{contact.message}</p>
+                    <p className="font-normal text-[#1d2327]">{contact.subject || 'Demande de contact'}</p>
+                    <p className="text-[#646970] truncate max-w-md font-normal">{contact.message}</p>
                   </td>
                   <td className="p-3 font-normal">
                     <span
-                      className={`inline-block px-2 py-0.5 text-[10px] font-bold rounded ${
+                      className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm ${
                         contact.status === 'unread'
                           ? 'bg-amber-100 text-amber-800 border border-amber-300'
                           : contact.status === 'replied'
                           ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
-                          : 'bg-gray-100 text-gray-700'
+                          : 'bg-gray-100 text-gray-700 border border-gray-300'
                       }`}
                     >
                       {contact.status === 'unread' ? 'Non lu' : contact.status === 'replied' ? 'Traité' : 'Lu'}
                     </span>
                   </td>
-                  <td className="p-3 text-[#646970] font-normal text-[11px]">
+                  <td className="p-3 text-[#646970] text-[11px] font-normal">
                     {new Date(contact.created_at).toLocaleDateString('fr-FR', {
                       day: 'numeric',
                       month: 'short',

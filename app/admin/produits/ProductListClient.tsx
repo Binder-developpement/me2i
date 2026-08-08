@@ -51,17 +51,17 @@ export default function ProductListClient({
             placeholder="Rechercher un produit..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-8 pr-3 py-1.5 border border-[#8c8f94] rounded-sm text-xs w-full sm:w-64 focus:outline-none focus:border-[#2271b1] bg-white"
+            className="pl-8 pr-3 py-1.5 border border-[#8c8f94] rounded-sm text-xs w-full sm:w-64 focus:outline-none focus:border-[#2271b1] bg-white font-normal"
           />
         </div>
-        <span className="text-xs text-[#646970]">{filteredProducts.length} produit(s)</span>
+        <span className="text-xs text-[#646970] font-normal">{filteredProducts.length} produit(s)</span>
       </div>
 
       {/* WordPress Table */}
       <div className="bg-white border border-[#c3c4c7] rounded-sm overflow-hidden shadow-sm">
         <table className="w-full text-left text-xs border-collapse">
           <thead>
-            <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] uppercase tracking-wider font-semibold">
+            <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] uppercase tracking-wider font-normal">
               <th className="p-3 w-14 text-center">Image</th>
               <th className="p-3">Nom du Produit</th>
               <th className="p-3">Catégorie</th>
@@ -80,7 +80,7 @@ export default function ProductListClient({
               </tr>
             ) : (
               filteredProducts.map((prod) => (
-                <tr key={prod.id} className="hover:bg-[#f0f6fc]/50 transition-colors group">
+                <tr key={prod.id} className="hover:bg-[#f0f6fc]/50 transition-colors group font-normal">
                   <td className="p-2 text-center">
                     {prod.cover_url ? (
                       <img
@@ -97,14 +97,14 @@ export default function ProductListClient({
                   <td className="p-3">
                     <Link
                       href={`/admin/produits/${prod.id}`}
-                      className="font-bold text-[#2271b1] hover:text-[#135e96] text-sm block"
+                      className="font-normal text-[#2271b1] hover:text-[#135e96] text-sm block"
                     >
                       {prod.name}
                     </Link>
                     <div className="flex items-center gap-2 text-[11px] mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
                       <Link
                         href={`/admin/produits/${prod.id}`}
-                        className="text-[#2271b1] hover:underline font-semibold"
+                        className="text-[#2271b1] hover:underline font-normal"
                       >
                         Modifier
                       </Link>
@@ -113,20 +113,20 @@ export default function ProductListClient({
                         type="button"
                         onClick={() => handleDelete(prod.id, prod.name)}
                         disabled={deletingId === prod.id}
-                        className="text-[#d63638] hover:underline font-semibold"
+                        className="text-[#d63638] hover:underline font-normal"
                       >
                         Supprimer
                       </button>
                     </div>
                   </td>
-                  <td className="p-3 text-[#50575e]">{prod.category || 'Électricité'}</td>
-                  <td className="p-3 font-semibold text-[#1d2327]">
+                  <td className="p-3 text-[#50575e] font-normal">{prod.category || 'Électricité'}</td>
+                  <td className="p-3 font-normal text-[#1d2327]">
                     {prod.price ? `${prod.price.toLocaleString('fr-FR')} ${prod.currency || 'XAF'}` : 'Sur devis'}
                   </td>
-                  <td className="p-3 font-mono">{prod.stock ?? 0} unit.</td>
+                  <td className="p-3 font-mono font-normal">{prod.stock ?? 0} unit.</td>
                   <td className="p-3">
                     <span
-                      className={`inline-block px-2 py-0.5 text-[10px] font-bold rounded-sm uppercase tracking-wider ${
+                      className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm tracking-wider ${
                         prod.status === 'published'
                           ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
                           : prod.status === 'out_of_stock'
