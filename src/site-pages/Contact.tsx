@@ -49,20 +49,23 @@ export default function Contact({ settings = {} }: { settings?: Record<string, s
   }
 
   return (
-    <div className="pt-20 min-h-[100dvh] bg-white">
-      <section className="py-12 bg-white text-center border-b border-[#f0f0f1]">
-        <div className="mx-auto max-w-3xl px-6">
-          <h1 className="text-3xl sm:text-4xl font-normal text-[#1d2327] mb-3">
+    <div className="pt-24 pb-16 min-h-[100dvh] bg-white">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-12">
+        {/* Header Title styled exactly like /demarches */}
+        <div className="mb-12 text-center max-w-3xl mx-auto">
+          <span className="inline-block px-3 py-1 rounded-none bg-[#1E3A5F]/10 text-[#1E3A5F] text-xs font-semibold uppercase tracking-wider mb-3">
+            Contact {companyName}
+          </span>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight mb-4">
             Contactez {companyName}
           </h1>
-          <p className="text-[#646970] font-normal text-base leading-relaxed">
+          <p className="text-gray-600 text-base sm:text-lg">
             Une étude technique, un devis de maintenance ou une commande ? Notre équipe d'ingénieurs et techniciens est à votre écoute.
           </p>
         </div>
-      </section>
 
-      <section className="py-16">
-        <div className="mx-auto max-w-[1280px] px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Form */}
           <div className="lg:col-span-2">
             <h2 className="text-2xl font-normal text-[#1d2327] mb-6">Formulaire de contact</h2>
@@ -213,7 +216,7 @@ export default function Contact({ settings = {} }: { settings?: Record<string, s
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   )
 }
