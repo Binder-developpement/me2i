@@ -604,12 +604,14 @@ function SectorsSection() {
                 className="group bg-white border border-slate-200 rounded-sm p-6 shadow-sm hover:shadow-md hover:border-bleu-marianne transition-all duration-200 flex flex-col justify-between"
               >
                 <div>
-                  <div className="p-3 rounded-sm bg-bleu-marianne/10 text-bleu-marianne w-fit mb-5 group-hover:bg-bleu-marianne group-hover:text-white transition-colors duration-200">
-                    <Icon className="h-6 w-6" />
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2.5 rounded-sm bg-bleu-marianne/10 text-bleu-marianne shrink-0 group-hover:bg-bleu-marianne group-hover:text-white transition-colors duration-200">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <h3 className="font-heading text-base font-bold text-slate-800 leading-snug">
+                      {sector.title}
+                    </h3>
                   </div>
-                  <h3 className="font-heading text-lg font-bold text-slate-800 mb-2">
-                    {sector.title}
-                  </h3>
                   <p className="text-xs text-slate-600 leading-relaxed font-normal">
                     {sector.desc}
                   </p>
