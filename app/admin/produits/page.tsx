@@ -1,3 +1,4 @@
+import { requireAdminAuth } from '@/src/admin/lib/auth-guard'
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import Link from 'next/link'
 import { Plus } from 'lucide-react'
@@ -6,6 +7,7 @@ import ProductListClient from './ProductListClient'
 export const revalidate = 0
 
 export default async function ProductsListPage() {
+  await requireAdminAuth()
   let products: any[] = []
 
   try {

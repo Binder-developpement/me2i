@@ -1,3 +1,4 @@
+import { requireAdminAuth } from '@/src/admin/lib/auth-guard'
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import { notFound } from 'next/navigation'
 import ContactDetailClient from './ContactDetailClient'
@@ -9,6 +10,7 @@ export default async function ContactDetailPage({
 }: {
   params: Promise<{ id: string }>
 }) {
+  await requireAdminAuth()
   const { id } = await params
   let contact: any = null
 

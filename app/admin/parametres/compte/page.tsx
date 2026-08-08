@@ -1,13 +1,11 @@
+import { requireAdminAuth } from '@/src/admin/lib/auth-guard'
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import AccountSettingsClient from './AccountSettingsClient'
 
 export const revalidate = 0
 
 export default async function AccountPage() {
-  const supabase = await createServerClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const user = await requireAdminAuth()
 
   return (
     <div className="space-y-4 w-full">

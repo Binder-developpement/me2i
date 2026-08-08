@@ -1,3 +1,4 @@
+import { requireAdminAuth } from '@/src/admin/lib/auth-guard'
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import Link from 'next/link'
 import { Plus } from 'lucide-react'
@@ -10,6 +11,7 @@ export default async function ArticlesListPage({
 }: {
   searchParams: Promise<{ tab?: string }>
 }) {
+  await requireAdminAuth()
   const params = await searchParams
   const initialTab = params?.tab === 'trash' ? 'trash' : 'all'
 

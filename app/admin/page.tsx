@@ -1,3 +1,4 @@
+import { requireAdminAuth } from '@/src/admin/lib/auth-guard'
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import Link from 'next/link'
 import {
@@ -13,6 +14,7 @@ import {
 export const revalidate = 0
 
 export default async function AdminDashboard() {
+  await requireAdminAuth()
   let stats = {
     articles: 0,
     services: 0,

@@ -1,9 +1,11 @@
+import { requireAdminAuth } from '@/src/admin/lib/auth-guard'
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import OrderListClient from './OrderListClient'
 
 export const revalidate = 0
 
 export default async function OrdersListPage() {
+  await requireAdminAuth()
   let orders: any[] = []
 
   try {

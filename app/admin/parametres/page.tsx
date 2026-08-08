@@ -1,9 +1,11 @@
+import { requireAdminAuth } from '@/src/admin/lib/auth-guard'
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import CompanySettingsClient from './CompanySettingsClient'
 
 export const revalidate = 0
 
 export default async function SettingsPage() {
+  await requireAdminAuth()
   let settingsMap: Record<string, string> = {}
 
   try {

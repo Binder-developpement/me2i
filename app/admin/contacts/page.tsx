@@ -1,9 +1,11 @@
+import { requireAdminAuth } from '@/src/admin/lib/auth-guard'
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import ContactListClient from './ContactListClient'
 
 export const revalidate = 0
 
 export default async function ContactsListPage() {
+  await requireAdminAuth()
   let contacts: any[] = []
 
   try {

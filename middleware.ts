@@ -2,55 +2,100 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
 export async function middleware(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({ request })
-
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'placeholder-key'
-
-  // If Supabase is not configured yet, skip auth check for dev
-  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    return supabaseResponse
-  }
-
-  const supabase = createServerClient(
-    supabaseUrl,
-    supabaseKey,
-    {
-      cookies: {
-        getAll() {
-          return request.cookies.getAll()
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) =>
-            request.cookies.set(name, value)
-          )
-          supabaseResponse = NextResponse.next({ request })
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          )
-        },
-      },
-    }
-  )
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
   const { pathname } = request.nextUrl
+
+  // Store current pathname in headers for server components
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('x-pathname', pathname)
+
+  let supabaseResponse = NextResponse.next({
+    request: {
+      headers: requestHeaders,
+    },
+  })
+
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseKey =
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
 
   // Allow login page
   if (pathname === '/admin/login') {
-    // If already authenticated, redirect to dashboard
-    if (user) {
-      return NextResponse.redirect(new URL('/admin', request.url))
+    if (supabaseUrl && supabaseKey) {
+      try {
+        const supabase = createServerClient(supabaseUrl, supabaseKey, {
+          cookies: {
+            getAll() {
+              return request.cookies.getAll()
+            },
+            setAll(cookiesToSet) {
+              cookiesToSet.forEach(({ name, value }) =>
+                request.cookies.set(name, value)
+              )
+              supabaseResponse = NextResponse.next({
+                request: {
+                  headers: requestHeaders,
+                },
+              })
+              cookiesToSet.forEach(({ name, value, options }) =>
+                supabaseResponse.cookies.set(name, value, options)
+              )
+            },
+          },
+        })
+        const {
+          data: { user },
+        } = await supabase.auth.getUser()
+
+        if (user) {
+          return NextResponse.redirect(new URL('/admin', request.url))
+        }
+      } catch (e) {
+        console.error('Middleware auth check error on login:', e)
+      }
     }
     return supabaseResponse
   }
 
-  // Protect all /admin/* routes
-  if (pathname.startsWith('/admin') && !user) {
-    return NextResponse.redirect(new URL('/admin/login', request.url))
+  // Protect all /admin and /admin/* routes
+  if (pathname === '/admin' || pathname.startsWith('/admin/')) {
+    if (!supabaseUrl || !supabaseKey) {
+      // If Supabase credentials missing, force redirect to login
+      return NextResponse.redirect(new URL('/admin/login', request.url))
+    }
+
+    try {
+      const supabase = createServerClient(supabaseUrl, supabaseKey, {
+        cookies: {
+          getAll() {
+            return request.cookies.getAll()
+          },
+          setAll(cookiesToSet) {
+            cookiesToSet.forEach(({ name, value }) =>
+              request.cookies.set(name, value)
+            )
+            supabaseResponse = NextResponse.next({
+              request: {
+                headers: requestHeaders,
+              },
+            })
+            cookiesToSet.forEach(({ name, value, options }) =>
+              supabaseResponse.cookies.set(name, value, options)
+            )
+          },
+        },
+      })
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser()
+
+      if (!user) {
+        return NextResponse.redirect(new URL('/admin/login', request.url))
+      }
+    } catch (e) {
+      return NextResponse.redirect(new URL('/admin/login', request.url))
+    }
   }
 
   return supabaseResponse

@@ -1,3 +1,4 @@
+import { requireAdminAuth } from '@/src/admin/lib/auth-guard'
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import { notFound } from 'next/navigation'
 import EditServiceClient from './EditServiceClient'
@@ -9,6 +10,7 @@ export default async function EditServicePage({
 }: {
   params: Promise<{ id: string }>
 }) {
+  await requireAdminAuth()
   const { id } = await params
   let service: any = null
 
