@@ -605,8 +605,8 @@ function SectorsSection() {
                 variants={staggerItem}
                 className={`group rounded-sm p-6 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between ${
                   isPrimary
-                    ? 'bg-bleu-marianne text-white border border-bleu-marianne hover:bg-[#132c4a]'
-                    : 'bg-white text-slate-800 border border-slate-200 hover:border-bleu-marianne'
+                    ? 'bg-bleu-marianne text-white hover:bg-[#132c4a]'
+                    : 'bg-white text-slate-800'
                 }`}
               >
                 <div className="flex items-start gap-4">
