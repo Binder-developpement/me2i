@@ -7,7 +7,7 @@ import { updateArticleAction, deleteArticleAction } from '@/src/admin/lib/articl
 import RichEditor from '@/src/admin/components/RichEditor'
 import ImageUpload from '@/src/admin/components/ImageUpload'
 import { toast } from 'sonner'
-import { ArrowLeft, Save, Trash2, Loader2 } from 'lucide-react'
+import { ArrowLeft, Save, Loader2 } from 'lucide-react'
 
 export default function EditArticleClient({ article }: { article: any }) {
   const router = useRouter()
@@ -66,117 +66,128 @@ export default function EditArticleClient({ article }: { article: any }) {
   }
 
   return (
-    <div className="space-y-6">
-      {/* Top Breadcrumb & Action bar */}
-      <div className="flex items-center justify-between border-b border-[#c3c4c7] pb-4">
-        <div className="flex items-center gap-3">
+    <div className="space-y-4 max-w-6xl">
+      {/* Top Header sans gras excessif */}
+      <div className="flex items-center justify-between pb-2 border-b border-[#dcdcde]">
+        <div className="flex items-center gap-2">
           <Link
             href="/admin/articles"
-            className="p-1.5 rounded hover:bg-[#dcdcde] text-[#1d2327] transition-colors"
+            className="p-1 rounded hover:bg-[#dcdcde] text-[#1d2327] transition-colors"
+            title="Retour à la liste"
           >
             <ArrowLeft className="h-4 w-4" />
           </Link>
-          <h1 className="text-2xl font-bold text-[#1d2327]">Modifier l'article</h1>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={handleDelete}
-            disabled={deleting}
-            className="flex items-center gap-1 px-3 py-2 text-xs font-semibold text-red-600 hover:bg-red-50 rounded-sm transition-colors"
-          >
-            <Trash2 className="h-3.5 w-3.5" />
-            <span>Supprimer</span>
-          </button>
-          <button
-            type="button"
-            onClick={handleSubmit}
-            disabled={loading}
-            className="flex items-center gap-1.5 bg-[#2271b1] hover:bg-[#135e96] text-white text-xs font-semibold px-4 py-2 rounded-sm transition-colors shadow-sm disabled:opacity-50"
-          >
-            {loading ? (
-              <Loader2 className="h-3.5 w-3.5 animate-spin" />
-            ) : (
-              <Save className="h-3.5 w-3.5" />
-            )}
-            <span>Mettre à jour</span>
-          </button>
+          <h1 className="text-xl font-normal text-[#1d2327]">Modifier l'article</h1>
         </div>
       </div>
 
-      {/* WordPress 2-Column Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Main Content (2/3) */}
-        <div className="lg:col-span-2 space-y-4">
-          <div className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-sm">
+      {/* WordPress 2-Column Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* Main Content Area (Left 2/3) */}
+        <div className="lg:col-span-2 space-y-3">
+          {/* Title box sans gras */}
+          <div className="bg-white border border-[#c3c4c7] rounded-sm p-3.5 space-y-2">
             <input
               type="text"
-              placeholder="Titre de l'article"
+              placeholder="Saisir le titre ici"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full text-xl font-bold text-[#1d2327] placeholder-[#8c8f94] focus:outline-none border-b border-transparent focus:border-[#2271b1] pb-2 transition-colors"
+              className="w-full text-lg font-normal text-[#1d2327] placeholder-[#8c8f94] focus:outline-none border-b border-[#dcdcde] focus:border-[#2271b1] pb-1.5 transition-colors"
             />
-            <div className="mt-2 flex items-center gap-1 text-xs text-[#646970]">
-              <span className="font-semibold">Permalien :</span>
+            <div className="flex items-center gap-1 text-xs text-[#646970]">
+              <span className="font-normal">Permalien :</span>
               <input
                 type="text"
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
-                className="text-[#2271b1] bg-transparent border-b border-gray-300 focus:outline-none focus:border-[#2271b1] px-1"
+                className="text-[#2271b1] bg-transparent border-b border-dashed border-gray-300 focus:outline-none focus:border-[#2271b1] px-1 font-normal"
               />
             </div>
           </div>
 
-          <div className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-sm space-y-2">
-            <label className="block text-xs font-semibold text-[#1d2327] uppercase tracking-wider">
+          {/* Excerpt box */}
+          <div className="bg-white border border-[#c3c4c7] rounded-sm p-3.5 space-y-1.5">
+            <label className="block text-xs font-normal text-[#1d2327] uppercase tracking-wider">
               Extrait (Résumé court)
             </label>
             <textarea
               rows={2}
               value={excerpt}
               onChange={(e) => setExcerpt(e.target.value)}
-              className="w-full p-2.5 border border-[#8c8f94] rounded-sm text-xs focus:outline-none focus:border-[#2271b1] bg-white"
+              className="w-full p-2 border border-[#8c8f94] rounded-sm text-xs focus:outline-none focus:border-[#2271b1] bg-white font-normal"
             />
           </div>
 
-          <div className="space-y-2">
-            <label className="block text-xs font-semibold text-[#1d2327] uppercase tracking-wider">
+          {/* Rich Content Editor */}
+          <div className="space-y-1.5">
+            <label className="block text-xs font-normal text-[#1d2327] uppercase tracking-wider">
               Contenu de l'article
             </label>
             <RichEditor content={content} onChange={setContent} />
           </div>
         </div>
 
-        {/* Right Sidebar Panels (1/3) */}
-        <div className="space-y-4">
-          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm">
-            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7] font-semibold text-xs text-[#1d2327] uppercase tracking-wider">
+        {/* Right Sidebar Panels (Right 1/3) */}
+        <div className="space-y-3">
+          {/* Card Publication avec options Modifier / Enregistrer / Supprimer intégrées */}
+          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-hidden">
+            <div className="px-3.5 py-2 bg-[#f6f7f7] border-b border-[#c3c4c7] font-normal text-xs text-[#1d2327] uppercase tracking-wider">
               Publication
             </div>
-            <div className="p-4 space-y-3 text-xs text-[#2c3338]">
+
+            <div className="p-3.5 space-y-3 text-xs text-[#2c3338]">
               <div className="flex items-center justify-between">
-                <span>Statut :</span>
+                <span className="font-normal">Statut :</span>
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value as any)}
-                  className="p-1 border border-[#8c8f94] rounded-sm text-xs bg-white"
+                  className="p-1 border border-[#8c8f94] rounded-sm text-xs bg-white font-normal"
                 >
                   <option value="draft">Brouillon</option>
                   <option value="published">Publié</option>
                 </select>
               </div>
-              <div className="text-[11px] text-[#646970] pt-2 border-t border-[#f0f0f1]">
-                Créé le : {new Date(article.created_at).toLocaleString('fr-FR')}
-              </div>
+
+              {article.created_at && (
+                <div className="text-[11px] text-[#646970] pt-2 border-t border-[#f0f0f1]">
+                  Créé le : {new Date(article.created_at).toLocaleString('fr-FR')}
+                </div>
+              )}
+            </div>
+
+            {/* Actions à l'intérieur du bloc Publication (style WordPress) */}
+            <div className="px-3.5 py-2.5 bg-[#f6f7f7] border-t border-[#c3c4c7] flex items-center justify-between">
+              <button
+                type="button"
+                onClick={handleDelete}
+                disabled={deleting}
+                className="text-xs text-red-600 hover:text-red-800 hover:underline font-normal disabled:opacity-50"
+              >
+                {deleting ? 'Suppression...' : 'Déplacer dans la corbeille'}
+              </button>
+
+              <button
+                type="button"
+                onClick={handleSubmit}
+                disabled={loading}
+                className="flex items-center gap-1 bg-[#2271b1] hover:bg-[#135e96] text-white text-xs font-normal px-3 py-1.5 rounded-sm transition-colors shadow-sm disabled:opacity-50"
+              >
+                {loading ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <Save className="h-3.5 w-3.5" />
+                )}
+                <span>Mettre à jour</span>
+              </button>
             </div>
           </div>
 
+          {/* Card Catégorie */}
           <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm">
-            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7] font-semibold text-xs text-[#1d2327] uppercase tracking-wider">
+            <div className="px-3.5 py-2 bg-[#f6f7f7] border-b border-[#c3c4c7] font-normal text-xs text-[#1d2327] uppercase tracking-wider">
               Catégorie
             </div>
-            <div className="p-4 space-y-2 text-xs">
+            <div className="p-3.5 space-y-1.5 text-xs">
               {['Technique', 'Prévention', 'Réglementation', 'Équipe', 'Solaire', 'Industrie'].map((cat) => (
                 <label key={cat} className="flex items-center gap-2 cursor-pointer hover:text-[#2271b1]">
                   <input
@@ -186,13 +197,14 @@ export default function EditArticleClient({ article }: { article: any }) {
                     onChange={() => setCategory(cat)}
                     className="text-[#2271b1]"
                   />
-                  <span>{cat}</span>
+                  <span className="font-normal">{cat}</span>
                 </label>
               ))}
             </div>
           </div>
 
-          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm p-4">
+          {/* Card Image mise en avant */}
+          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm p-3.5">
             <ImageUpload
               value={coverUrl}
               onChange={setCoverUrl}

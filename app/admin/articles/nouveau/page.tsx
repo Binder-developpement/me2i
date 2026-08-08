@@ -7,7 +7,7 @@ import { createArticleAction } from '@/src/admin/lib/article-actions'
 import RichEditor from '@/src/admin/components/RichEditor'
 import ImageUpload from '@/src/admin/components/ImageUpload'
 import { toast } from 'sonner'
-import { ArrowLeft, Save, Loader2, Eye, Check } from 'lucide-react'
+import { ArrowLeft, Save, Loader2 } from 'lucide-react'
 
 export default function NewArticlePage() {
   const router = useRouter()
@@ -69,68 +69,45 @@ export default function NewArticlePage() {
   }
 
   return (
-    <div className="space-y-6">
-      {/* Top Breadcrumb & Action bar */}
-      <div className="flex items-center justify-between border-b border-[#c3c4c7] pb-4">
-        <div className="flex items-center gap-3">
+    <div className="space-y-4 max-w-6xl">
+      {/* Top Header sans gras */}
+      <div className="flex items-center justify-between pb-2 border-b border-[#dcdcde]">
+        <div className="flex items-center gap-2">
           <Link
             href="/admin/articles"
-            className="p-1.5 rounded hover:bg-[#dcdcde] text-[#1d2327] transition-colors"
+            className="p-1 rounded hover:bg-[#dcdcde] text-[#1d2327] transition-colors"
+            title="Retour à la liste"
           >
             <ArrowLeft className="h-4 w-4" />
           </Link>
-          <h1 className="text-2xl font-bold text-[#1d2327]">Ajouter un article</h1>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => handleSubmit('draft')}
-            disabled={loading}
-            className="px-3 py-1.5 border border-[#2271b1] text-[#2271b1] hover:bg-[#2271b1]/10 text-xs font-semibold rounded-sm transition-colors"
-          >
-            Enregistrer le brouillon
-          </button>
-          <button
-            type="button"
-            onClick={() => handleSubmit('published')}
-            disabled={loading}
-            className="flex items-center gap-1.5 bg-[#2271b1] hover:bg-[#135e96] text-white text-xs font-semibold px-4 py-2 rounded-sm transition-colors shadow-sm disabled:opacity-50"
-          >
-            {loading ? (
-              <Loader2 className="h-3.5 w-3.5 animate-spin" />
-            ) : (
-              <Save className="h-3.5 w-3.5" />
-            )}
-            <span>Publier</span>
-          </button>
+          <h1 className="text-xl font-normal text-[#1d2327]">Ajouter un article</h1>
         </div>
       </div>
 
-      {/* WordPress 2-Column Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Main Content (2/3) */}
-        <div className="lg:col-span-2 space-y-4">
-          {/* Title input */}
-          <div className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-sm">
+      {/* WordPress 2-Column Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {/* Main Content Area (Left 2/3) */}
+        <div className="lg:col-span-2 space-y-3">
+          {/* Title box sans gras */}
+          <div className="bg-white border border-[#c3c4c7] rounded-sm p-3.5 space-y-2">
             <input
               type="text"
               placeholder="Saisir le titre ici..."
               value={title}
               onChange={handleTitleChange}
-              className="w-full text-xl font-bold text-[#1d2327] placeholder-[#8c8f94] focus:outline-none border-b border-transparent focus:border-[#2271b1] pb-2 transition-colors"
+              className="w-full text-lg font-normal text-[#1d2327] placeholder-[#8c8f94] focus:outline-none border-b border-[#dcdcde] focus:border-[#2271b1] pb-1.5 transition-colors"
             />
-            <div className="mt-2 flex items-center gap-1 text-xs text-[#646970]">
-              <span className="font-semibold">Permalien :</span>
-              <span className="text-[#2271b1] underline">
+            <div className="flex items-center gap-1 text-xs text-[#646970]">
+              <span className="font-normal">Permalien :</span>
+              <span className="text-[#2271b1] underline font-normal">
                 {slug || 'mon-article'}
               </span>
             </div>
           </div>
 
-          {/* Excerpt */}
-          <div className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-sm space-y-2">
-            <label className="block text-xs font-semibold text-[#1d2327] uppercase tracking-wider">
+          {/* Excerpt box */}
+          <div className="bg-white border border-[#c3c4c7] rounded-sm p-3.5 space-y-1.5">
+            <label className="block text-xs font-normal text-[#1d2327] uppercase tracking-wider">
               Extrait (Résumé court)
             </label>
             <textarea
@@ -138,33 +115,34 @@ export default function NewArticlePage() {
               placeholder="Un bref résumé de l'article pour les cartes d'actualités..."
               value={excerpt}
               onChange={(e) => setExcerpt(e.target.value)}
-              className="w-full p-2.5 border border-[#8c8f94] rounded-sm text-xs focus:outline-none focus:border-[#2271b1] bg-white"
+              className="w-full p-2 border border-[#8c8f94] rounded-sm text-xs focus:outline-none focus:border-[#2271b1] bg-white font-normal"
             />
           </div>
 
-          {/* Rich Editor */}
-          <div className="space-y-2">
-            <label className="block text-xs font-semibold text-[#1d2327] uppercase tracking-wider">
+          {/* Rich Content Editor */}
+          <div className="space-y-1.5">
+            <label className="block text-xs font-normal text-[#1d2327] uppercase tracking-wider">
               Contenu de l'article
             </label>
             <RichEditor content={content} onChange={setContent} />
           </div>
         </div>
 
-        {/* Right Sidebar Panels (1/3) */}
-        <div className="space-y-4">
-          {/* Publish Settings Panel */}
-          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm">
-            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7] font-semibold text-xs text-[#1d2327] uppercase tracking-wider">
+        {/* Right Sidebar Panels (Right 1/3) */}
+        <div className="space-y-3">
+          {/* Card Publication avec options Modifier / Enregistrer / Publier intégrées */}
+          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-hidden">
+            <div className="px-3.5 py-2 bg-[#f6f7f7] border-b border-[#c3c4c7] font-normal text-xs text-[#1d2327] uppercase tracking-wider">
               Publication
             </div>
-            <div className="p-4 space-y-3 text-xs text-[#2c3338]">
+
+            <div className="p-3.5 space-y-3 text-xs text-[#2c3338]">
               <div className="flex items-center justify-between">
-                <span>Statut :</span>
+                <span className="font-normal">Statut :</span>
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value as any)}
-                  className="p-1 border border-[#8c8f94] rounded-sm text-xs bg-white"
+                  className="p-1 border border-[#8c8f94] rounded-sm text-xs bg-white font-normal"
                 >
                   <option value="draft">Brouillon</option>
                   <option value="published">Publié</option>
@@ -172,18 +150,44 @@ export default function NewArticlePage() {
               </div>
 
               <div className="flex items-center justify-between border-t border-[#f0f0f1] pt-3">
-                <span>Visibilité :</span>
-                <span className="font-semibold text-emerald-700">Publique</span>
+                <span className="font-normal">Visibilité :</span>
+                <span className="font-normal text-emerald-700">Publique</span>
               </div>
+            </div>
+
+            {/* Actions à l'intérieur de la Card Publication (Style WordPress) */}
+            <div className="px-3.5 py-2.5 bg-[#f6f7f7] border-t border-[#c3c4c7] flex items-center justify-between gap-2">
+              <button
+                type="button"
+                onClick={() => handleSubmit('draft')}
+                disabled={loading}
+                className="px-2.5 py-1.5 border border-[#2271b1] text-[#2271b1] hover:bg-[#2271b1]/10 text-xs font-normal rounded-sm transition-colors disabled:opacity-50"
+              >
+                Enregistrer le brouillon
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleSubmit('published')}
+                disabled={loading}
+                className="flex items-center gap-1 bg-[#2271b1] hover:bg-[#135e96] text-white text-xs font-normal px-3 py-1.5 rounded-sm transition-colors shadow-sm disabled:opacity-50"
+              >
+                {loading ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <Save className="h-3.5 w-3.5" />
+                )}
+                <span>Publier</span>
+              </button>
             </div>
           </div>
 
-          {/* Category Panel */}
+          {/* Card Catégorie */}
           <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm">
-            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7] font-semibold text-xs text-[#1d2327] uppercase tracking-wider">
+            <div className="px-3.5 py-2 bg-[#f6f7f7] border-b border-[#c3c4c7] font-normal text-xs text-[#1d2327] uppercase tracking-wider">
               Catégories
             </div>
-            <div className="p-4 space-y-2 text-xs">
+            <div className="p-3.5 space-y-1.5 text-xs">
               {['Technique', 'Prévention', 'Réglementation', 'Équipe', 'Solaire', 'Industrie'].map((cat) => (
                 <label key={cat} className="flex items-center gap-2 cursor-pointer hover:text-[#2271b1]">
                   <input
@@ -193,14 +197,14 @@ export default function NewArticlePage() {
                     onChange={() => setCategory(cat)}
                     className="text-[#2271b1]"
                   />
-                  <span>{cat}</span>
+                  <span className="font-normal">{cat}</span>
                 </label>
               ))}
             </div>
           </div>
 
-          {/* Featured Image Panel */}
-          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm p-4">
+          {/* Card Image mise en avant */}
+          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm p-3.5">
             <ImageUpload
               value={coverUrl}
               onChange={setCoverUrl}
