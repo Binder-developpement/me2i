@@ -66,9 +66,9 @@ export default function EditArticleClient({ article }: { article: any }) {
   }
 
   return (
-    <div className="space-y-4 max-w-6xl">
+    <div className="space-y-4 w-full">
       {/* Top Header sans gras excessif */}
-      <div className="flex items-center justify-between pb-2 border-b border-[#dcdcde]">
+      <div className="flex items-center justify-between pb-2 border-b border-[#dcdcde] w-full">
         <div className="flex items-center gap-2">
           <Link
             href="/admin/articles"
@@ -81,12 +81,12 @@ export default function EditArticleClient({ article }: { article: any }) {
         </div>
       </div>
 
-      {/* WordPress 2-Column Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {/* Main Content Area (Left 2/3) */}
-        <div className="lg:col-span-2 space-y-3">
-          {/* Title box sans gras */}
-          <div className="bg-white border border-[#c3c4c7] rounded-sm p-3.5 space-y-2">
+      {/* WordPress Full-Width Flex Layout: Central content takes full remaining width, sidebar 280px on extreme right */}
+      <div className="flex flex-col lg:flex-row items-start gap-4 w-full">
+        {/* Main Content Area (Expands to fill all central space) */}
+        <div className="flex-1 min-w-0 space-y-3 w-full">
+          {/* Title box */}
+          <div className="bg-white border border-[#c3c4c7] rounded-sm p-3.5 space-y-2 shadow-sm">
             <input
               type="text"
               placeholder="Saisir le titre ici"
@@ -100,13 +100,13 @@ export default function EditArticleClient({ article }: { article: any }) {
                 type="text"
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
-                className="text-[#2271b1] bg-transparent border-b border-dashed border-gray-300 focus:outline-none focus:border-[#2271b1] px-1 font-normal"
+                className="text-[#2271b1] bg-transparent border-b border-dashed border-gray-300 focus:outline-none focus:border-[#2271b1] px-1 font-normal max-w-full"
               />
             </div>
           </div>
 
           {/* Excerpt box */}
-          <div className="bg-white border border-[#c3c4c7] rounded-sm p-3.5 space-y-1.5">
+          <div className="bg-white border border-[#c3c4c7] rounded-sm p-3.5 space-y-1.5 shadow-sm">
             <label className="block text-xs font-normal text-[#1d2327] uppercase tracking-wider">
               Extrait (Résumé court)
             </label>
@@ -127,9 +127,9 @@ export default function EditArticleClient({ article }: { article: any }) {
           </div>
         </div>
 
-        {/* Right Sidebar Panels (Right 1/3) */}
-        <div className="space-y-3">
-          {/* Card Publication avec options Modifier / Enregistrer / Supprimer intégrées */}
+        {/* Right Sidebar (Extreme right, 280px width) */}
+        <div className="w-full lg:w-72 shrink-0 space-y-3">
+          {/* Card Publication */}
           <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-hidden">
             <div className="px-3.5 py-2 bg-[#f6f7f7] border-b border-[#c3c4c7] font-normal text-xs text-[#1d2327] uppercase tracking-wider">
               Publication
@@ -155,8 +155,8 @@ export default function EditArticleClient({ article }: { article: any }) {
               )}
             </div>
 
-            {/* Actions à l'intérieur du bloc Publication (style WordPress) */}
-            <div className="px-3.5 py-2.5 bg-[#f6f7f7] border-t border-[#c3c4c7] flex items-center justify-between">
+            {/* Actions à l'intérieur du bloc Publication */}
+            <div className="px-3.5 py-2.5 bg-[#f6f7f7] border-t border-[#c3c4c7] flex items-center justify-between gap-2">
               <button
                 type="button"
                 onClick={handleDelete}
