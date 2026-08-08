@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { updateContactStatusAction, deleteContactAction } from '@/src/admin/lib/contact-actions'
@@ -16,6 +16,10 @@ export default function ContactListClient({
   const [contacts, setContacts] = useState(initialContacts)
   const [activeTab, setActiveTab] = useState<'all' | 'unread' | 'read' | 'replied'>('all')
   const [search, setSearch] = useState('')
+
+  useEffect(() => {
+    setContacts(initialContacts)
+  }, [initialContacts])
 
   const filteredContacts = contacts.filter((c) => {
     const matchesTab = activeTab === 'all' || c.status === activeTab
