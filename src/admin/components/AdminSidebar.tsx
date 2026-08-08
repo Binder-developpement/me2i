@@ -7,7 +7,7 @@ import {
   FileText,
   Wrench,
   Package,
-  Image as ImageIcon,
+  ImageIcon,
   Trash2,
   ShoppingCart,
   MessageSquare,
@@ -24,16 +24,6 @@ const navItems = [
     title: 'Articles',
     icon: FileText,
     href: '/admin/articles',
-  },
-  {
-    title: 'Médiathèque & Galerie',
-    icon: ImageIcon,
-    href: '/admin/media',
-  },
-  {
-    title: 'Corbeille',
-    icon: Trash2,
-    href: '/admin/articles?tab=trash',
   },
   {
     title: 'Services',
@@ -59,6 +49,16 @@ const navItems = [
     title: 'Paramètres',
     icon: Settings,
     href: '/admin/parametres',
+  },
+  {
+    title: 'Médiathèque & Galerie',
+    icon: ImageIcon,
+    href: '/admin/media',
+  },
+  {
+    title: 'Corbeille',
+    icon: Trash2,
+    href: '/admin/articles?tab=trash',
   },
 ]
 
