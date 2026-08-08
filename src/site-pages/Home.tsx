@@ -234,7 +234,7 @@ function HeroSection({ settings = {} }: { settings?: Record<string, string> }) {
                   ref={titleRef}
                   className="font-heading text-[32px] font-bold leading-[1.1] tracking-tight text-bleu-marianne md:text-[42px] lg:text-[54px] opacity-0"
                 >
-                  Maintenir votre outil de production, accompagner vos équipes.
+                  Agence de maintenance des équipements industriels
                 </h1>
 
                 {/* Subtitle */}
