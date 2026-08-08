@@ -669,62 +669,146 @@ function SectorsSection() {
 
 /* ──────────────────────── News Section ──────────────────────── */
 
-function NewsSection() {
+interface ArticleItem {
+  id: string
+  title: string
+  slug?: string
+  excerpt?: string
+  cover_url?: string
+  category?: string
+  created_at?: string
+  published_at?: string
+}
+
+function NewsSection({ articles = [] }: { articles?: ArticleItem[] }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
+  // Fallback articles if DB has no published articles yet
+  const displayArticles = articles.length > 0 ? articles : [
+    {
+      id: '1',
+      title: 'Modernisation des systèmes d\'astreinte 24h/7j pour sites industriels',
+      slug: 'modernisation-des-systemes-d-astreinte-24h-7j',
+      excerpt: 'ME2I renforce ses équipes techniques d\'intervention rapide pour garantir un temps de réponse sous 2h sur tout le territoire.',
+      category: 'Maintenance',
+      cover_url: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80',
+      created_at: new Date().toISOString(),
+    },
+    {
+      id: '2',
+      title: 'Guide d\'installation des groupes électrogènes de forte puissance',
+      slug: 'guide-d-installation-des-groupes-electrogenes',
+      excerpt: 'Découvrez les règles d\'or pour l\'insonorisation, la ventilation et le raccordement des centrales de secours industrielles.',
+      category: 'Énergie',
+      cover_url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80',
+      created_at: new Date().toISOString(),
+    },
+    {
+      id: '3',
+      title: 'Systèmes hybrides Solaire & Groupe Électrogène : Analyse de rentabilité',
+      slug: 'systemes-hybrides-solaire-et-groupe-electrogene',
+      excerpt: 'Comment réduire votre consommation de fioul de 40% grâce au couplage photovoltaïque intelligent.',
+      category: 'Innovation',
+      cover_url: 'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=800&q=80',
+      created_at: new Date().toISOString(),
+    },
+  ]
+
+  const formatDate = (dateStr?: string) => {
+    if (!dateStr) return 'Date récente'
+    try {
+      return new Date(dateStr).toLocaleDateString('fr-FR', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      })
+    } catch (e) {
+      return dateStr
+    }
+  }
+
   return (
-    <section className="bg-gris-tres-clair py-section-mobile lg:py-section" aria-labelledby="news-title">
+    <section className="bg-[#f8fafc] py-16 lg:py-24 border-t border-slate-200" aria-labelledby="news-title">
       <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+        {/* Section Header */}
         <motion.div
           ref={ref}
-          className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
+          className="mb-14 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={fadeInUp}
         >
-          <h2 id="news-title" className="font-heading text-[28px] font-medium text-bleu-marianne md:text-[36px]">
-            Dernières actualités
-          </h2>
+          <div>
+            <span className="text-[11px] font-bold uppercase tracking-widest text-bleu-marianne/80 mb-3 inline-block bg-bleu-marianne/10 px-3 py-1">
+              Actualités &amp; Publications
+            </span>
+            <h2 id="news-title" className="font-heading text-[32px] font-bold text-bleu-marianne md:text-[40px] tracking-tight">
+              Dernières actualités ME2I
+            </h2>
+            <p className="mt-2 text-sm text-slate-500 font-normal max-w-xl">
+              Retrouvez nos retours d'expériences du terrain, guides d'ingénierie et actualités sectorielles.
+            </p>
+          </div>
+
           <Link
-            to="/actualites"
-            className="inline-flex items-center gap-2 self-start rounded-none border border-bleu-marianne px-5 py-2.5 text-sm font-medium text-bleu-marianne transition-all hover:bg-bleu-marianne hover:text-white"
+            to="/blog"
+            className="inline-flex items-center gap-2 self-start md:self-end rounded-none bg-bleu-marianne px-5 py-3 text-xs font-bold uppercase tracking-wider text-white transition-all hover:bg-bleu-marianne-clair shadow-sm shrink-0"
           >
-            Toutes les actualités
+            <span>Voir tous les articles</span>
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </motion.div>
 
+        {/* Cards Grid */}
         <motion.div
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          className="grid gap-8 grid-cols-1 md:grid-cols-3"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
         >
-          {news.map((item) => (
+          {displayArticles.map((item) => (
             <motion.article
-              key={item.title}
+              key={item.id || item.title}
               variants={staggerItem}
-              className="group overflow-hidden rounded border border-gris-clair bg-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-card-hover"
+              className="group bg-white border border-slate-200 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-bleu-marianne transition-all duration-200 flex flex-col justify-between"
             >
-              <Link to="/actualites" className="block">
-                <div className="aspect-video overflow-hidden">
+              <Link to={`/blog/${item.id}`} className="flex flex-col h-full">
+                {/* Article Cover Image */}
+                <div className="aspect-[16/10] overflow-hidden relative bg-slate-100">
                   <img
-                    src={item.image}
-                    alt=""
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    src={item.cover_url || 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80'}
+                    alt={item.title}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
                     loading="lazy"
                   />
-                </div>
-                <div className="p-5">
-                  <div className="flex items-center gap-3">
-                    <time className="text-xs text-[#a7aaad]">{item.date}</time>
-                    <span className="rounded bg-bleu-marianne/10 px-2.5 py-0.5 text-xs font-medium text-bleu-marianne">
-                      {item.category}
+                  <div className="absolute top-3 left-3">
+                    <span className="bg-bleu-marianne text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-none shadow-sm">
+                      {item.category || 'Général'}
                     </span>
                   </div>
-                  <h3 className="mt-3 font-heading text-base font-medium text-gris-fonce line-clamp-2 leading-snug">
-                    {item.title}
-                  </h3>
+                </div>
+
+                {/* Article Body Content */}
+                <div className="p-6 flex flex-col flex-1 justify-between">
+                  <div>
+                    <time className="text-xs text-slate-400 font-normal block mb-2">
+                      {formatDate(item.published_at || item.created_at)}
+                    </time>
+                    <h3 className="font-heading text-lg font-bold text-slate-800 leading-snug line-clamp-2 group-hover:text-bleu-marianne transition-colors">
+                      {item.title}
+                    </h3>
+                    {item.excerpt && (
+                      <p className="mt-2 text-xs text-slate-600 line-clamp-3 leading-relaxed font-normal">
+                        {item.excerpt}
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-1.5 text-xs font-bold text-bleu-marianne group-hover:gap-2.5 transition-all">
+                    <span>Lire la suite</span>
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </div>
                 </div>
               </Link>
             </motion.article>
@@ -737,7 +821,13 @@ function NewsSection() {
 
 /* ──────────────────────── Home Page ──────────────────────── */
 
-export default function Home({ settings = {} }: { settings?: Record<string, string> }) {
+export default function Home({
+  settings = {},
+  articles = [],
+}: {
+  settings?: Record<string, string>
+  articles?: any[]
+}) {
   return (
     <>
       <HeroSection settings={settings} />
@@ -745,7 +835,7 @@ export default function Home({ settings = {} }: { settings?: Record<string, stri
       <VisionSection />
       <ServicesSection />
       <SectorsSection />
-      <NewsSection />
+      <NewsSection articles={articles} />
     </>
   )
 }
