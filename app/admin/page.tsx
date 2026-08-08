@@ -93,31 +93,6 @@ export default async function AdminDashboard() {
         </div>
       </div>
 
-      {/* WordPress Welcome Box */}
-      <div className="bg-white border border-[#c3c4c7] rounded-sm p-5 shadow-sm relative overflow-hidden">
-        <div className="max-w-3xl">
-          <h2 className="text-base font-normal text-[#1d2327]">
-            Bienvenue dans votre administration ME2I
-          </h2>
-          <p className="text-xs text-[#50575e] mt-1.5 leading-relaxed font-normal">
-            Gérez vos publications, présentez vos expertises et suivez les demandes de contact ainsi que les commandes clients directement depuis ce panneau de contrôle.
-          </p>
-          <div className="mt-3 flex flex-wrap items-center gap-4 text-xs font-normal text-[#2271b1]">
-            <Link href="/admin/articles" className="hover:underline flex items-center gap-1">
-              Gérer les articles &rarr;
-            </Link>
-            <Link href="/admin/services" className="hover:underline flex items-center gap-1">
-              Gérer les services &rarr;
-            </Link>
-            <Link href="/admin/produits" className="hover:underline flex items-center gap-1">
-              Gérer le catalogue &rarr;
-            </Link>
-            <Link href="/admin/parametres" className="hover:underline flex items-center gap-1">
-              Modifier les informations entreprise &rarr;
-            </Link>
-          </div>
-        </div>
-      </div>
 
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
