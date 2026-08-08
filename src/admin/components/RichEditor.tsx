@@ -33,6 +33,12 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
       }),
     ],
     content: content || '',
+    editorProps: {
+      attributes: {
+        class:
+          'prose max-w-none p-4 min-h-[280px] focus:outline-none text-sm text-[#1e1e1e] cursor-text outline-none',
+      },
+    },
     onUpdate: ({ editor }) => {
       onChange(editor.getHTML())
     },
@@ -61,14 +67,24 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
   }
 
   return (
-    <div className="border border-[#8c8f94] rounded-sm overflow-hidden bg-white">
+    <div
+      onClick={() => {
+        if (editor && !editor.isFocused) {
+          editor.chain().focus().run()
+        }
+      }}
+      className="border border-[#8c8f94] rounded-sm overflow-hidden bg-white cursor-text focus-within:border-[#2271b1] focus-within:ring-1 focus-within:ring-[#2271b1] transition-shadow"
+    >
       {/* WordPress-style Toolbar */}
-      <div className="flex flex-wrap items-center gap-1 bg-[#f6f7f7] border-b border-[#dcdcde] p-1.5 text-xs text-[#1d2327]">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="flex flex-wrap items-center gap-1 bg-[#f6f7f7] border-b border-[#dcdcde] p-1.5 text-xs text-[#1d2327] select-none"
+      >
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBold().run()}
-          className={`p-1.5 rounded hover:bg-[#dcdcde] ${
-            editor.isActive('bold') ? 'bg-[#dcdcde] font-bold' : ''
+          className={`p-1.5 rounded hover:bg-[#dcdcde] transition-colors ${
+            editor.isActive('bold') ? 'bg-[#dcdcde] font-bold text-[#2271b1]' : ''
           }`}
           title="Gras"
         >
@@ -77,8 +93,8 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleItalic().run()}
-          className={`p-1.5 rounded hover:bg-[#dcdcde] ${
-            editor.isActive('italic') ? 'bg-[#dcdcde]' : ''
+          className={`p-1.5 rounded hover:bg-[#dcdcde] transition-colors ${
+            editor.isActive('italic') ? 'bg-[#dcdcde] text-[#2271b1]' : ''
           }`}
           title="Italique"
         >
@@ -88,8 +104,8 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-          className={`p-1.5 rounded hover:bg-[#dcdcde] ${
-            editor.isActive('heading', { level: 2 }) ? 'bg-[#dcdcde]' : ''
+          className={`p-1.5 rounded hover:bg-[#dcdcde] transition-colors ${
+            editor.isActive('heading', { level: 2 }) ? 'bg-[#dcdcde] text-[#2271b1]' : ''
           }`}
           title="Titre H2"
         >
@@ -98,8 +114,8 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-          className={`p-1.5 rounded hover:bg-[#dcdcde] ${
-            editor.isActive('heading', { level: 3 }) ? 'bg-[#dcdcde]' : ''
+          className={`p-1.5 rounded hover:bg-[#dcdcde] transition-colors ${
+            editor.isActive('heading', { level: 3 }) ? 'bg-[#dcdcde] text-[#2271b1]' : ''
           }`}
           title="Titre H3"
         >
@@ -109,8 +125,8 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
-          className={`p-1.5 rounded hover:bg-[#dcdcde] ${
-            editor.isActive('bulletList') ? 'bg-[#dcdcde]' : ''
+          className={`p-1.5 rounded hover:bg-[#dcdcde] transition-colors ${
+            editor.isActive('bulletList') ? 'bg-[#dcdcde] text-[#2271b1]' : ''
           }`}
           title="Liste à puces"
         >
@@ -119,8 +135,8 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
-          className={`p-1.5 rounded hover:bg-[#dcdcde] ${
-            editor.isActive('orderedList') ? 'bg-[#dcdcde]' : ''
+          className={`p-1.5 rounded hover:bg-[#dcdcde] transition-colors ${
+            editor.isActive('orderedList') ? 'bg-[#dcdcde] text-[#2271b1]' : ''
           }`}
           title="Liste numérotée"
         >
@@ -129,8 +145,8 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
         <button
           type="button"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
-          className={`p-1.5 rounded hover:bg-[#dcdcde] ${
-            editor.isActive('blockquote') ? 'bg-[#dcdcde]' : ''
+          className={`p-1.5 rounded hover:bg-[#dcdcde] transition-colors ${
+            editor.isActive('blockquote') ? 'bg-[#dcdcde] text-[#2271b1]' : ''
           }`}
           title="Citation"
         >
@@ -140,17 +156,17 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
         <button
           type="button"
           onClick={setLink}
-          className={`p-1.5 rounded hover:bg-[#dcdcde] ${
-            editor.isActive('link') ? 'bg-[#dcdcde]' : ''
+          className={`p-1.5 rounded hover:bg-[#dcdcde] transition-colors ${
+            editor.isActive('link') ? 'bg-[#dcdcde] text-[#2271b1]' : ''
           }`}
-          title="Inserer un lien"
+          title="Insérer un lien"
         >
           <LinkIcon className="h-4 w-4" />
         </button>
         <button
           type="button"
           onClick={addImage}
-          className="p-1.5 rounded hover:bg-[#dcdcde]"
+          className="p-1.5 rounded hover:bg-[#dcdcde] transition-colors"
           title="Insérer une image"
         >
           <ImageIcon className="h-4 w-4" />
@@ -159,7 +175,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
         <button
           type="button"
           onClick={() => editor.chain().focus().undo().run()}
-          className="p-1.5 rounded hover:bg-[#dcdcde]"
+          className="p-1.5 rounded hover:bg-[#dcdcde] transition-colors"
           title="Annuler"
         >
           <Undo className="h-4 w-4" />
@@ -167,7 +183,7 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
         <button
           type="button"
           onClick={() => editor.chain().focus().redo().run()}
-          className="p-1.5 rounded hover:bg-[#dcdcde]"
+          className="p-1.5 rounded hover:bg-[#dcdcde] transition-colors"
           title="Rétablir"
         >
           <Redo className="h-4 w-4" />
@@ -175,10 +191,9 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
       </div>
 
       {/* Editor Content Area */}
-      <EditorContent
-        editor={editor}
-        className="prose max-w-none p-4 min-h-[260px] focus:outline-none text-sm text-[#1e1e1e]"
-      />
+      <div className="min-h-[280px] cursor-text">
+        <EditorContent editor={editor} />
+      </div>
     </div>
   )
 }
