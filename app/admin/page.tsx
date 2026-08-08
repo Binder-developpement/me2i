@@ -1,21 +1,15 @@
 import { requireAdminAuth } from '@/src/admin/lib/auth-guard'
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import Link from 'next/link'
+import QuickDraftWidget from '@/src/admin/components/QuickDraftWidget'
 import {
   FileText,
   Wrench,
   Package,
   ShoppingCart,
   MessageSquare,
+  Award,
   Plus,
-  ArrowRight,
-  FolderOpen,
-  Settings,
-  Layers,
-  Clock,
-  CheckCircle2,
-  AlertCircle,
-  Zap,
 } from 'lucide-react'
 
 export const revalidate = 0
@@ -26,7 +20,6 @@ export default async function AdminDashboard() {
   let stats = {
     articles: 0,
     draftArticles: 0,
-    publishedArticles: 0,
     services: 0,
     products: 0,
     orders: 0,
@@ -39,6 +32,7 @@ export default async function AdminDashboard() {
   let recentArticles: any[] = []
   let recentContacts: any[] = []
   let recentOrders: any[] = []
+  let draftArticlesList: any[] = []
 
   try {
     const supabase = await createServerClient()
@@ -56,6 +50,7 @@ export default async function AdminDashboard() {
       { data: articlesData },
       { data: contactsData },
       { data: ordersData },
+      { data: draftsData },
     ] = await Promise.all([
       supabase.from('articles').select('*', { count: 'exact', head: true }),
       supabase.from('articles').select('*', { count: 'exact', head: true }).eq('status', 'draft'),
@@ -69,15 +64,12 @@ export default async function AdminDashboard() {
       supabase.from('articles').select('id, title, status, created_at').order('created_at', { ascending: false }).limit(5),
       supabase.from('contacts').select('id, name, email, subject, status, created_at').order('created_at', { ascending: false }).limit(5),
       supabase.from('orders').select('id, reference, customer_name, total, status, created_at').order('created_at', { ascending: false }).limit(5),
+      supabase.from('articles').select('id, title, created_at').eq('status', 'draft').order('created_at', { ascending: false }).limit(3),
     ])
 
-    const totalArts = articlesCount || 0
-    const drafts = draftArticlesCount || 0
-
     stats = {
-      articles: totalArts,
-      draftArticles: drafts,
-      publishedArticles: totalArts - drafts,
+      articles: articlesCount || 0,
+      draftArticles: draftArticlesCount || 0,
       services: servicesCount || 0,
       products: productsCount || 0,
       orders: ordersCount || 0,
@@ -90,31 +82,32 @@ export default async function AdminDashboard() {
     recentArticles = articlesData || []
     recentContacts = contactsData || []
     recentOrders = ordersData || []
+    draftArticlesList = draftsData || []
   } catch (err) {
     console.error('Error fetching admin dashboard stats:', err)
   }
 
   return (
     <div className="space-y-4 w-full">
-      {/* Top Header Card */}
+      {/* WordPress Top Header Card */}
       <div className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 w-full">
         <div>
           <h1 className="text-xl font-normal text-[#1d2327]">Tableau de bord</h1>
           <p className="text-xs text-[#646970] font-normal mt-0.5">
-            Aperçu général de l'activité, demandes de contact et contenus de votre site ME2I
+            Bienvenue dans l'administration ME2I
           </p>
         </div>
         <div className="flex items-center gap-2">
           <Link
             href="/admin/articles/nouveau"
-            className="inline-flex items-center gap-1.5 bg-[#2271b1] hover:bg-[#135e96] text-white text-xs font-normal px-3 py-2 rounded-sm transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 bg-[#2271b1] hover:bg-[#135e96] text-white text-xs font-normal px-3 py-1.5 rounded-sm transition-colors shadow-sm"
           >
             <Plus className="h-3.5 w-3.5" />
-            <span>Nouvel article</span>
+            <span>Créer un article</span>
           </Link>
           <Link
             href="/admin/produits/nouveau"
-            className="inline-flex items-center gap-1.5 bg-[#1E3A5F] hover:bg-[#152943] text-white text-xs font-normal px-3 py-2 rounded-sm transition-colors shadow-sm"
+            className="inline-flex items-center gap-1.5 bg-[#1E3A5F] hover:bg-[#152943] text-white text-xs font-normal px-3 py-1.5 rounded-sm transition-colors shadow-sm"
           >
             <Plus className="h-3.5 w-3.5" />
             <span>Nouveau produit</span>
@@ -122,261 +115,186 @@ export default async function AdminDashboard() {
         </div>
       </div>
 
-      {/* Barre d'Accès Rapide */}
-      <div className="bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm">
-        <div className="text-[11px] font-normal text-[#646970] uppercase tracking-wider mb-2 flex items-center gap-1.5">
-          <Zap className="h-3.5 w-3.5 text-[#2271b1]" />
-          <span>Accès rapide aux fonctionnalités</span>
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
-          <Link
-            href="/admin/articles/nouveau"
-            className="inline-flex items-center gap-1.5 bg-[#f6f7f7] hover:bg-[#e0e0e0] text-[#1d2327] border border-[#c3c4c7] text-xs font-normal px-3 py-1.5 rounded-sm transition-colors"
-          >
-            <Plus className="h-3.5 w-3.5 text-[#2271b1]" />
-            <span>Créer un article</span>
-          </Link>
-          <Link
-            href="/admin/produits/nouveau"
-            className="inline-flex items-center gap-1.5 bg-[#f6f7f7] hover:bg-[#e0e0e0] text-[#1d2327] border border-[#c3c4c7] text-xs font-normal px-3 py-1.5 rounded-sm transition-colors"
-          >
-            <Plus className="h-3.5 w-3.5 text-amber-600" />
-            <span>Ajouter un produit</span>
-          </Link>
-          <Link
-            href="/admin/services/nouveau"
-            className="inline-flex items-center gap-1.5 bg-[#f6f7f7] hover:bg-[#e0e0e0] text-[#1d2327] border border-[#c3c4c7] text-xs font-normal px-3 py-1.5 rounded-sm transition-colors"
-          >
-            <Plus className="h-3.5 w-3.5 text-purple-600" />
-            <span>Nouveau service</span>
-          </Link>
-          <Link
-            href="/admin/realisations/nouveau"
-            className="inline-flex items-center gap-1.5 bg-[#f6f7f7] hover:bg-[#e0e0e0] text-[#1d2327] border border-[#c3c4c7] text-xs font-normal px-3 py-1.5 rounded-sm transition-colors"
-          >
-            <Plus className="h-3.5 w-3.5 text-blue-600" />
-            <span>Ajouter une réalisation</span>
-          </Link>
-          <Link
-            href="/admin/media"
-            className="inline-flex items-center gap-1.5 bg-[#f6f7f7] hover:bg-[#e0e0e0] text-[#1d2327] border border-[#c3c4c7] text-xs font-normal px-3 py-1.5 rounded-sm transition-colors"
-          >
-            <FolderOpen className="h-3.5 w-3.5 text-emerald-600" />
-            <span>Médiathèque</span>
-          </Link>
-          <Link
-            href="/admin/parametres"
-            className="inline-flex items-center gap-1.5 bg-[#f6f7f7] hover:bg-[#e0e0e0] text-[#1d2327] border border-[#c3c4c7] text-xs font-normal px-3 py-1.5 rounded-sm transition-colors"
-          >
-            <Settings className="h-3.5 w-3.5 text-gray-600" />
-            <span>Paramètres entreprise</span>
-          </Link>
-        </div>
-      </div>
-
-      {/* Section des Alertes & Éléments Nécessitant une Attention */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        {/* Messages non lus */}
-        <Link
-          href="/admin/contacts"
-          className="bg-white border border-[#c3c4c7] hover:border-amber-500 rounded-sm p-3.5 shadow-sm transition-all flex items-center justify-between group"
-        >
-          <div className="space-y-1">
-            <span className="text-xs font-normal text-[#646970]">Messages non lus</span>
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-normal text-[#1d2327]">{stats.unreadContacts}</span>
-              <span className="text-[11px] text-[#646970] font-normal">sur {stats.contacts} reçus</span>
+      {/* WordPress 2-Column Dashboard Meta Boxes */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* LEFT COLUMN */}
+        <div className="space-y-4">
+          {/* Meta Box: D'un coup d'œil */}
+          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-hidden">
+            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7]">
+              <h2 className="text-xs font-normal uppercase tracking-wider text-[#1d2327]">
+                D'un coup d'œil
+              </h2>
             </div>
-          </div>
-          <div className={`p-2.5 rounded-full ${stats.unreadContacts > 0 ? 'bg-amber-100 text-amber-700 animate-pulse' : 'bg-gray-100 text-gray-400'}`}>
-            <MessageSquare className="h-5 w-5" />
-          </div>
-        </Link>
 
-        {/* Commandes reçues / en cours */}
-        <Link
-          href="/admin/commandes"
-          className="bg-white border border-[#c3c4c7] hover:border-emerald-500 rounded-sm p-3.5 shadow-sm transition-all flex items-center justify-between group"
-        >
-          <div className="space-y-1">
-            <span className="text-xs font-normal text-[#646970]">Commandes à traiter</span>
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-normal text-[#1d2327]">{stats.pendingOrders}</span>
-              <span className="text-[11px] text-[#646970] font-normal">sur {stats.orders} reçues</span>
-            </div>
-          </div>
-          <div className={`p-2.5 rounded-full ${stats.pendingOrders > 0 ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-100 text-gray-400'}`}>
-            <ShoppingCart className="h-5 w-5" />
-          </div>
-        </Link>
-
-        {/* Articles en Brouillons */}
-        <Link
-          href="/admin/articles"
-          className="bg-white border border-[#c3c4c7] hover:border-blue-500 rounded-sm p-3.5 shadow-sm transition-all flex items-center justify-between group"
-        >
-          <div className="space-y-1">
-            <span className="text-xs font-normal text-[#646970]">Articles en brouillon</span>
-            <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-normal text-[#1d2327]">{stats.draftArticles}</span>
-              <span className="text-[11px] text-[#646970] font-normal">sur {stats.articles} articles</span>
-            </div>
-          </div>
-          <div className="p-2.5 rounded-full bg-blue-50 text-[#2271b1]">
-            <Clock className="h-5 w-5" />
-          </div>
-        </Link>
-      </div>
-
-      {/* Statistiques Diverses Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        {/* Articles */}
-        <div className="bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm">
-          <div className="text-[10px] font-normal text-[#646970] uppercase">Articles</div>
-          <div className="text-lg font-normal text-[#1d2327] mt-1">{stats.articles}</div>
-          <div className="text-[10px] text-[#646970] mt-0.5">{stats.publishedArticles} publiés</div>
-        </div>
-
-        {/* Services */}
-        <div className="bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm">
-          <div className="text-[10px] font-normal text-[#646970] uppercase">Services</div>
-          <div className="text-lg font-normal text-[#1d2327] mt-1">{stats.services}</div>
-          <div className="text-[10px] text-[#646970] mt-0.5">Offres de maintenance</div>
-        </div>
-
-        {/* Produits */}
-        <div className="bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm">
-          <div className="text-[10px] font-normal text-[#646970] uppercase">Catalogue</div>
-          <div className="text-lg font-normal text-[#1d2327] mt-1">{stats.products}</div>
-          <div className="text-[10px] text-[#646970] mt-0.5">Produits en ligne</div>
-        </div>
-
-        {/* Réalisations */}
-        <div className="bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm">
-          <div className="text-[10px] font-normal text-[#646970] uppercase">Réalisations</div>
-          <div className="text-lg font-normal text-[#1d2327] mt-1">{stats.realisations}</div>
-          <div className="text-[10px] text-[#646970] mt-0.5">Projets documentés</div>
-        </div>
-
-        {/* Commandes */}
-        <div className="bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm">
-          <div className="text-[10px] font-normal text-[#646970] uppercase">Commandes</div>
-          <div className="text-lg font-normal text-[#1d2327] mt-1">{stats.orders}</div>
-          <div className="text-[10px] text-[#646970] mt-0.5">{stats.pendingOrders} en attente</div>
-        </div>
-
-        {/* Messages */}
-        <div className="bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm">
-          <div className="text-[10px] font-normal text-[#646970] uppercase">Messages</div>
-          <div className="text-lg font-normal text-[#1d2327] mt-1">{stats.contacts}</div>
-          <div className="text-[10px] text-amber-700 mt-0.5 font-normal">{stats.unreadContacts} non lus</div>
-        </div>
-      </div>
-
-      {/* Main Grid: Widgets d'activité récente */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-        {/* Messages non lus & récents */}
-        <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm">
-          <div className="px-4 py-2.5 border-b border-[#c3c4c7] bg-[#f6f7f7] flex items-center justify-between">
-            <h3 className="text-xs font-normal uppercase tracking-wider text-[#1d2327] flex items-center gap-2">
-              <MessageSquare className="h-4 w-4 text-[#2271b1]" />
-              Derniers messages reçus
-            </h3>
-            <Link href="/admin/contacts" className="text-xs text-[#2271b1] hover:underline font-normal">
-              Tout voir
-            </Link>
-          </div>
-          <div className="divide-y divide-[#f0f0f1]">
-            {recentContacts.length === 0 ? (
-              <div className="p-6 text-center text-xs text-[#646970] font-normal">
-                Aucun message reçu pour le moment.
+            <div className="p-4 grid grid-cols-2 gap-3 text-xs text-[#2c3338] font-normal">
+              <div className="space-y-2">
+                <Link href="/admin/articles" className="flex items-center gap-2 text-[#2271b1] hover:underline">
+                  <FileText className="h-4 w-4 text-[#8c8f94]" />
+                  <span><strong>{stats.articles}</strong> Article(s)</span>
+                </Link>
+                <Link href="/admin/services" className="flex items-center gap-2 text-[#2271b1] hover:underline">
+                  <Wrench className="h-4 w-4 text-[#8c8f94]" />
+                  <span><strong>{stats.services}</strong> Service(s)</span>
+                </Link>
+                <Link href="/admin/produits" className="flex items-center gap-2 text-[#2271b1] hover:underline">
+                  <Package className="h-4 w-4 text-[#8c8f94]" />
+                  <span><strong>{stats.products}</strong> Produit(s)</span>
+                </Link>
               </div>
-            ) : (
-              recentContacts.map((contact) => (
-                <div key={contact.id} className="p-3 hover:bg-[#f6f7f7] transition-colors flex items-center justify-between">
-                  <div className="overflow-hidden pr-2">
-                    <p className="text-xs font-normal text-[#1d2327] truncate">{contact.name}</p>
-                    <p className="text-[11px] text-[#646970] font-normal truncate">{contact.subject || contact.email}</p>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <span className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded ${
-                      contact.status === 'unread' ? 'bg-amber-100 text-amber-800' : 'bg-gray-100 text-gray-700'
-                    }`}>
-                      {contact.status === 'unread' ? 'Non lu' : 'Lu'}
+
+              <div className="space-y-2">
+                <Link href="/admin/realisations" className="flex items-center gap-2 text-[#2271b1] hover:underline">
+                  <Award className="h-4 w-4 text-[#8c8f94]" />
+                  <span><strong>{stats.realisations}</strong> Réalisation(s)</span>
+                </Link>
+                <Link href="/admin/contacts" className="flex items-center gap-2 text-[#2271b1] hover:underline">
+                  <MessageSquare className="h-4 w-4 text-[#8c8f94]" />
+                  <span><strong>{stats.contacts}</strong> Message(s) {stats.unreadContacts > 0 && <span className="text-amber-700 font-normal">({stats.unreadContacts} non lu)</span>}</span>
+                </Link>
+                <Link href="/admin/commandes" className="flex items-center gap-2 text-[#2271b1] hover:underline">
+                  <ShoppingCart className="h-4 w-4 text-[#8c8f94]" />
+                  <span><strong>{stats.orders}</strong> Commande(s) {stats.pendingOrders > 0 && <span className="text-emerald-700 font-normal">({stats.pendingOrders} en cours)</span>}</span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="px-4 py-2 bg-[#f6f7f7] border-t border-[#f0f0f1] text-[11px] text-[#646970] font-normal">
+              ME2I Maintenance &amp; Énergie — Next.js avec Supabase Database
+            </div>
+          </div>
+
+          {/* Meta Box: Activité */}
+          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-hidden">
+            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7] flex items-center justify-between">
+              <h2 className="text-xs font-normal uppercase tracking-wider text-[#1d2327]">
+                Activité
+              </h2>
+              <span className="text-[11px] text-[#646970] font-normal">Récemment publié &amp; reçu</span>
+            </div>
+
+            {/* Sub-section: Messages récents */}
+            <div className="p-4 space-y-3 border-b border-[#f0f0f1]">
+              <div className="text-[11px] font-normal text-[#646970] uppercase tracking-wider">
+                Derniers messages clients
+              </div>
+              {recentContacts.length === 0 ? (
+                <p className="text-xs text-[#646970] font-normal">Aucun message reçu pour le moment.</p>
+              ) : (
+                <div className="space-y-2">
+                  {recentContacts.map((c) => (
+                    <div key={c.id} className="flex items-center justify-between text-xs py-1 border-b border-[#f6f7f7] last:border-0 font-normal">
+                      <div className="truncate max-w-[240px]">
+                        <Link href="/admin/contacts" className="text-[#2271b1] hover:underline">
+                          {c.name}
+                        </Link>
+                        <span className="text-[#646970] ml-2 text-[11px] truncate">
+                          {c.subject || c.email}
+                        </span>
+                      </div>
+                      <span className={`px-2 py-0.5 text-[10px] rounded ${
+                        c.status === 'unread' ? 'bg-amber-100 text-amber-800' : 'bg-gray-100 text-gray-600'
+                      }`}>
+                        {c.status === 'unread' ? 'Non lu' : 'Lu'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Sub-section: Articles publiés récemment */}
+            <div className="p-4 space-y-3">
+              <div className="text-[11px] font-normal text-[#646970] uppercase tracking-wider">
+                Articles récents
+              </div>
+              {recentArticles.length === 0 ? (
+                <p className="text-xs text-[#646970] font-normal">Aucun article créé.</p>
+              ) : (
+                <div className="space-y-2">
+                  {recentArticles.map((a) => (
+                    <div key={a.id} className="flex items-center justify-between text-xs py-1 border-b border-[#f6f7f7] last:border-0 font-normal">
+                      <Link href={`/admin/articles/${a.id}`} className="text-[#2271b1] hover:underline truncate max-w-[240px]">
+                        {a.title}
+                      </Link>
+                      <span className={`px-2 py-0.5 text-[10px] rounded ${
+                        a.status === 'published' ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-700'
+                      }`}>
+                        {a.status === 'published' ? 'Publié' : 'Brouillon'}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT COLUMN */}
+        <div className="space-y-4">
+          {/* Meta Box: Brouillon rapide */}
+          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-hidden">
+            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7]">
+              <h2 className="text-xs font-normal uppercase tracking-wider text-[#1d2327]">
+                Brouillon rapide
+              </h2>
+            </div>
+
+            <QuickDraftWidget />
+
+            {draftArticlesList.length > 0 && (
+              <div className="p-4 bg-[#f6f7f7] border-t border-[#c3c4c7] space-y-2 text-xs font-normal">
+                <div className="text-[11px] text-[#646970] uppercase tracking-wider">
+                  Brouillons récents :
+                </div>
+                {draftArticlesList.map((d) => (
+                  <div key={d.id} className="flex items-center justify-between">
+                    <Link href={`/admin/articles/${d.id}`} className="text-[#2271b1] hover:underline truncate max-w-[220px]">
+                      {d.title}
+                    </Link>
+                    <span className="text-[10px] text-[#a7aaad]">
+                      {new Date(d.created_at).toLocaleDateString('fr-FR')}
                     </span>
                   </div>
-                </div>
-              ))
+                ))}
+              </div>
             )}
           </div>
-        </div>
 
-        {/* Commandes récentes */}
-        <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm">
-          <div className="px-4 py-2.5 border-b border-[#c3c4c7] bg-[#f6f7f7] flex items-center justify-between">
-            <h3 className="text-xs font-normal uppercase tracking-wider text-[#1d2327] flex items-center gap-2">
-              <ShoppingCart className="h-4 w-4 text-emerald-600" />
-              Commandes reçues
-            </h3>
-            <Link href="/admin/commandes" className="text-xs text-[#2271b1] hover:underline font-normal">
-              Tout voir
-            </Link>
-          </div>
-          <div className="divide-y divide-[#f0f0f1]">
-            {recentOrders.length === 0 ? (
-              <div className="p-6 text-center text-xs text-[#646970] font-normal">
-                Aucune commande reçue pour le moment.
-              </div>
-            ) : (
-              recentOrders.map((ord) => (
-                <div key={ord.id} className="p-3 hover:bg-[#f6f7f7] transition-colors flex items-center justify-between">
-                  <div className="overflow-hidden pr-2">
-                    <p className="text-xs font-normal text-[#1d2327] truncate">{ord.customer_name || ord.reference}</p>
-                    <p className="text-[11px] text-emerald-700 font-normal">{ord.total ? `${ord.total.toLocaleString()} FCFA` : 'Sur devis'}</p>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <span className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded ${
-                      ord.status === 'pending' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
+          {/* Meta Box: Dernières commandes reçues */}
+          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-hidden">
+            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7] flex items-center justify-between">
+              <h2 className="text-xs font-normal uppercase tracking-wider text-[#1d2327]">
+                Commandes reçues
+              </h2>
+              <Link href="/admin/commandes" className="text-xs text-[#2271b1] hover:underline font-normal">
+                Tout voir
+              </Link>
+            </div>
+
+            <div className="p-4 space-y-2 text-xs font-normal">
+              {recentOrders.length === 0 ? (
+                <p className="text-xs text-[#646970] font-normal">Aucune commande pour le moment.</p>
+              ) : (
+                recentOrders.map((o) => (
+                  <div key={o.id} className="flex items-center justify-between py-1.5 border-b border-[#f6f7f7] last:border-0">
+                    <div>
+                      <Link href={`/admin/commandes/${o.id}`} className="text-[#2271b1] hover:underline">
+                        {o.customer_name || o.reference}
+                      </Link>
+                      <p className="text-[11px] text-[#646970]">
+                        {o.total ? `${o.total.toLocaleString()} FCFA` : 'Sur devis'}
+                      </p>
+                    </div>
+                    <span className={`px-2 py-0.5 text-[10px] rounded ${
+                      o.status === 'pending' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
                     }`}>
-                      {ord.status === 'pending' ? 'En attente' : 'Traitée'}
+                      {o.status === 'pending' ? 'En attente' : 'Traitée'}
                     </span>
                   </div>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-
-        {/* Articles récents */}
-        <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm">
-          <div className="px-4 py-2.5 border-b border-[#c3c4c7] bg-[#f6f7f7] flex items-center justify-between">
-            <h3 className="text-xs font-normal uppercase tracking-wider text-[#1d2327] flex items-center gap-2">
-              <FileText className="h-4 w-4 text-[#2271b1]" />
-              Articles récents
-            </h3>
-            <Link href="/admin/articles" className="text-xs text-[#2271b1] hover:underline font-normal">
-              Tout voir
-            </Link>
-          </div>
-          <div className="divide-y divide-[#f0f0f1]">
-            {recentArticles.length === 0 ? (
-              <div className="p-6 text-center text-xs text-[#646970] font-normal">
-                Aucun article créé pour le moment.
-              </div>
-            ) : (
-              recentArticles.map((art) => (
-                <div key={art.id} className="p-3 hover:bg-[#f6f7f7] transition-colors flex items-center justify-between">
-                  <span className="text-xs font-normal text-[#1d2327] truncate max-w-[180px]">
-                    {art.title}
-                  </span>
-                  <span className={`px-2 py-0.5 text-[10px] font-normal rounded ${
-                    art.status === 'published' ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-100 text-slate-700'
-                  }`}>
-                    {art.status === 'published' ? 'Publié' : 'Brouillon'}
-                  </span>
-                </div>
-              ))
-            )}
+                ))
+              )}
+            </div>
           </div>
         </div>
       </div>
