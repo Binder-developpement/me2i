@@ -610,7 +610,6 @@ function SectorsSection() {
                   <h3 className="font-heading text-lg font-bold text-slate-800 mb-2">
                     {sector.title}
                   </h3>
-                  <div className="w-8 h-[2px] bg-bleu-marianne mb-3 group-hover:w-12 transition-all duration-200" />
                   <p className="text-xs text-slate-600 leading-relaxed font-normal">
                     {sector.desc}
                   </p>
