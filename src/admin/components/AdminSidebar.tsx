@@ -54,8 +54,8 @@ export default function AdminSidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="fixed top-10 left-0 bottom-0 z-30 w-60 flex flex-col bg-gradient-to-b from-[#1E3A5F] via-[#1A3354] to-[#13253e] text-white select-none shadow-md">
-      {/* Sidebar Header: juste ME2I en majuscule sur fond gradient doux */}
+    <aside className="fixed top-10 left-0 bottom-0 z-30 w-60 flex flex-col bg-gradient-to-b from-[#2A4B75] via-[#1E3A5F] to-[#172D4C] text-white select-none shadow-sm">
+      {/* Sidebar Header: juste ME2I en majuscule sur fond gradient très doux */}
       <div className="flex items-center px-5 h-14 bg-transparent">
         <Link href="/admin" className="font-black text-xl tracking-wider text-white hover:text-white/80 transition-opacity">
           ME2I
