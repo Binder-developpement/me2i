@@ -19,13 +19,13 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 h-10 bg-[#1d2327] border-b border-[#2c3338] text-[#f0f6fc] flex items-center justify-between px-3 select-none text-[13px]">
+    <header className="fixed top-0 left-0 right-0 z-40 h-10 bg-gradient-to-r from-[#0f1b2c] via-[#1a3354] to-[#264872] text-white flex items-center justify-between px-3 select-none text-[13px] shadow-sm">
       {/* Left side actions */}
       <div className="flex items-center gap-4">
         <Link
           href="/"
           target="_blank"
-          className="flex items-center gap-1.5 px-2 py-1 rounded text-[#c3c4c7] hover:text-white hover:bg-[#2c3338] transition-colors"
+          className="flex items-center gap-1.5 px-2 py-1 rounded text-white/80 hover:text-white hover:bg-white/10 transition-colors"
           title="Ouvrir le site public"
         >
           <Home className="h-3.5 w-3.5" />
