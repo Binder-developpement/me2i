@@ -30,11 +30,11 @@ export default function AdminLoginPage() {
 
       if (error) {
         if (error.message.toLowerCase().includes('email not confirmed')) {
-          setErrorMsg('L\'e-mail n\'a pas encore été confirmé dans Supabase. Allez sur le Dashboard Supabase > Authentication > Users > ... > Confirm email, ou désactivez "Confirm Email".')
+          setErrorMsg('L\'e-mail n\'a pas encore été confirmé. Utilisez contact@me2i.cm ou confirmez l\'adresse dans Supabase Users.')
         } else {
-          setErrorMsg('Identifiant ou mot de passe incorrect.')
+          setErrorMsg(error.message || 'Identifiant ou mot de passe incorrect.')
         }
-        toast.error('Échec de la connexion : ' + error.message)
+        toast.error('Échec : ' + error.message)
         setLoading(false)
         return
       }
