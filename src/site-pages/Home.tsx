@@ -321,9 +321,9 @@ function HeroSection({ settings = {} }: { settings?: Record<string, string> }) {
                   <div className="my-6 border-t border-slate-100" />
 
                   <div className="bg-slate-50/50 p-4 rounded-lg border border-slate-100">
-                    <h3 className="text-xs font-bold text-bleu-marianne uppercase tracking-wider">Un projet ? Une question ?</h3>
+                    <h3 className="text-xs font-bold text-bleu-marianne uppercase tracking-wider">Avez-vous un projet ou un équipement en panne ?</h3>
                     <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">
-                      Nos équipes d'experts vous accompagnent pas-à-pas dans toutes vos démarches de transition industrielle et numérique.
+                      Nos équipes d'experts vous accompagnent pas-à-pas dans la résolution de vos pannes et vos projets d'énergie &amp; d'automatisme.
                     </p>
                   </div>
                 </div>
