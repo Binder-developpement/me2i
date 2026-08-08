@@ -99,7 +99,7 @@ export default async function AdminDashboard() {
       <div className="bg-white border border-[#c3c4c7] rounded-sm p-6 shadow-sm relative overflow-hidden">
         <div className="max-w-3xl">
           <h2 className="text-lg font-bold text-[#1d2327]">
-            Bienvenue dans votre administration ME2I 👋
+            Bienvenue dans votre administration ME2I
           </h2>
           <p className="text-sm text-[#50575e] mt-2 leading-relaxed">
             Gérez vos publications, présentez vos expertises et suivez les demandes de contact ainsi que les commandes clients directement depuis ce panneau de contrôle.
