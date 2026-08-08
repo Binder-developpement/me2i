@@ -190,10 +190,10 @@ export default function OrderDetailClient({ order }: { order: any }) {
                   onChange={(e) => setStatus(e.target.value as any)}
                   className="p-1 border border-[#8c8f94] rounded-sm text-xs bg-white font-normal"
                 >
-                  <option value="pending">⏳ En attente</option>
-                  <option value="processing">⚙️ En cours</option>
-                  <option value="completed">✅ Complétée</option>
-                  <option value="cancelled">❌ Annulée</option>
+                  <option value="pending">En attente</option>
+                  <option value="processing">En cours</option>
+                  <option value="completed">Complétée</option>
+                  <option value="cancelled">Annulée</option>
                 </select>
               </div>
 
