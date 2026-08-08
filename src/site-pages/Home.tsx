@@ -25,6 +25,12 @@ import {
   Activity,
   Zap,
   Cpu,
+  Factory,
+  HardHat,
+  HeartPulse,
+  Hotel,
+  Wheat,
+  Landmark,
 } from 'lucide-react'
 
 /* ──────────────────────── Animation variants ──────────────────────── */
@@ -521,6 +527,122 @@ function ServicesSection() {
   )
 }
 
+/* ──────────────────────── Sectors Section ──────────────────────── */
+
+const sectorsData = [
+  {
+    title: 'Industrie & Manufacture',
+    icon: Factory,
+    desc: 'Maintenance des équipements industriels, lignes de production, systèmes de refroidissement et installations électriques pour les usines et unités de fabrication.',
+  },
+  {
+    title: 'BTP & Construction',
+    icon: HardHat,
+    desc: 'Fourniture et maintenance de groupes électrogènes pour les chantiers de construction, alimentation de secours et installations électriques temporaires.',
+  },
+  {
+    title: 'Santé & Hôpitaux',
+    icon: HeartPulse,
+    desc: 'Solutions énergétiques critiques pour les établissements de santé : groupes électrogènes de secours, onduleurs et maintenance préventive garantissant la continuité des soins.',
+  },
+  {
+    title: 'Hôtellerie & Commerce',
+    icon: Hotel,
+    desc: 'Installation et entretien des systèmes énergétiques pour hôtels, centres commerciaux et grandes surfaces, assurant confort et continuité de service.',
+  },
+  {
+    title: 'Agriculture & Agroalimentaire',
+    icon: Wheat,
+    desc: "Alimentation électrique des exploitations agricoles, chambres froides, unités de transformation et systèmes d'irrigation par énergie solaire.",
+  },
+  {
+    title: 'Institutions & Administrations',
+    icon: Landmark,
+    desc: 'Équipement et maintenance des bâtiments publics, ambassades, organisations internationales et institutions gouvernementales en solutions énergétiques fiables.',
+  },
+]
+
+function SectorsSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  return (
+    <section className="bg-[#f8fafc] py-16 lg:py-24 border-t border-b border-slate-200" aria-labelledby="sectors-title">
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+        {/* Section Header */}
+        <motion.div
+          ref={ref}
+          className="mb-14 text-center max-w-3xl mx-auto"
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeInUp}
+        >
+          <span className="text-[11px] font-bold uppercase tracking-widest text-bleu-marianne/80 mb-3 inline-block bg-bleu-marianne/10 px-3 py-1">
+            Nos secteurs d'intervention
+          </span>
+          <h2 id="sectors-title" className="font-heading text-[32px] font-bold text-bleu-marianne md:text-[40px] lg:text-[48px]" style={{ letterSpacing: '-0.02em' }}>
+            Des solutions adaptées à votre domaine
+          </h2>
+          <p className="mt-4 text-base text-slate-500 font-normal leading-relaxed">
+            ME2I intervient dans de nombreux secteurs d'activité, apportant son expertise technique et sa rigueur opérationnelle à des clients variés.
+          </p>
+        </motion.div>
+
+        {/* Sectors 6 Cards Grid */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+        >
+          {sectorsData.map((sector) => {
+            const Icon = sector.icon
+            return (
+              <motion.div
+                key={sector.title}
+                variants={staggerItem}
+                className="group bg-white border border-slate-200 rounded-sm p-6 shadow-sm hover:shadow-md hover:border-bleu-marianne transition-all duration-200 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="p-3 rounded-sm bg-bleu-marianne/10 text-bleu-marianne w-fit mb-5 group-hover:bg-bleu-marianne group-hover:text-white transition-colors duration-200">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="font-heading text-lg font-bold text-slate-800 mb-2">
+                    {sector.title}
+                  </h3>
+                  <div className="w-8 h-[2px] bg-bleu-marianne mb-3 group-hover:w-12 transition-all duration-200" />
+                  <p className="text-xs text-slate-600 leading-relaxed font-normal">
+                    {sector.desc}
+                  </p>
+                </div>
+              </motion.div>
+            )
+          })}
+        </motion.div>
+
+        {/* Concluding Banner Callout */}
+        <motion.div
+          className="mt-12 p-6 bg-white border-l-4 border-bleu-marianne border-y border-r border-slate-200 rounded-sm shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeInUp}
+        >
+          <p className="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed">
+            Quel que soit votre secteur, ME2I vous accompagne avec des solutions énergétiques adaptées à vos exigences opérationnelles.
+          </p>
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-2 bg-bleu-marianne hover:bg-bleu-marianne-clair text-white text-xs font-bold uppercase tracking-wider px-5 py-3 rounded-none transition-colors shadow-sm shrink-0"
+          >
+            <span>Demander une étude</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
 /* ──────────────────────── News Section ──────────────────────── */
 
 function NewsSection() {
@@ -571,7 +693,7 @@ function NewsSection() {
                 </div>
                 <div className="p-5">
                   <div className="flex items-center gap-3">
-                    <time className="text-xs text-gris-moyen">{item.date}</time>
+                    <time className="text-xs text-[#a7aaad]">{item.date}</time>
                     <span className="rounded bg-bleu-marianne/10 px-2.5 py-0.5 text-xs font-medium text-bleu-marianne">
                       {item.category}
                     </span>
@@ -598,6 +720,7 @@ export default function Home({ settings = {} }: { settings?: Record<string, stri
       <WhoWeAreSection />
       <VisionSection />
       <ServicesSection />
+      <SectorsSection />
       <NewsSection />
     </>
   )
