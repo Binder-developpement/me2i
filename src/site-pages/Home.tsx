@@ -597,7 +597,7 @@ function SectorsSection() {
         >
           {sectorsData.map((sector, index) => {
             const Icon = sector.icon
-            const isPrimary = index % 2 === 1
+            const isPrimary = index % 2 === 0
 
             return (
               <motion.div
