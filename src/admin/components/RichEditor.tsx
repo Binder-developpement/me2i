@@ -48,11 +48,30 @@ export default function RichEditor({ content, onChange }: RichEditorProps) {
     return null
   }
 
-  const addImage = () => {
-    const url = window.prompt('URL de l\'image :')
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run()
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    if (file.size > 10 * 1024 * 1024) {
+      alert('L\'image dépasse la taille maximale de 10 Mo')
+      return
     }
+
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      if (typeof reader.result === 'string') {
+        editor.chain().focus().setImage({ src: reader.result }).run()
+      }
+    }
+    reader.readAsDataURL(file)
+  }
+
+  const addImage = () => {
+    const input = document.createElement('input')
+    input.type = 'file'
+    input.accept = 'image/*'
+    input.onchange = (e: any) => handleImageUpload(e)
+    input.click()
   }
 
   const setLink = () => {

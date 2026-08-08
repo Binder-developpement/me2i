@@ -25,8 +25,8 @@ export default function ImageUpload({
       const file = e.target.files?.[0]
       if (!file) return
 
-      if (file.size > 5 * 1024 * 1024) {
-        toast.error('L\'image dépasse la taille maximale autorisée (5 Mo)')
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error('L\'image dépasse la taille maximale autorisée (10 Mo)')
         return
       }
 
@@ -112,7 +112,7 @@ export default function ImageUpload({
               {uploading ? 'Téléversement...' : 'Définir l\'image'}
             </span>
             <span className="text-[10px] text-[#646970]">
-              PNG, JPG, WebP jusqu'à 5Mo
+              PNG, JPG, WebP jusqu'à 10 Mo
             </span>
           </div>
         </label>
