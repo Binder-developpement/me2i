@@ -2,7 +2,6 @@
 
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
 
 function generateSlug(text: string): string {
   return text
@@ -61,12 +60,12 @@ export async function createRealisationAction(formData: FormData) {
 
   if (error) {
     console.error('Error inserting realization:', error)
-    // If table doesn't exist or errors out, log warning
   }
 
   revalidatePath('/realisations')
   revalidatePath('/admin/realisations')
-  redirect('/admin/realisations')
+
+  return { success: true }
 }
 
 export async function updateRealisationAction(id: string, formData: FormData) {
@@ -117,7 +116,8 @@ export async function updateRealisationAction(id: string, formData: FormData) {
   revalidatePath('/realisations')
   revalidatePath(`/realisations/${id}`)
   revalidatePath('/admin/realisations')
-  redirect('/admin/realisations')
+
+  return { success: true }
 }
 
 export async function deleteRealisationAction(id: string) {
@@ -138,6 +138,8 @@ export async function deleteRealisationAction(id: string) {
 
   revalidatePath('/realisations')
   revalidatePath('/admin/realisations')
+
+  return { success: true }
 }
 
 export async function trashRealisationAction(id: string) {
@@ -161,6 +163,8 @@ export async function trashRealisationAction(id: string) {
 
   revalidatePath('/realisations')
   revalidatePath('/admin/realisations')
+
+  return { success: true }
 }
 
 export async function restoreRealisationAction(id: string) {
@@ -184,4 +188,6 @@ export async function restoreRealisationAction(id: string) {
 
   revalidatePath('/realisations')
   revalidatePath('/admin/realisations')
+
+  return { success: true }
 }
