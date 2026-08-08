@@ -45,7 +45,7 @@ export default function About() {
             A propos de la ville
           </h1>
           <p className="text-white/80 max-w-[640px]">
-            m2i — Ville de Saint-Etienne, prefecture de la Loire, au coeur
+            m2i - Ville de Saint-Etienne, prefecture de la Loire, au coeur
             de la region Auvergne-Rhone-Alpes.
           </p>
         </div>

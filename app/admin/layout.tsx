@@ -4,7 +4,7 @@ import AdminTopbar from '@/src/admin/components/AdminTopbar'
 import { Toaster } from 'sonner'
 
 export const metadata = {
-  title: 'Administration — ME2I',
+  title: 'Administration - ME2I',
   robots: 'noindex, nofollow',
 }
 

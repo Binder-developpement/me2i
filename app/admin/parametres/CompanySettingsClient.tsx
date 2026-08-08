@@ -20,7 +20,7 @@ export default function CompanySettingsClient({
     email: initialSettings.email || 'contact@me2i.cm',
     phone: initialSettings.phone || '+237 000 000 000',
     emergency_phone: initialSettings.emergency_phone || '+237 000 000 001',
-    address: initialSettings.address || 'Cameroun — Afrique centrale',
+    address: initialSettings.address || 'Cameroun - Afrique centrale',
     linkedin_url: initialSettings.linkedin_url || '',
     facebook_url: initialSettings.facebook_url || '',
     opening_hours: initialSettings.opening_hours || 'Lundi – Vendredi : 7h30 – 18h00',

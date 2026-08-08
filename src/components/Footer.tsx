@@ -48,7 +48,7 @@ export default function Footer() {
             <address className="not-italic text-sm text-white/70 leading-relaxed space-y-2">
               <p className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-white/50" />
-                Cameroun — Afrique centrale
+                Cameroun - Afrique centrale
               </p>
               <p className="flex items-center gap-2">
                 <Phone className="h-4 w-4 shrink-0 text-white/50" />
@@ -147,7 +147,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-white/40">
-            &copy; {new Date().getFullYear()} ME2I — Maintenance Industrielle &amp; Énergie sans Interruption. Tous droits réservés.
+            &copy; {new Date().getFullYear()} ME2I - Maintenance Industrielle &amp; Énergie sans Interruption. Tous droits réservés.
           </p>
           <div className="flex flex-wrap gap-x-4 gap-y-1">
             <Link to="/a-propos" className="text-xs text-white/40 hover:text-white transition-colors">

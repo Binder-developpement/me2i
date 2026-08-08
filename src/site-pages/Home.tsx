@@ -465,7 +465,7 @@ function ServicesSection() {
           </p>
         </motion.div>
 
-        {/* Domain Groups Grid — WordPress-style clean editorial */}
+        {/* Domain Groups Grid - WordPress-style clean editorial */}
         <motion.div
           className="grid gap-px bg-slate-100 border border-slate-100 sm:grid-cols-2 xl:grid-cols-4"
           initial="hidden"

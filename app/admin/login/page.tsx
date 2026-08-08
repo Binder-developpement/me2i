@@ -2,14 +2,16 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { createClientSupabase } from '@/src/admin/lib/supabase-client'
 import { toast } from 'sonner'
-import { Lock, Mail, ShieldCheck, ArrowRight, Loader2 } from 'lucide-react'
+import { Loader2, ArrowRight } from 'lucide-react'
 
 export default function AdminLoginPage() {
   const router = useRouter()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [rememberMe, setRememberMe] = useState(false)
   const [loading, setLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
@@ -26,7 +28,7 @@ export default function AdminLoginPage() {
       })
 
       if (error) {
-        setErrorMsg(error.message || 'Identifiants incorrects')
+        setErrorMsg('Identifiant ou mot de passe incorrect.')
         toast.error('Échec de la connexion : ' + error.message)
         setLoading(false)
         return
@@ -36,108 +38,111 @@ export default function AdminLoginPage() {
       router.push('/admin')
       router.refresh()
     } catch (err: any) {
-      setErrorMsg(err?.message || 'Une erreur est survenue')
+      setErrorMsg(err?.message || 'Une erreur est survenue lors de la connexion.')
       toast.error('Erreur lors de la connexion')
       setLoading(false)
     }
   }
 
   return (
-    <div className="min-h-screen bg-[#f0f0f1] flex flex-col items-center justify-center p-4">
-      {/* WordPress-style Login Container */}
-      <div className="w-full max-w-sm">
-        {/* Header Logo */}
+    <div className="min-h-screen bg-[#f0f0f1] flex flex-col items-center justify-center p-4 select-none font-sans text-[#2c3338]">
+      <div className="w-full max-w-[320px] sm:max-w-[340px]">
+        {/* WordPress Style Logo */}
         <div className="text-center mb-6">
-          <div className="inline-flex h-12 w-12 items-center justify-center rounded-sm bg-[#1E3A5F] text-white font-black text-xl shadow-md mb-3">
-            M
+          <Link
+            href="/"
+            className="inline-flex items-center justify-center h-20 w-20 rounded-full bg-[#1d2327] text-white shadow-md hover:bg-[#2271b1] transition-colors group"
+            title="Aller sur ME2I"
+          >
+            <span className="font-black text-2xl tracking-wider text-white group-hover:scale-105 transition-transform">
+              M2I
+            </span>
+          </Link>
+        </div>
+
+        {/* WordPress Error Message Notice */}
+        {errorMsg && (
+          <div className="mb-4 p-3 bg-white border-l-4 border-[#d63638] text-xs text-[#2c3338] shadow-sm">
+            <strong className="text-[#d63638]">ERREUR :</strong> {errorMsg}
           </div>
-          <h1 className="text-xl font-bold text-[#1d2327]">ME2I Administration</h1>
-          <p className="text-xs text-[#646970] mt-1">
-            Connectez-vous pour accéder au panneau de gestion
-          </p>
-        </div>
+        )}
 
-        {/* Login Form Box */}
-        <div className="bg-white border border-[#c3c4c7] rounded-sm p-6 shadow-sm">
-          {errorMsg && (
-            <div className="mb-4 p-3 bg-[#fcf0f1] border-l-4 border-[#d63638] text-xs text-[#d63638]">
-              {errorMsg}
-            </div>
-          )}
+        {/* WordPress Authentic Login Form Box */}
+        <form
+          onSubmit={handleLogin}
+          className="bg-white border border-[#c3c4c7] p-6 shadow-sm space-y-4"
+        >
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-xs font-normal text-[#1d2327] mb-1.5"
+            >
+              Identifiant ou adresse e-mail
+            </label>
+            <input
+              id="email"
+              type="email"
+              required
+              autoFocus
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-3 py-2 border border-[#8c8f94] rounded-sm text-sm text-[#2c3338] bg-white focus:outline-none focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] transition-shadow"
+            />
+          </div>
 
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-xs font-semibold text-[#1d2327] mb-1 uppercase tracking-wider"
-              >
-                Adresse e-mail
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-2.5 h-4 w-4 text-[#8c8f94]" />
-                <input
-                  id="email"
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@me2i.cm"
-                  className="w-full pl-9 pr-3 py-2 border border-[#8c8f94] rounded-sm text-sm focus:outline-none focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] transition-colors"
-                />
-              </div>
-            </div>
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-xs font-normal text-[#1d2327] mb-1.5"
+            >
+              Mot de passe
+            </label>
+            <input
+              id="password"
+              type="password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-3 py-2 border border-[#8c8f94] rounded-sm text-sm text-[#2c3338] bg-white focus:outline-none focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] transition-shadow"
+            />
+          </div>
 
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-xs font-semibold text-[#1d2327] mb-1 uppercase tracking-wider"
-              >
-                Mot de passe
-              </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-2.5 h-4 w-4 text-[#8c8f94]" />
-                <input
-                  id="password"
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full pl-9 pr-3 py-2 border border-[#8c8f94] rounded-sm text-sm focus:outline-none focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] transition-colors"
-                />
-              </div>
-            </div>
+          {/* Remember me & Submit button */}
+          <div className="flex items-center justify-between pt-2">
+            <label className="flex items-center gap-1.5 text-xs text-[#50575e] cursor-pointer">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                className="rounded-sm border-[#8c8f94] text-[#2271b1] focus:ring-[#2271b1]"
+              />
+              <span>Se souvenir de moi</span>
+            </label>
 
-            <div className="pt-2">
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full flex items-center justify-center gap-2 bg-[#2271b1] hover:bg-[#135e96] text-white text-sm font-semibold py-2.5 px-4 rounded-sm transition-colors shadow-sm disabled:opacity-50"
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    <span>Connexion en cours...</span>
-                  </>
-                ) : (
-                  <>
-                    <span>Se connecter</span>
-                    <ArrowRight className="h-4 w-4" />
-                  </>
-                )}
-              </button>
-            </div>
-          </form>
-        </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="bg-[#2271b1] hover:bg-[#135e96] text-white text-xs font-semibold px-4 py-2 rounded-sm transition-colors border border-[#2271b1] flex items-center gap-1.5 shadow-sm disabled:opacity-60"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                  <span>Connexion...</span>
+                </>
+              ) : (
+                <span>Se connecter</span>
+              )}
+            </button>
+          </div>
+        </form>
 
-        {/* Footer links */}
-        <div className="mt-6 text-center text-xs text-[#646970] space-y-2">
+        {/* WordPress Bottom Links */}
+        <div className="mt-4 space-y-2 text-xs text-[#2271b1]">
           <p>
-            <a href="/" className="hover:text-[#2271b1] transition-colors">
-              &larr; Retourner sur le site ME2I
-            </a>
+            <Link href="/" className="hover:text-[#135e96] transition-colors">
+              &larr; Aller sur ME2I
+            </Link>
           </p>
-          <p>© {new Date().getFullYear()} ME2I — All rights reserved.</p>
         </div>
       </div>
     </div>
