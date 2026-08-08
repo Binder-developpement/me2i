@@ -11,10 +11,17 @@ const faqs = [
   { q: 'Fournissez-vous des groupes électrogènes sur mesure ?', a: 'Nous proposons la vente, l\'installation et l\'hybridation de groupes électrogènes de toutes puissances.' },
 ]
 
-export default function Contact() {
+export default function Contact({ settings = {} }: { settings?: Record<string, string> }) {
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' })
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
+
+  const companyName = settings.company_name || 'ME2I'
+  const email = settings.email || 'contact@me2i.cm'
+  const phone = settings.phone || '+237 699 00 00 00'
+  const emergencyPhone = settings.emergency_phone || '+237 677 00 00 00'
+  const address = settings.address || 'Douala / Yaoundé, Cameroun'
+  const openingHours = settings.opening_hours || 'Lundi – Vendredi : 7h30 – 18h00'
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -46,7 +53,7 @@ export default function Contact() {
       <section className="bg-[#1E3A5F] py-16">
         <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
           <h1 className="text-4xl sm:text-5xl font-normal text-white mb-4">
-            Contactez ME2I
+            Contactez {companyName}
           </h1>
           <p className="text-white/80 max-w-[560px] font-normal text-base">
             Une étude technique, un devis de maintenance ou une commande ? Notre équipe d'ingénieurs et techniciens est à votre écoute.
@@ -61,7 +68,7 @@ export default function Contact() {
             <h2 className="text-2xl font-normal text-[#1d2327] mb-6">Formulaire de contact</h2>
             {sent ? (
               <div className="p-6 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-sm font-normal">
-                Votre message a bien été transmis aux équipes ME2I. Nous vous recontacterons dans les plus brefs délais.
+                Votre message a bien été transmis aux équipes {companyName}. Nous vous recontacterons dans les plus brefs délais.
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -163,36 +170,44 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Info sidebar */}
+          {/* Info sidebar dynamically populated from admin parameters */}
           <div className="space-y-6">
             <div className="p-6 bg-gray-50 border border-gray-200 rounded-sm space-y-4">
               <div className="flex items-start gap-3">
                 <MapPin size={20} className="text-[#2271b1] mt-0.5 shrink-0" />
                 <div>
-                  <p className="font-normal text-[#1d2327] text-sm">Siège ME2I</p>
-                  <p className="text-xs text-[#646970] font-normal">Douala / Yaoundé, Cameroun</p>
+                  <p className="font-normal text-[#1d2327] text-sm">Siège &amp; Adresse</p>
+                  <p className="text-xs text-[#646970] font-normal">{address}</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Clock size={20} className="text-[#2271b1] mt-0.5 shrink-0" />
                 <div>
                   <p className="font-normal text-[#1d2327] text-sm">Horaires d'ouverture</p>
-                  <p className="text-xs text-[#646970] font-normal">Lun - Ven : 7h30 - 18h00</p>
-                  <p className="text-xs text-emerald-700 font-normal">Astreinte 24h/24 - 7j/7</p>
+                  <p className="text-xs text-[#646970] font-normal">{openingHours}</p>
+                  {emergencyPhone && (
+                    <p className="text-xs text-emerald-700 font-normal mt-0.5">
+                      Astreinte / Urgence : {emergencyPhone}
+                    </p>
+                  )}
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Mail size={20} className="text-[#2271b1] mt-0.5 shrink-0" />
                 <div>
                   <p className="font-normal text-[#1d2327] text-sm">Email direct</p>
-                  <p className="text-xs text-[#2271b1] font-normal">contact@me2i.cm</p>
+                  <a href={`mailto:${email}`} className="text-xs text-[#2271b1] hover:underline font-normal">
+                    {email}
+                  </a>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Phone size={20} className="text-[#2271b1] mt-0.5 shrink-0" />
                 <div>
                   <p className="font-normal text-[#1d2327] text-sm">Téléphone &amp; Support</p>
-                  <p className="text-xs text-[#646970] font-normal">+237 699 00 00 00</p>
+                  <a href={`tel:${phone}`} className="text-xs text-[#646970] hover:text-[#2271b1] font-normal">
+                    {phone}
+                  </a>
                 </div>
               </div>
             </div>
