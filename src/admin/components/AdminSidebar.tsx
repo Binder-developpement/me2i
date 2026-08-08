@@ -8,6 +8,7 @@ import {
   Wrench,
   Package,
   Image as ImageIcon,
+  Images,
   ShoppingCart,
   MessageSquare,
   Settings,
@@ -27,6 +28,11 @@ const navItems = [
   {
     title: 'Médiathèque',
     icon: ImageIcon,
+    href: '/admin/media',
+  },
+  {
+    title: 'Galerie d\'images',
+    icon: Images,
     href: '/admin/media',
   },
   {
@@ -73,7 +79,7 @@ export default function AdminSidebar() {
         </Link>
       </div>
 
-      {/* Navigation items avec fondu primaire doux */}
+      {/* Navigation items sans sous-menus avec texte agrandi */}
       <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-1">
         {navItems.map((item) => {
           const isActive =
