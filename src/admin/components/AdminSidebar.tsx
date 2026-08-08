@@ -55,10 +55,15 @@ export default function AdminSidebar() {
 
   return (
     <aside className="fixed top-10 left-0 bottom-0 z-30 w-60 flex flex-col bg-gradient-to-br from-[#0f1b2c] via-[#1a3354] to-[#264872] text-white select-none shadow-sm">
-      {/* Sidebar Header: juste ME2I en majuscule sur fond gradient très doux */}
-      <div className="flex items-center px-5 h-14 bg-transparent">
-        <Link href="/admin" className="font-black text-xl tracking-wider text-white hover:text-white/80 transition-opacity">
-          ME2I
+      {/* Sidebar Header: ME2I sans gras avec sous-titre et légère séparation */}
+      <div className="px-5 py-3.5 border-b border-white/10 bg-transparent">
+        <Link href="/admin" className="block group">
+          <span className="font-medium text-lg tracking-wider text-white group-hover:text-white/80 transition-colors block">
+            ME2I
+          </span>
+          <span className="block text-[11px] font-normal text-white/60 tracking-normal leading-tight mt-0.5">
+            Administration
+          </span>
         </Link>
       </div>
 
