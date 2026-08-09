@@ -3,7 +3,6 @@ import { createServerClient } from '@/src/admin/lib/supabase-server'
 import Link from 'next/link'
 import { Plus } from 'lucide-react'
 import ArticleListClient from './ArticleListClient'
-import { fallbackLongArticles } from '@/src/lib/default-articles'
 
 export const revalidate = 0
 
@@ -30,12 +29,6 @@ export default async function ArticlesListPage({
     console.error('Error fetching articles:', err)
   }
 
-  // Combine fallback long articles with database articles without duplicates
-  const dbSlugs = new Set(articles.map((a) => a.slug || a.id))
-  const missingFallbacks = fallbackLongArticles.filter((f) => !dbSlugs.has(f.slug) && !dbSlugs.has(f.id))
-
-  const combinedArticles = [...missingFallbacks, ...articles]
-
   return (
     <div className="space-y-4 w-full">
       {/* Header Card */}
@@ -43,7 +36,7 @@ export default async function ArticlesListPage({
         <div>
           <h1 className="text-xl font-normal text-[#1d2327]">Articles</h1>
           <p className="text-xs text-[#646970] font-normal mt-0.5">
-            Gérez les publications et actualités de votre site ({combinedArticles.length} article(s))
+            Gérez les publications et actualités de votre site ({articles.length} article(s))
           </p>
         </div>
         <Link
@@ -55,8 +48,8 @@ export default async function ArticlesListPage({
         </Link>
       </div>
 
-      {/* Client List component with status tabs & search */}
-      <ArticleListClient initialArticles={combinedArticles} defaultTab={initialTab} />
+      {/* Client List component */}
+      <ArticleListClient initialArticles={articles} defaultTab={initialTab} />
     </div>
   )
 }

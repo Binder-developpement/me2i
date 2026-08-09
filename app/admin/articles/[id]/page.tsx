@@ -2,7 +2,6 @@ import { requireAdminAuth } from '@/src/admin/lib/auth-guard'
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import { notFound } from 'next/navigation'
 import EditArticleClient from './EditArticleClient'
-import { fallbackLongArticles } from '@/src/lib/default-articles'
 
 export const revalidate = 0
 
@@ -36,35 +35,9 @@ export default async function EditArticlePage({
         .eq('slug', id)
         .single()
       article = data
-
-      if (!article) {
-        const { data: seedArt } = await supabase
-          .from('realisations')
-          .select('*')
-          .or(`id.eq.art_${id},slug.eq.${id}`)
-          .single()
-        
-        if (seedArt) {
-          article = {
-            id: seedArt.id,
-            title: seedArt.title,
-            slug: seedArt.slug || seedArt.id.replace('art_', ''),
-            category: seedArt.category || 'Maintenance Industrielle',
-            excerpt: seedArt.description || seedArt.subtitle || '',
-            content: seedArt.content || seedArt.description || '',
-            cover_url: seedArt.cover_url || null,
-            status: seedArt.status || 'published',
-          }
-        }
-      }
     }
   } catch (err) {
     // Ignore error
-  }
-
-  // Fallback to long articles list if not in DB
-  if (!article) {
-    article = fallbackLongArticles.find((f) => f.id === id || f.slug === id)
   }
 
   if (!article) {

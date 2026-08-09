@@ -110,21 +110,23 @@ export default function BlogClient({ initialArticles }: { initialArticles: Artic
           </div>
         ) : (
           <div className="space-y-12">
-            {/* Featured Hero Article */}
+            {/* Featured Hero Article - Limited height & clickable everywhere */}
             {featured && (
-              <div className="group relative bg-white border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                <div className="grid grid-cols-1 lg:grid-cols-12">
-                  <div className="lg:col-span-7 aspect-[16/9] lg:aspect-auto relative bg-gray-100 overflow-hidden min-h-[300px]">
-                    <img
-                      src={featured.cover_url || '/images/hero.jpg'}
-                      alt={featured.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+              <div className="group relative bg-white border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow rounded-sm">
+                <div className="grid grid-cols-1 lg:grid-cols-12 items-center">
+                  <div className="lg:col-span-6 relative bg-gray-100 overflow-hidden h-[260px] sm:h-[320px] lg:h-[350px]">
+                    <Link href={`/blog/${featured.slug || featured.id}`} className="block w-full h-full">
+                      <img
+                        src={featured.cover_url || '/images/hero.jpg'}
+                        alt={featured.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </Link>
                   </div>
-                  <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+                  <div className="lg:col-span-6 p-6 sm:p-8 lg:p-8 flex flex-col justify-between h-full">
                     <div>
                       <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
-                        <span className="px-2.5 py-0.5 bg-[#1E3A5F] text-white text-[10px] font-bold uppercase tracking-wider">
+                        <span className="px-2.5 py-0.5 bg-[#1E3A5F] text-white text-[10px] font-bold uppercase tracking-wider rounded-sm">
                           {featured.category || 'Maintenance'}
                         </span>
                         {featured.created_at && (
@@ -139,15 +141,15 @@ export default function BlogClient({ initialArticles }: { initialArticles: Artic
                           {featured.title}
                         </Link>
                       </h2>
-                      <p className="text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-4 mb-6">
+                      <Link href={`/blog/${featured.slug || featured.id}`} className="block text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-3 mb-6 hover:text-gray-900 transition-colors">
                         {featured.excerpt}
-                      </p>
+                      </Link>
                     </div>
 
                     <div>
                       <Link
                         href={`/blog/${featured.slug || featured.id}`}
-                        className="inline-flex items-center gap-2 px-4 py-2 bg-[#1E3A5F] text-white text-xs font-semibold hover:bg-[#152943] transition-colors"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-[#1E3A5F] text-white text-xs font-semibold hover:bg-[#152943] transition-colors rounded-sm shadow-sm"
                       >
                         <span>Lire l'article</span>
                       </Link>
@@ -157,22 +159,22 @@ export default function BlogClient({ initialArticles }: { initialArticles: Artic
               </div>
             )}
 
-            {/* Grid of Other Articles */}
+            {/* Grid of Other Articles - All images and texts clickable */}
             {restArticles.length > 0 && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {restArticles.map((art) => (
                   <article
                     key={art.id}
-                    className="group bg-white border border-gray-200 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                    className="group bg-white border border-gray-200 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-md transition-shadow rounded-sm"
                   >
                     <div>
-                      <div className="aspect-[16/10] bg-gray-100 relative overflow-hidden">
+                      <Link href={`/blog/${art.slug || art.id}`} className="block aspect-[16/10] bg-gray-100 relative overflow-hidden">
                         <img
                           src={art.cover_url || '/og-preview.png'}
                           alt={art.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
-                      </div>
+                      </Link>
                       <div className="p-5">
                         <div className="flex items-center gap-2 text-[11px] text-gray-500 mb-2">
                           <span className="text-[#1E3A5F] font-semibold uppercase tracking-wider">
@@ -188,9 +190,9 @@ export default function BlogClient({ initialArticles }: { initialArticles: Artic
                             {art.title}
                           </Link>
                         </h3>
-                        <p className="text-gray-600 text-xs leading-relaxed line-clamp-3 mb-4">
+                        <Link href={`/blog/${art.slug || art.id}`} className="block text-gray-600 text-xs leading-relaxed line-clamp-3 mb-4 hover:text-gray-900 transition-colors">
                           {art.excerpt}
-                        </p>
+                        </Link>
                       </div>
                     </div>
 
@@ -199,7 +201,7 @@ export default function BlogClient({ initialArticles }: { initialArticles: Artic
                         href={`/blog/${art.slug || art.id}`}
                         className="text-xs font-semibold text-[#1E3A5F] group-hover:underline inline-flex items-center gap-1"
                       >
-                        <span>Lire</span>
+                        <span>Lire l'article</span>
                       </Link>
                     </div>
                   </article>
