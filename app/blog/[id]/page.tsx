@@ -145,6 +145,13 @@ export default async function SingleArticlePage({
   const wordCount = (article.content || '').replace(/<[^>]*>/g, '').split(/\s+/).length
   const readTime = Math.max(1, Math.ceil(wordCount / 200))
 
+  // Prevent duplicate rendering if content starts with or equals excerpt
+  const cleanContentText = (article.content || '').replace(/<[^>]*>/g, '').trim()
+  const cleanExcerptText = (article.excerpt || '').trim()
+  const isDuplicateDescription =
+    cleanExcerptText.length > 0 &&
+    (cleanContentText === cleanExcerptText || cleanContentText.startsWith(cleanExcerptText))
+
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm'
   const jsonLdArticle = {
     '@context': 'https://schema.org',
@@ -229,8 +236,8 @@ export default async function SingleArticlePage({
                 {article.title}
               </h1>
 
-              {/* Excerpt Callout */}
-              {article.excerpt && (
+              {/* Excerpt Callout (only if not identical to content) */}
+              {article.excerpt && !isDuplicateDescription && (
                 <p className="text-base text-gray-600 font-normal leading-relaxed border-l-4 border-[#1E3A5F] bg-gray-50 p-4 rounded-r-sm italic">
                   {article.excerpt}
                 </p>
