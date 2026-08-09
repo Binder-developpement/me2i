@@ -72,7 +72,7 @@ export default async function HomePage() {
       })
     }
 
-    // Fetch latest published articles
+    // Fetch latest published articles from database
     const { data: articlesData } = await supabase
       .from('articles')
       .select('*')
@@ -87,5 +87,12 @@ export default async function HomePage() {
     console.error('Erreur chargement donnees accueil:', err)
   }
 
-  return <Home dbSettings={settingsMap} dbArticles={dbArticles} />
+  return (
+    <Home
+      settings={settingsMap}
+      dbSettings={settingsMap}
+      articles={dbArticles}
+      dbArticles={dbArticles}
+    />
+  )
 }

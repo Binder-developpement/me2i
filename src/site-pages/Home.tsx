@@ -684,36 +684,7 @@ function NewsSection({ articles = [] }: { articles?: ArticleItem[] }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
-  // Fallback articles if DB has no published articles yet
-  const displayArticles = articles.length > 0 ? articles : [
-    {
-      id: '1',
-      title: 'Modernisation des systèmes d\'astreinte 24h/7j pour sites industriels',
-      slug: 'modernisation-des-systemes-d-astreinte-24h-7j',
-      excerpt: 'ME2I renforce ses équipes techniques d\'intervention rapide pour garantir un temps de réponse sous 2h sur tout le territoire.',
-      category: 'Maintenance',
-      cover_url: 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80',
-      created_at: new Date().toISOString(),
-    },
-    {
-      id: '2',
-      title: 'Guide d\'installation des groupes électrogènes de forte puissance',
-      slug: 'guide-d-installation-des-groupes-electrogenes',
-      excerpt: 'Découvrez les règles d\'or pour l\'insonorisation, la ventilation et le raccordement des centrales de secours industrielles.',
-      category: 'Énergie',
-      cover_url: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80',
-      created_at: new Date().toISOString(),
-    },
-    {
-      id: '3',
-      title: 'Systèmes hybrides Solaire & Groupe Électrogène : Analyse de rentabilité',
-      slug: 'systemes-hybrides-solaire-et-groupe-electrogene',
-      excerpt: 'Comment réduire votre consommation de fioul de 40% grâce au couplage photovoltaïque intelligent.',
-      category: 'Innovation',
-      cover_url: 'https://images.unsplash.com/photo-1509391365360-2e959784a276?auto=format&fit=crop&w=800&q=80',
-      created_at: new Date().toISOString(),
-    },
-  ]
+  const displayArticles = articles
 
   const formatDate = (dateStr?: string) => {
     if (!dateStr) return 'Date récente'
@@ -726,6 +697,10 @@ function NewsSection({ articles = [] }: { articles?: ArticleItem[] }) {
     } catch (e) {
       return dateStr
     }
+  }
+
+  if (!displayArticles || displayArticles.length === 0) {
+    return null
   }
 
   return (
@@ -770,12 +745,12 @@ function NewsSection({ articles = [] }: { articles?: ArticleItem[] }) {
               variants={staggerItem}
               className="group bg-white p-4 border border-slate-200/80 rounded-sm hover:border-[#2271b1] transition-all duration-200 flex flex-col justify-between"
             >
-              <Link to={`/blog/${item.id}`} className="flex flex-col h-full justify-between">
+              <Link to={`/blog/${item.slug || item.id}`} className="flex flex-col h-full justify-between">
                 <div>
                   {/* Subtle Compact Image */}
                   <div className="h-44 w-full overflow-hidden rounded-sm relative bg-slate-100 mb-4">
                     <img
-                      src={item.cover_url || 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80'}
+                      src={item.cover_url || '/og-preview.png'}
                       alt={item.title}
                       className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                       loading="lazy"
@@ -823,19 +798,26 @@ function NewsSection({ articles = [] }: { articles?: ArticleItem[] }) {
 
 export default function Home({
   settings = {},
+  dbSettings = {},
   articles = [],
+  dbArticles = [],
 }: {
   settings?: Record<string, string>
+  dbSettings?: Record<string, string>
   articles?: any[]
+  dbArticles?: any[]
 }) {
+  const mergedSettings = Object.keys(settings || {}).length > 0 ? settings : (dbSettings || {})
+  const mergedArticles = (articles && articles.length > 0) ? articles : (dbArticles || [])
+
   return (
     <>
-      <HeroSection settings={settings} />
+      <HeroSection settings={mergedSettings} />
       <WhoWeAreSection />
       <VisionSection />
       <ServicesSection />
       <SectorsSection />
-      <NewsSection articles={articles} />
+      <NewsSection articles={mergedArticles} />
     </>
   )
 }
