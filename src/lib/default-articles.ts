@@ -5,7 +5,7 @@ export const fallbackLongArticles = [
     slug: "guide-ultime-diagnostic-depannage-groupes-electrogenes-secours",
     category: "Groupes Électrogènes",
     excerpt: "Dossier technique exhaustif pour diagnostiquer, analyser et résoudre l'ensemble des pannes mécaniques, électriques et électroniques sur les générateurs de secours.",
-    cover_url: "/images/hero.jpg",
+    cover_url: "/images/realisations/realisation_p6_img1.png",
     status: "published",
     created_at: new Date().toISOString(),
     content: `
@@ -69,7 +69,7 @@ export const fallbackLongArticles = [
     slug: "conception-calcul-installation-tgbt-armoires-distribution-industrielle",
     category: "Armoires Électriques",
     excerpt: "Guide technique exhaustif couvrant le dimensionnement des jeu de barres, le calcul du courant de court-circuit Icc, les formes de cloisonnement et la sélectivité des protections.",
-    cover_url: "/og-preview.png",
+    cover_url: "/images/realisations/realisation_p7_img1.png",
     status: "published",
     created_at: new Date().toISOString(),
     content: `
@@ -125,7 +125,7 @@ export const fallbackLongArticles = [
     slug: "automatisme-supervision-scada-guide-complet-norme-iec-61131-3",
     category: "Automatisme et Contrôle",
     excerpt: "Dossier approfondi sur la programmation des automates PLC, le choix des réseaux de terrain (PROFINET, Modbus TCP) et le développement d'interfaces SCADA ergonomiques.",
-    cover_url: "/images/hero.jpg",
+    cover_url: "/images/realisations/realisation_p10_img1.png",
     status: "published",
     created_at: new Date().toISOString(),
     content: `
@@ -175,7 +175,7 @@ export const fallbackLongArticles = [
     slug: "ingenierie-froid-industriel-guide-maintenance-centrales-frigorifiques",
     category: "Froid Industriel",
     excerpt: "Étude approfondie sur la conduite, le diagnostic et l'optimisation énergétique des centrales frigorifiques industrielles à compresseurs vis ou pistons.",
-    cover_url: "/og-preview.png",
+    cover_url: "/images/realisations/realisation_p12_img1.png",
     status: "published",
     created_at: new Date().toISOString(),
     content: `
@@ -223,7 +223,7 @@ export const fallbackLongArticles = [
     slug: "dimensionnement-ingenierie-centrales-solaires-hybrides-groupes-electrogenes",
     category: "Énergies Renouvelables",
     excerpt: "Guide d'ingénierie complet sur le couplage photovoltaïque, stockage par batteries Lithium LFP et générateurs diesel pour réduire jusqu'à 70% la consommation de carburant.",
-    cover_url: "/images/hero.jpg",
+    cover_url: "/me2isolaire.jpg",
     status: "published",
     created_at: new Date().toISOString(),
     content: `
@@ -270,7 +270,7 @@ export const fallbackLongArticles = [
     slug: "qualite-energie-electrique-industrielle-harmoniques-transitoires-depollution",
     category: "Efficacité Énergétique",
     excerpt: "Étude approfondie sur la dépollution des réseaux électriques, la suppression des courants harmoniques et la protection contre les micro-coupures.",
-    cover_url: "/og-preview.png",
+    cover_url: "/images/realisations/realisation_p14_img1.png",
     status: "published",
     created_at: new Date().toISOString(),
     content: `
@@ -311,7 +311,7 @@ export const fallbackLongArticles = [
     slug: "maintenance-predictive-analyse-vibratoire-machines-tournantes-industrielles",
     category: "Maintenance Industrielle",
     excerpt: "Dossier technique sur le suivi vibratoire par FFT, l'analyse d'huile et la thermographie pour anticiper la casse des roulements, pompes et moteurs.",
-    cover_url: "/images/hero.jpg",
+    cover_url: "/images/realisations/realisation_p15_img1.png",
     status: "published",
     created_at: new Date().toISOString(),
     content: `
@@ -360,7 +360,7 @@ export const fallbackLongArticles = [
     slug: "revision-majeure-reconditionnement-complet-overhaul-moteurs-diesel",
     category: "Groupes Électrogènes",
     excerpt: "Guide technique étape par étape sur le démontage, le métrologie, le chemisage, le rectification et le rodage des grands moteurs diesel (Cummins, Perkins, Caterpillar).",
-    cover_url: "/og-preview.png",
+    cover_url: "/images/realisations/realisation_p16_img1.png",
     status: "published",
     created_at: new Date().toISOString(),
     content: `
@@ -406,7 +406,7 @@ export const fallbackLongArticles = [
     slug: "inverseurs-automatiques-source-ats-synchro-couplage-principes-schemas",
     category: "Armoires Électriques",
     excerpt: "Étude complète sur les technologies de permutation de sources d'énergie : transition ouverte, transition fermée, synchronisation et partage de charge.",
-    cover_url: "/images/hero.jpg",
+    cover_url: "/images/realisations/realisation_p17_img1.png",
     status: "published",
     created_at: new Date().toISOString(),
     content: `
@@ -445,7 +445,7 @@ export const fallbackLongArticles = [
     slug: "audit-securite-electrique-mise-aux-normes-installations-grande-puissance",
     category: "Sécurité et Normes",
     excerpt: "Méthodologie complète pour auditer les réseaux électriques industriels, mesurer la terre, évaluer le risque incendie et se conformer à la norme NF C 15-100.",
-    cover_url: "/og-preview.png",
+    cover_url: "/images/realisations/realisation_p19_img1.png",
     status: "published",
     created_at: new Date().toISOString(),
     content: `
