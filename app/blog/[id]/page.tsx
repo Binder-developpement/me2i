@@ -1,6 +1,7 @@
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import {
   ArrowLeft,
   Calendar,
@@ -16,6 +17,65 @@ import {
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>
+}): Promise<Metadata> {
+  const { id } = await params
+  const supabase = await createServerClient()
+
+  const { data: article } = await supabase
+    .from('articles')
+    .select('*')
+    .or(`id.eq.${id},slug.eq.${id}`)
+    .single()
+
+  if (!article || article.status !== 'published') {
+    return {
+      title: 'Article introuvable',
+    }
+  }
+
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm'
+  const articleUrl = `${baseUrl}/blog/${article.slug || article.id}`
+  const description = article.excerpt || article.title
+
+  return {
+    title: article.title,
+    description: description,
+    alternates: {
+      canonical: articleUrl,
+    },
+    openGraph: {
+      type: 'article',
+      locale: 'fr_FR',
+      url: articleUrl,
+      title: article.title,
+      description: description,
+      siteName: 'ME2I - Maintenance et Énergie',
+      publishedTime: article.created_at,
+      modifiedTime: article.updated_at || article.created_at,
+      images: article.cover_url
+        ? [
+            {
+              url: article.cover_url,
+              width: 1200,
+              height: 630,
+              alt: article.title,
+            },
+          ]
+        : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: article.title,
+      description: description,
+      images: article.cover_url ? [article.cover_url] : [],
+    },
+  }
+}
 
 export default async function SingleArticlePage({
   params,
@@ -63,8 +123,36 @@ export default async function SingleArticlePage({
   const wordCount = (article.content || '').replace(/<[^>]*>/g, '').split(/\s+/).length
   const readTime = Math.max(1, Math.ceil(wordCount / 200))
 
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm'
+  const jsonLdArticle = {
+    '@context': 'https://schema.org',
+    '@type': 'TechArticle',
+    headline: article.title,
+    description: article.excerpt || article.title,
+    image: article.cover_url ? [article.cover_url] : [],
+    datePublished: article.created_at,
+    dateModified: article.updated_at || article.created_at,
+    author: {
+      '@type': 'Organization',
+      name: 'ME2I Maintenance et Énergie',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'ME2I',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${baseUrl}/logo.png`,
+      },
+    },
+  }
+
   return (
     <div className="pt-24 pb-20 min-h-screen bg-[#f8fafc] text-gray-800">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArticle) }}
+      />
+
       {/* Top Bar with Back Link on the LEFT */}
       <div className="bg-white border-b border-gray-200 py-3 mb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-3 text-xs font-normal">
