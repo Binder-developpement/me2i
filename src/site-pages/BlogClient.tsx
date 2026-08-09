@@ -38,17 +38,17 @@ export default function BlogClient({ initialArticles }: { initialArticles: Artic
 
   return (
     <div className="pt-24 pb-16 min-h-[100dvh] bg-white">
-      {/* Hero Header */}
-      <section className="bg-gradient-to-b from-[#0f1b2c] to-[#1E3A5F] text-white py-12 mb-12">
-        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-12">
-          <div className="max-w-3xl">
-            <span className="inline-block px-3 py-1 bg-white/10 text-white text-xs font-semibold uppercase tracking-wider mb-3">
+      {/* Hero Header (Centered, no background) */}
+      <section className="py-8 mb-8">
+        <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-12 text-center">
+          <div className="max-w-3xl mx-auto">
+            <span className="inline-block px-3 py-1 bg-gray-100 text-[#1E3A5F] text-xs font-semibold uppercase tracking-wider mb-3 rounded-sm">
               Blog & Actualités ME2I
             </span>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1d2327] mb-4">
               Actualités & Insights Techniques
             </h1>
-            <p className="text-white/80 text-base sm:text-lg leading-relaxed">
+            <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
               Découvrez les dernières innovations, guides techniques et études de cas en maintenance industrielle, hybridation solaire et ingénierie électrique au Cameroun.
             </p>
           </div>
@@ -98,138 +98,111 @@ export default function BlogClient({ initialArticles }: { initialArticles: Artic
               Aucun article ne correspond à votre recherche ou catégorie sélectionnée.
             </p>
             <button
+              type="button"
               onClick={() => {
-                setActiveCategory('Toutes')
                 setSearch('')
+                setActiveCategory('Toutes')
               }}
-              className="bg-[#1E3A5F] text-white text-xs font-semibold px-4 py-2 transition-colors hover:bg-[#2A5DB0]"
+              className="px-4 py-2 bg-[#1E3A5F] text-white text-xs font-medium hover:bg-[#152943] transition-colors"
             >
-              Réinitialiser la recherche
+              Réinitialiser les filtres
             </button>
           </div>
         ) : (
           <div className="space-y-12">
-            {/* Featured Main Article */}
+            {/* Featured Hero Article */}
             {featured && (
-              <div className="border border-gray-200 bg-white grid grid-cols-1 lg:grid-cols-12 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-                {/* Image (7 cols) */}
-                <div className="lg:col-span-7 aspect-[16/10] bg-gray-100 relative overflow-hidden">
-                  <Link href={`/blog/${featured.id}`} className="block w-full h-full">
-                    {featured.cover_url ? (
-                      <img
-                        src={featured.cover_url}
-                        alt={featured.title}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-[#1E3A5F] text-white flex items-center justify-center font-bold text-2xl">
-                        ME2I
-                      </div>
-                    )}
-                  </Link>
-                </div>
-
-                {/* Content (5 cols) */}
-                <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between">
-                  <div>
-                    <span className="inline-block text-xs font-bold uppercase tracking-wider text-[#1E3A5F] mb-2">
-                      À la une &middot; {featured.category || 'Actualité'}
-                    </span>
-
-                    <Link href={`/blog/${featured.id}`}>
-                      <h2 className="text-xl sm:text-2xl font-bold text-gray-900 hover:text-[#1E3A5F] transition-colors mb-3 leading-snug">
-                        {featured.title}
-                      </h2>
-                    </Link>
-
-                    <p className="text-gray-600 text-xs sm:text-sm line-clamp-4 leading-relaxed mb-6">
-                      {featured.excerpt || 'Découvrez le détail de cet article rédigé par nos experts ME2I.'}
-                    </p>
+              <div className="group relative bg-white border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <div className="grid grid-cols-1 lg:grid-cols-12">
+                  <div className="lg:col-span-7 aspect-[16/9] lg:aspect-auto relative bg-gray-100 overflow-hidden min-h-[300px]">
+                    <img
+                      src={featured.cover_url || '/images/hero.jpg'}
+                      alt={featured.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
+                  <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center gap-3 text-xs text-gray-500 mb-3">
+                        <span className="px-2.5 py-0.5 bg-[#1E3A5F] text-white text-[10px] font-bold uppercase tracking-wider">
+                          {featured.category || 'Maintenance'}
+                        </span>
+                        {featured.created_at && (
+                          <span className="flex items-center gap-1">
+                            <Calendar className="h-3 w-3 text-gray-400" />
+                            {new Date(featured.created_at).toLocaleDateString('fr-FR')}
+                          </span>
+                        )}
+                      </div>
+                      <h2 className="text-xl sm:text-2xl font-bold text-[#1d2327] group-hover:text-[#1E3A5F] transition-colors mb-3 leading-snug">
+                        <Link href={`/blog/${featured.slug || featured.id}`}>
+                          {featured.title}
+                        </Link>
+                      </h2>
+                      <p className="text-gray-600 text-xs sm:text-sm leading-relaxed line-clamp-4 mb-6">
+                        {featured.excerpt}
+                      </p>
+                    </div>
 
-                  <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
-                    {featured.created_at && (
-                      <span className="text-xs text-gray-500 flex items-center gap-1.5">
-                        <Calendar className="h-3.5 w-3.5" />
-                        {new Date(featured.created_at).toLocaleDateString('fr-FR', {
-                          day: 'numeric',
-                          month: 'long',
-                          year: 'numeric',
-                        })}
-                      </span>
-                    )}
-
-                    <Link
-                      href={`/blog/${featured.id}`}
-                      className="bg-[#1E3A5F] hover:bg-[#2A5DB0] text-white text-xs font-semibold px-4 py-2 transition-colors"
-                    >
-                      Lire l'article
-                    </Link>
+                    <div>
+                      <Link
+                        href={`/blog/${featured.slug || featured.id}`}
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-[#1E3A5F] text-white text-xs font-semibold hover:bg-[#152943] transition-colors"
+                      >
+                        <span>Lire l'article</span>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Grid of Remaining Articles */}
+            {/* Grid of Other Articles */}
             {restArticles.length > 0 && (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {restArticles.map((article) => (
-                  <div
-                    key={article.id}
-                    className="border border-gray-200 bg-white flex flex-col justify-between hover:shadow-lg transition-all duration-300"
+                {restArticles.map((art) => (
+                  <article
+                    key={art.id}
+                    className="group bg-white border border-gray-200 flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                   >
                     <div>
-                      <Link href={`/blog/${article.id}`} className="block aspect-[16/10] bg-gray-100 overflow-hidden">
-                        {article.cover_url ? (
-                          <img
-                            src={article.cover_url}
-                            alt={article.title}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-[#1E3A5F]/10 text-[#1E3A5F] flex items-center justify-center font-bold text-xl">
-                            ME2I
-                          </div>
-                        )}
-                      </Link>
-
+                      <div className="aspect-[16/10] bg-gray-100 relative overflow-hidden">
+                        <img
+                          src={art.cover_url || '/og-preview.png'}
+                          alt={art.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
                       <div className="p-5">
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-[#1E3A5F] block mb-1.5">
-                          {article.category || 'Actualité'}
-                        </span>
-
-                        <Link href={`/blog/${article.id}`}>
-                          <h3 className="text-base font-bold text-gray-900 hover:text-[#1E3A5F] transition-colors mb-2 line-clamp-2">
-                            {article.title}
-                          </h3>
-                        </Link>
-
-                        <p className="text-xs text-gray-600 line-clamp-3 leading-relaxed mb-4">
-                          {article.excerpt || 'Consultez la totalité de cet article.'}
+                        <div className="flex items-center gap-2 text-[11px] text-gray-500 mb-2">
+                          <span className="text-[#1E3A5F] font-semibold uppercase tracking-wider">
+                            {art.category || 'Technique'}
+                          </span>
+                          <span>•</span>
+                          {art.created_at && (
+                            <span>{new Date(art.created_at).toLocaleDateString('fr-FR')}</span>
+                          )}
+                        </div>
+                        <h3 className="text-base font-bold text-[#1d2327] group-hover:text-[#1E3A5F] transition-colors line-clamp-2 mb-2 leading-snug">
+                          <Link href={`/blog/${art.slug || art.id}`}>
+                            {art.title}
+                          </Link>
+                        </h3>
+                        <p className="text-gray-600 text-xs leading-relaxed line-clamp-3 mb-4">
+                          {art.excerpt}
                         </p>
                       </div>
                     </div>
 
-                    <div className="p-5 pt-0 border-t border-gray-100 flex items-center justify-between mt-auto">
-                      {article.created_at && (
-                        <span className="text-[11px] text-gray-500 flex items-center gap-1">
-                          <Calendar className="h-3 w-3" />
-                          {new Date(article.created_at).toLocaleDateString('fr-FR', {
-                            day: 'numeric',
-                            month: 'short',
-                            year: 'numeric',
-                          })}
-                        </span>
-                      )}
-
+                    <div className="px-5 pb-5 pt-0">
                       <Link
-                        href={`/blog/${article.id}`}
-                        className="bg-[#1E3A5F] hover:bg-[#2A5DB0] text-white text-xs font-semibold px-3 py-1.5 transition-colors"
+                        href={`/blog/${art.slug || art.id}`}
+                        className="text-xs font-semibold text-[#1E3A5F] group-hover:underline inline-flex items-center gap-1"
                       >
-                        Lire
+                        <span>Lire</span>
                       </Link>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
             )}
