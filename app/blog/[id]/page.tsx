@@ -18,19 +18,48 @@ import {
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
+async function getArticleOrRealisation(id: string) {
+  const supabase = await createServerClient()
+
+  let { data: article } = await supabase
+    .from('articles')
+    .select('*')
+    .or(`id.eq.${id},slug.eq.${id}`)
+    .single()
+
+  if (!article) {
+    const { data: real } = await supabase
+      .from('realisations')
+      .select('*')
+      .or(`id.eq.${id},slug.eq.${id}`)
+      .single()
+
+    if (real) {
+      article = {
+        id: real.id,
+        title: real.title,
+        slug: real.slug || real.id,
+        category: real.category || 'Expertise Technique',
+        excerpt: real.description || real.subtitle || '',
+        content: real.content || real.description || '',
+        cover_url: real.cover_url || real.image_url || null,
+        status: 'published',
+        created_at: real.created_at,
+        updated_at: real.updated_at,
+      }
+    }
+  }
+
+  return article
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ id: string }>
 }): Promise<Metadata> {
   const { id } = await params
-  const supabase = await createServerClient()
-
-  const { data: article } = await supabase
-    .from('articles')
-    .select('*')
-    .or(`id.eq.${id},slug.eq.${id}`)
-    .single()
+  const article = await getArticleOrRealisation(id)
 
   if (!article || article.status !== 'published') {
     return {
@@ -41,6 +70,7 @@ export async function generateMetadata({
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm'
   const articleUrl = `${baseUrl}/blog/${article.slug || article.id}`
   const description = article.excerpt || article.title
+  const imageUrl = article.cover_url || `${baseUrl}/og-preview.png`
 
   return {
     title: article.title,
@@ -54,25 +84,23 @@ export async function generateMetadata({
       url: articleUrl,
       title: article.title,
       description: description,
-      siteName: 'ME2I - Maintenance et Énergie',
+      siteName: 'ME2I : Maintenance et Énergie',
       publishedTime: article.created_at,
       modifiedTime: article.updated_at || article.created_at,
-      images: article.cover_url
-        ? [
-            {
-              url: article.cover_url,
-              width: 1200,
-              height: 630,
-              alt: article.title,
-            },
-          ]
-        : [],
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: article.title,
       description: description,
-      images: article.cover_url ? [article.cover_url] : [],
+      images: [imageUrl],
     },
   }
 }
@@ -85,12 +113,7 @@ export default async function SingleArticlePage({
   const { id } = await params
   const supabase = await createServerClient()
 
-  // Fetch target article
-  const { data: article } = await supabase
-    .from('articles')
-    .select('*')
-    .or(`id.eq.${id},slug.eq.${id}`)
-    .single()
+  const article = await getArticleOrRealisation(id)
 
   if (!article || article.status !== 'published') {
     notFound()
@@ -98,9 +121,8 @@ export default async function SingleArticlePage({
 
   // Fetch recent articles for the sidebar
   const { data: recentArticles } = await supabase
-    .from('articles')
+    .from('realisations')
     .select('id, title, slug, cover_url, created_at')
-    .eq('status', 'published')
     .neq('id', article.id)
     .order('created_at', { ascending: false })
     .limit(4)
@@ -141,7 +163,7 @@ export default async function SingleArticlePage({
       name: 'ME2I',
       logo: {
         '@type': 'ImageObject',
-        url: `${baseUrl}/logo.png`,
+        url: `${baseUrl}/og-preview.png`,
       },
     },
   }
