@@ -72,21 +72,21 @@ export default function AdminSidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="fixed top-10 left-0 bottom-0 z-30 w-60 flex flex-col bg-gradient-to-b from-[#0b1320] via-[#111e33] to-[#1a2d4b] text-white select-none border-r border-black/20 shadow-md">
-      {/* Sidebar Header: sans aucune ligne blanche */}
-      <div className="px-5 py-3.5 border-b border-black/20 bg-black/20 backdrop-blur-sm">
+    <aside className="fixed top-10 left-0 bottom-0 z-30 w-64 flex flex-col bg-gradient-to-b from-[#0b1320] via-[#111e33] to-[#1a2d4b] text-white select-none border-r border-black/20 shadow-md">
+      {/* Sidebar Header sans aucune ligne de bordure */}
+      <div className="px-5 py-4 bg-black/15">
         <Link href="/admin" className="block group">
-          <span className="font-normal text-base tracking-wider text-white/90 group-hover:text-[#72aee6] transition-colors block uppercase">
+          <span className="font-medium text-lg tracking-wider text-white/90 group-hover:text-[#72aee6] transition-colors block uppercase">
             ME2I Admin
           </span>
-          <span className="block text-[10px] font-normal text-white/40 tracking-normal leading-tight mt-0.5 uppercase">
+          <span className="block text-xs font-normal text-white/40 tracking-normal leading-tight mt-0.5 uppercase">
             Panneau de contrôle
           </span>
         </Link>
       </div>
 
-      {/* Navigation items */}
-      <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5">
+      {/* Navigation items avec taille agrandie */}
+      <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-1.5">
         {navItems.map((item) => {
           const isActive =
             pathname === item.href ||
@@ -96,23 +96,18 @@ export default function AdminSidebar() {
             <Link
               key={item.title}
               href={item.href}
-              className={`flex items-center gap-3 px-3.5 py-2 rounded-sm text-xs font-normal transition-all relative ${
+              className={`flex items-center gap-3.5 px-4 py-3 rounded-md text-sm font-medium transition-all relative ${
                 isActive
-                  ? 'bg-[#2271b1] text-white shadow-sm font-medium'
-                  : 'text-white/70 hover:bg-black/20 hover:text-white'
+                  ? 'bg-[#2271b1] text-white shadow-md'
+                  : 'text-white/80 hover:bg-black/25 hover:text-white'
               }`}
             >
-              <item.icon className={`h-4 w-4 shrink-0 ${isActive ? 'text-white' : 'text-white/40'}`} />
-              <span>{item.title}</span>
+              <item.icon className={`h-5 w-5 shrink-0 ${isActive ? 'text-white' : 'text-white/50'}`} />
+              <span className="text-sm">{item.title}</span>
             </Link>
           )
         })}
       </nav>
-
-      {/* Footer info sans ligne claire */}
-      <div className="p-3 border-t border-black/20 bg-black/20 text-[10px] text-white/35 text-center font-normal">
-        ME2I &copy; {new Date().getFullYear()} — Version 1.0
-      </div>
     </aside>
   )
 }
