@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClientSupabase } from '@/src/admin/lib/supabase-client'
-import { ExternalLink, Plus, LogOut, User, Bell, Home, ShieldCheck } from 'lucide-react'
+import { ExternalLink, Plus, LogOut, Home } from 'lucide-react'
 
 export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
   const router = useRouter()
@@ -19,17 +19,17 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 h-10 bg-gradient-to-r from-[#0f1b2c] via-[#1a3354] to-[#264872] text-white flex items-center justify-between px-3 select-none text-[13px] shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-40 h-10 bg-[#1d2327] border-b border-[#2c3338] text-white flex items-center justify-between px-3 select-none text-xs font-normal shadow-sm">
       {/* Left side actions */}
       <div className="flex items-center gap-4">
         <Link
           href="/"
           target="_blank"
-          className="flex items-center gap-1.5 px-2 py-1 rounded text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-[#c3c4c7] hover:text-white hover:bg-[#2c3338] transition-colors"
           title="Ouvrir le site public"
         >
-          <Home className="h-3.5 w-3.5" />
-          <span className="font-medium text-xs hidden sm:inline">Aller sur le site</span>
+          <Home className="h-3.5 w-3.5 text-[#72aee6]" />
+          <span className="font-normal text-xs hidden sm:inline">Aller sur le site</span>
           <ExternalLink className="h-3 w-3 opacity-60" />
         </Link>
 
@@ -38,7 +38,7 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
           <button
             type="button"
             onClick={() => setShowCreateMenu(!showCreateMenu)}
-            className="flex items-center gap-1 px-2 py-1 rounded text-[#c3c4c7] hover:text-white hover:bg-[#2c3338] transition-colors text-xs font-medium"
+            className="flex items-center gap-1 px-2.5 py-1 rounded-sm text-[#c3c4c7] hover:text-white hover:bg-[#2c3338] transition-colors text-xs font-normal"
           >
             <Plus className="h-3.5 w-3.5 text-[#72aee6]" />
             <span>Créer</span>
@@ -46,29 +46,36 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
 
           {showCreateMenu && (
             <div
-              className="absolute left-0 mt-1 w-44 bg-[#1d2327] border border-[#2c3338] rounded shadow-xl py-1 z-50"
+              className="absolute left-0 mt-1 w-44 bg-[#1d2327] border border-[#2c3338] rounded-sm shadow-xl py-1 z-50"
               onMouseLeave={() => setShowCreateMenu(false)}
             >
               <Link
                 href="/admin/articles/nouveau"
-                className="block px-3 py-1.5 text-xs text-[#c3c4c7] hover:bg-[#2271b1] hover:text-white"
+                className="block px-3 py-1.5 text-xs text-[#c3c4c7] hover:bg-[#2271b1] hover:text-white font-normal"
                 onClick={() => setShowCreateMenu(false)}
               >
                 Article
               </Link>
               <Link
                 href="/admin/services/nouveau"
-                className="block px-3 py-1.5 text-xs text-[#c3c4c7] hover:bg-[#2271b1] hover:text-white"
+                className="block px-3 py-1.5 text-xs text-[#c3c4c7] hover:bg-[#2271b1] hover:text-white font-normal"
                 onClick={() => setShowCreateMenu(false)}
               >
                 Service
               </Link>
               <Link
                 href="/admin/produits/nouveau"
-                className="block px-3 py-1.5 text-xs text-[#c3c4c7] hover:bg-[#2271b1] hover:text-white"
+                className="block px-3 py-1.5 text-xs text-[#c3c4c7] hover:bg-[#2271b1] hover:text-white font-normal"
                 onClick={() => setShowCreateMenu(false)}
               >
                 Produit
+              </Link>
+              <Link
+                href="/admin/realisations/nouveau"
+                className="block px-3 py-1.5 text-xs text-[#c3c4c7] hover:bg-[#2271b1] hover:text-white font-normal"
+                onClick={() => setShowCreateMenu(false)}
+              >
+                Réalisation
               </Link>
             </div>
           )}
@@ -82,40 +89,41 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
           <button
             type="button"
             onClick={() => setShowUserMenu(!showUserMenu)}
-            className="flex items-center gap-2 px-2 py-1 rounded text-[#c3c4c7] hover:text-white hover:bg-[#2c3338] transition-colors"
+            className="flex items-center gap-2 px-2.5 py-1 rounded-sm text-[#c3c4c7] hover:text-white hover:bg-[#2c3338] transition-colors"
           >
-            <div className="h-6 w-6 rounded-full bg-[#2271b1] flex items-center justify-center text-white text-xs font-bold">
+            <div className="h-5 w-5 rounded-full bg-[#2271b1] flex items-center justify-center text-white text-[10px] font-bold">
               {userEmail ? userEmail.charAt(0).toUpperCase() : 'A'}
             </div>
-            <span className="text-xs font-medium max-w-[120px] truncate hidden md:inline">
+            <span className="text-xs font-normal max-w-[140px] truncate hidden md:inline">
               {userEmail || 'Admin'}
             </span>
           </button>
 
           {showUserMenu && (
             <div
-              className="absolute right-0 mt-1 w-48 bg-[#1d2327] border border-[#2c3338] rounded shadow-xl py-1 z-50"
+              className="absolute right-0 mt-1 w-48 bg-[#1d2327] border border-[#2c3338] rounded-sm shadow-xl py-1 z-50"
               onMouseLeave={() => setShowUserMenu(false)}
             >
               <div className="px-3 py-2 border-b border-[#2c3338]">
-                <p className="text-xs font-semibold text-white truncate">{userEmail || 'Admin'}</p>
-                <p className="text-[10px] text-[#a7aaad]">Compte Administrateur</p>
+                <p className="text-[11px] text-[#646970]">Connecté en tant que</p>
+                <p className="text-xs text-white font-normal truncate mt-0.5">{userEmail || 'Admin'}</p>
               </div>
+
               <Link
-                href="/admin/parametres/compte"
-                className="flex items-center gap-2 px-3 py-1.5 text-xs text-[#c3c4c7] hover:bg-[#2271b1] hover:text-white"
+                href="/admin/parametres"
+                className="block px-3 py-2 text-xs text-[#c3c4c7] hover:bg-[#2271b1] hover:text-white font-normal"
                 onClick={() => setShowUserMenu(false)}
               >
-                <User className="h-3.5 w-3.5" />
-                Mon compte
+                Paramètres du site
               </Link>
+
               <button
                 type="button"
                 onClick={handleSignOut}
-                className="w-full text-left flex items-center gap-2 px-3 py-1.5 text-xs text-red-400 hover:bg-red-600 hover:text-white transition-colors"
+                className="w-full text-left flex items-center gap-2 px-3 py-2 text-xs text-red-400 hover:bg-red-950/30 hover:text-red-300 font-normal border-t border-[#2c3338]"
               >
                 <LogOut className="h-3.5 w-3.5" />
-                Déconnexion
+                <span>Se déconnecter</span>
               </button>
             </div>
           )}
