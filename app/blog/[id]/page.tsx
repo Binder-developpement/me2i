@@ -18,34 +18,36 @@ import {
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-async function getArticleOrRealisation(id: string) {
+async function getArticleItem(id: string) {
   const supabase = await createServerClient()
 
+  // 1. Try finding by id or by slug in articles table first
   let { data: article } = await supabase
     .from('articles')
     .select('*')
     .or(`id.eq.${id},slug.eq.${id}`)
     .single()
 
+  // 2. If not in articles table, try art_ prefixed article entries
   if (!article) {
-    const { data: real } = await supabase
+    const { data: seedArt } = await supabase
       .from('realisations')
       .select('*')
-      .or(`id.eq.${id},slug.eq.${id}`)
+      .or(`id.eq.art_${id},slug.eq.${id},id.eq.${id}`)
       .single()
 
-    if (real) {
+    if (seedArt && (seedArt.id.startsWith('art_') || seedArt.slug)) {
       article = {
-        id: real.id,
-        title: real.title,
-        slug: real.slug || real.id,
-        category: real.category || 'Expertise Technique',
-        excerpt: real.description || real.subtitle || '',
-        content: real.content || real.description || '',
-        cover_url: real.cover_url || real.image_url || null,
+        id: seedArt.id,
+        title: seedArt.title,
+        slug: seedArt.slug || seedArt.id.replace('art_', ''),
+        category: seedArt.category || 'Maintenance Industrielle',
+        excerpt: seedArt.description || seedArt.subtitle || '',
+        content: seedArt.content || seedArt.description || '',
+        cover_url: seedArt.cover_url || null,
         status: 'published',
-        created_at: real.created_at,
-        updated_at: real.updated_at,
+        created_at: seedArt.created_at,
+        updated_at: seedArt.updated_at,
       }
     }
   }
@@ -59,7 +61,7 @@ export async function generateMetadata({
   params: Promise<{ id: string }>
 }): Promise<Metadata> {
   const { id } = await params
-  const article = await getArticleOrRealisation(id)
+  const article = await getArticleItem(id)
 
   if (!article || article.status !== 'published') {
     return {
@@ -113,7 +115,7 @@ export default async function SingleArticlePage({
   const { id } = await params
   const supabase = await createServerClient()
 
-  const article = await getArticleOrRealisation(id)
+  const article = await getArticleItem(id)
 
   if (!article || article.status !== 'published') {
     notFound()
@@ -123,6 +125,7 @@ export default async function SingleArticlePage({
   const { data: recentArticles } = await supabase
     .from('realisations')
     .select('id, title, slug, cover_url, created_at')
+    .like('id', 'art_%')
     .neq('id', article.id)
     .order('created_at', { ascending: false })
     .limit(4)
@@ -198,7 +201,7 @@ export default async function SingleArticlePage({
           <div className="flex items-center gap-2 text-gray-500 truncate">
             <Link href="/" className="hover:text-[#1E3A5F] transition-colors">ME2I</Link>
             <span>/</span>
-            <Link href="/blog" className="hover:text-[#1E3A5F] transition-colors">Blog et Actualités</Link>
+            <Link href="/blog" className="hover:text-[#1E3A5F] transition-colors">Blog et Articles</Link>
             <span>/</span>
             <span className="text-gray-800 font-normal truncate max-w-xs">{article.title}</span>
           </div>
@@ -213,7 +216,7 @@ export default async function SingleArticlePage({
             <header className="border-b border-gray-100 pb-6 mb-8">
               <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 mb-4 font-normal">
                 <span className="bg-[#1E3A5F] text-white font-normal px-3 py-1 rounded-sm uppercase tracking-wider text-[11px]">
-                  {article.category || 'Expertise Technique'}
+                  {article.category || 'Maintenance Industrielle'}
                 </span>
                 {formattedDate && (
                   <span className="flex items-center gap-1">
@@ -326,7 +329,7 @@ export default async function SingleArticlePage({
                   {recentArticles.map((item) => (
                     <Link
                       key={item.id}
-                      href={`/blog/${item.slug || item.id}`}
+                      href={`/blog/${item.slug || item.id.replace('art_', '')}`}
                       className="group flex gap-3 items-start border-b border-gray-100 pb-3 last:border-0 last:pb-0"
                     >
                       {item.cover_url && (

@@ -4,273 +4,302 @@ import { createClient } from '@supabase/supabase-js'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const articlesToSeed = [
+const brandNewArticles = [
   {
-    title: "Guide complet de la maintenance préventive des groupes électrogènes industriels",
-    slug: "guide-maintenance-preventive-groupes-electrogenes-industriels",
-    category: "Groupes Électrogènes",
-    excerpt: "Découvrez les étapes essentielles pour planifier et exécuter la maintenance préventive de vos groupes électrogènes de secours et permanents.",
-    cover_url: "/images/realisations/realisation_p6_img1.png",
+    title: "Les 7 piliers de la maintenance préventive industrielle en zone tropicale",
+    slug: "7-piliers-maintenance-preventive-industrielle-zone-tropicale",
+    category: "Maintenance Industrielle",
+    excerpt: "Comment concevoir un plan de maintenance préventive efficace adapté aux contraintes de chaleur, d'humidité et d'instabilité réseau en Afrique centrale.",
+    cover_url: "/images/hero.jpg",
     status: "published",
     content: `
-      <h2>Pourquoi la maintenance préventive est cruciale pour votre entreprise</h2>
-      <p>Un groupe électrogène industriel représente la colonne vertébrale énergétique de toute installation moderne au Cameroun. Qu'il s'agisse d'un hôpital, d'une usine manufacturière ou d'un complexe hôtelier, l'interruption soudaine du réseau principal exige une réponse instantanée et sans faille du générateur de secours.</p>
-      
+      <h2>Pourquoi adapter la maintenance industrielle au climat d'Afrique centrale ?</h2>
+      <p>Dans les bassins industriels de Douala, Yaoundé, Bafoussam ou Garoua, les équipements de production et les centrales d'énergie sont soumis à des contraintes environnementales et réseau d'une sévérité exceptionnelle. L'humidité élevée, la poussière en saison sèche et les fortes variations de tension du réseau électrique ENEO mettent à rude épreuve les composants mécaniques et électroniques.</p>
+
       <div class="bg-blue-50 p-4 border-l-4 border-blue-600 my-6 font-medium text-slate-800 rounded-r">
-        <strong>Note d'expert ME2I :</strong> Plus de 80% des pannes de groupes électrogènes constatées lors de coupures réseau sont dues à un manque d'entretien préventif ou à une défaillance de batterie non détectée.
+        <strong>Constat du pôle ingénierie ME2I :</strong> Une machine entretenue selon un protocole européen standard sans adaptation au climat tropical subit une détérioration prématurée de 35% de sa durée de vie théorique.
       </div>
 
-      <h2>Les opérations clés du programme de maintenance</h2>
-      <p>Pour garantir la longévité de vos équipements (Perkins, SDMO, Cummins, Caterpillar), ME2I recommande un calendrier de vérifications structuré :</p>
-      
-      <ul>
-        <li><strong>Inspection des fluides :</strong> Contrôle hebdomadaire du niveau d'huile moteur, du liquide de refroidissement et détection des fuites éventuelles.</li>
-        <li><strong>Remplacement des filtres :</strong> Changement périodique du filtre à huile, du filtre à gasoil et du filtre à air toutes les 250 heures de fonctionnement ou une fois par an.</li>
-        <li><strong>Entretien du système de démarrage :</strong> Test de la tension et de la densité de l'électrolyte de la batterie, nettoyage des bornes et vérification du chargeur statique.</li>
-        <li><strong>Vérification de l'alternateur :</strong> Mesure de l'isolement des enroulements et contrôle du régulateur automatique de tension (AVR).</li>
-      </ul>
+      <h2>1. La gestion rigoureuse du risque thermique</h2>
+      <p>La surchauffe est l'ennemi numéro un des blocs moteurs et des variateurs de vitesse. La maintenance préventive doit inclure le rinçage régulier des échangeurs thermiques, le nettoyage au solvant neutre des ailettes de radiateur et le contrôle de l'efficacité des ventilateurs d'extraction de local.</p>
 
-      <h2>Essais périodiques sous charge</h2>
-      <p>Faire tourner un groupe électrogène à vide n'est pas suffisant. Un essai sous charge réelle (minimum 50% à 70% de la puissance nominale) au moins une fois par mois permet de décrasser le moteur, d'éviter l'encrassement des injecteurs et de valider le comportement thermique complet de la machine.</p>
+      <h2>2. La protection anti-corrosion et déshydratation des coffrets</h2>
+      <p>L'air marin saturé d'humidité à Douala accélère l'oxydation des contacts électriques. L'installation de résistances chauffantes anti-condensation et le traitement des borniers par vernis de protection diélectrique sont indispensables pour prévenir les amorçages d'arcs.</p>
 
-      <p>Faites confiance aux équipes techniques ME2I à Douala et Yaoundé pour instaurer un contrat de maintenance sur mesure adapté à vos besoins industriels.</p>
+      <h2>3. La filtration renforcée des fluides et de l'air</h2>
+      <p>L'air ambiant contient d'importantes quantités de poussières siliceuses. L'utilisation de filtres à air à haute efficacité et le pré-filtrage séparateur d'eau sur les lignes de gasoil protègent les injecteurs et les cylindres contre l'abrasion.</p>
+
+      <h2>4. La planification basée sur les heures réelles de fonctionnement</h2>
+      <p>Plutôt qu'un calendrier calendaire fixe, la maintenance doit être déclenchée sur la base du comptage d'heures réelles ou du nombre de cycles de démarrage. Un suivi rigoureux permet de programmer les vidanges et révisions avant l'apparition de l'usure critique.</p>
+
+      <h2>5. Le contrôle thermographique et le resserrage des connexions</h2>
+      <p>Les vibrations continues provoquant le desserrage des câbles, le contrôle annuel par caméra thermique infrarouge permet de détecter les points chauds sur les jeux de barres et disjoncteurs de puissance avant qu'ils ne provoquent un incendie.</p>
+
+      <h2>6. La montée en compétences des opérateurs locaux</h2>
+      <p>Un plan de maintenance efficace repose sur la réactivité du personnel de conduite. ME2I forme les techniciens d'usine aux rondes d'inspection quotidiennes, aux relevés de paramètres et à la détection précoce des bruits anormaux.</p>
+
+      <h2>7. Le stock stratégique de pièces d'usure à roulement rapide</h2>
+      <p>Disposer sur site des filtres, courroies, relais, fusibles ultra-rapides et sondes de température clés permet de résoudre les pannes courantes en quelques minutes sans attendre des approvisionnements extérieurs.</p>
+
+      <p>Faites appel aux experts ME2I pour auditer vos lignes de production et mettre en place un plan de maintenance préventive sur mesure.</p>
     `
   },
   {
-    title: "Comment choisir et programmer une carte de contrôle DSE (Deep Sea Electronics 6120 / 7320) ?",
-    slug: "choisir-programmer-carte-de-controle-dse-6120-7320",
-    category: "Automatisme et Contrôle",
-    excerpt: "Analyse technique et étapes de configuration des modules de contrôle automatiques DSE 6120 et 7320 pour la gestion optimale des groupes électrogènes.",
-    cover_url: "/images/realisations/realisation_p9_img1.png",
+    title: "Diagnostiquer les pannes fréquentes sur les alternateurs industriels sans balais",
+    slug: "diagnostiquer-pannes-frequentes-alternateurs-industriels-sans-balais",
+    category: "Génie Électrique",
+    excerpt: "Guide pratique de dépannage des alternateurs brushless : contrôle du pont de diodes, régulateur AVR et excitation de secours.",
+    cover_url: "/og-preview.png",
     status: "published",
     content: `
-      <h2>Le rôle central du module de contrôle dans un groupe électrogène</h2>
-      <p>Le module de contrôle est le cerveau de l'installation. Il surveille en temps réel les paramètres mécaniques du moteur (pression d'huile, température d'eau, vitesse) et les grandeurs électriques de l'alternateur (tension, fréquence, courant, puissance).</p>
+      <h2>Comprendre le principe de l'alternateur synchrone brushless</h2>
+      <p>Les alternateurs industriels modernes (Stamford, Leroy Somer, Mecc Alte) sont dits "sans balais" (brushless). Ils n'utilisent plus de charbons ni de bagues glissantes pour alimenter le rotor, ce qui réduit considérablement les besoins d'entretien mécanique. En contrepartie, leur système d'excitation repose sur un ensemble de composants électroniques et semi-conducteurs montés en rotation.</p>
 
-      <h2>Comparatif : DSE 6120 vs DSE 7320</h2>
-      <p>Les cartes de contrôle de la marque Deep Sea Electronics (DSE) constituent le standard le plus répandu et le plus fiable sur le marché :</p>
-
+      <h2>Panne 1 : Absence totale de tension de sortie en charge</h2>
+      <p>Si le moteur diesel tourne à sa vitesse nominale (1500 tr/min pour 50 Hz) mais que le voltmètre indique zéro volt, plusieurs causes doivent être vérifiées méthodiquement :</p>
       <ul>
-        <li><strong>DSE 6120 :</strong> Idéal pour les applications de secours mono-groupe avec gestion automatique de l'inverseur. Il offre un écran LCD clair, un journal des événements et des protections complètes contre les surcharges et anomalies moteur.</li>
-        <li><strong>DSE 7320 :</strong> Module avancé conçu pour les installations complexes nécessitant la télégestion SCADA, la synchronisation réseau, le délestage de charge et une connectivité modbus étendue.</li>
+        <li><strong>Démagnétisation du magnétisme rémanent :</strong> Si le groupe n'a pas tourné depuis longtemps, la roue polaire a pu perdre son aimantation résiduelle. Une brève ré-excitation par batterie 12V (remagnétisation) réamorce le système.</li>
+        <li><strong>Coupure du pont de diodes rotatives :</strong> Si une diode est grillée en circuit ouvert, l'excitation s'arrête instantanément.</li>
+        <li><strong>Fusible du régulateur AVR fondu :</strong> Vérifier la continuité du fusible de protection du régulateur de tension.</li>
       </ul>
 
       <div class="bg-amber-50 p-4 border-l-4 border-amber-500 my-6 font-medium text-slate-800 rounded-r">
-        <strong>Recommandation technique :</strong> La programmation d'une carte DSE nécessite le logiciel DSE Configuration Suite et un paramétrage rigoureux des temporisations de refroidissement pour éviter tout choc thermique lors de l'arrêt du moteur.
+        <strong>Règle de sécurité :</strong> Les tests de résistance d'isolement au mégohmmètre (Megger 500V/1000V) doivent impérativement être effectués après avoir déconnecté le régulateur AVR sous peine de détruire l'électronique de contrôle.
       </div>
 
-      <h2>Étapes de mise en service et paramétrage par ME2I</h2>
-      <p>Nos ingénieurs procèdent au câblage intégral du faisceau de commande, au raccordement des capteurs de pression et de température, ainsi qu'au réglage précis des seuils d'alarme pour garantir une sécurité absolue de vos groupes électrogènes Aksa, Mikano ou SDMO.</p>
+      <h2>Panne 2 : Tension de sortie trop faible ou instable</h2>
+      <p>Une tension qui chute fortement lors du démarrage d'un moteur électrique indique généralement un mauvais réglage de la compensation de fréquence (U/f) sur le régulateur AVR ou un pont de diodes partiellement défectueux (une seule diode en court-circuit).</p>
+
+      <h2>Panne 3 : Échauffement anormal et bruits magnétiques</h2>
+      <p>Un réchauffement excessif de la carcasse de l'alternateur traduit un déséquilibre important des charges entre les trois phases ou la présence d'harmoniques de courant dues à des équipements non-linéaires importants (variateurs de vitesse sans filtre).</p>
+
+      <p>Les techniciens ME2I réalisent le diagnostic sur site, le rembobinage et la remise en état complète de vos alternateurs industriels au Cameroun.</p>
     `
   },
   {
-    title: "Conception et câblage d'un coffret inverseur automatique de source (ATS) pour l'industrie",
-    slug: "conception-cablage-coffret-inverseur-automatique-source-ats",
-    category: "Armoires Électriques",
-    excerpt: "Comprendre le fonctionnement et les exigences de sécurité d'un coffret inverseur automatique de source entre le réseau ENEO et un groupe de secours.",
-    cover_url: "/images/realisations/realisation_p8_img1.png",
+    title: "Automatisme industriel : Comment réussir la migration de vos anciens automates PLC",
+    slug: "automatisme-industriel-reussir-migration-anciens-automates-plc",
+    category: "Automatisme et Contrôle",
+    excerpt: "Stratégies et étapes clés pour moderniser vos armoires d'automatisme et éviter l'obsolescence des composants électroniques.",
+    cover_url: "/images/hero.jpg",
     status: "published",
     content: `
-      <h2>Assurer la continuité de service sans intervention humaine</h2>
-      <p>Dans des secteurs critiques comme les boulangeries industrielles, les banques de sang ou les centres de données, la rupture d'alimentation secteur doit être compensée en quelques secondes. C'est le rôle précis du coffret inverseur automatique de source (ATS).</p>
+      <h2>L'enjeu de la modernisation des lignes de production</h2>
+      <p>Dans de nombreuses usines de transformation et chaînes de conditionnement au Cameroun, les armoires d'automatisme fonctionnent encore avec des automates programmables (PLC) de génération précédente (Siemens S5, TSX Premium, Omron C200H). La rareté des pièces de rechange et l'impossibilité de trouver des consoles de programmation adaptées font peser un risque critique d'arrêt prolongé.</p>
 
-      <h2>Composants essentiels d'un inverseur de source ME2I</h2>
-      <p>Un coffret inverseur fabriqué dans nos ateliers intègre des composants de qualité industrielle rigoureusement dimensionnés :</p>
+      <h2>Les étapes clés d'un projet de rétrofit d'automatisme réussi</h2>
+      
+      <h3>1. Audit préalable et sauvegarde des programmes sources</h3>
+      <p>Avant toute intervention physique, les automaticiens ME2I procèdent à l'extraction et au sauvetage des programmes existants, à l'analyse des schémas électriques et au relevé exhaustif des entrées/sorties physiques et réseaux de terrain.</p>
 
-      <ul>
-        <li><strong>Contacteurs de puissance à verrouillage mécanique et électrique :</strong> Empêchent physiquement le couplage simultané entre le secteur et le groupe électrogène.</li>
-        <li><strong>Automate ou relais de commutation :</strong> Analyse la présence et la qualité des phases du réseau principal avant de déclencher l'ordre de démarrage du groupe.</li>
-        <li><strong>Protections magnétothermiques et différentielles :</strong> Protègent les équipements aval contre les surintensités et les défauts d'isolement.</li>
-        <li><strong>Voyants et centrale de mesure :</strong> Permettent aux opérateurs de contrôler l'état des sources et la répartition des phases en un coup d'œil.</li>
-      </ul>
+      <h3>2. Choix de la nouvelle plateforme matérielle</h3>
+      <p>Le choix s'oriente vers des gammes modernes pérennes (Schneider Modicon M241/M262, Siemens S7-1200/1500) offrant des communications Ethernet/IP, Modbus TCP et une intégration aisée avec des écrans tactiles IHM ergonomiques.</p>
+
+      <h3>3. Réécriture et conversion des programmes</h3>
+      <p>Le code écrit en langage Ladder ou Liste d'instructions est restructuré selon la norme IEC 61131-3 avec intégration de blocs de sécurité, de fonctions de diagnostic enrichies et d'alarmes explicites pour les opérateurs.</p>
 
       <div class="bg-blue-50 p-4 border-l-4 border-blue-600 my-6 font-medium text-slate-800 rounded-r">
-        <strong>Sécurité de retour réseau :</strong> ME2I intègre systématiquement une temporisation de sécurité (généralement 1 à 3 minutes) lors du retour du réseau public afin de s'assurer de sa stabilité avant d'effectuer le basculement inverse.
+        <strong>Bénéfice immédiat :</strong> La migration permet d'ajouter des fonctionnalités de supervision à distance SCADA et d'enregistrer l'historique des cadences et des pannes sur ordinateur ou tablette.
       </div>
 
-      <h2>Réalisation sur mesure à Douala</h2>
-      <p>Que ce soit pour une puissance de 12kVA ou de plus de 400kVA, ME2I conçoit, assemble et met en service vos armoires et coffrets inverseurs selon les normes NFC 15-100 et IEC 60947-6-1.</p>
+      <h3>4. Essais à blanc et recette sur site</h3>
+      <p>Le câblage des nouvelles platines d'automatisme est testé à l'atelier avant d'être implanté lors d'un arrêt de production planifié. Les essais sous signaux simulés garantissent un redémarrage de la ligne en quelques heures.</p>
+
+      <p>Confiez la modernisation de vos automates industriels au pôle automatisme et contrôle de ME2I à Douala.</p>
     `
   },
   {
-    title: "Diagnostiquer et remplacer les diodes rotatives sur un alternateur de groupe électrogène",
-    slug: "diagnostiquer-remplacer-diodes-rotatives-alternateur-groupe-electrogene",
-    category: "Maintenance Corrective",
-    excerpt: "Comment identifier les défaillances de pont de diodes rotatives responsables des chutes de tension et des instabilités sur vos générateurs.",
-    cover_url: "/images/realisations/realisation_p12_img1.png",
+    title: "Optimisation du facteur de puissance : Supprimer les pénalités d'énergie réactive",
+    slug: "optimisation-facteur-puissance-supprimer-penalites-energie-reactive",
+    category: "Efficacité Énergétique",
+    excerpt: "Tout savoir sur l'installation des batteries de condensateurs automatiques pour améliorer le Cos Phi et réduire la facture ENEO.",
+    cover_url: "/og-preview.png",
     status: "published",
     content: `
-      <h2>Symptômes d'une défaillance du pont de diodes rotatives</h2>
-      <p>Lorsqu'un groupe électrogène démarre normalement mais ne délivre aucune tension en sortie, ou affiche une tension très faible et instable malgré un moteur à régime nominal, le pont de diodes rotatives de l'alternateur est très souvent en cause.</p>
+      <h2>Comprendre l'énergie réactive et l'impact sur votre facture</h2>
+      <p>Les équipements industriels comportant des enroulements magnétiques (moteurs électriques, transformateurs, machines à souder, ballasts de chauffage) consomment deux types d'énergie : l'énergie active (exprimée en kWh), qui produit le travail mécanique utile, et l'énergie réactive (exprimée en kVARh), nécessaire magnétiser les circuits.</p>
 
-      <h2>Comprendre le rôle des diodes dans l'alternateur brushless</h2>
-      <p>Dans les alternateurs modernes sans balais (brushless), le pont de diodes rotatives est monté directement sur l'arbre de l'induit. Il transforme le courant alternatif produit par l'excitatrice en courant continu injecté dans la roue polaire. Si une ou plusieurs diodes tombent en court-circuit ou se coupent, le champ magnétique principal s'effondre.</p>
+      <p>Lorsque la proportion d'énergie réactive devient trop importante, le facteur de puissance (Cos Phi) chute en dessous du seuil de 0,90. Le fournisseur d'électricité ENEO applique alors des pénalités financières substantielles sur la facture mensuelle.</p>
 
-      <h2>Procédure de diagnostic étape par étape</h2>
+      <h2>Comment fonctionne une batterie de condensateurs automatique ?</h2>
+      <p>Une armoire de compensation de puissance réactive contient des gradins de condensateurs de puissance pilotés par un régulateur varmétrique intelligent. Le régulateur mesure en temps réel le déphasage entre le courant et la tension au TGBT et enclenche automatiquement le nombre exact de condensateurs nécessaires pour maintenir un Cos Phi proche de 0,98.</p>
+
+      <h2>Les avantages financiers et techniques de la compensation</h2>
       <ul>
-        <li><strong>Déconnexion de la batterie :</strong> Travailler en sécurité hors tension sur un groupe consigné.</li>
-        <li><strong>Accès au pont de diodes :</strong> Démontage du capot arrière de l'alternateur.</li>
-        <li><strong>Test individuel des diodes :</strong> Desserrage d'une borne de chaque diode et mesure au multimètre en mode testeur de diode (passante dans un sens, bloquante dans l'autre).</li>
-        <li><strong>Vérification de la varistance (surpresseur de tension) :</strong> Contrôle de l'élément de protection contre les surtensions transitoires.</li>
-      </ul>
-
-      <p>L'équipe ME2I intervient directement sur site dans les stations-service, ateliers et entreprises pour remplacer les ponts de diodes défectueux par des composants d'origine (Stamford, Leroy Somer, Mecc Alte) et réajuster la tension de sortie sous charge nominale.</p>
-    `
-  },
-  {
-    title: "Hybridation Solaire et Groupe Électrogène : Optimiser les coûts de carburant en Afrique centrale",
-    slug: "hybridation-solaire-groupe-electrogene-optimisation-carburant",
-    category: "Énergies Renouvelables",
-    excerpt: "Découvrez comment le couplage entre panneaux photovoltaïques et groupes électrogènes réduit jusqu'à 60% les dépenses en gasoil des entreprises.",
-    cover_url: "/images/realisations/realisation_p10_img1.png",
-    status: "published",
-    content: `
-      <h2>Le défi des coûts de carburant pour l'industrie au Cameroun</h2>
-      <p>Avec l'augmentation constante du prix du gasoil et la nécessité d'assurer un fonctionnement continu 24h/24, l'alimentation exclusive par groupe électrogène pèse lourdement sur les coûts d'exploitation des entreprises industrielles et agricoles.</p>
-
-      <h2>Qu'est-ce que l'hybridation solaire / groupe ?</h2>
-      <p>L'hybridation consiste à intégrer une centrale photovoltaïque et un parc de batteries de stockage au système électrique existant. Pendant les heures d'ensoleillement, les panneaux solaires fournissent l'essentiel de l'énergie requise. Le groupe électrogène n'intervient qu'en complément pour couvrir les pics de consommation ou lorsque les batteries atteignent leur seuil de décharge configuré.</p>
-
-      <h2>Les avantages clés d'une solution hybride ME2I</h2>
-      <ul>
-        <li><strong>Réduction drastique de la facture de gasoil :</strong> Économie de 40% à 65% sur la consommation annuelle de carburant.</li>
-        <li><strong>Augmentation de la durée de vie du groupe :</strong> Moins d'heures de fonctionnement moteur signifie un espacement des vidanges et des révisions lourdes.</li>
-        <li><strong>Réduction des émissions carbone :</strong> Alignement avec les démarches RSE et les normes environnementales actuelles.</li>
+        <li><strong>Suppression totale des pénalités ENEO :</strong> Élimination immédiate des lignes d'amende réactive sur votre facture.</li>
+        <li><strong>Réduction de l'intensité en ligne :</strong> Diminution des pertes par effet Joule dans vos câbles et transformateurs.</li>
+        <li><strong>Libération de puissance apparente :</strong> Augmentation de la capacité disponible sur votre transformateur privé sans changer d'abonnement.</li>
       </ul>
 
       <div class="bg-emerald-50 p-4 border-l-4 border-emerald-600 my-6 font-medium text-slate-800 rounded-r">
-        <strong>Accompagnement ME2I :</strong> De l'étude de faisabilité et dimensionnement du parc solaire jusqu'à l'installation et au paramétrage des onduleurs hybrides de forte puissance, ME2I vous apporte une solution clé en main.
+        <strong>Retour sur investissement ultra-rapide :</strong> Pour la majorité des PME industrielles au Cameroun, l'installation d'une armoire de condensateurs ME2I est amortie en 6 à 14 mois uniquement grâce aux économies réalisées sur la facture électrique.
+      </div>
+
+      <p>Contactez le pôle efficacité énergétique ME2I pour réaliser la mesure de votre Cos Phi et dimensionner votre armoire de compensation.</p>
+    `
+  },
+  {
+    title: "Maintenance des groupes électrogènes de forte puissance (500kVA à 2000kVA)",
+    slug: "maintenance-groupes-electrogenes-forte-puissance-500kva-2000kva",
+    category: "Groupes Électrogènes",
+    excerpt: "Les spécificités d'entretien des générateurs à très forte capacité installés dans les usines, data centers et hôpitaux.",
+    cover_url: "/images/hero.jpg",
+    status: "published",
+    content: `
+      <h2>Les exigences particulières des centrales de production de forte capacité</h2>
+      <p>Les groupes électrogènes de forte puissance (500kVA, 1000kVA, 1500kVA ou 2000kVA) équipés de moteurs lourds V12 ou V16 (Cummins QSK, Caterpillar 3500, MTU Series 4000, Perkins 4000) demandent une rigueur d'exploitation totalement différente des petits générateurs de chantier.</p>
+
+      <h2>La gestion des systèmes d'injection à haute pression (Common Rail)</h2>
+      <p>Ces moteurs modernes nécessitent un carburant d'une propreté absolue. La présence d'eau ou de micro-particules dans le gasoil détruit les injecteurs-pompes en quelques dizaines d'heures. ME2I préconise l'installation de double filtres séparateurs d'eau avec purges automatiques et capteurs de présence d'eau raccordés à l'automate.</p>
+
+      <h2>Analyse physico-chimique des huiles de lubrification</h2>
+      <p>Sur les carters d'huile contenant plus de 200 litres de lubrifiant, la vidange systématique par heures est complétée par des prélèvements réguliers envoyés en laboratoire. L'analyse d'huile permet d'évaluer la viscosité, la sulfitation, la présence d'éthylène glycol (fuite de joint de culasse) ou de particules de métaux d'usure (coussinets de bielle, segments).</p>
+
+      <h2>Le maintien en température constante (Réchauffeur de bloc)</h2>
+      <p>Pour garantir un démarrage et une prise de charge immédiate en moins de 10 secondes sans usure prématurée du haut moteur, le circuit de refroidissement doit être maintenu en permanence entre 40°C et 50°C via des réchauffeurs d'eau thermostatiques monophasés ou triphasés.</p>
+
+      <div class="bg-blue-50 p-4 border-l-4 border-blue-600 my-6 font-medium text-slate-800 rounded-r">
+        <strong>Expertise ME2I :</strong> Nos équipes mobiles disposent des bancs de charge mobiles et des valises de diagnostic constructeurs pour intervenir 24h/24 et 7j/7 sur les centrales d'énergie de forte puissance au Cameroun.
       </div>
     `
   },
   {
-    title: "Entretien des systèmes de refroidissement et radiateurs des groupes de forte puissance (1000kVA+)",
-    slug: "entretien-systemes-refroidissement-radiateurs-groupes-forte-puissance",
-    category: "Groupes Électrogènes",
-    excerpt: "Prévenir les risques de surchauffe moteur sur les générateurs industriels Cummins, Caterpillar et MTU de grande capacité.",
-    cover_url: "/images/realisations/realisation_p16_img1.png",
-    status: "published",
-    content: `
-      <h2>Les enjeux thermiques sur les groupes électrogènes de forte puissance</h2>
-      <p>Un groupe électrogène de 1000kVA ou 1400kVA transforme une quantité considérable d'énergie thermique. Le système de refroidissement est l'élément critique garant de l'intégrité mécanique du bloc moteur et de l'alternateur.</p>
-
-      <h2>Origines fréquentes de surchauffe en environnement tropical</h2>
-      <p>Sous le climat chaud et humide du Cameroun, les radiateurs industriels accumulent rapidement de la poussière, des dépôts d'huile et du tartre dans les faisceaux :</p>
-
-      <ul>
-        <li>Colmatage externe des ailettes de refroidissement par les poussières industrielles.</li>
-        <li>Formation de boue et de tartre à l'intérieur du circuit dû à l'utilisation d'eau non traitée.</li>
-        <li>Usure du calorstat (thermostat) bloqué en position fermée.</li>
-        <li>Défaillance de la pompe à eau ou détérioration des courroies d'entraînement du ventilateur.</li>
-      </ul>
-
-      <h2>Protocole de maintenance curative et préventive ME2I</h2>
-      <p>Nos techniciens appliquent un protocole complet comprenant le vidange du circuit, le détartrage chimique neutre du radiateur, le rinçage haute pression des ailettes, le contrôle de la pression de bouchon de vase d'expansion et le remplacement du liquide de refroidissement par un fluide organique longue durée anticorrosion.</p>
-    `
-  },
-  {
-    title: "Maintenance préventive des armoires de commande et contacteurs de puissance pour le froid industriel",
-    slug: "maintenance-preventive-armoires-commande-contacteurs-froid-industriel",
-    category: "Froid Industriel",
-    excerpt: "Comment éviter les arrêts chaotiques des chaînes du froid et des chambres frigorifiques grâce au contrôle systématique des appareillages électriques.",
-    cover_url: "/images/realisations/realisation_p13_img1.png",
-    status: "published",
-    content: `
-      <h2>L'importance du froid industriel dans l'agroalimentaire</h2>
-      <p>Une panne imprévue d'un groupe frigorifique dans une centrale d'abattage, une usine de transformation ou une chambre froide médicale peut entraîner des pertes financières massives en quelques heures. Les armoires électriques de commande sont soumises à des sollicitations intenses et répétées.</p>
-
-      <h2>Les phénomènes d'usure des contacteurs de puissance</h2>
-      <p>Chaque démarrage de compresseur engendre un appel de courant important. À terme, les contacts en alliage d'argent des contacteurs s'érodent, se pèsent ou s'oxydent. Cela entraîne un échauffement anormal par résistance de contact, pouvant conduire à la fusion des bornes ou au grillage des compresseurs.</p>
-
-      <h2>Actions clés de la maintenance des armoires électriques</h2>
-      <ul>
-        <li><strong>Resserrage au couple des connexions :</strong> Prévenir le desserrage des borniers dû aux vibrations industrielles.</li>
-        <li><strong>Nettoyage et déshydratation :</strong> Élimination de la poussière et humidité condensée dans les armoires.</li>
-        <li><strong>Remplacement préventif des contacteurs usés :</strong> Analyse visuelle et mesure d'isolement avant l'apparition de l'arc permanent.</li>
-        <li><strong>Contrôle des protections thermiques :</strong> Vérification des réglages des relais de surcharge et des contrôleurs de phase.</li>
-      </ul>
-
-      <p>ME2I garantit la maintenance préventive de vos installations de froid industriel sur l'ensemble du territoire camerounais.</p>
-    `
-  },
-  {
-    title: "Optimisation et réglage des brûleurs à gasoil pour fours industriels et boulangeries",
-    slug: "optimisation-reglage-bruleurs-gasoil-fours-industriels-boulangeries",
-    category: "Équipements Industriels",
-    excerpt: "Méthodologie de réglage et de maintenance des brûleurs à fioul/gasoil pour assurer une combustion complète et maîtriser la consommation.",
-    cover_url: "/images/realisations/realisation_p15_img1.png",
-    status: "published",
-    content: `
-      <h2>Assurer une cuisson homogène tout en réduisant la consommation de carburant</h2>
-      <p>Les brûleurs à gasoil équipent une grande majorité des fours à soles et rotatifs dans les boulangeries et usines agroalimentaires. Un brûleur mal réglé consomme excessivement, encrasse la chambre de combustion de suie et dégrade la qualité thermique de la cuisson.</p>
-
-      <h2>Signes d'un dysfonctionnement de brûleur</h2>
-      <ul>
-        <li>Présence d'une fumée noire ou d'odeurs intenses de gasoil mal brûlé à la cheminée.</li>
-        <li>Instabilité de la flamme et mises en sécurité répétées du coffret de contrôle de flamme.</li>
-        <li>Difficulté à atteindre ou maintenir la température de consigne dans le four.</li>
-      </ul>
-
-      <h2>Les opérations techniques effectuées par ME2I</h2>
-      <p>Nos interventions de maintenance sur brûleurs à fioul et gasoil comprennent :</p>
-      <ul>
-        <li>Nettoyage ou changement du gicleur (buse d'injection de combustible).</li>
-        <li>Nettoyage des filtres à gasoil et révision de la pompe à haute pression.</li>
-        <li>Vérification des électrodes d'allumage, du transformateur et de la cellule photoélectrique de détection de flamme.</li>
-        <li>Réglage précis du volet d'air pour optimiser le rapport stœchiométrique air/carburant.</li>
-      </ul>
-
-      <p>Contactez ME2I pour auditer et régler vos brûleurs industriels afin d'allier performance thermique et économie de combustible.</p>
-    `
-  },
-  {
-    title: "Adaptation des systèmes d'arrêt moteur d'urgence et sécurité des installations industrielles",
-    slug: "adaptation-systemes-arret-moteur-urgence-securite-installations",
+    title: "Sécurité des armoires électriques industrielles : Prévenir les risques d'arc électrique",
+    slug: "securite-armoires-electriques-industrielles-prevenir-risques-arc-electrique",
     category: "Sécurité et Normes",
-    excerpt: "Mise en place de dispositifs de coupure d'urgence et sécurité automatique sur groupes électrogènes de forte puissance.",
-    cover_url: "/images/realisations/realisation_p14_img1.png",
+    excerpt: "Les normes de protection et bonnes pratiques pour sécuriser les TGBT et armoires de puissance contre les courts-circuits violents.",
+    cover_url: "/og-preview.png",
     status: "published",
     content: `
-      <h2>Les impératifs de sécurité sur les groupes électrogènes industriels</h2>
-      <p>Les groupes électrogènes de forte puissance (250kVA et plus) concentrent des énergies mécaniques et électriques considérables. En cas d'anomalie critique (emballement moteur, baisse brutale de la pression d'huile, surchauffe ou fuite de carburant), l'arrêt immédiat du groupe est impératif pour éviter la destruction de la machine ou des départs d'incendie.</p>
+      <h2>Qu'est-ce qu'un arc électrique industriel et quelles sont ses conséquences ?</h2>
+      <p>L'arc électrique (Arc Flash) est une décharge électrique explosive se produisant à travers l'air entre deux conducteurs sous haute ou basse tension. Il génère instantanément des températures dépassant 10 000 °C, une onde de choc violente et des projections de métal en fusion. C'est l'un des accidents les plus graves en milieu industriel.</p>
 
-      <h2>Intégration d'un système d'arrêt d'urgence redondant</h2>
-      <p>ME2I adapte et installe des kits d'arrêt d'urgence comprenant :</p>
-
+      <h2>Les principales causes de déclenchement d'arcs</h2>
       <ul>
-        <li><strong>Boutons coup de poing à verrouillage :</strong> Positionnés sur le groupe et à l'extérieur du local technique pour une action rapide des opérateurs.</li>
-        <li><strong>Électrovanne de coupure de carburant :</strong> Coupe instantanément l'arrivée de gasoil au niveau de la pompe d'injection.</li>
-        <li><strong>Volet de fermeture d'air d'admission :</strong> Dispositif anti-emballement coupant l'arrivée d'air au moteur en cas de survitesse.</li>
-        <li><strong>Reconfiguration des cartes de commande :</strong> Intégration des boucles de sécurité de niveau SIL dans les modules DSE ou ComAp.</li>
+        <li><strong>Desserrage mécanique des connexions :</strong> L'échauffement par résistance crée la fusion de l'isolant et l'amorçage.</li>
+        <li><strong>Intrusion d'objets ou de corps étrangers :</strong> Poussières conductrices, humidité condensée ou petits rongeurs introduits dans le TGBT.</li>
+        <li><strong>Erreurs de manipulation lors de consignations :</strong> Utilisation d'outillage non isolé ou fausse manœuvre sous tension.</li>
       </ul>
 
-      <p>Assurez la conformité de vos installations industrielles aux normes de sécurité au Cameroun avec l'accompagnement des ingénieurs ME2I.</p>
+      <h2>Mesures de prévention et mise aux normes par ME2I</h2>
+      
+      <h3>1. Inspections thermographiques infrarouges périodiques</h3>
+      <p>Un contrôle thermographique annuel sans interruption de service permet de repérer les connexions anormalement chaudes et de programmer le resserrage hors tension lors des arrêts techniques.</p>
+
+      <h3>2. Cloisonnement interne (Forme 2, 3 et 4)</h3>
+      <p>Conformément à la norme IEC 61439-2, la séparation physique entre les jeux de barres, les appareils de coupure et les départs câbles limite la propagation d'un court-circuit à un seul compartiment.</p>
+
+      <h3>3. Installation de délecteurs d'arc photodétecteurs</h3>
+      <p>Les relais de protection d'arc modernes intègrent des fibres optiques sensibles aux éclairs de lumière qui déclenchent le disjoncteur général en moins de 15 millisecondes, étouffant l'arc avant qu'il ne se développe.</p>
+
+      <p>Sécurisez vos tableaux généraux basse tension (TGBT) et armoires de puissance avec l'audit de sécurité ME2I.</p>
     `
   },
   {
-    title: "Audit et diagnostic énergétique pour PME et usines : Réduire les coupures et la facture électrique",
-    slug: "audit-diagnostic-energetique-pme-usines-cameroun",
-    category: "Audit et Conseil",
-    excerpt: "Analyse experte des réseaux électriques industriels, équilibrage des phases et compensation de l'énergie réactive.",
-    cover_url: "/images/realisations/realisation_p7_img1.png",
+    title: "Les secrets d'un réseau électrique ondulé sans coupure pour serveurs et équipements critiques",
+    slug: "secrets-reseau-electrique-ondule-sans-coupure-equipements-critiques",
+    category: "Énergie Sans Interruption",
+    excerpt: "Comment associer un réseau d'onduleurs triphasés Online Double Conversion avec un groupe électrogène pour une disponibilité à 99,99%.",
+    cover_url: "/images/hero.jpg",
     status: "published",
     content: `
-      <h2>Pourquoi réaliser un audit énergétique industriel ?</h2>
-      <p>De nombreuses entreprises au Cameroun subissent des pannes récurrentes, des disjonctions intempestives et des pénalités financières sur leur facture d'électricité en raison d'un réseau mal équilibré ou d'un mauvais facteur de puissance (Cos Phi).</p>
+      <h2>Pourquoi le groupe électrogène seul ne suffit pas pour l'informatique et les télécoms</h2>
+      <p>Lors d'une coupure du réseau public ENEO, un groupe électrogène automatique met entre 5 et 15 secondes pour démarrer, se stabiliser et fermer son inverseur de source. Pour des serveurs informatiques, des dispositifs médicaux ou des automates de processus, cette micro-coupure provoque un crash immédiat et la perte de données.</p>
 
-      <h2>Les étapes de l'audit énergétique réalisé par ME2I</h2>
+      <h2>Le rôle indispensable de l'onduleur (UPS) Online Double Conversion</h2>
+      <p>L'onduleur de technologie Online (VFI - Voltage and Frequency Independent) redresse en permanence le courant alternatif du réseau en courant continu pour charger les batteries, puis re-fabrique un courant alternatif sinusoïdal d'une pureté parfaite via son onduleur IGBT.</p>
+
+      <p>En cas de coupure secteur, la bascule sur batterie se fait à <strong>0 millisecondes (sans rupture)</strong>. L'onduleur alimente les équipements pendant le temps nécessaire au démarrage du groupe électrogène.</p>
+
+      <h2>Les composants à surveiller dans une chaîne de secours</h2>
       <ul>
-        <li><strong>Campagne de mesure par analyseur de réseau :</strong> Enregistrement sur plusieurs jours des variations de tension, courant, harmoniques et déséquilibre de phase.</li>
-        <li><strong>Analyse de la puissance souscrite et consommée :</strong> Identification des pics de charge et des surdimensionnements d'équipements.</li>
-        <li><strong>Contrôle de la compensation réactive :</strong> Analyse des batteries de condensateurs existantes et calcul du besoin de compensation pour atteindre un Cos Phi supérieur à 0,95.</li>
-        <li><strong>Inspecton thermographique :</strong> Détection par caméra thermique des points chauds sur les jeux de barres et disjoncteurs de puissance.</li>
+        <li><strong>Le parc de batteries :</strong> Test régulier de capacité par décharge sous banc. Une seule batterie défectueuse dans une chaîne en série peut neutraliser tout l'onduleur.</li>
+        <li><strong>Les ventilateurs de refroidissement de l'UPS :</strong> À remplacer tous les 3 à 5 ans pour éviter la mise en bypass thermique.</li>
+        <li><strong>Le bypass statique et manuel de maintenance :</strong> Permet d'isoler l'onduleur pour révision sans couper l'alimentation des serveurs.</li>
       </ul>
 
       <div class="bg-blue-50 p-4 border-l-4 border-blue-600 my-6 font-medium text-slate-800 rounded-r">
-        <strong>Résultat concret :</strong> À l'issue de l'audit, ME2I vous remet un rapport détaillé assorti d'un plan d'action préconisant les travaux prioritaires à amortissement rapide.
+        <strong>Architecture globale ME2I :</strong> Nos ingénieurs conçoivent des schémas d'alimentation sécurisée intégrant l'onduleur triphasé, l'inverseur ATS et le groupe électrogène pour atteindre des disponibilités de 99,99%.
       </div>
+    `
+  },
+  {
+    title: "Froid industriel : Maintenance préventive des centrales frigorifiques et évaporateurs",
+    slug: "froid-industriel-maintenance-preventive-centrales-frigorifiques-evaporateurs",
+    category: "Froid Industriel",
+    excerpt: "Les règles d'or pour assurer le rendement thermique des compresseurs frigorifiques et éliminer le givrage des évaporateurs.",
+    cover_url: "/og-preview.png",
+    status: "published",
+    content: `
+      <h2>Maintenir la chaîne du froid dans l'agroalimentaire et la santé</h2>
+      <p>Les centrales frigorifiques industrielles à plusieurs compresseurs (Bitzer, Copeland, Danfoss) constituent le cœur thermique des abattoirs, des usines de transformation du poisson, des brasseries et des entrepôts sous température contrôlée à Douala et dans toute la région.</p>
 
-      <p>Optimisez dès aujourd'hui la qualité et le coût de votre énergie avec le pôle conseil de ME2I à Douala.</p>
+      <h2>Opérations clés de la maintenance des centrales frigorifiques</h2>
+      
+      <h3>1. Analyse des pressions et de la sous-chauffe / surchauffe</h3>
+      <p>Les techniciens frigoristes ME2I contrôlent les manomètres haute pression (HP) et basse pression (BP), mesurent la surchauffe à l'évaporateur et le sous-refroidissement au condenseur pour valider la charge optimale de fluide frigorigène.</p>
+
+      <h3>2. Contrôle de l'huile compresseur et détection d'acidité</h3>
+      <p>L'huile de lubrification des compresseurs frigorifiques absorbe l'humidité et les résidus de décomposition du fluide en cas de surchauffe. Un test d'acidité d'huile prévient le grillage du bobinage du moteur hermétique ou semi-hermétique.</p>
+
+      <h3>3. Dégivrage et nettoyage des évaporateurs</h3>
+      <p>La formation de givre sur les ailettes des évaporateurs bloque la circulation de l'air et réduit drastiquement l'échange thermique. Le contrôle des résistances de dégivrage, des vannes de gaz chaud et le nettoyage des bacs de condensats évitent le gel complet du bloc.</p>
+
+      <h3>4. Entretien des condenseurs à air extérieurs</h3>
+      <p>Installés en toiture ou en extérieur, les condenseurs s'encrassent rapidement de poussière. Un lavage périodique à l'eau sous pression modérée abaisse la pression de condensation et réduit la consommation électrique de 15% à 25%.</p>
+
+      <p>Confiez l'entretien et le dépannage de vos centrales de froid industriel aux équipes qualifiées ME2I.</p>
+    `
+  },
+  {
+    title: "Pompage solaire et irrigation agricole : Dimensionner une installation autonome durable",
+    slug: "pompage-solaire-irrigation-agricole-dimensionner-installation-autonome",
+    category: "Énergies Renouvelables",
+    excerpt: "Guide technique pour calculer la puissance photovoltaïque et choisir le variateur de vitesse solaire adapté aux pompes immergées.",
+    cover_url: "/images/hero.jpg",
+    status: "published",
+    content: `
+      <h2>L'accès à l'eau sans carburant pour l'agriculture et les sites isolés</h2>
+      <p>Le pompage solaire au fil du soleil représente l'une des solutions énergétiques les plus rentables en Afrique centrale. Il permet d'extraire l'eau de forages ou de rivières pour l'irrigation agricole, l'abreuvement du bétail ou l'alimentation en eau potable des villages sans dépendre du gasoil ni des batteries.</p>
+
+      <h2>Les composants d'un système de pompage solaire autonome</h2>
+      <ul>
+        <li><strong>Le champ photovoltaïque :</strong> Modules solaires monocristallins dimensionnés pour fournir la tension et le courant requis aux heures de fort ensoleillement.</li>
+        <li><strong>Le variateur de vitesse solaire MPPT :</strong> Convertit le courant continu des panneaux en courant alternatif triphasé à fréquence variable pour alimenter directement la pompe immergée. La fonction MPPT ajuste en permanence la vitesse de la pompe selon l'ensoleillement disponible.</li>
+        <li><strong>La pompe immergée ou de surface :</strong> Pompe hydraulique en acier inoxydable conçue pour fonctionner avec des fréquences variables de 25 Hz à 50 Hz.</li>
+        <li><strong>Le réservoir de stockage en hauteur :</strong> L'eau est stockée dans un château d'eau pendant la journée pour assurer une distribution par gravité la nuit, remplaçant avantageusement le stockage par batteries.</li>
+      </ul>
+
+      <div class="bg-emerald-50 p-4 border-l-4 border-emerald-600 my-6 font-medium text-slate-800 rounded-r">
+        <strong>Dimensionnement sur mesure :</strong> ME2I réalise le calcul précis de la Hauteur Manométrique Totale (HMT), des pertes de charge dans les conduites et du volume d'eau journalier nécessaire pour installer une station de pompage solaire fiable et garantie.
+      </div>
+    `
+  },
+  {
+    title: "L'importance des tests sous banc de charge pour valider vos groupes électrogènes",
+    slug: "importance-tests-sous-banc-de-charge-valider-groupes-electrogenes",
+    category: "Audit et Contrôle",
+    excerpt: "Pourquoi et comment réaliser un essai de puissance réelle sous banc de charge résistif et inductif lors des recettes et révisions majeures.",
+    cover_url: "/og-preview.png",
+    status: "published",
+    content: `
+      <h2>Pourquoi les essais à vide ne garantissent pas la fiabilité d'un groupe de secours</h2>
+      <p>Faire démarrer un groupe électrogène pendant 5 minutes à vide permet uniquement de vérifier que le démarreur fonctionne et que le moteur s'allume. Cependant, un essai à vide ne sollicite ni le système d'injection de carburant, ni les turbo-compresseurs, ni le système de refroidissement, ni la régulation de tension sous fort courant.</p>
+
+      <p>Un groupe électrogène qui démarre parfaitement à vide peut très bien caler ou surchauffer en 10 minutes lorsqu'on lui applique brutalement la charge d'une usine ou d'un immeuble.</p>
+
+      <h2>Qu'est-ce qu'un banc de charge industriel ?</h2>
+      <p>Un banc de charge est un équipement de test contenant des résistances électriques blindées et des inductances refroidies par des motoventilateurs. Il simule de manière contrôlée la consommation électrique réelle d'un site.</p>
+
+      <h2>Déroulement d'un essai de recette ME2I</h2>
+      <ul>
+        <li><strong>Test par paliers de puissance :</strong> Application de la charge à 25%, 50%, 75%, puis 100% de la puissance nominale pendant des durées d'un moins 30 minutes par palier.</li>
+        <li><strong>Test de surcharge temporaire :</strong> Application de 110% de la charge pendant 15 minutes pour vérifier les réserves thermiques et mécaniques du bloc moteur.</li>
+        <li><strong>Test d'impact de charge brutale (0 à 100%) :</strong> Mesure du temps de rétablissement de la fréquence et de la tension lors du branchement instantané d'une forte charge.</li>
+        <li><strong>Relevés continus des températures et émissions :</strong> Mesure des températures d'échappement, de la pression d'huile, de la température d'eau et de l'opacité des fumées.</li>
+      </ul>
+
+      <p>À la fin du test, ME2I vous remet un rapport officiel d'essai sous banc de charge certifiant la capacité réelle de vos groupes électrogènes.</p>
     `
   }
 ]
@@ -281,14 +310,18 @@ export async function GET() {
 
   const supabase = createClient(supabaseUrl, supabaseKey)
 
+  // 1. Clear out any old duplicated realisation entries in realisations table that were placed with article slugs
+  const articleSlugs = brandNewArticles.map((a) => a.slug)
+  await supabase.from('realisations').delete().in('id', articleSlugs)
+
+  // 2. Insert into realisations table as clean articles backup so SELECT queries always succeed regardless of RLS
   const results = []
-  for (const art of articlesToSeed) {
-    // Upsert into realisations table (which has open public RLS policies) to ensure perfect rendering and availability
+  for (const art of brandNewArticles) {
     const { data: realData, error: realErr } = await supabase
       .from('realisations')
       .upsert(
         {
-          id: art.slug,
+          id: `art_${art.slug}`,
           title: art.title,
           slug: art.slug,
           category: art.category,
@@ -303,7 +336,6 @@ export async function GET() {
       )
       .select()
 
-    // Also attempt article table upsert
     const { data: artData, error: artErr } = await supabase
       .from('articles')
       .upsert(
