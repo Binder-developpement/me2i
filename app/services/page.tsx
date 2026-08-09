@@ -5,15 +5,44 @@ import type { Metadata } from 'next'
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm';
+
 export const metadata: Metadata = {
-  title: 'Nos Services et Expertises Industrielles',
-  description: 'Services ME2I au Cameroun : Maintenance de groupes électrogènes, automatisme industriel, installation d\'onduleurs et énergies renouvelables.',
+  title: 'Nos Services et Solutions de Maintenance Industrielle',
+  description: 'Services d\'ingénierie ME2I au Cameroun : maintenance industrielle, groupes électrogènes, automatisme, armoires électriques et installations UPS.',
+  keywords: [
+    "maintenance industrielle",
+    "maintenances industrielles",
+    "industrial maintenance services",
+    "maintenance groupe électrogène",
+    "generator maintenance Africa",
+    "automatisme industriel",
+    "industrial automation services",
+    "onduleurs industriels",
+    "uninterruptible power supply",
+    "armoires électriques"
+  ],
   alternates: {
-    canonical: '/services',
+    canonical: `${baseUrl}/services`,
   },
   openGraph: {
-    title: 'Nos Services et Expertises Industrielles | ME2I Cameroun',
-    description: 'Maintenance des groupes électrogènes, automatisme et installations électriques au Cameroun.',
+    title: 'Nos Services et Solutions de Maintenance Industrielle | ME2I',
+    description: 'Maintenance des groupes électrogènes, automatisme et installations électriques industrielles au Cameroun.',
+    url: `${baseUrl}/services`,
+    images: [
+      {
+        url: `${baseUrl}/og-preview.png`,
+        width: 1200,
+        height: 630,
+        alt: "ME2I Services et Expertises",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: 'Nos Services et Solutions de Maintenance Industrielle | ME2I',
+    description: 'Maintenance des groupes électrogènes, automatisme et installations électriques industrielles au Cameroun.',
+    images: [`${baseUrl}/og-preview.png`],
   },
 }
 

@@ -1,8 +1,51 @@
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import Home from '@/src/site-pages/Home'
+import type { Metadata } from 'next'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm';
+
+export const metadata: Metadata = {
+  title: "ME2I : Leader en Maintenance Industrielle et Énergie au Cameroun",
+  description:
+    "Expertise haut de gamme en maintenance industrielle, groupes électrogènes, automatisme, armoires électriques et installations solaires hybrides à Douala et Yaoundé.",
+  keywords: [
+    "maintenance industrielle",
+    "maintenances industrielles",
+    "industrial maintenance",
+    "generator maintenance",
+    "maintenance groupe électrogène Cameroun",
+    "automatisme industriel",
+    "industrial automation",
+    "onduleurs UPS",
+    "énergie sans interruption",
+    "electromechanical services"
+  ],
+  alternates: {
+    canonical: "./",
+  },
+  openGraph: {
+    title: "ME2I : Leader en Maintenance Industrielle et Énergie au Cameroun",
+    description: "Expertise en maintenance industrielle, groupes électrogènes, automatisme et installations électriques.",
+    url: baseUrl,
+    images: [
+      {
+        url: `${baseUrl}/og-preview.png`,
+        width: 1200,
+        height: 630,
+        alt: "ME2I Maintenance Industrielle et Énergie",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ME2I : Leader en Maintenance Industrielle et Énergie au Cameroun",
+    description: "Expertise en maintenance industrielle, groupes électrogènes, automatisme et installations électriques.",
+    images: [`${baseUrl}/og-preview.png`],
+  },
+};
 
 export default async function HomePage() {
   let settingsMap: Record<string, string> = {
@@ -37,12 +80,12 @@ export default async function HomePage() {
       .order('created_at', { ascending: false })
       .limit(3)
 
-    if (articlesData && articlesData.length > 0) {
+    if (articlesData) {
       dbArticles = articlesData
     }
   } catch (err) {
-    console.error('Error fetching homepage data:', err)
+    console.error('Erreur chargement donnees accueil:', err)
   }
 
-  return <Home settings={settingsMap} articles={dbArticles} />
+  return <Home dbSettings={settingsMap} dbArticles={dbArticles} />
 }

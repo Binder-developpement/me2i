@@ -17,7 +17,6 @@ const navLinks = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [searchFocused, setSearchFocused] = useState(false)
   const [searchValue, setSearchValue] = useState('')
   const location = useLocation()
 
@@ -60,7 +59,7 @@ export default function Navbar() {
       >
         <div className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-6 lg:px-12">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 shrink-0" aria-label="Accueil - Ville de Saint-Etienne">
+          <Link to="/" className="flex items-center gap-3 shrink-0" aria-label="Accueil ME2I">
             <div className="flex flex-col">
               <span className="text-[21px] font-semibold uppercase tracking-wider text-bleu-marianne leading-tight">
                 ME2I
@@ -95,30 +94,19 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Right side: Search + Login */}
+          {/* Right side: Fixed width Search input without width animation */}
           <div className="hidden lg:flex items-center gap-4">
-            <div
-              className="flex items-center rounded border border-gris-clair bg-white transition-all duration-300"
-              style={{ width: searchFocused ? 400 : 280 }}
-            >
+            <div className="flex items-center w-64 rounded border border-gris-clair bg-white">
               <Search className="ml-3 h-4 w-4 text-gris-moyen shrink-0" aria-hidden="true" />
               <input
                 type="search"
-                placeholder="Rechercher un service, une demarche..."
+                placeholder="Rechercher un service..."
                 className="h-10 w-full bg-transparent px-3 text-sm text-gris-fonce placeholder:text-gris-moyen focus:outline-none"
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                onFocus={() => setSearchFocused(true)}
-                onBlur={() => setSearchFocused(false)}
                 aria-label="Rechercher"
               />
             </div>
-            <Link
-              to="/contact"
-              className="rounded-lg px-5 py-2.5 text-sm font-medium text-white transition-colors duration-200 hover:bg-bleu-marianne-clair"
-            >
-              A propos
-            </Link>
           </div>
 
           {/* Mobile hamburger */}
@@ -179,7 +167,7 @@ export default function Navbar() {
                 </nav>
                 <div className="mt-auto">
                   <p className="text-slate-400 text-sm">
-                    m2i
+                    ME2I
                   </p>
                 </div>
               </div>
