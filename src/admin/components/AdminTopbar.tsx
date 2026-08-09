@@ -19,13 +19,13 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 h-10 bg-gradient-to-r from-[#0b1320] via-[#111e33] to-[#1a2d4b] border-b border-white/5 text-white flex items-center justify-between px-3 select-none text-xs font-normal shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-40 h-10 bg-gradient-to-r from-[#0b1320] via-[#111e33] to-[#1a2d4b] border-b border-white/[0.03] text-white flex items-center justify-between px-3 select-none text-xs font-normal shadow-sm">
       {/* Left side actions */}
       <div className="flex items-center gap-4">
         <Link
           href="/"
           target="_blank"
-          className="flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+          className="flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-white/70 hover:text-white hover:bg-white/[0.03] transition-colors"
           title="Ouvrir le site public"
         >
           <Home className="h-3.5 w-3.5 text-[#72aee6]" />
@@ -38,7 +38,7 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
           <button
             type="button"
             onClick={() => setShowCreateMenu(!showCreateMenu)}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-sm text-white/80 hover:text-white hover:bg-white/10 transition-colors text-xs font-normal"
+            className="flex items-center gap-1 px-2.5 py-1 rounded-sm text-white/70 hover:text-white hover:bg-white/[0.03] transition-colors text-xs font-normal"
           >
             <Plus className="h-3.5 w-3.5 text-[#72aee6]" />
             <span>Créer</span>
@@ -46,7 +46,7 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
 
           {showCreateMenu && (
             <div
-              className="absolute left-0 mt-1 w-44 bg-[#0d1624] border border-[#1e3a5f]/60 rounded-sm shadow-xl py-1 z-50"
+              className="absolute left-0 mt-1 w-44 bg-[#0d1624] border border-white/[0.06] rounded-sm shadow-xl py-1 z-50"
               onMouseLeave={() => setShowCreateMenu(false)}
             >
               <Link
@@ -89,7 +89,7 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
           <button
             type="button"
             onClick={() => setShowUserMenu(!showUserMenu)}
-            className="flex items-center gap-2 px-2.5 py-1 rounded-sm text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+            className="flex items-center gap-2 px-2.5 py-1 rounded-sm text-white/70 hover:text-white hover:bg-white/[0.03] transition-colors"
           >
             <div className="h-5 w-5 rounded-full bg-[#2271b1] flex items-center justify-center text-white text-[10px] font-bold">
               {userEmail ? userEmail.charAt(0).toUpperCase() : 'A'}
@@ -101,11 +101,11 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
 
           {showUserMenu && (
             <div
-              className="absolute right-0 mt-1 w-48 bg-[#0d1624] border border-[#1e3a5f]/60 rounded-sm shadow-xl py-1 z-50"
+              className="absolute right-0 mt-1 w-48 bg-[#0d1624] border border-white/[0.06] rounded-sm shadow-xl py-1 z-50"
               onMouseLeave={() => setShowUserMenu(false)}
             >
-              <div className="px-3 py-2 border-b border-[#1e3a5f]/40">
-                <p className="text-[11px] text-white/60">Connecté en tant que</p>
+              <div className="px-3 py-2 border-b border-white/[0.06]">
+                <p className="text-[11px] text-white/50">Connecté en tant que</p>
                 <p className="text-xs text-white font-normal truncate mt-0.5">{userEmail || 'Admin'}</p>
               </div>
 
@@ -120,7 +120,7 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
               <button
                 type="button"
                 onClick={handleSignOut}
-                className="w-full text-left flex items-center gap-2 px-3 py-2 text-xs text-red-400 hover:bg-red-950/30 hover:text-red-300 font-normal border-t border-[#1e3a5f]/40"
+                className="w-full text-left flex items-center gap-2 px-3 py-2 text-xs text-red-400 hover:bg-red-950/30 hover:text-red-300 font-normal border-t border-white/[0.06]"
               >
                 <LogOut className="h-3.5 w-3.5" />
                 <span>Se déconnecter</span>
