@@ -1,16 +1,12 @@
 'use client'
 
 import { Link } from '@/src/lib/router-compat'
-import Image from 'next/image'
 import { Realisation } from '@/src/lib/realisations-data'
 import {
   ArrowLeft,
   Building,
   MapPin,
-  Calendar,
   CheckCircle2,
-  Phone,
-  Mail,
   ArrowRight,
   ShieldCheck,
 } from 'lucide-react'
@@ -20,6 +16,9 @@ export default function RealisationDetail({
 }: {
   realisation: Realisation
 }) {
+  const cleanSubtitle = (realisation.subtitle || '').replace(/<[^>]*>/g, '').trim()
+  const rawContent = (realisation.content || realisation.description || '').trim()
+
   return (
     <div className="pt-24 pb-16 min-h-[100dvh] bg-[#f8fafc]">
       <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-12">
@@ -60,9 +59,9 @@ export default function RealisationDetail({
                 <h1 className="text-2xl sm:text-3xl font-bold text-[#1d2327] tracking-tight leading-tight">
                   {realisation.title}
                 </h1>
-                {realisation.subtitle && (
+                {cleanSubtitle && !rawContent.startsWith(cleanSubtitle) && (
                   <p className="text-sm font-normal text-[#2271b1]">
-                    {realisation.subtitle}
+                    {cleanSubtitle}
                   </p>
                 )}
               </div>
@@ -82,14 +81,24 @@ export default function RealisationDetail({
                 )}
               </div>
 
-              {/* Description & Technical details */}
+              {/* Description & Technical details (Rendered as HTML) */}
               <div className="space-y-4 pt-4 border-t border-[#f0f0f1]">
                 <h2 className="text-base font-normal uppercase tracking-wider text-[#1d2327]">
                   Détail du projet &amp; Intervention ME2I
                 </h2>
-                <div className="text-sm text-[#50575e] font-normal leading-relaxed whitespace-pre-line space-y-3">
-                  {realisation.content || realisation.description}
-                </div>
+                <div
+                  className="prose prose-slate max-w-none text-sm text-[#50575e] font-normal leading-relaxed
+                    prose-headings:font-semibold prose-headings:text-[#1d2327]
+                    prose-h2:text-lg prose-h2:mt-6 prose-h2:mb-3 prose-h2:border-b prose-h2:border-[#f0f0f1] prose-h2:pb-2
+                    prose-h3:text-base prose-h3:mt-4 prose-h3:mb-2
+                    prose-p:mb-3 prose-p:leading-relaxed
+                    prose-ul:list-disc prose-ul:pl-5 prose-ul:my-3
+                    prose-ol:list-decimal prose-ol:pl-5 prose-ol:my-3
+                    prose-li:mb-1.5"
+                  dangerouslySetInnerHTML={{
+                    __html: rawContent || '<p>Détail du projet non disponible.</p>',
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -149,30 +158,6 @@ export default function RealisationDetail({
                   <span>Demander un devis similaire</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
-              </div>
-            </div>
-
-            {/* Assistance Box */}
-            <div className="bg-[#f6f7f7] border border-[#c3c4c7] rounded-sm p-6 space-y-4">
-              <h3 className="text-xs font-semibold text-[#1d2327] uppercase tracking-wider">
-                Assistance Technique 24h/7j
-              </h3>
-              <p className="text-xs text-[#50575e] font-normal leading-relaxed">
-                Une question sur cette réalisation ou besoin d'une évaluation pour vos propres équipements ?
-              </p>
-              <div className="space-y-2 text-xs font-normal">
-                <p className="flex items-center gap-2 text-[#2271b1]">
-                  <Phone className="w-4 h-4" />
-                  <a href="tel:+237699000000" className="hover:underline">
-                    +237 699 00 00 00
-                  </a>
-                </p>
-                <p className="flex items-center gap-2 text-[#2271b1]">
-                  <Mail className="w-4 h-4" />
-                  <a href="mailto:contact@me2i.cm" className="hover:underline">
-                    contact@me2i.cm
-                  </a>
-                </p>
               </div>
             </div>
           </div>

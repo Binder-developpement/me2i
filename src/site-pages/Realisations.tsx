@@ -133,12 +133,12 @@ export default function Realisations({
 
                     {item.subtitle && (
                       <p className="text-xs font-normal text-[#2271b1] line-clamp-1">
-                        {item.subtitle}
+                        {(item.subtitle || '').replace(/<[^>]*>/g, '').trim()}
                       </p>
                     )}
 
                     <p className="text-xs text-[#50575e] font-normal leading-relaxed line-clamp-3">
-                      {item.description}
+                      {(item.description || '').replace(/<[^>]*>/g, '').trim()}
                     </p>
 
                     {/* Metadata tags */}
