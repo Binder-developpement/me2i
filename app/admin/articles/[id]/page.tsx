@@ -2,6 +2,7 @@ import { requireAdminAuth } from '@/src/admin/lib/auth-guard'
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import { notFound } from 'next/navigation'
 import EditArticleClient from './EditArticleClient'
+import { fallbackLongArticles } from '@/src/lib/default-articles'
 
 export const revalidate = 0
 
@@ -16,17 +17,23 @@ export default async function EditArticlePage({
 
   try {
     const supabase = await createServerClient()
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('articles')
       .select('*')
-      .eq('id', id)
+      .or(`id.eq.${id},slug.eq.${id}`)
       .single()
 
-    if (error || !data) {
-      notFound()
-    }
     article = data
   } catch (err) {
+    // Ignore error
+  }
+
+  // Fallback to long articles list if not in DB
+  if (!article) {
+    article = fallbackLongArticles.find((f) => f.id === id || f.slug === id)
+  }
+
+  if (!article) {
     notFound()
   }
 
