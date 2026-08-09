@@ -2,6 +2,7 @@ import { requireAdminAuth } from '@/src/admin/lib/auth-guard'
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import Link from 'next/link'
 import QuickDraftWidget from '@/src/admin/components/QuickDraftWidget'
+import DashboardAnalyticsWidget from '@/src/admin/components/DashboardAnalyticsWidget'
 import {
   FileText,
   Wrench,
@@ -10,7 +11,6 @@ import {
   MessageSquare,
   Award,
   Plus,
-  ArrowRight,
   FolderOpen,
   Settings,
 } from 'lucide-react'
@@ -360,8 +360,20 @@ export default async function AdminDashboard() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN: 1/4 Width (lg:col-span-1) */}
+        {/* RIGHT COLUMN: 1/4 Width (lg:col-span-1) with Analytics & Quick Draft */}
         <div className="lg:col-span-1 space-y-4">
+          {/* Analytics & Metrics Cards */}
+          <DashboardAnalyticsWidget
+            contactsCount={stats.contacts}
+            unreadContactsCount={stats.unreadContacts}
+            ordersCount={stats.orders}
+            pendingOrdersCount={stats.pendingOrders}
+            articlesCount={stats.articles}
+            productsCount={stats.products}
+            servicesCount={stats.services}
+            realisationsCount={stats.realisations}
+          />
+
           {/* Meta Box: Brouillon rapide */}
           <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-hidden">
             <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7]">
