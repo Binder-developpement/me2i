@@ -72,14 +72,14 @@ export default function AdminSidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="fixed top-10 left-0 bottom-0 z-30 w-60 flex flex-col bg-gradient-to-b from-[#0b1320] via-[#111e33] to-[#1a2d4b] text-white select-none border-r border-[#1e3a5f]/40 shadow-md">
+    <aside className="fixed top-10 left-0 bottom-0 z-30 w-60 flex flex-col bg-gradient-to-b from-[#0b1320] via-[#111e33] to-[#1a2d4b] text-white select-none border-r border-white/5 shadow-md">
       {/* Sidebar Header: ME2I avec léger dégradé Primary */}
-      <div className="px-5 py-3.5 border-b border-white/10 bg-[#080d18]/60 backdrop-blur-sm">
+      <div className="px-5 py-3.5 border-b border-white/5 bg-[#080d18]/60 backdrop-blur-sm">
         <Link href="/admin" className="block group">
           <span className="font-normal text-base tracking-wider text-white group-hover:text-[#72aee6] transition-colors block uppercase">
             ME2I Admin
           </span>
-          <span className="block text-[10px] font-normal text-white/60 tracking-normal leading-tight mt-0.5 uppercase">
+          <span className="block text-[10px] font-normal text-white/50 tracking-normal leading-tight mt-0.5 uppercase">
             Panneau de contrôle
           </span>
         </Link>
@@ -99,7 +99,7 @@ export default function AdminSidebar() {
               className={`flex items-center gap-3 px-3.5 py-2.5 rounded-sm text-xs font-normal transition-all relative ${
                 isActive
                   ? 'bg-[#2271b1] text-white shadow-sm font-medium'
-                  : 'text-white/80 hover:bg-white/10 hover:text-white'
+                  : 'text-white/80 hover:bg-white/5 hover:text-white'
               }`}
             >
               <item.icon className={`h-4 w-4 shrink-0 ${isActive ? 'text-white' : 'text-white/60'}`} />
@@ -110,7 +110,7 @@ export default function AdminSidebar() {
       </nav>
 
       {/* Footer info */}
-      <div className="p-3 border-t border-white/10 bg-[#080d18]/60 text-[10px] text-white/50 text-center font-normal">
+      <div className="p-3 border-t border-white/5 bg-[#080d18]/60 text-[10px] text-white/40 text-center font-normal">
         ME2I &copy; {new Date().getFullYear()} — Version 1.0
       </div>
     </aside>

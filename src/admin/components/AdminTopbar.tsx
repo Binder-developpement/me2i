@@ -19,7 +19,7 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 h-10 bg-gradient-to-r from-[#0b1320] via-[#111e33] to-[#1a2d4b] border-b border-[#1e3a5f]/40 text-white flex items-center justify-between px-3 select-none text-xs font-normal shadow-sm">
+    <header className="fixed top-0 left-0 right-0 z-40 h-10 bg-gradient-to-r from-[#0b1320] via-[#111e33] to-[#1a2d4b] border-b border-white/5 text-white flex items-center justify-between px-3 select-none text-xs font-normal shadow-sm">
       {/* Left side actions */}
       <div className="flex items-center gap-4">
         <Link
