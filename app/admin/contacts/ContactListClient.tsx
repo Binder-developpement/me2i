@@ -124,7 +124,7 @@ export default function ContactListClient({
         </div>
       </div>
 
-      {/* VIEW RENDER: CARDS VIEW */}
+      {/* VIEW RENDER */}
       {viewMode === 'cards' ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredContacts.length === 0 ? (
@@ -203,91 +203,170 @@ export default function ContactListClient({
           )}
         </div>
       ) : (
-        /* VIEW RENDER: TABLE VIEW */
-        <div className="bg-white border border-[#c3c4c7] rounded-sm overflow-x-auto shadow-sm w-full">
-          <table className="w-full min-w-[650px] text-left text-xs border-collapse">
-            <thead>
-              <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] uppercase tracking-wider font-normal">
-                <th className="p-3 font-normal">Expéditeur</th>
-                <th className="p-3 font-normal">Sujet / Message</th>
-                <th className="p-3 font-normal">Statut</th>
-                <th className="p-3 font-normal">Date</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#c3c4c7]/50 text-[#2c3338]">
-              {filteredContacts.length === 0 ? (
-                <tr>
-                  <td colSpan={4} className="p-8 text-center text-xs text-[#646970]">
-                    <MessageSquare className="h-8 w-8 mx-auto text-[#a7aaad] mb-2" />
-                    Aucun message de contact.
-                  </td>
-                </tr>
-              ) : (
-                filteredContacts.map((c) => (
-                  <tr key={c.id} className="hover:bg-[#f0f6fc]/50 transition-colors group font-normal">
-                    <td className="p-3">
+        /* DEFAULT VIEW MODE ('table'): Automatic Mobile Cards (< 768px), Desktop Table (>= 768px) */
+        <>
+          {/* MOBILE RESPONSIVE CARDS VIEW (< 768px) */}
+          <div className="block md:hidden space-y-3">
+            {filteredContacts.length === 0 ? (
+              <div className="bg-white border border-[#c3c4c7] rounded-sm p-6 text-center text-xs text-[#646970]">
+                Aucun message de contact.
+              </div>
+            ) : (
+              filteredContacts.map((c) => (
+                <div
+                  key={c.id}
+                  className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-xs space-y-3"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
                       <Link
                         href={`/admin/contacts/${c.id}`}
-                        className="font-normal text-[#2271b1] hover:text-[#135e96] text-sm block"
+                        className="font-bold text-[#2271b1] hover:text-[#135e96] text-sm block"
                       >
                         {c.name}
                       </Link>
-                      <p className="text-[11px] text-[#646970] font-normal">{c.email}</p>
-                      <div className="flex items-center gap-2 text-[11px] mt-1 opacity-100 transition-opacity">
-                        <Link
-                          href={`/admin/contacts/${c.id}`}
-                          className="text-[#2271b1] hover:underline font-normal"
-                        >
-                          Consulter
-                        </Link>
-                        {c.status === 'unread' && (
-                          <>
-                            <span className="text-[#c3c4c7]">|</span>
-                            <button
-                              type="button"
-                              onClick={() => handleMarkAsRead(c.id)}
-                              className="text-[#2271b1] hover:underline font-normal"
-                            >
-                              Marquer comme lu
-                            </button>
-                          </>
-                        )}
+                      <p className="text-[11px] text-[#646970] font-normal flex items-center gap-1 mt-0.5">
+                        <Mail className="h-3 w-3 text-[#8c8f94]" />
+                        <span>{c.email}</span>
+                      </p>
+                    </div>
+                    <span
+                      className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm tracking-wider shrink-0 ${
+                        c.status === 'unread'
+                          ? 'bg-amber-100 text-amber-800 border border-amber-300'
+                          : c.status === 'replied'
+                          ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                          : 'bg-gray-100 text-gray-800 border border-gray-300'
+                      }`}
+                    >
+                      {c.status === 'unread' ? 'Non lu' : c.status === 'replied' ? 'Traité' : 'Lu'}
+                    </span>
+                  </div>
+
+                  <div className="bg-gray-50 border border-gray-200 rounded p-2.5 text-xs text-[#1d2327]">
+                    <p className="font-semibold text-xs text-[#1d2327] mb-0.5">{c.subject || 'Sans sujet'}</p>
+                    <p className="text-[11px] text-[#646970] line-clamp-2 leading-relaxed">{c.message}</p>
+                  </div>
+
+                  <div className="pt-2 border-t border-[#f0f0f1] flex items-center gap-3 text-xs">
+                    <Link
+                      href={`/admin/contacts/${c.id}`}
+                      className="text-[#2271b1] font-medium hover:underline"
+                    >
+                      Consulter
+                    </Link>
+                    {c.status === 'unread' && (
+                      <>
                         <span className="text-[#c3c4c7]">|</span>
                         <button
                           type="button"
-                          onClick={() => handleDelete(c.id, c.name)}
-                          className="text-[#d63638] hover:underline font-normal"
+                          onClick={() => handleMarkAsRead(c.id)}
+                          className="text-[#2271b1] font-medium hover:underline"
                         >
-                          Supprimer
+                          Marquer comme lu
                         </button>
-                      </div>
-                    </td>
-                    <td className="p-3 max-w-xs">
-                      <p className="font-normal text-[#1d2327] line-clamp-1">{c.subject || 'Sans sujet'}</p>
-                      <p className="text-[11px] text-[#646970] line-clamp-1 font-normal mt-0.5">{c.message}</p>
-                    </td>
-                    <td className="p-3">
-                      <span
-                        className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm tracking-wider ${
-                          c.status === 'unread'
-                            ? 'bg-amber-100 text-amber-800 border border-amber-300'
-                            : c.status === 'replied'
-                            ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
-                            : 'bg-gray-100 text-gray-800 border border-gray-300'
-                        }`}
-                      >
-                        {c.status === 'unread' ? 'Non lu' : c.status === 'replied' ? 'Traité' : 'Lu'}
-                      </span>
-                    </td>
-                    <td className="p-3 text-[#646970] font-normal">
-                      {new Date(c.created_at).toLocaleDateString('fr-FR')}
+                      </>
+                    )}
+                    <span className="text-[#c3c4c7]">|</span>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(c.id, c.name)}
+                      className="text-[#d63638] font-medium hover:underline"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+
+          {/* DESKTOP TABLE VIEW (>= 768px) */}
+          <div className="hidden md:block bg-white border border-[#c3c4c7] rounded-sm overflow-x-auto shadow-sm w-full">
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] uppercase tracking-wider font-normal">
+                  <th className="p-3 font-normal">Expéditeur</th>
+                  <th className="p-3 font-normal">Sujet / Message</th>
+                  <th className="p-3 font-normal">Statut</th>
+                  <th className="p-3 font-normal">Date</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#c3c4c7]/50 text-[#2c3338]">
+                {filteredContacts.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} className="p-8 text-center text-xs text-[#646970]">
+                      <MessageSquare className="h-8 w-8 mx-auto text-[#a7aaad] mb-2" />
+                      Aucun message de contact.
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                ) : (
+                  filteredContacts.map((c) => (
+                    <tr key={c.id} className="hover:bg-[#f0f6fc]/50 transition-colors group font-normal">
+                      <td className="p-3">
+                        <Link
+                          href={`/admin/contacts/${c.id}`}
+                          className="font-normal text-[#2271b1] hover:text-[#135e96] text-sm block"
+                        >
+                          {c.name}
+                        </Link>
+                        <p className="text-[11px] text-[#646970] font-normal">{c.email}</p>
+                        <div className="flex items-center gap-2 text-[11px] mt-1 opacity-100 transition-opacity">
+                          <Link
+                            href={`/admin/contacts/${c.id}`}
+                            className="text-[#2271b1] hover:underline font-normal"
+                          >
+                            Consulter
+                          </Link>
+                          {c.status === 'unread' && (
+                            <>
+                              <span className="text-[#c3c4c7]">|</span>
+                              <button
+                                type="button"
+                                onClick={() => handleMarkAsRead(c.id)}
+                                className="text-[#2271b1] hover:underline font-normal"
+                              >
+                                Marquer comme lu
+                              </button>
+                            </>
+                          )}
+                          <span className="text-[#c3c4c7]">|</span>
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(c.id, c.name)}
+                            className="text-[#d63638] hover:underline font-normal"
+                          >
+                            Supprimer
+                          </button>
+                        </div>
+                      </td>
+                      <td className="p-3 max-w-xs">
+                        <p className="font-normal text-[#1d2327] line-clamp-1">{c.subject || 'Sans sujet'}</p>
+                        <p className="text-[11px] text-[#646970] line-clamp-1 font-normal mt-0.5">{c.message}</p>
+                      </td>
+                      <td className="p-3">
+                        <span
+                          className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm tracking-wider ${
+                            c.status === 'unread'
+                              ? 'bg-amber-100 text-amber-800 border border-amber-300'
+                              : c.status === 'replied'
+                              ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                              : 'bg-gray-100 text-gray-800 border border-gray-300'
+                          }`}
+                        >
+                          {c.status === 'unread' ? 'Non lu' : c.status === 'replied' ? 'Traité' : 'Lu'}
+                        </span>
+                      </td>
+                      <td className="p-3 text-[#646970] font-normal">
+                        {new Date(c.created_at).toLocaleDateString('fr-FR')}
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
     </div>
   )

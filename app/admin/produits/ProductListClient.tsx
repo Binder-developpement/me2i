@@ -131,7 +131,7 @@ export default function ProductListClient({
         </div>
       </div>
 
-      {/* VIEW RENDER: CARDS VIEW */}
+      {/* VIEW RENDER */}
       {viewMode === 'cards' ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredProducts.length === 0 ? (
@@ -211,90 +211,171 @@ export default function ProductListClient({
           )}
         </div>
       ) : (
-        /* VIEW RENDER: TABLE VIEW */
-        <div className="bg-white border border-[#c3c4c7] rounded-sm overflow-x-auto shadow-sm w-full">
-          <table className="w-full min-w-[600px] text-left text-xs border-collapse">
-            <thead>
-              <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] uppercase tracking-wider font-normal">
-                <th className="p-3 w-14 text-center">Image</th>
-                <th className="p-3 font-normal">Nom du Produit</th>
-                <th className="p-3 font-normal">Catégorie</th>
-                <th className="p-3 font-normal">Prix</th>
-                <th className="p-3 font-normal">Stock</th>
-                <th className="p-3 font-normal">Statut</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#c3c4c7]/50 text-[#2c3338]">
-              {filteredProducts.length === 0 ? (
-                <tr>
-                  <td colSpan={6} className="p-8 text-center text-xs text-[#646970]">
-                    <Package className="h-8 w-8 mx-auto text-[#a7aaad] mb-2" />
-                    Aucun produit dans le catalogue.
-                  </td>
-                </tr>
-              ) : (
-                filteredProducts.map((prod) => (
-                  <tr key={prod.id} className="hover:bg-[#f0f6fc]/50 transition-colors group font-normal">
-                    <td className="p-2 text-center">
-                      {prod.cover_url ? (
-                        <img
-                          src={prod.cover_url}
-                          alt=""
-                          className="h-9 w-9 object-cover rounded-sm border border-gray-200 mx-auto"
-                        />
-                      ) : (
-                        <div className="h-9 w-9 bg-gray-100 rounded-sm flex items-center justify-center mx-auto text-gray-400">
-                          <ImageIcon className="h-4 w-4" />
-                        </div>
-                      )}
-                    </td>
-                    <td className="p-3">
+        /* DEFAULT VIEW MODE ('table'): Automatic Mobile Cards (< 768px), Desktop Table (>= 768px) */
+        <>
+          {/* MOBILE RESPONSIVE CARDS VIEW (< 768px) */}
+          <div className="block md:hidden space-y-3">
+            {filteredProducts.length === 0 ? (
+              <div className="bg-white border border-[#c3c4c7] rounded-sm p-6 text-center text-xs text-[#646970]">
+                Aucun produit dans le catalogue.
+              </div>
+            ) : (
+              filteredProducts.map((prod) => (
+                <div
+                  key={prod.id}
+                  className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-xs space-y-3"
+                >
+                  <div className="flex items-start gap-3">
+                    {prod.cover_url ? (
+                      <img
+                        src={prod.cover_url}
+                        alt={prod.name}
+                        className="w-14 h-14 object-cover rounded-sm border border-gray-200 shrink-0"
+                      />
+                    ) : (
+                      <div className="w-14 h-14 bg-gray-100 rounded-sm border border-gray-200 flex items-center justify-center text-gray-400 shrink-0">
+                        <ImageIcon className="h-5 w-5" />
+                      </div>
+                    )}
+                    <div className="flex-1 min-w-0">
                       <Link
                         href={`/admin/produits/${prod.id}`}
-                        className="font-normal text-[#2271b1] hover:text-[#135e96] text-sm block"
+                        className="font-semibold text-[#2271b1] hover:text-[#135e96] text-sm leading-snug block"
                       >
                         {prod.name}
                       </Link>
-                      <div className="flex items-center gap-2 text-[11px] mt-1 opacity-100 transition-opacity">
-                        <Link
-                          href={`/admin/produits/${prod.id}`}
-                          className="text-[#2271b1] hover:underline font-normal"
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="font-medium text-xs text-[#1d2327]">
+                          {prod.price ? `${prod.price.toLocaleString()} FCFA` : 'Sur devis'}
+                        </span>
+                        <span
+                          className={`px-2 py-0.5 text-[10px] rounded-sm ${
+                            prod.status === 'published'
+                              ? 'bg-emerald-100 text-emerald-800'
+                              : 'bg-amber-100 text-amber-800'
+                          }`}
                         >
-                          Modifier
-                        </Link>
-                        <span className="text-[#c3c4c7]">|</span>
-                        <button
-                          type="button"
-                          onClick={() => handleDelete(prod.id, prod.name)}
-                          disabled={deletingId === prod.id}
-                          className="text-[#d63638] hover:underline font-normal"
-                        >
-                          Supprimer
-                        </button>
+                          {prod.status === 'published' ? 'Publié' : 'Brouillon'}
+                        </span>
                       </div>
-                    </td>
-                    <td className="p-3 text-[#50575e] font-normal">{prod.category || 'Non classé'}</td>
-                    <td className="p-3 font-medium text-[#1d2327]">
-                      {prod.price ? `${prod.price.toLocaleString()} FCFA` : 'Sur devis'}
-                    </td>
-                    <td className="p-3 text-[#50575e] font-normal">{prod.stock ?? 0}</td>
-                    <td className="p-3">
-                      <span
-                        className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm tracking-wider ${
-                          prod.status === 'published'
-                            ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
-                            : 'bg-amber-100 text-amber-800 border border-amber-300'
-                        }`}
-                      >
-                        {prod.status === 'published' ? 'Publié' : 'Brouillon'}
-                      </span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 text-[11px] text-[#646970]">
+                    <span className="flex items-center gap-1">
+                      <Tag className="h-3 w-3 text-[#2271b1]" />
+                      <span>{prod.category || 'Non classé'}</span>
+                    </span>
+                    <span>Stock: {prod.stock ?? 0}</span>
+                  </div>
+
+                  <div className="pt-2 border-t border-[#f0f0f1] flex items-center gap-3 text-xs">
+                    <Link
+                      href={`/admin/produits/${prod.id}`}
+                      className="text-[#2271b1] font-medium hover:underline"
+                    >
+                      Modifier
+                    </Link>
+                    <span className="text-[#c3c4c7]">|</span>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(prod.id, prod.name)}
+                      disabled={deletingId === prod.id}
+                      className="text-[#d63638] font-medium hover:underline"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+
+          {/* DESKTOP TABLE VIEW (>= 768px) */}
+          <div className="hidden md:block bg-white border border-[#c3c4c7] rounded-sm overflow-x-auto shadow-sm w-full">
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] uppercase tracking-wider font-normal">
+                  <th className="p-3 w-14 text-center">Image</th>
+                  <th className="p-3 font-normal">Nom du Produit</th>
+                  <th className="p-3 font-normal">Catégorie</th>
+                  <th className="p-3 font-normal">Prix</th>
+                  <th className="p-3 font-normal">Stock</th>
+                  <th className="p-3 font-normal">Statut</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#c3c4c7]/50 text-[#2c3338]">
+                {filteredProducts.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="p-8 text-center text-xs text-[#646970]">
+                      <Package className="h-8 w-8 mx-auto text-[#a7aaad] mb-2" />
+                      Aucun produit dans le catalogue.
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                ) : (
+                  filteredProducts.map((prod) => (
+                    <tr key={prod.id} className="hover:bg-[#f0f6fc]/50 transition-colors group font-normal">
+                      <td className="p-2 text-center">
+                        {prod.cover_url ? (
+                          <img
+                            src={prod.cover_url}
+                            alt=""
+                            className="h-9 w-9 object-cover rounded-sm border border-gray-200 mx-auto"
+                          />
+                        ) : (
+                          <div className="h-9 w-9 bg-gray-100 rounded-sm flex items-center justify-center mx-auto text-gray-400">
+                            <ImageIcon className="h-4 w-4" />
+                          </div>
+                        )}
+                      </td>
+                      <td className="p-3">
+                        <Link
+                          href={`/admin/produits/${prod.id}`}
+                          className="font-normal text-[#2271b1] hover:text-[#135e96] text-sm block"
+                        >
+                          {prod.name}
+                        </Link>
+                        <div className="flex items-center gap-2 text-[11px] mt-1 opacity-100 transition-opacity">
+                          <Link
+                            href={`/admin/produits/${prod.id}`}
+                            className="text-[#2271b1] hover:underline font-normal"
+                          >
+                            Modifier
+                          </Link>
+                          <span className="text-[#c3c4c7]">|</span>
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(prod.id, prod.name)}
+                            disabled={deletingId === prod.id}
+                            className="text-[#d63638] hover:underline font-normal"
+                          >
+                            Supprimer
+                          </button>
+                        </div>
+                      </td>
+                      <td className="p-3 text-[#50575e] font-normal">{prod.category || 'Non classé'}</td>
+                      <td className="p-3 font-medium text-[#1d2327]">
+                        {prod.price ? `${prod.price.toLocaleString()} FCFA` : 'Sur devis'}
+                      </td>
+                      <td className="p-3 text-[#50575e] font-normal">{prod.stock ?? 0}</td>
+                      <td className="p-3">
+                        <span
+                          className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm tracking-wider ${
+                            prod.status === 'published'
+                              ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                              : 'bg-amber-100 text-amber-800 border border-amber-300'
+                          }`}
+                        >
+                          {prod.status === 'published' ? 'Publié' : 'Brouillon'}
+                        </span>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
     </div>
   )

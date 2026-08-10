@@ -122,7 +122,7 @@ export default function OrderListClient({
         </div>
       </div>
 
-      {/* VIEW RENDER: CARDS VIEW */}
+      {/* VIEW RENDER */}
       {viewMode === 'cards' ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredOrders.length === 0 ? (
@@ -184,70 +184,132 @@ export default function OrderListClient({
           )}
         </div>
       ) : (
-        /* VIEW RENDER: TABLE VIEW */
-        <div className="bg-white border border-[#c3c4c7] rounded-sm overflow-x-auto shadow-sm w-full">
-          <table className="w-full min-w-[650px] text-left text-xs border-collapse">
-            <thead>
-              <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] uppercase tracking-wider font-normal">
-                <th className="p-3 font-normal">Référence</th>
-                <th className="p-3 font-normal">Client</th>
-                <th className="p-3 font-normal">Montant Total</th>
-                <th className="p-3 font-normal">Statut</th>
-                <th className="p-3 font-normal">Date</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[#c3c4c7]/50 text-[#2c3338]">
-              {filteredOrders.length === 0 ? (
-                <tr>
-                  <td colSpan={5} className="p-8 text-center text-xs text-[#646970]">
-                    <ShoppingCart className="h-8 w-8 mx-auto text-[#a7aaad] mb-2" />
-                    Aucune commande enregistrée.
-                  </td>
-                </tr>
-              ) : (
-                filteredOrders.map((ord) => (
-                  <tr key={ord.id} className="hover:bg-[#f0f6fc]/50 transition-colors group font-normal">
-                    <td className="p-3 font-mono">
+        /* DEFAULT VIEW MODE ('table'): Automatic Mobile Cards (< 768px), Desktop Table (>= 768px) */
+        <>
+          {/* MOBILE RESPONSIVE CARDS VIEW (< 768px) */}
+          <div className="block md:hidden space-y-3">
+            {filteredOrders.length === 0 ? (
+              <div className="bg-white border border-[#c3c4c7] rounded-sm p-6 text-center text-xs text-[#646970]">
+                Aucune commande enregistrée.
+              </div>
+            ) : (
+              filteredOrders.map((ord) => (
+                <div
+                  key={ord.id}
+                  className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-xs space-y-3"
+                >
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
                       <Link
                         href={`/admin/commandes/${ord.id}`}
-                        className="font-normal text-[#2271b1] hover:text-[#135e96] text-sm block"
+                        className="font-bold text-[#2271b1] hover:text-[#135e96] text-sm font-mono block"
                       >
                         {ord.reference}
                       </Link>
-                      <div className="flex items-center gap-2 text-[11px] mt-1 opacity-100 transition-opacity font-sans">
-                        <Link
-                          href={`/admin/commandes/${ord.id}`}
-                          className="text-[#2271b1] hover:underline font-normal"
-                        >
-                          Consulter
-                        </Link>
-                        <span className="text-[#c3c4c7]">|</span>
-                        <button
-                          type="button"
-                          onClick={() => handleDelete(ord.id, ord.reference)}
-                          className="text-[#d63638] hover:underline font-normal"
-                        >
-                          Supprimer
-                        </button>
-                      </div>
-                    </td>
-                    <td className="p-3">
-                      <p className="font-normal text-[#1d2327]">{ord.customer_name}</p>
-                      <p className="text-[11px] text-[#646970] font-normal">{ord.customer_email}</p>
-                    </td>
-                    <td className="p-3 font-medium text-[#1d2327]">
+                      <p className="font-medium text-xs text-[#1d2327] mt-0.5 flex items-center gap-1">
+                        <User className="h-3 w-3 text-[#646970]" />
+                        <span>{ord.customer_name}</span>
+                      </p>
+                    </div>
+                    <div>{getStatusBadge(ord.status)}</div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3 text-[11px] text-[#646970]">
+                    <span className="flex items-center gap-1">
+                      <Mail className="h-3 w-3 text-[#8c8f94]" />
+                      <span>{ord.customer_email}</span>
+                    </span>
+                    <span className="font-semibold text-xs text-[#1d2327]">
                       {ord.total ? `${ord.total.toLocaleString()} FCFA` : 'Sur devis'}
-                    </td>
-                    <td className="p-3">{getStatusBadge(ord.status)}</td>
-                    <td className="p-3 text-[#646970] font-normal">
-                      {new Date(ord.created_at).toLocaleDateString('fr-FR')}
+                    </span>
+                  </div>
+
+                  <div className="pt-2 border-t border-[#f0f0f1] flex items-center gap-3 text-xs">
+                    <Link
+                      href={`/admin/commandes/${ord.id}`}
+                      className="text-[#2271b1] font-medium hover:underline"
+                    >
+                      Consulter la commande
+                    </Link>
+                    <span className="text-[#c3c4c7]">|</span>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(ord.id, ord.reference)}
+                      className="text-[#d63638] font-medium hover:underline"
+                    >
+                      Supprimer
+                    </button>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+
+          {/* DESKTOP TABLE VIEW (>= 768px) */}
+          <div className="hidden md:block bg-white border border-[#c3c4c7] rounded-sm overflow-x-auto shadow-sm w-full">
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] uppercase tracking-wider font-normal">
+                  <th className="p-3 font-normal">Référence</th>
+                  <th className="p-3 font-normal">Client</th>
+                  <th className="p-3 font-normal">Montant Total</th>
+                  <th className="p-3 font-normal">Statut</th>
+                  <th className="p-3 font-normal">Date</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#c3c4c7]/50 text-[#2c3338]">
+                {filteredOrders.length === 0 ? (
+                  <tr>
+                    <td colSpan={5} className="p-8 text-center text-xs text-[#646970]">
+                      <ShoppingCart className="h-8 w-8 mx-auto text-[#a7aaad] mb-2" />
+                      Aucune commande enregistrée.
                     </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
+                ) : (
+                  filteredOrders.map((ord) => (
+                    <tr key={ord.id} className="hover:bg-[#f0f6fc]/50 transition-colors group font-normal">
+                      <td className="p-3 font-mono">
+                        <Link
+                          href={`/admin/commandes/${ord.id}`}
+                          className="font-normal text-[#2271b1] hover:text-[#135e96] text-sm block"
+                        >
+                          {ord.reference}
+                        </Link>
+                        <div className="flex items-center gap-2 text-[11px] mt-1 opacity-100 transition-opacity font-sans">
+                          <Link
+                            href={`/admin/commandes/${ord.id}`}
+                            className="text-[#2271b1] hover:underline font-normal"
+                          >
+                            Consulter
+                          </Link>
+                          <span className="text-[#c3c4c7]">|</span>
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(ord.id, ord.reference)}
+                            className="text-[#d63638] hover:underline font-normal"
+                          >
+                            Supprimer
+                          </button>
+                        </div>
+                      </td>
+                      <td className="p-3">
+                        <p className="font-normal text-[#1d2327]">{ord.customer_name}</p>
+                        <p className="text-[11px] text-[#646970] font-normal">{ord.customer_email}</p>
+                      </td>
+                      <td className="p-3 font-medium text-[#1d2327]">
+                        {ord.total ? `${ord.total.toLocaleString()} FCFA` : 'Sur devis'}
+                      </td>
+                      <td className="p-3">{getStatusBadge(ord.status)}</td>
+                      <td className="p-3 text-[#646970] font-normal">
+                        {new Date(ord.created_at).toLocaleDateString('fr-FR')}
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
     </div>
   )
