@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { deleteServiceAction } from '@/src/admin/lib/service-actions'
 import { toast } from 'sonner'
-import { Search, Wrench } from 'lucide-react'
+import { Search, Wrench, Tag } from 'lucide-react'
 
 export default function ServiceListClient({
   initialServices,
@@ -56,9 +56,69 @@ export default function ServiceListClient({
         <span className="text-xs text-[#646970] font-normal">{filteredServices.length} service(s)</span>
       </div>
 
-      {/* WordPress Table */}
-      <div className="bg-white border border-[#c3c4c7] rounded-sm overflow-x-auto shadow-sm w-full">
-        <table className="w-full min-w-[550px] text-left text-xs border-collapse">
+      {/* MOBILE RESPONSIVE CARDS VIEW (< 768px) */}
+      <div className="block md:hidden space-y-3">
+        {filteredServices.length === 0 ? (
+          <div className="bg-white border border-[#c3c4c7] rounded-sm p-6 text-center text-xs text-[#646970]">
+            Aucun service trouvé.
+          </div>
+        ) : (
+          filteredServices.map((service) => (
+            <div
+              key={service.id}
+              className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-xs space-y-3"
+            >
+              <div className="flex items-start justify-between gap-2">
+                <Link
+                  href={`/admin/services/${service.id}`}
+                  className="font-semibold text-[#2271b1] hover:text-[#135e96] text-sm leading-snug"
+                >
+                  {service.title}
+                </Link>
+                <span
+                  className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm shrink-0 ${
+                    service.status === 'published'
+                      ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                      : 'bg-amber-100 text-amber-800 border border-amber-300'
+                  }`}
+                >
+                  {service.status === 'published' ? 'Publié' : 'Brouillon'}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-3 text-[11px] text-[#646970]">
+                <span className="flex items-center gap-1">
+                  <Tag className="h-3 w-3 text-[#2271b1]" />
+                  <span>{service.category || 'Général'}</span>
+                </span>
+                <span>Ordre: {service.order_index}</span>
+              </div>
+
+              <div className="pt-2 border-t border-[#f0f0f1] flex items-center gap-3 text-xs">
+                <Link
+                  href={`/admin/services/${service.id}`}
+                  className="text-[#2271b1] font-medium hover:underline"
+                >
+                  Modifier
+                </Link>
+                <span className="text-[#c3c4c7]">|</span>
+                <button
+                  type="button"
+                  onClick={() => handleDelete(service.id, service.title)}
+                  disabled={deletingId === service.id}
+                  className="text-[#d63638] font-medium hover:underline"
+                >
+                  Supprimer
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* DESKTOP TABLE VIEW (>= 768px) */}
+      <div className="hidden md:block bg-white border border-[#c3c4c7] rounded-sm overflow-x-auto shadow-sm w-full">
+        <table className="w-full text-left text-xs border-collapse">
           <thead>
             <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] uppercase tracking-wider font-normal">
               <th className="p-3 w-10 text-center">

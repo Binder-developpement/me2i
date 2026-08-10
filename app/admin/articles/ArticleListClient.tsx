@@ -10,7 +10,7 @@ import {
   emptyTrashAction,
 } from '@/src/admin/lib/article-actions'
 import { toast } from 'sonner'
-import { Search, Edit, Trash2, ExternalLink, RefreshCw, AlertTriangle } from 'lucide-react'
+import { Search, Edit, Trash2, ExternalLink, RefreshCw, AlertTriangle, Calendar, Tag } from 'lucide-react'
 
 export default function ArticleListClient({
   initialArticles,
@@ -98,7 +98,7 @@ export default function ArticleListClient({
 
   // Empty entire trash
   const handleEmptyTrash = async () => {
-    if (!confirm('Voulez-vous vraiment vider toute la corbeille ? Tous les articles corbeille seront supprimés définitivement.')) {
+    if (!confirm('Voulez-vous vraiment vider la corbeille ? Tous les articles en corbeille seront définitivement supprimés.')) {
       return
     }
 
@@ -106,15 +106,16 @@ export default function ArticleListClient({
       setEmptying(true)
       await emptyTrashAction()
       setArticles((prev) => prev.filter((a) => a.status !== 'trash'))
-      toast.success('Corbeille vidée')
+      toast.success('La corbeille a été vidée')
       router.refresh()
     } catch (err: any) {
-      toast.error(err?.message || 'Erreur lors du vidage de la corbeille')
+      toast.error('Erreur lors du vidage de la corbeille')
     } finally {
       setEmptying(false)
     }
   }
 
+  // Counts
   const counts = {
     all: articles.filter((a) => a.status !== 'trash').length,
     published: articles.filter((a) => a.status === 'published').length,
@@ -123,11 +124,11 @@ export default function ArticleListClient({
   }
 
   return (
-    <div className="space-y-4">
-      {/* WordPress-style Status Tabs & Search bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+    <div className="space-y-4 w-full">
+      {/* Search & Tabs Toolbar */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm">
         {/* Tabs */}
-        <div className="flex items-center gap-2 text-xs border-b border-[#c3c4c7] sm:border-b-0 pb-2 sm:pb-0 select-none">
+        <div className="flex items-center gap-2 text-xs border-b border-[#c3c4c7] sm:border-b-0 pb-2 sm:pb-0 select-none flex-wrap">
           <button
             type="button"
             onClick={() => setActiveTab('all')}
@@ -182,33 +183,136 @@ export default function ArticleListClient({
         </div>
 
         {/* Search Input & Empty Trash button */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           {activeTab === 'trash' && counts.trash > 0 && (
             <button
               type="button"
               onClick={handleEmptyTrash}
               disabled={emptying}
-              className="px-3 py-1.5 border border-red-600 text-red-600 hover:bg-red-50 text-xs font-semibold rounded-sm transition-colors disabled:opacity-50"
+              className="px-3 py-1.5 border border-red-600 text-red-600 hover:bg-red-50 text-xs font-semibold rounded-sm transition-colors disabled:opacity-50 shrink-0"
             >
               {emptying ? 'Vidage...' : 'Vider la corbeille'}
             </button>
           )}
 
-          <div className="relative">
+          <div className="relative w-full sm:w-64">
             <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-[#8c8f94]" />
             <input
               type="text"
               placeholder="Rechercher des articles..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="pl-8 pr-3 py-1.5 border border-[#8c8f94] rounded-sm text-xs focus:outline-none focus:border-[#2271b1] bg-white w-48 sm:w-64"
+              className="w-full pl-8 pr-3 py-1.5 border border-[#8c8f94] rounded-sm text-xs focus:outline-none focus:border-[#2271b1] bg-white font-normal"
             />
           </div>
         </div>
       </div>
 
-      {/* Table WordPress style */}
-      <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-x-auto">
+      {/* MOBILE RESPONSIVE CARDS VIEW (Shown on phones < 768px) */}
+      <div className="block md:hidden space-y-3">
+        {filteredArticles.length === 0 ? (
+          <div className="bg-white border border-[#c3c4c7] rounded-sm p-6 text-center text-xs text-[#646970]">
+            {activeTab === 'trash' ? 'La corbeille est vide.' : 'Aucun article trouvé.'}
+          </div>
+        ) : (
+          filteredArticles.map((article) => (
+            <div
+              key={article.id}
+              className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-xs space-y-3"
+            >
+              <div className="flex items-start justify-between gap-2">
+                <Link
+                  href={activeTab === 'trash' ? '#' : `/admin/articles/${article.id}`}
+                  className="font-semibold text-[#2271b1] hover:text-[#135e96] text-sm leading-snug"
+                >
+                  {article.title}
+                </Link>
+                {article.status === 'published' ? (
+                  <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-normal bg-emerald-100 text-emerald-800 shrink-0">
+                    Publié
+                  </span>
+                ) : article.status === 'trash' ? (
+                  <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-normal bg-red-100 text-red-800 shrink-0">
+                    Corbeille
+                  </span>
+                ) : (
+                  <span className="inline-block px-2 py-0.5 rounded-full text-[10px] font-normal bg-gray-100 text-gray-700 shrink-0">
+                    Brouillon
+                  </span>
+                )}
+              </div>
+
+              {/* Metadata Badges */}
+              <div className="flex flex-wrap items-center gap-3 text-[11px] text-[#646970]">
+                <span className="flex items-center gap-1">
+                  <Tag className="h-3 w-3 text-[#2271b1]" />
+                  <span>{article.category || 'Général'}</span>
+                </span>
+                {article.created_at && (
+                  <span className="flex items-center gap-1">
+                    <Calendar className="h-3 w-3 text-[#8c8f94]" />
+                    <span>{new Date(article.created_at).toLocaleDateString('fr-FR')}</span>
+                  </span>
+                )}
+              </div>
+
+              {/* Action Buttons Bar */}
+              <div className="pt-2 border-t border-[#f0f0f1] flex flex-wrap items-center gap-3 text-xs">
+                {activeTab === 'trash' ? (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() => handleRestore(article.id, article.title)}
+                      disabled={loadingId === article.id}
+                      className="text-[#2271b1] hover:underline font-medium"
+                    >
+                      Rétablir
+                    </button>
+                    <span className="text-[#c3c4c7]">|</span>
+                    <button
+                      type="button"
+                      onClick={() => handleDeletePermanently(article.id, article.title)}
+                      disabled={loadingId === article.id}
+                      className="text-red-600 hover:underline font-medium"
+                    >
+                      Supprimer
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      href={`/admin/articles/${article.id}`}
+                      className="text-[#2271b1] hover:underline font-medium"
+                    >
+                      Modifier
+                    </Link>
+                    <span className="text-[#c3c4c7]">|</span>
+                    <button
+                      type="button"
+                      onClick={() => handleTrash(article.id, article.title)}
+                      disabled={loadingId === article.id}
+                      className="text-[#d63638] hover:underline font-medium"
+                    >
+                      Corbeille
+                    </button>
+                    <span className="text-[#c3c4c7]">|</span>
+                    <Link
+                      href={`/blog/${article.slug || article.id}`}
+                      target="_blank"
+                      className="text-[#2271b1] hover:underline font-medium"
+                    >
+                      Aperçu
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* DESKTOP TABLE VIEW (Shown on screens >= 768px) */}
+      <div className="hidden md:block bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-x-auto">
         <table className="w-full text-left text-xs border-collapse">
           <thead>
             <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] font-normal">
@@ -239,7 +343,7 @@ export default function ArticleListClient({
                     </Link>
 
                     {/* WordPress Action Bar under row */}
-                    <div className="flex items-center gap-2 text-[11px] opacity-90 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center gap-2 text-[11px] opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
                       {activeTab === 'trash' ? (
                         <>
                           <button
@@ -279,7 +383,7 @@ export default function ArticleListClient({
                           </button>
                           <span className="text-[#c3c4c7]">|</span>
                           <Link
-                            href={`/blog/${article.id}`}
+                            href={`/blog/${article.slug || article.id}`}
                             target="_blank"
                             className="text-[#2271b1] hover:underline"
                           >
