@@ -81,36 +81,37 @@ export default function RealisationListClient({
 
   return (
     <div className="space-y-4 w-full">
-      {/* Tabs and Search with View Switcher */}
-      <div className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 w-full">
-        <div className="flex items-center gap-3 text-xs font-normal text-[#2c3338] border-b border-[#f0f0f1] sm:border-b-0 pb-2 sm:pb-0 flex-wrap">
+      {/* Search & Tabs Toolbar with View Switcher */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm w-full">
+        {/* Responsive Horizontal Scroll Tabs */}
+        <div className="flex items-center gap-2 text-xs border-b border-[#c3c4c7] sm:border-b-0 pb-2 sm:pb-0 select-none overflow-x-auto max-w-full whitespace-nowrap shrink-0">
           <button
             onClick={() => setActiveTab('all')}
-            className={`transition-colors ${
+            className={`pb-1 px-1 font-normal transition-colors ${
               activeTab === 'all'
-                ? 'text-[#2271b1] underline font-normal'
+                ? 'text-[#2271b1] border-b-2 border-[#2271b1]'
                 : 'text-[#50575e] hover:text-[#2271b1]'
             }`}
           >
             Toutes ({countAll})
           </button>
-          <span>|</span>
+          <span className="text-[#c3c4c7]">|</span>
           <button
             onClick={() => setActiveTab('published')}
-            className={`transition-colors ${
+            className={`pb-1 px-1 font-normal transition-colors ${
               activeTab === 'published'
-                ? 'text-[#2271b1] underline font-normal'
+                ? 'text-[#2271b1] border-b-2 border-[#2271b1]'
                 : 'text-[#50575e] hover:text-[#2271b1]'
             }`}
           >
             Publiées ({countPublished})
           </button>
-          <span>|</span>
+          <span className="text-[#c3c4c7]">|</span>
           <button
             onClick={() => setActiveTab('draft')}
-            className={`transition-colors ${
+            className={`pb-1 px-1 font-normal transition-colors ${
               activeTab === 'draft'
-                ? 'text-[#2271b1] underline font-normal'
+                ? 'text-[#2271b1] border-b-2 border-[#2271b1]'
                 : 'text-[#50575e] hover:text-[#2271b1]'
             }`}
           >
@@ -118,12 +119,12 @@ export default function RealisationListClient({
           </button>
           {countTrash > 0 && (
             <>
-              <span>|</span>
+              <span className="text-[#c3c4c7]">|</span>
               <button
                 onClick={() => setActiveTab('trash')}
-                className={`transition-colors ${
+                className={`pb-1 px-1 font-normal transition-colors ${
                   activeTab === 'trash'
-                    ? 'text-red-700 underline font-normal'
+                    ? 'text-red-700 border-b-2 border-red-600'
                     : 'text-red-600 hover:text-red-800'
                 }`}
               >
@@ -134,7 +135,7 @@ export default function RealisationListClient({
         </div>
 
         {/* Right side controls: Search + View Switcher */}
-        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end shrink-0">
           <div className="relative flex-1 sm:flex-none sm:w-64">
             <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-[#8c8f94]" />
             <input

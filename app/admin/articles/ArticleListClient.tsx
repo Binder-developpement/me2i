@@ -127,9 +127,9 @@ export default function ArticleListClient({
   return (
     <div className="space-y-4 w-full">
       {/* Search & Tabs Toolbar with View Switcher */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm">
-        {/* Tabs */}
-        <div className="flex items-center gap-2 text-xs border-b border-[#c3c4c7] sm:border-b-0 pb-2 sm:pb-0 select-none flex-wrap">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm w-full">
+        {/* Responsive Horizontal Scroll Tabs */}
+        <div className="flex items-center gap-2 text-xs border-b border-[#c3c4c7] sm:border-b-0 pb-2 sm:pb-0 select-none overflow-x-auto max-w-full whitespace-nowrap shrink-0">
           <button
             type="button"
             onClick={() => setActiveTab('all')}
@@ -184,7 +184,7 @@ export default function ArticleListClient({
         </div>
 
         {/* Right side controls: Search box + View Switcher */}
-        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end shrink-0">
           {activeTab === 'trash' && counts.trash > 0 && (
             <button
               type="button"

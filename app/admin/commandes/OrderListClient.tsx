@@ -43,24 +43,24 @@ export default function OrderListClient({
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'pending':
-        return <span className="px-2 py-0.5 text-[10px] font-normal rounded-sm bg-amber-100 text-amber-800 border border-amber-300">En attente</span>
+        return <span className="px-2 py-0.5 text-[10px] font-normal rounded-sm bg-amber-100 text-amber-800 border border-amber-300 shrink-0">En attente</span>
       case 'processing':
-        return <span className="px-2 py-0.5 text-[10px] font-normal rounded-sm bg-blue-100 text-blue-800 border border-blue-300">En cours</span>
+        return <span className="px-2 py-0.5 text-[10px] font-normal rounded-sm bg-blue-100 text-blue-800 border border-blue-300 shrink-0">En cours</span>
       case 'completed':
-        return <span className="px-2 py-0.5 text-[10px] font-normal rounded-sm bg-emerald-100 text-emerald-800 border border-emerald-300">Complétée</span>
+        return <span className="px-2 py-0.5 text-[10px] font-normal rounded-sm bg-emerald-100 text-emerald-800 border border-emerald-300 shrink-0">Complétée</span>
       case 'cancelled':
-        return <span className="px-2 py-0.5 text-[10px] font-normal rounded-sm bg-red-100 text-red-800 border border-red-300">Annulée</span>
+        return <span className="px-2 py-0.5 text-[10px] font-normal rounded-sm bg-red-100 text-red-800 border border-red-300 shrink-0">Annulée</span>
       default:
-        return <span className="px-2 py-0.5 text-[10px] font-normal rounded-sm bg-gray-100 text-gray-800">{status}</span>
+        return <span className="px-2 py-0.5 text-[10px] font-normal rounded-sm bg-gray-100 text-gray-800 shrink-0">{status}</span>
     }
   }
 
   return (
     <div className="space-y-4 w-full">
-      {/* Tabs & Search Toolbar with View Switcher */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm">
-        {/* Tabs */}
-        <div className="flex items-center gap-2 text-xs border-b border-[#c3c4c7] sm:border-b-0 pb-2 sm:pb-0 flex-wrap">
+      {/* Search & Tabs Toolbar with View Switcher */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm w-full">
+        {/* Responsive Horizontal Scroll Tabs */}
+        <div className="flex items-center gap-2 text-xs border-b border-[#c3c4c7] sm:border-b-0 pb-2 sm:pb-0 select-none overflow-x-auto max-w-full whitespace-nowrap shrink-0">
           {(['all', 'pending', 'processing', 'completed', 'cancelled'] as const).map((st) => (
             <button
               key={st}
@@ -78,7 +78,7 @@ export default function OrderListClient({
         </div>
 
         {/* Right side controls: Search + View Switcher */}
-        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end shrink-0">
           <div className="relative flex-1 sm:flex-none sm:w-64">
             <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-[#8c8f94]" />
             <input

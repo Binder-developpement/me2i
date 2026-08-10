@@ -59,10 +59,10 @@ export default function ContactListClient({
 
   return (
     <div className="space-y-4 w-full">
-      {/* Tabs & Search Toolbar with View Switcher */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm">
-        {/* Tabs */}
-        <div className="flex items-center gap-2 text-xs border-b border-[#c3c4c7] sm:border-b-0 pb-2 sm:pb-0 flex-wrap">
+      {/* Search & Tabs Toolbar with View Switcher */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm w-full">
+        {/* Responsive Horizontal Scroll Tabs */}
+        <div className="flex items-center gap-2 text-xs border-b border-[#c3c4c7] sm:border-b-0 pb-2 sm:pb-0 select-none overflow-x-auto max-w-full whitespace-nowrap shrink-0">
           {(['all', 'unread', 'read', 'replied'] as const).map((tab) => (
             <button
               key={tab}
@@ -80,7 +80,7 @@ export default function ContactListClient({
         </div>
 
         {/* Right side controls: Search + View Switcher */}
-        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end shrink-0">
           <div className="relative flex-1 sm:flex-none sm:w-64">
             <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-[#8c8f94]" />
             <input
