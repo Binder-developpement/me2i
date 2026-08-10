@@ -457,7 +457,7 @@ export default function RealisationListClient({
                           </p>
                         )}
                         {/* WordPress Action Bar under title */}
-                        <div className="flex items-center gap-2 text-[11px] opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity mt-1">
+                        <div className="flex items-center gap-2 text-xs font-medium opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity mt-1">
                           {activeTab === 'trash' ? (
                             <>
                               <button

@@ -311,7 +311,7 @@ export default function ContactListClient({
                           {c.name}
                         </Link>
                         <p className="text-[11px] text-[#646970] font-normal">{c.email}</p>
-                        <div className="flex items-center gap-2 text-[11px] mt-1 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
+                        <div className="flex items-center gap-2 text-xs font-medium mt-1 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
                           <Link
                             href={`/admin/contacts/${c.id}`}
                             className="text-[#2271b1] hover:underline font-normal"
