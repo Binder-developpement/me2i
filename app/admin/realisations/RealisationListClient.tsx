@@ -427,8 +427,8 @@ export default function RealisationListClient({
                   </tr>
                 ) : (
                   filtered.map((item) => (
-                    <tr key={item.id} className="hover:bg-[#f6f7f7]/60 transition-colors">
-                      <td className="py-2.5 px-3 w-16">
+                    <tr key={item.id} className="hover:bg-[#f6f7f7]/60 transition-colors group">
+                      <td className="py-2.5 px-3 w-16 align-top">
                         <div className="relative w-12 h-12 bg-[#f0f0f1] border border-[#c3c4c7] rounded-sm overflow-hidden shrink-0">
                           {item.cover_url ? (
                             <Image
@@ -444,7 +444,7 @@ export default function RealisationListClient({
                           )}
                         </div>
                       </td>
-                      <td className="py-2.5 px-3">
+                      <td className="py-2.5 px-3 align-top">
                         <Link
                           href={`/admin/realisations/${item.id}`}
                           className="font-normal text-[#2271b1] hover:text-[#135e96] text-sm block"
@@ -456,27 +456,8 @@ export default function RealisationListClient({
                             {item.subtitle}
                           </p>
                         )}
-                      </td>
-                      <td className="py-2.5 px-3 text-[#50575e] font-normal">{item.category}</td>
-                      <td className="py-2.5 px-3 text-[#50575e] font-normal">
-                        <div>{item.client || '—'}</div>
-                        <div className="text-[11px] text-[#646970]">{item.location || '—'}</div>
-                      </td>
-                      <td className="py-2.5 px-3">
-                        <span
-                          className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm ${
-                            item.status === 'published'
-                              ? 'bg-emerald-100 text-emerald-800'
-                              : item.status === 'trash'
-                              ? 'bg-red-100 text-red-800'
-                              : 'bg-amber-100 text-amber-800'
-                          }`}
-                        >
-                          {item.status === 'published' ? 'Publié' : item.status === 'trash' ? 'Corbeille' : 'Brouillon'}
-                        </span>
-                      </td>
-                      <td className="py-2.5 px-3 text-right">
-                        <div className="flex items-center justify-end gap-2 text-xs font-normal">
+                        {/* WordPress Action Bar under title */}
+                        <div className="flex items-center gap-2 text-[11px] opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity mt-1">
                           {activeTab === 'trash' ? (
                             <>
                               <button
@@ -490,7 +471,7 @@ export default function RealisationListClient({
                                 onClick={() => handleDeletePermanent(item.id)}
                                 className="text-red-600 hover:underline"
                               >
-                                Supprimer
+                                Supprimer définitivement
                               </button>
                             </>
                           ) : (
@@ -506,7 +487,7 @@ export default function RealisationListClient({
                                 onClick={() => handleTrash(item.id)}
                                 className="text-[#d63638] hover:underline"
                               >
-                                Corbeille
+                                Déplacer dans la corbeille
                               </button>
                               <span className="text-[#c3c4c7]">|</span>
                               <Link
@@ -519,6 +500,24 @@ export default function RealisationListClient({
                             </>
                           )}
                         </div>
+                      </td>
+                      <td className="py-2.5 px-3 text-[#50575e] font-normal align-top">{item.category}</td>
+                      <td className="py-2.5 px-3 text-[#50575e] font-normal align-top">
+                        <div>{item.client || '—'}</div>
+                        <div className="text-[11px] text-[#646970]">{item.location || '—'}</div>
+                      </td>
+                      <td className="py-2.5 px-3 align-top">
+                        <span
+                          className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm ${
+                            item.status === 'published'
+                              ? 'bg-emerald-100 text-emerald-800'
+                              : item.status === 'trash'
+                              ? 'bg-red-100 text-red-800'
+                              : 'bg-amber-100 text-amber-800'
+                          }`}
+                        >
+                          {item.status === 'published' ? 'Publié' : item.status === 'trash' ? 'Corbeille' : 'Brouillon'}
+                        </span>
                       </td>
                     </tr>
                   ))
