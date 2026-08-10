@@ -55,7 +55,7 @@ export default function OrderListClient({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 w-full">
       {/* Tabs & Search */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div className="flex items-center gap-2 text-xs border-b border-[#c3c4c7] sm:border-b-0 pb-2 sm:pb-0 flex-wrap">
@@ -75,7 +75,7 @@ export default function OrderListClient({
           ))}
         </div>
 
-        <div className="relative">
+        <div className="relative w-full sm:w-auto">
           <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-[#8c8f94]" />
           <input
             type="text"
@@ -88,8 +88,8 @@ export default function OrderListClient({
       </div>
 
       {/* WordPress Table */}
-      <div className="bg-white border border-[#c3c4c7] rounded-sm overflow-hidden shadow-sm">
-        <table className="w-full text-left text-xs border-collapse">
+      <div className="bg-white border border-[#c3c4c7] rounded-sm overflow-x-auto shadow-sm w-full">
+        <table className="w-full min-w-[650px] text-left text-xs border-collapse">
           <thead>
             <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] uppercase tracking-wider font-normal">
               <th className="p-3 font-normal">Référence</th>
@@ -108,18 +108,18 @@ export default function OrderListClient({
                 </td>
               </tr>
             ) : (
-              filteredOrders.map((order) => (
-                <tr key={order.id} className="hover:bg-[#f0f6fc]/50 transition-colors group font-normal">
-                  <td className="p-3">
+              filteredOrders.map((ord) => (
+                <tr key={ord.id} className="hover:bg-[#f0f6fc]/50 transition-colors group font-normal">
+                  <td className="p-3 font-mono">
                     <Link
-                      href={`/admin/commandes/${order.id}`}
-                      className="font-normal text-[#2271b1] hover:text-[#135e96] font-mono text-sm block"
+                      href={`/admin/commandes/${ord.id}`}
+                      className="font-normal text-[#2271b1] hover:text-[#135e96] text-sm block"
                     >
-                      {order.reference}
+                      {ord.reference}
                     </Link>
-                    <div className="flex items-center gap-2 text-[11px] mt-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center gap-2 text-[11px] mt-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity font-sans">
                       <Link
-                        href={`/admin/commandes/${order.id}`}
+                        href={`/admin/commandes/${ord.id}`}
                         className="text-[#2271b1] hover:underline font-normal"
                       >
                         Consulter
@@ -127,7 +127,7 @@ export default function OrderListClient({
                       <span className="text-[#c3c4c7]">|</span>
                       <button
                         type="button"
-                        onClick={() => handleDelete(order.id, order.reference)}
+                        onClick={() => handleDelete(ord.id, ord.reference)}
                         className="text-[#d63638] hover:underline font-normal"
                       >
                         Supprimer
@@ -135,21 +135,15 @@ export default function OrderListClient({
                     </div>
                   </td>
                   <td className="p-3">
-                    <p className="font-normal text-[#1d2327]">{order.customer_name}</p>
-                    <p className="text-[11px] text-[#646970] font-normal">{order.customer_email}</p>
+                    <p className="font-normal text-[#1d2327]">{ord.customer_name}</p>
+                    <p className="text-[11px] text-[#646970] font-normal">{ord.customer_email}</p>
                   </td>
-                  <td className="p-3 font-normal text-[#1d2327]">
-                    {order.total ? `${order.total.toLocaleString('fr-FR')} ${order.currency || 'XAF'}` : 'N/A'}
+                  <td className="p-3 font-medium text-[#1d2327]">
+                    {ord.total ? `${ord.total.toLocaleString()} FCFA` : 'Sur devis'}
                   </td>
-                  <td className="p-3">{getStatusBadge(order.status)}</td>
-                  <td className="p-3 text-[#646970] text-[11px] font-normal">
-                    {new Date(order.created_at).toLocaleDateString('fr-FR', {
-                      day: 'numeric',
-                      month: 'short',
-                      year: 'numeric',
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
+                  <td className="p-3">{getStatusBadge(ord.status)}</td>
+                  <td className="p-3 text-[#646970] font-normal">
+                    {new Date(ord.created_at).toLocaleDateString('fr-FR')}
                   </td>
                 </tr>
               ))

@@ -4,9 +4,17 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClientSupabase } from '@/src/admin/lib/supabase-client'
-import { ExternalLink, Plus, LogOut, Home } from 'lucide-react'
+import { ExternalLink, Plus, LogOut, Home, Menu, X } from 'lucide-react'
 
-export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
+export default function AdminTopbar({
+  userEmail,
+  isMobileOpen,
+  onToggleMobileMenu,
+}: {
+  userEmail?: string
+  isMobileOpen?: boolean
+  onToggleMobileMenu?: () => void
+}) {
   const router = useRouter()
   const [showCreateMenu, setShowCreateMenu] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
@@ -21,16 +29,32 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
   return (
     <header className="fixed top-0 left-0 right-0 z-40 h-10 bg-gradient-to-r from-[#0b1320] via-[#111e33] to-[#1a2d4b] text-white flex items-center justify-between px-3 select-none text-xs font-normal shadow-sm">
       {/* Left side actions */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-4">
+        {/* Mobile Hamburger Toggle Button */}
+        {onToggleMobileMenu && (
+          <button
+            type="button"
+            onClick={onToggleMobileMenu}
+            className="md:hidden p-1.5 rounded-sm text-white/80 hover:text-white hover:bg-black/30 transition-colors"
+            aria-label={isMobileOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+          >
+            {isMobileOpen ? (
+              <X className="h-4 w-4 text-[#72aee6]" />
+            ) : (
+              <Menu className="h-4 w-4 text-[#72aee6]" />
+            )}
+          </button>
+        )}
+
         <Link
           href="/"
           target="_blank"
-          className="flex items-center gap-1.5 px-2.5 py-1 rounded-sm text-white/70 hover:text-white hover:bg-black/20 transition-colors"
+          className="flex items-center gap-1.5 px-2 py-1 rounded-sm text-white/70 hover:text-white hover:bg-black/20 transition-colors"
           title="Ouvrir le site public"
         >
           <Home className="h-3.5 w-3.5 text-[#72aee6]" />
           <span className="font-normal text-xs hidden sm:inline">Aller sur le site</span>
-          <ExternalLink className="h-3 w-3 opacity-60" />
+          <ExternalLink className="h-3 w-3 opacity-60 hidden sm:inline" />
         </Link>
 
         {/* Quick create menu */}
@@ -38,7 +62,7 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
           <button
             type="button"
             onClick={() => setShowCreateMenu(!showCreateMenu)}
-            className="flex items-center gap-1 px-2.5 py-1 rounded-sm text-white/70 hover:text-white hover:bg-black/20 transition-colors text-xs font-normal"
+            className="flex items-center gap-1 px-2 py-1 rounded-sm text-white/70 hover:text-white hover:bg-black/20 transition-colors text-xs font-normal"
           >
             <Plus className="h-3.5 w-3.5 text-[#72aee6]" />
             <span>Créer</span>
@@ -89,7 +113,7 @@ export default function AdminTopbar({ userEmail }: { userEmail?: string }) {
           <button
             type="button"
             onClick={() => setShowUserMenu(!showUserMenu)}
-            className="flex items-center gap-2 px-2.5 py-1 rounded-sm text-white/70 hover:text-white hover:bg-black/20 transition-colors"
+            className="flex items-center gap-2 px-2 py-1 rounded-sm text-white/70 hover:text-white hover:bg-black/20 transition-colors"
           >
             <div className="h-5 w-5 rounded-full bg-[#2271b1] flex items-center justify-center text-white text-[10px] font-bold">
               {userEmail ? userEmail.charAt(0).toUpperCase() : 'A'}

@@ -57,10 +57,10 @@ export default function ContactListClient({
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 w-full">
       {/* Tabs & Search */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-        <div className="flex items-center gap-2 text-xs border-b border-[#c3c4c7] sm:border-b-0 pb-2 sm:pb-0">
+        <div className="flex items-center gap-2 text-xs border-b border-[#c3c4c7] sm:border-b-0 pb-2 sm:pb-0 flex-wrap">
           {(['all', 'unread', 'read', 'replied'] as const).map((tab) => (
             <button
               key={tab}
@@ -77,7 +77,7 @@ export default function ContactListClient({
           ))}
         </div>
 
-        <div className="relative">
+        <div className="relative w-full sm:w-auto">
           <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-[#8c8f94]" />
           <input
             type="text"
@@ -90,8 +90,8 @@ export default function ContactListClient({
       </div>
 
       {/* Table */}
-      <div className="bg-white border border-[#c3c4c7] rounded-sm overflow-hidden shadow-sm">
-        <table className="w-full text-left text-xs border-collapse">
+      <div className="bg-white border border-[#c3c4c7] rounded-sm overflow-x-auto shadow-sm w-full">
+        <table className="w-full min-w-[650px] text-left text-xs border-collapse">
           <thead>
             <tr className="bg-[#f6f7f7] border-b border-[#c3c4c7] text-[#1d2327] uppercase tracking-wider font-normal">
               <th className="p-3 font-normal">Expéditeur</th>
@@ -109,73 +109,64 @@ export default function ContactListClient({
                 </td>
               </tr>
             ) : (
-              filteredContacts.map((contact) => (
-                <tr
-                  key={contact.id}
-                  className={`transition-colors group font-normal ${
-                    contact.status === 'unread' ? 'bg-[#f0f6fc]/80' : 'hover:bg-[#f6f7f7]'
-                  }`}
-                >
-                  <td className="p-3 font-normal">
+              filteredContacts.map((c) => (
+                <tr key={c.id} className="hover:bg-[#f0f6fc]/50 transition-colors group font-normal">
+                  <td className="p-3">
                     <Link
-                      href={`/admin/contacts/${contact.id}`}
+                      href={`/admin/contacts/${c.id}`}
                       className="font-normal text-[#2271b1] hover:text-[#135e96] text-sm block"
                     >
-                      {contact.name}
+                      {c.name}
                     </Link>
-                    <p className="text-[11px] text-[#646970] font-normal">{contact.email}</p>
-                    <div className="flex items-center gap-2 text-[11px] mt-1 opacity-0 group-hover:opacity-100 transition-opacity font-normal">
+                    <p className="text-[11px] text-[#646970] font-normal">{c.email}</p>
+                    <div className="flex items-center gap-2 text-[11px] mt-1 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                       <Link
-                        href={`/admin/contacts/${contact.id}`}
+                        href={`/admin/contacts/${c.id}`}
                         className="text-[#2271b1] hover:underline font-normal"
                       >
                         Consulter
                       </Link>
-                      <span className="text-[#c3c4c7]">|</span>
-                      {contact.status === 'unread' && (
+                      {c.status === 'unread' && (
                         <>
+                          <span className="text-[#c3c4c7]">|</span>
                           <button
                             type="button"
-                            onClick={() => handleMarkAsRead(contact.id)}
+                            onClick={() => handleMarkAsRead(c.id)}
                             className="text-[#2271b1] hover:underline font-normal"
                           >
                             Marquer comme lu
                           </button>
-                          <span className="text-[#c3c4c7]">|</span>
                         </>
                       )}
+                      <span className="text-[#c3c4c7]">|</span>
                       <button
                         type="button"
-                        onClick={() => handleDelete(contact.id, contact.name)}
+                        onClick={() => handleDelete(c.id, c.name)}
                         className="text-[#d63638] hover:underline font-normal"
                       >
                         Supprimer
                       </button>
                     </div>
                   </td>
-                  <td className="p-3 font-normal">
-                    <p className="font-normal text-[#1d2327]">{contact.subject || 'Demande de contact'}</p>
-                    <p className="text-[#646970] truncate max-w-md font-normal">{contact.message}</p>
+                  <td className="p-3 max-w-xs">
+                    <p className="font-normal text-[#1d2327] line-clamp-1">{c.subject || 'Sans sujet'}</p>
+                    <p className="text-[11px] text-[#646970] line-clamp-1 font-normal mt-0.5">{c.message}</p>
                   </td>
-                  <td className="p-3 font-normal">
+                  <td className="p-3">
                     <span
-                      className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm ${
-                        contact.status === 'unread'
+                      className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm tracking-wider ${
+                        c.status === 'unread'
                           ? 'bg-amber-100 text-amber-800 border border-amber-300'
-                          : contact.status === 'replied'
+                          : c.status === 'replied'
                           ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
-                          : 'bg-gray-100 text-gray-700 border border-gray-300'
+                          : 'bg-gray-100 text-gray-800 border border-gray-300'
                       }`}
                     >
-                      {contact.status === 'unread' ? 'Non lu' : contact.status === 'replied' ? 'Traité' : 'Lu'}
+                      {c.status === 'unread' ? 'Non lu' : c.status === 'replied' ? 'Traité' : 'Lu'}
                     </span>
                   </td>
-                  <td className="p-3 text-[#646970] text-[11px] font-normal">
-                    {new Date(contact.created_at).toLocaleDateString('fr-FR', {
-                      day: 'numeric',
-                      month: 'short',
-                      year: 'numeric',
-                    })}
+                  <td className="p-3 text-[#646970] font-normal">
+                    {new Date(c.created_at).toLocaleDateString('fr-FR')}
                   </td>
                 </tr>
               ))
