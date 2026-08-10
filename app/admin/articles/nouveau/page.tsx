@@ -106,16 +106,16 @@ export default function NewArticlePage() {
           </div>
 
           {/* Excerpt box */}
-          <div className="bg-white border border-[#c3c4c7] rounded-sm p-3.5 space-y-1.5 shadow-sm">
-            <label className="block text-xs font-normal text-[#1d2327] uppercase tracking-wider">
+          <div className="bg-white border border-[#c3c4c7] rounded-sm p-4 space-y-2 shadow-sm">
+            <label className="block text-xs font-semibold text-[#1d2327] uppercase tracking-wider">
               Extrait (Résumé court)
             </label>
             <textarea
-              rows={2}
+              rows={4}
               placeholder="Un bref résumé de l'article pour les cartes d'actualités..."
               value={excerpt}
               onChange={(e) => setExcerpt(e.target.value)}
-              className="w-full p-2 border border-[#8c8f94] rounded-sm text-xs focus:outline-none focus:border-[#2271b1] bg-white font-normal"
+              className="w-full p-3 border border-[#8c8f94] rounded-sm text-xs sm:text-sm focus:outline-none focus:border-[#2271b1] focus:ring-1 focus:ring-[#2271b1] bg-white font-normal leading-relaxed min-h-[110px]"
             />
           </div>
 
