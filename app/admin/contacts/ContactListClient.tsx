@@ -61,8 +61,8 @@ export default function ContactListClient({
     <div className="space-y-4 w-full">
       {/* Search & Tabs Toolbar with View Switcher */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-white border border-[#c3c4c7] rounded-sm p-3 shadow-sm w-full">
-        {/* Responsive Horizontal Scroll Tabs */}
-        <div className="flex items-center gap-2 text-xs border-b border-[#c3c4c7] sm:border-b-0 pb-2 sm:pb-0 select-none overflow-x-auto max-w-full whitespace-nowrap shrink-0">
+        {/* Responsive Horizontal Scroll Tabs (no visible scrollbar on mobile) */}
+        <div className="flex items-center gap-2 text-xs border-b border-[#c3c4c7] sm:border-b-0 pb-2 sm:pb-0 select-none overflow-x-auto no-scrollbar [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden max-w-full whitespace-nowrap shrink-0">
           {(['all', 'unread', 'read', 'replied'] as const).map((tab) => (
             <button
               key={tab}
