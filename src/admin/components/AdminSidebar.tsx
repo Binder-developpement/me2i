@@ -12,6 +12,7 @@ import {
   Trash2,
   ShoppingCart,
   MessageSquare,
+  Users,
   Settings,
   X,
 } from 'lucide-react'
@@ -21,6 +22,11 @@ const navItems = [
     title: 'Tableau de bord',
     icon: LayoutDashboard,
     href: '/admin',
+  },
+  {
+    title: 'Utilisateurs & Rôles',
+    icon: Users,
+    href: '/admin/utilisateurs',
   },
   {
     title: 'Réalisations',

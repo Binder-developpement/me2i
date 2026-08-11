@@ -88,3 +88,20 @@ export interface CompanySetting {
   value: string | null
   updated_at: string
 }
+
+export type UserRole = 'super_admin' | 'admin' | 'editor' | 'manager'
+export type UserStatus = 'active' | 'inactive' | 'suspended'
+
+export interface AdminUser {
+  id: string
+  email: string
+  full_name: string
+  role: UserRole
+  status: UserStatus
+  avatar_url?: string | null
+  phone?: string | null
+  last_login?: string | null
+  created_at: string
+  updated_at?: string
+}
+
