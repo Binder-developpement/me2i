@@ -25,7 +25,7 @@ const companyLinks = [
 export default function Footer() {
   const [settings, setSettings] = useState<Record<string, string>>({
     company_name: 'MCI',
-    tagline: 'Maintenance Industrielle & Énergie sans Interruption',
+    tagline: 'Maintenance & Construction Industrielle',
     email: 'contact@me2i.cm',
     phone: '+237 699 00 00 00',
     emergency_phone: '+237 677 00 00 00',
@@ -54,7 +54,7 @@ export default function Footer() {
   }, [])
 
   const companyName = settings.company_name || 'MCI'
-  const tagline = settings.tagline || 'Maintenance Industrielle & Énergie sans Interruption'
+  const tagline = settings.tagline || 'Maintenance & Construction Industrielle'
   const address = settings.address || 'Douala / Yaoundé, Cameroun'
   const email = settings.email || 'contact@me2i.cm'
   const phone = settings.phone || '+237 699 00 00 00'

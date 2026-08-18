@@ -7,7 +7,7 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm';
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "MCI : Maintenance Industrielle & Énergie sans Interruption",
+    default: "MCI SARL : Maintenance et Construction Industrielle",
     template: "%s | MCI Cameroun",
   },
   description:
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: baseUrl,
     siteName: "MCI : Maintenance et Énergie",
-    title: "MCI : Maintenance Industrielle & Énergie sans Interruption",
+    title: "MCI SARL : Maintenance et Construction Industrielle",
     description:
       "Spécialiste de la maintenance industrielle, des groupes électrogènes, de l'automatisme et des installations électriques au Cameroun.",
     images: [
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MCI : Maintenance Industrielle & Énergie sans Interruption",
+    title: "MCI SARL : Maintenance et Construction Industrielle",
     description:
       "Spécialiste de la maintenance industrielle, des groupes électrogènes, de l'automatisme et des installations électriques au Cameroun.",
     images: [`${baseUrl}/og-preview.png`],

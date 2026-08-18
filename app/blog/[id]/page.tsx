@@ -292,7 +292,7 @@ export default async function SingleArticlePage({
                 </h3>
               </div>
               <p className="text-xs text-gray-600 leading-relaxed font-normal mb-4">
-                MCI (Maintenance Industrielle et Énergie sans Interruption) est votre spécialiste au Cameroun pour la maintenance des groupes électrogènes, l'automatisme industriel et les énergies renouvelables.
+                MCI SARL (Maintenance et Construction Industrielle) est votre spécialiste au Cameroun pour la maintenance des groupes électrogènes, l'automatisme industriel et les énergies renouvelables.
               </p>
               <Link
                 href="/a-propos"

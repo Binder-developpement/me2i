@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export default async function ContactPage() {
   let settingsMap: Record<string, string> = {
     company_name: 'MCI',
-    tagline: 'Maintenance Industrielle & Énergie sans Interruption',
+    tagline: 'Maintenance & Construction Industrielle',
     email: 'contact@me2i.cm',
     phone: '+237 699 00 00 00',
     emergency_phone: '+237 677 00 00 00',

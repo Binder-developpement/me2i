@@ -90,7 +90,7 @@ CREATE TABLE IF NOT EXISTS company_settings (
 -- Insert default settings
 INSERT INTO company_settings (key, value) VALUES
   ('company_name', 'MCI'),
-  ('tagline', 'Maintenance Industrielle & Énergie sans Interruption'),
+  ('tagline', 'Maintenance & Construction Industrielle'),
   ('email', 'contact@me2i.cm'),
   ('phone', '+237 000 000 000'),
   ('emergency_phone', '+237 000 000 001'),

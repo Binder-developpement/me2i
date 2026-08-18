@@ -22,7 +22,7 @@ export default function CompanySettingsClient({
   const [loading, setLoading] = useState(false)
   const [settings, setSettings] = useState({
     company_name: initialSettings.company_name || 'MCI',
-    tagline: initialSettings.tagline || 'Maintenance Industrielle & Énergie sans Interruption',
+    tagline: initialSettings.tagline || 'Maintenance & Construction Industrielle',
     email: initialSettings.email || 'contact@me2i.cm',
     phone: initialSettings.phone || '+237 699 00 00 00',
     emergency_phone: initialSettings.emergency_phone || '+237 677 00 00 00',

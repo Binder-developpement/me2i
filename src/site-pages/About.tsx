@@ -128,7 +128,7 @@ export default function About({
 }) {
   const companyName = settings.company_name || 'MCI'
   const tagline =
-    settings.tagline || 'Maintenance Industrielle & Énergie sans Interruption'
+    settings.tagline || 'Maintenance & Construction Industrielle'
   const address = settings.address || 'Douala / Yaoundé, Cameroun'
   const email = settings.email || 'contact@me2i.cm'
   const phone = settings.phone || '+237 699 00 00 00'
@@ -163,7 +163,7 @@ export default function About({
                 </h2>
               </div>
               <p className="text-sm text-[#50575e] font-normal leading-relaxed mb-4">
-                <strong className="text-[#1d2327] font-semibold">{companyName}</strong> (Maintenance Industrielle et Énergie sans Interruption) est une entreprise camerounaise basée à Douala, spécialisée dans la maintenance industrielle, les groupes électrogènes, les systèmes énergétiques, l'automatisme industriel et les énergies renouvelables.
+                <strong className="text-[#1d2327] font-semibold">{companyName}</strong> (Maintenance et Construction Industrielle) est une entreprise camerounaise basée à Douala, spécialisée dans la maintenance industrielle, les groupes électrogènes, les systèmes énergétiques, l'automatisme industriel et les énergies renouvelables.
               </p>
               <p className="text-sm text-[#50575e] font-normal leading-relaxed">
                 Notre mission principale est d'assurer la continuité énergétique et la performance maximale des installations industrielles de nos clients grâce à des solutions techniques fiables, innovantes et rigoureusement adaptées aux réalités du terrain.

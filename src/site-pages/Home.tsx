@@ -375,7 +375,7 @@ function WhoWeAreSection() {
                 Qui sommes-nous ?
               </h2>
               <p className="mt-6 text-base text-slate-600 leading-relaxed max-w-[620px]">
-                <strong>MCI (Maintenance Industrielle et Énergie sans Interruption)</strong> est une entreprise technique spécialisée dans les solutions énergétiques, la maintenance industrielle et l’automatisme. 
+                <strong>MCI SARL (Maintenance et Construction Industrielle)</strong> est une entreprise technique spécialisée dans les solutions énergétiques, la maintenance industrielle et l’automatisme. 
               </p>
               <p className="mt-4 text-base text-slate-600 leading-relaxed max-w-[620px]">
                 Notre mission est d’accompagner les entreprises, industries, hôpitaux, bâtiments publics et établissements privés dans la continuité énergétique et la fiabilité de leurs installations.
