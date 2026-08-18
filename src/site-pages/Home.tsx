@@ -106,7 +106,7 @@ const news = [
     image: '/actualite-1.jpg',
     date: '15 juin 2025',
     category: 'Technique',
-    title: 'm2i s\'équipe d\'une nouvelle caméra thermique haute précision pour ses diagnostics électriques',
+    title: 'MCI s\'équipe d\'une nouvelle caméra thermique haute précision pour ses diagnostics électriques',
   },
   {
     image: '/actualite-2.jpg',
@@ -210,7 +210,7 @@ function HeroSection({ settings = {} }: { settings?: Record<string, string> }) {
                 {/* Sober Badge */}
                 <div ref={badgeRef} className="mb-3 opacity-0">
                   <span className="text-[11px] font-bold uppercase tracking-widest text-bleu-marianne/80">
-                    m2i &middot; Maintenance Industrielle &amp; Ingénierie
+                    MCI &middot; Maintenance &amp; Construction Industrielle
                   </span>
                 </div>
 
