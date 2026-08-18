@@ -1240,40 +1240,60 @@ function JoinUsSection() {
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section 
-      ref={ref} 
-      className="relative bg-cover bg-center py-24 lg:py-32 text-white overflow-hidden" 
-      style={{ backgroundImage: 'url("/images/careers-bg.jpg")' }}
-      aria-labelledby="join-title"
-    >
-      {/* Rich dark gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/85 to-slate-950/90 z-10" />
+    <section ref={ref} className="bg-white py-20 lg:py-32" aria-labelledby="join-title">
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+        <div className="bg-bleu-marianne/10 rounded-2xl p-6 lg:py-10 lg:pr-10 lg:pl-0 border border-bleu-marianne/20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Column: Image (Matching layout of WhoWeAreSection) */}
+            <motion.div
+              className="lg:col-span-5 flex justify-center w-full items-center z-10"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-xl border border-slate-100 bg-slate-100 lg:-my-24 z-20">
+                <img
+                  src="/images/careers-bg.jpg"
+                  alt="Équipe technique et ingénieurs de MCI SARL"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </motion.div>
 
-      <div className="relative z-20 mx-auto max-w-[800px] px-6 text-center">
-        <motion.div
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={fadeInUp}
-          className="flex flex-col items-center"
-        >
-          <span className="text-[11px] font-bold uppercase tracking-widest text-[#2A5DB0] mb-3.5 block">
-            Formation &amp; Transfert de Compétences
-          </span>
-          <h2 id="join-title" className="font-heading text-3xl sm:text-4xl font-normal leading-tight mb-6">
-            Développez Votre Potentiel Technique
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed mb-8 max-w-[640px]">
-            MCI encourage le renforcement continu des compétences locales au Cameroun. Nous accompagnons et recrutons régulièrement des profils techniques qualifiés (techniciens et ingénieurs) passionnés par l&apos;électricité, l&apos;énergie et la construction industrielle.
-          </p>
+            {/* Right Column: Text */}
+            <motion.div
+              className="lg:col-span-7 flex flex-col justify-center"
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              variants={fadeInUp}
+            >
+              <span className="text-[11px] font-bold uppercase tracking-widest text-bleu-marianne/80 mb-3">
+                Formation &amp; Transfert de Compétences
+              </span>
+              <h2
+                id="join-title"
+                className="font-heading text-[32px] font-bold leading-[1.1] tracking-tight text-bleu-marianne md:text-[40px]"
+              >
+                Développez votre potentiel technique
+              </h2>
+              <p className="mt-6 text-base text-slate-600 leading-relaxed max-w-[620px]">
+                MCI encourage le renforcement continu des compétences locales au Cameroun. Nous formons, accompagnons et recrutons régulièrement des profils techniques qualifiés (techniciens et ingénieurs) passionnés par l&apos;électricité industrielle, l&apos;énergie et l&apos;automatisme.
+              </p>
+              
+              <div className="mt-8">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center gap-2 rounded-none bg-bleu-marianne hover:bg-slate-800 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors duration-200"
+                >
+                  Nous contacter / Postuler
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </motion.div>
 
-          <Link
-            to="/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-none bg-bleu-marianne-clair hover:bg-blue-600 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors duration-200"
-          >
-            Nous contacter / Postuler
-            <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   )
