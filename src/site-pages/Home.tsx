@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from '@/src/lib/router-compat'
 import { motion, useInView } from 'framer-motion'
 import { useInView as useIntersectionObserver } from 'react-intersection-observer'
+import { createContactAction } from '@/src/admin/lib/contact-actions'
+import { toast } from 'sonner'
+import { Loader2 } from 'lucide-react'
 import gsap from 'gsap'
 import {
   ArrowRight,
@@ -777,65 +780,41 @@ function NewsSection({ articles = [] }: { articles?: ArticleItem[] }) {
   )
 }
 
-/* ──────────────────────── Pôles d'Expertise Section ──────────────────────── */
+/* ──────────────────────── Solutions & Optimisation Section ──────────────────────── */
 
-function ExpertiseGridSection() {
+function SolutionsSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
-  const departments = [
+  const solutions = [
     {
-      title: 'Maintenance & Installation Industrielle',
-      color: 'border-t-[#1E3A5F] hover:shadow-[#1E3A5F]/5',
-      accentColor: 'text-[#1E3A5F]',
+      title: "Audit Énergétique & Réseau",
+      benefit: "Économie de Facture",
+      percentage: "Jusqu'à -30%",
+      desc: "Analyse précise de la qualité d'énergie (Fluke), correction du facteur de puissance et élimination des pénalités d'énergie réactive.",
       icon: Wrench,
-      items: [
-        'Électricité industrielle & solaire',
-        'Mécanique de précision',
-        'Entretien groupes électrogènes',
-        'Dépannage équipements industriels',
-        'Maintenance préventive contractuelle'
-      ]
+      accent: "text-[#1E3A5F] bg-[#1E3A5F]/5 border-[#1E3A5F]/10"
     },
     {
-      title: 'Construction Industrielle',
-      color: 'border-t-[#D16B0A] hover:shadow-[#D16B0A]/5',
-      accentColor: 'text-[#D16B0A]',
-      icon: Settings,
-      items: [
-        'Conception mécanique assistée (CAO)',
-        'Fabrication mécanique',
-        'Chaudronnerie industrielle',
-        'Montage et tuyauterie sur site'
-      ]
+      title: "Hybridation Solaire & Diesel",
+      benefit: "Économie de Carburant",
+      percentage: "Jusqu'à -40%",
+      desc: "Conception de centrales associant panneaux photovoltaïques et groupes électrogènes de secours avec automatisme de couplage avancé (ATS).",
+      icon: Zap,
+      accent: "text-[#D16B0A] bg-[#D16B0A]/5 border-[#D16B0A]/10"
     },
     {
-      title: 'Solutions Numériques & Contrôle d\'Accès',
-      color: 'border-t-[#27A658] hover:shadow-[#27A658]/5',
-      accentColor: 'text-[#27A658]',
-      icon: Shield,
-      items: [
-        'Architecture réseaux & systèmes',
-        'Systèmes de contrôle d\'accès',
-        'Vidéosurveillance IP industrielle',
-        'Support informatique & maintenance IT'
-      ]
-    },
-    {
-      title: 'Formation Technique',
-      color: 'border-t-[#7B3FA0] hover:shadow-[#7B3FA0]/5',
-      accentColor: 'text-[#7B3FA0]',
-      icon: BookOpen,
-      items: [
-        'Formations techniques qualifiantes',
-        'Renforcement des compétences locales',
-        'Accompagnement et transfert technologique'
-      ]
+      title: "Maintenance Préventive",
+      benefit: "Réduction des Pannes",
+      percentage: "Jusqu'à -85%",
+      desc: "Suivi technique périodique rigoureux (analyse vibratoire, vidange, contrôles DSE) pour anticiper les défaillances machine majeures.",
+      icon: Clock,
+      accent: "text-[#27A658] bg-[#27A658]/5 border-[#27A658]/10"
     }
   ]
 
   return (
-    <section ref={ref} className="bg-white py-20 lg:py-28" aria-labelledby="expertise-title">
+    <section ref={ref} className="bg-white py-20 lg:py-28" aria-labelledby="solutions-title">
       <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
         <motion.div 
           className="mb-16 text-center max-w-2xl mx-auto"
@@ -844,96 +823,13 @@ function ExpertiseGridSection() {
           variants={fadeInUp}
         >
           <span className="text-[11px] font-bold uppercase tracking-widest text-[#2A5DB0] mb-2.5 block">
-            Départements techniques
+            Rentabilité &amp; Efficacité
           </span>
-          <h2 id="expertise-title" className="font-heading text-3xl sm:text-4xl font-normal text-[#1d2327] tracking-tight">
-            Nos pôles d&apos;activité
+          <h2 id="solutions-title" className="font-heading text-3xl sm:text-4xl font-normal text-[#1d2327] tracking-tight">
+            Optimisation Industrielle &amp; Énergétique
           </h2>
           <p className="mt-4 text-xs sm:text-sm text-slate-500 font-normal leading-relaxed">
-            MCI déploie une expertise pluridisciplinaire au service de la performance industrielle et de la continuité énergétique de vos installations.
-          </p>
-        </motion.div>
-
-        <motion.div 
-          className="grid gap-8 md:grid-cols-2 lg:grid-cols-4"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerContainer}
-        >
-          {departments.map((dept, idx) => {
-            const Icon = dept.icon
-            return (
-              <motion.div 
-                key={idx}
-                variants={staggerItem}
-                className={`bg-white border-t-4 ${dept.color} border border-slate-200/60 p-8 rounded-sm hover:-translate-y-1.5 hover:shadow-2xl hover:border-slate-200 transition-all duration-300 flex flex-col justify-between`}
-              >
-                <div>
-                  <div className={`h-12 w-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 ${dept.accentColor}`}>
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <h3 className="text-base font-bold text-[#1d2327] leading-snug mb-5">
-                    {dept.title}
-                  </h3>
-                  <ul className="space-y-3">
-                    {dept.items.map((item, itemIdx) => (
-                      <li key={itemIdx} className="text-xs text-slate-500 font-normal leading-relaxed flex items-start gap-2">
-                        <span className={`inline-block mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-300`} />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            )
-          })}
-        </motion.div>
-      </div>
-    </section>
-  )
-}
-
-/* ──────────────────────── Engagements Section ──────────────────────── */
-
-function EngagementsSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
-  const engagements = [
-    {
-      title: "Assistance & Astreinte Technique",
-      desc: "Mobilisation réactive de nos équipes en cas de défaillance critique pour minimiser les arrêts de production.",
-      icon: Clock
-    },
-    {
-      title: "Pièces d'Origine Constructeurs (OEM)",
-      desc: "Préservation de la garantie et de la fiabilité de vos machines grâce au choix exclusif de pièces d'origine.",
-      icon: Settings
-    },
-    {
-      title: "Conformité Normative Rigoureuse",
-      desc: "Toutes nos prestations respectent strictement les standards internationaux de sécurité NFC 15-100 et IEC.",
-      icon: Shield
-    }
-  ]
-
-  return (
-    <section ref={ref} className="bg-[#f8fafc] py-20 lg:py-28 border-t border-b border-slate-200/60" aria-labelledby="engagements-title">
-      <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
-        <motion.div 
-          className="mb-16 text-center max-w-2xl mx-auto"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={fadeInUp}
-        >
-          <span className="text-[11px] font-bold uppercase tracking-widest text-[#2A5DB0] mb-2.5 block">
-            Charte d&apos;excellence
-          </span>
-          <h2 id="engagements-title" className="font-heading text-3xl sm:text-4xl font-normal text-[#1d2327] tracking-tight">
-            Engagements de Rigueur &amp; Qualité
-          </h2>
-          <p className="mt-4 text-xs sm:text-sm text-slate-500 font-normal leading-relaxed">
-            Chacune de nos interventions répond à des protocoles techniques stricts pour sécuriser vos investissements.
+            MCI conçoit des solutions d&apos;ingénierie concrètes pour maximiser la disponibilité de vos équipements tout en réduisant vos coûts d&apos;exploitation.
           </p>
         </motion.div>
 
@@ -943,26 +839,40 @@ function EngagementsSection() {
           animate={isInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
         >
-          {engagements.map((eng, idx) => {
-            const Icon = eng.icon
+          {solutions.map((sol, idx) => {
+            const Icon = sol.icon
             return (
               <motion.div 
                 key={idx}
                 variants={staggerItem}
-                className="bg-white p-8 border border-slate-200/70 rounded-sm hover:border-[#2A5DB0]/50 hover:shadow-lg transition-all duration-300 flex flex-col justify-between relative group"
+                className="bg-[#f8fafc] border border-slate-200/50 p-8 rounded-sm hover:-translate-y-1.5 hover:shadow-xl hover:bg-white hover:border-[#2A5DB0]/30 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="h-10 w-10 bg-slate-50 text-[#2A5DB0] border border-slate-100 flex items-center justify-center mb-6 rounded-sm group-hover:scale-105 transition-transform duration-300">
-                    <Icon className="h-5 w-5" />
+                  <div className="flex items-center justify-between mb-6">
+                    <div className={`h-10 w-10 flex items-center justify-center rounded-sm border ${sol.accent}`}>
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#2A5DB0] bg-[#2A5DB0]/5 px-2.5 py-1 rounded-sm">
+                      {sol.benefit}
+                    </span>
                   </div>
-                  <h3 className="text-base font-bold text-[#1d2327] mb-3 group-hover:text-[#2A5DB0] transition-colors duration-200">
-                    {eng.title}
+                  <div className="text-2xl font-black text-[#1d2327] mb-2">
+                    {sol.percentage}
+                  </div>
+                  <h3 className="text-base font-bold text-[#1d2327] mb-3 leading-snug">
+                    {sol.title}
                   </h3>
-                  <p className="text-xs text-slate-500 leading-relaxed font-normal">
-                    {eng.desc}
+                  <p className="text-xs text-slate-500 leading-relaxed font-normal mb-6">
+                    {sol.desc}
                   </p>
                 </div>
-                <div className="absolute bottom-0 left-0 w-full h-[3px] bg-slate-100 group-hover:bg-[#2A5DB0] transition-colors duration-300 rounded-b-sm" />
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#2A5DB0] hover:text-[#1E3A5F] transition-colors"
+                >
+                  <span>Demander une étude</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
               </motion.div>
             )
           })}
@@ -971,6 +881,206 @@ function EngagementsSection() {
     </section>
   )
 }
+
+/* ──────────────────────── Assistance Critique Section ──────────────────────── */
+
+function CriticalAssistanceSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' })
+  const [loading, setLoading] = useState(false)
+  const [sent, setSent] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      toast.error('Veuillez remplir tous les champs obligatoires')
+      return
+    }
+
+    try {
+      setLoading(true)
+      await createContactAction({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        subject: 'Demande d\'étude / Diagnostic rapide (depuis Accueil)',
+        message: form.message,
+      })
+      setSent(true)
+      toast.success('Votre demande a bien été envoyée !')
+      setForm({ name: '', email: '', phone: '', message: '' })
+    } catch (err: any) {
+      toast.error(err?.message || 'Erreur lors de l\'envoi du message')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <section ref={ref} className="bg-[#f8fafc] py-20 lg:py-28 border-t border-b border-slate-200/60" aria-labelledby="assistance-title">
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Column: ASTREINTE H24 / SLA info */}
+          <motion.div 
+            className="lg:col-span-6"
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            variants={fadeInUp}
+          >
+            <span className="text-[11px] font-bold uppercase tracking-widest text-[#2A5DB0] mb-3 block">
+              Urgence &amp; Réactivité
+            </span>
+            <h2 id="assistance-title" className="font-heading text-3xl sm:text-4xl font-normal text-[#1d2327] tracking-tight leading-tight mb-6">
+              Assistance Critique &amp; Astreinte H24
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-500 font-normal leading-relaxed mb-8">
+              Face à une coupure électrique ou une panne machine majeure, chaque minute compte. Nos techniciens et ingénieurs sont d&apos;astreinte permanente pour sécuriser vos équipements critiques.
+            </p>
+
+            <div className="space-y-6 mb-8 text-xs sm:text-sm font-normal text-slate-700">
+              <div className="flex items-start gap-4 p-4 bg-white border border-slate-200/60 rounded-sm">
+                <span className="flex-shrink-0 h-6 w-6 rounded-full bg-[#1E3A5F]/5 text-[#1E3A5F] flex items-center justify-center font-bold text-xs font-heading">SLA</span>
+                <div>
+                  <span className="block font-bold text-[#1d2327] mb-0.5">Temps de réponse garanti sur site</span>
+                  <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                    Moins de <strong>2 heures</strong> à Douala et périphérie. Moins de <strong>4 heures</strong> à Yaoundé.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 p-4 bg-white border border-slate-200/60 rounded-sm">
+                <span className="flex-shrink-0 h-6 w-6 rounded-full bg-[#27A658]/5 text-[#27A658] flex items-center justify-center font-bold text-xs font-heading">H24</span>
+                <div>
+                  <span className="block font-bold text-[#1d2327] mb-0.5">Ligne d&apos;Astreinte Directe</span>
+                  <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                    Pour toute urgence opérationnelle ou technique : <strong>+237 691 32 83 09</strong>.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="tel:+237691328309"
+                className="inline-flex items-center justify-center gap-2 rounded-none bg-bleu-marianne text-white hover:bg-slate-800 px-6 py-3 text-xs font-bold uppercase tracking-widest transition-colors duration-200"
+              >
+                Appeler l&apos;Astreinte
+              </a>
+              <a
+                href="mailto:contact@mci-sarl.com"
+                className="inline-flex items-center justify-center gap-2 rounded-none bg-white text-bleu-marianne border border-slate-200 hover:bg-slate-50 px-6 py-3 text-xs font-bold uppercase tracking-widest transition-colors duration-200"
+              >
+                contact@mci-sarl.com
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right Column: Contact form card */}
+          <motion.div 
+            className="lg:col-span-6"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <div className="bg-white border border-slate-200 p-8 shadow-sm rounded-sm relative">
+              <h3 className="text-lg font-bold text-[#1d2327] mb-1">
+                Demander une étude gratuite
+              </h3>
+              <p className="text-xs text-slate-500 font-normal mb-6">
+                Laissez-nous vos coordonnées, un ingénieur MCI vous recontacte sous 24h ouvrées.
+              </p>
+
+              {sent ? (
+                <div className="p-6 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-sm text-xs font-normal">
+                  <span className="block font-bold text-emerald-900 mb-1">✓ Demande enregistrée !</span>
+                  Nos ingénieurs étudient votre dossier et vous recontacteront sous 24h ouvrées. Merci pour votre confiance.
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">
+                      Nom / Entreprise *
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Ex: Entreprise S.A."
+                      required
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                      className="w-full h-10 px-3 border border-slate-200 outline-none focus:border-[#2A5DB0] text-xs font-normal rounded-sm"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">
+                        E-mail *
+                      </label>
+                      <input
+                        type="email"
+                        placeholder="nom@entreprise.com"
+                        required
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        className="w-full h-10 px-3 border border-slate-200 outline-none focus:border-[#2A5DB0] text-xs font-normal rounded-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">
+                        Téléphone
+                      </label>
+                      <input
+                        type="tel"
+                        placeholder="+237 6xx xx xx xx"
+                        value={form.phone}
+                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        className="w-full h-10 px-3 border border-slate-200 outline-none focus:border-[#2A5DB0] text-xs font-normal rounded-sm"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">
+                      Votre projet ou besoin *
+                    </label>
+                    <textarea
+                      placeholder="Décrivez brièvement votre besoin de maintenance, d'audit ou d'installation solaire..."
+                      required
+                      rows={3}
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      className="w-full p-3 border border-slate-200 outline-none focus:border-[#2A5DB0] text-xs font-normal rounded-sm resize-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full h-11 flex items-center justify-center gap-2 rounded-none bg-bleu-marianne hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-widest transition-colors duration-200 cursor-pointer disabled:opacity-50"
+                  >
+                    {loading ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <span>Envoi en cours...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Envoyer ma demande</span>
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </>
+                    )}
+                  </button>
+                </form>
+              )}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 
 /* ──────────────────────── Cycle Opérationnel Section (Timeline) ──────────────────────── */
 
@@ -1050,7 +1160,7 @@ function TimelineSection() {
   )
 }
 
-/* ──────────────────────── Pillars Section (Pourquoi MCI - Fond Sombre) ──────────────────────── */
+/* ──────────────────────── Pillars Section (Pourquoi MCI - Thème Clair) ──────────────────────── */
 
 function PillarsSection() {
   const ref = useRef(null)
@@ -1072,9 +1182,9 @@ function PillarsSection() {
   ]
 
   return (
-    <section ref={ref} className="bg-slate-950 text-white py-20 lg:py-28 relative overflow-hidden" aria-labelledby="pillars-title">
+    <section ref={ref} className="bg-slate-50 text-slate-800 py-20 lg:py-28 relative overflow-hidden" aria-labelledby="pillars-title">
       {/* Soft Ambient Light Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-[#2A5DB0]/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-[#2A5DB0]/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="mx-auto max-w-[1280px] px-6 lg:px-12 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
@@ -1087,10 +1197,10 @@ function PillarsSection() {
             <span className="text-[11px] font-bold uppercase tracking-widest text-[#2A5DB0] mb-2.5 block">
               Pourquoi nous faire confiance
             </span>
-            <h2 id="pillars-title" className="font-heading text-3xl sm:text-4xl font-normal leading-tight tracking-tight text-white">
+            <h2 id="pillars-title" className="font-heading text-3xl sm:text-4xl font-normal leading-tight tracking-tight text-[#1d2327]">
               Les piliers de notre engagement
             </h2>
-            <p className="mt-5 text-xs sm:text-sm text-slate-400 font-normal leading-relaxed">
+            <p className="mt-5 text-xs sm:text-sm text-slate-500 font-normal leading-relaxed">
               MCI combine ingénierie de précision, réactivité logistique et adaptabilité technologique pour sécuriser la continuité de votre exploitation industrielle.
             </p>
           </motion.div>
@@ -1105,13 +1215,13 @@ function PillarsSection() {
               <motion.div 
                 key={idx}
                 variants={staggerItem}
-                className="bg-slate-900/40 border border-slate-800 p-6 rounded-sm hover:border-slate-700/60 transition-colors duration-300"
+                className="bg-white border border-slate-200/60 p-6 rounded-sm hover:border-slate-300 hover:shadow-md transition-all duration-300"
               >
-                <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                <h3 className="text-sm font-semibold text-[#1d2327] mb-3 flex items-center gap-2">
                   <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#2A5DB0]" />
                   {p.title}
                 </h3>
-                <p className="text-xs text-slate-400 leading-relaxed font-normal">
+                <p className="text-xs text-slate-500 leading-relaxed font-normal">
                   {p.desc}
                 </p>
               </motion.div>
@@ -1193,8 +1303,8 @@ export default function Home({
       <ServicesSection />
       <SectorsSection />
       <NewsSection articles={mergedArticles} />
-      <ExpertiseGridSection />
-      <EngagementsSection />
+      <SolutionsSection />
+      <CriticalAssistanceSection />
       <TimelineSection />
       <PillarsSection />
       <JoinUsSection />
