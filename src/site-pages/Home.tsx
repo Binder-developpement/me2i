@@ -21,6 +21,10 @@ import {
   Hotel,
   Wheat,
   Landmark,
+  Zap,
+  Clock,
+  Users,
+  CheckCircle,
 } from 'lucide-react'
 
 /* ──────────────────────── Animation variants ──────────────────────── */
@@ -773,6 +777,301 @@ function NewsSection({ articles = [] }: { articles?: ArticleItem[] }) {
   )
 }
 
+/* ──────────────────────── Metrics Section ──────────────────────── */
+
+function MetricsSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  const metrics = [
+    { target: 99, suffix: '.9%', label: 'Disponibilité Énergétique', desc: 'Assurée sur les sites critiques de nos partenaires industriels.', icon: Zap },
+    { target: 250, suffix: '+', label: 'Dépannages & Astreintes / an', desc: 'Interventions rapides en cas de panne critique.', icon: Clock },
+    { target: 15, suffix: '+', label: 'Ans d\'Expertise Collective', desc: 'Cumulés par notre équipe d\'ingénieurs et techniciens.', icon: Users },
+    { target: 50, suffix: '+', label: 'Sites Industriels Partenaires', desc: 'Entreprises qui nous confient la maintenance de leurs équipements.', icon: Factory }
+  ]
+
+  return (
+    <section ref={ref} className="bg-slate-900 text-white py-16 lg:py-24" aria-labelledby="metrics-title">
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+        <h2 id="metrics-title" className="sr-only">Chiffres clés de l&apos;entreprise</h2>
+        <motion.div 
+          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+        >
+          {metrics.map((m, idx) => {
+            const Icon = m.icon
+            return (
+              <motion.div 
+                key={idx} 
+                variants={staggerItem}
+                className="flex flex-col items-center text-center p-6 bg-slate-800/40 border border-slate-700/40 rounded-sm hover:border-slate-600/60 transition-colors"
+              >
+                <div className="h-12 w-12 rounded-full bg-bleu-marianne-clair/10 flex items-center justify-center mb-4 text-[#2271b1]">
+                  <Icon className="h-6 w-6" />
+                </div>
+                <div className="flex items-baseline text-4xl lg:text-5xl font-bold tracking-tight text-white mb-2">
+                  <AnimatedCounter target={m.target} suffix={m.suffix} />
+                </div>
+                <div className="text-sm font-semibold uppercase tracking-wider text-white/90 mb-1">
+                  {m.label}
+                </div>
+                <p className="text-xs text-slate-400 font-normal leading-relaxed">
+                  {m.desc}
+                </p>
+              </motion.div>
+            )
+          })}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+/* ──────────────────────── Quality Section ──────────────────────── */
+
+function QualitySection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  const qualities = [
+    {
+      title: "Disponibilité H24/J7",
+      desc: "Un service d'astreinte technique pour intervenir d'urgence sur vos équipements critiques.",
+      icon: Zap
+    },
+    {
+      title: "Pièces d'Origine (OEM)",
+      desc: "Garantie de longévité grâce à l'utilisation exclusive de pièces constructeurs certifiées.",
+      icon: Settings
+    },
+    {
+      title: "Normes & Sécurité",
+      desc: "Conformité stricte aux exigences NFC 15-100 et standard IEC pour la protection de vos équipes.",
+      icon: Shield
+    }
+  ]
+
+  return (
+    <section ref={ref} className="bg-[#f8fafc] py-16 lg:py-24 border-t border-b border-slate-200" aria-labelledby="quality-title">
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+        <motion.div 
+          className="mb-12 text-center max-w-2xl mx-auto"
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeInUp}
+        >
+          <span className="text-[11px] font-bold uppercase tracking-widest text-[#2271b1] mb-2 block">Nos engagements</span>
+          <h2 id="quality-title" className="font-heading text-2xl sm:text-3xl font-normal text-[#1d2327]">
+            Rigueur, Normes &amp; Haute Disponibilité
+          </h2>
+          <p className="mt-3 text-xs sm:text-sm text-slate-500 font-normal">
+            Notre philosophie repose sur le respect scrupuleux des normes de sécurité et la réactivité opérationnelle.
+          </p>
+        </motion.div>
+
+        <motion.div 
+          className="grid gap-6 md:grid-cols-3"
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+        >
+          {qualities.map((q, idx) => {
+            const Icon = q.icon
+            return (
+              <motion.div 
+                key={idx}
+                variants={staggerItem}
+                className="bg-white p-8 border border-slate-200/80 rounded-sm hover:border-[#2271b1] transition-all hover:shadow-md duration-200 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="h-10 w-10 bg-slate-50 text-[#2271b1] border border-slate-100 flex items-center justify-center mb-6">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-base font-bold text-[#1d2327] mb-3">{q.title}</h3>
+                  <p className="text-xs text-slate-500 leading-relaxed font-normal">{q.desc}</p>
+                </div>
+              </motion.div>
+            )
+          })}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+/* ──────────────────────── Workshop Section ──────────────────────── */
+
+function WorkshopSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  return (
+    <section ref={ref} className="bg-white py-16 lg:py-24" aria-labelledby="workshop-title">
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Left Column: Image */}
+          <motion.div 
+            className="lg:col-span-6"
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="aspect-[16/10] overflow-hidden rounded-sm relative bg-slate-100 shadow-md border border-slate-200">
+              <img 
+                src="/images/atelier-container.jpg" 
+                alt="Atelier technique MCI sous conteneur" 
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </motion.div>
+
+          {/* Right Column: Text content */}
+          <motion.div 
+            className="lg:col-span-6 flex flex-col justify-center"
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            variants={fadeInUp}
+          >
+            <span className="text-[11px] font-bold uppercase tracking-widest text-[#2271b1] mb-2 block">
+              Infrastructures Modulaires
+            </span>
+            <h2 id="workshop-title" className="font-heading text-2xl sm:text-3xl font-normal text-[#1d2327] leading-snug">
+              Atelier Mobile &amp; Base Opérationnelle
+            </h2>
+            <p className="mt-4 text-xs sm:text-sm text-slate-500 font-normal leading-relaxed">
+              Pour assurer une réactivité maximale sur le terrain, MCI déploie des ateliers mobiles sous conteneurs de 20 pieds autonomes. Cette organisation rationnelle optimise nos opérations logistiques et techniques.
+            </p>
+
+            <div className="mt-6 grid grid-cols-2 gap-4 text-xs font-normal text-slate-600">
+              <div className="bg-slate-50 p-4 border border-slate-100 rounded-sm">
+                <span className="block font-bold text-[#1d2327] mb-1">Dans le conteneur</span>
+                <ul className="space-y-1.5 list-disc pl-4 text-slate-500">
+                  <li>Stock de pièces détachées</li>
+                  <li>Comptoir commercial</li>
+                  <li>Systèmes de programmation</li>
+                  <li>Composants électriques</li>
+                </ul>
+              </div>
+              <div className="bg-slate-50 p-4 border border-slate-100 rounded-sm">
+                <span className="block font-bold text-[#1d2327] mb-1">Sous toiture extérieure</span>
+                <ul className="space-y-1.5 list-disc pl-4 text-slate-500">
+                  <li>Poste à souder professionnel</li>
+                  <li>Perceuse à colonne</li>
+                  <li>Tour parallèle d&apos;usinage</li>
+                  <li>Établis et étaux de réglage</li>
+                </ul>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ──────────────────────── Workflow Section ──────────────────────── */
+
+function WorkflowSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  const steps = [
+    { num: '01', title: 'Diagnostic & Mesure', desc: 'Campagne de mesures précises (thermographie, Fluke, vibrations) pour identifier la racine du problème.' },
+    { num: '02', title: 'Planification', desc: 'Rédaction d\'une proposition technique détaillée et chiffrée sous 24h ouvrées.' },
+    { num: '03', title: 'Intervention', desc: 'Déploiement immédiat de nos techniciens avec tout l\'outillage requis sur votre site.' },
+    { num: '04', title: 'Recette sous Charge', desc: 'Essais de validation en situation de charge réelle et signature du procès-verbal.' }
+  ]
+
+  return (
+    <section ref={ref} className="bg-[#f8fafc] py-16 lg:py-24 border-t border-b border-slate-200" aria-labelledby="workflow-title">
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
+        <motion.div 
+          className="mb-14 text-center max-w-2xl mx-auto"
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeInUp}
+        >
+          <span className="text-[11px] font-bold uppercase tracking-widest text-[#2271b1] mb-2 block">Méthodologie</span>
+          <h2 id="workflow-title" className="font-heading text-2xl sm:text-3xl font-normal text-[#1d2327]">
+            Notre Processus d&apos;Intervention
+          </h2>
+          <p className="mt-3 text-xs sm:text-sm text-slate-500 font-normal">
+            De la détection initiale à la validation finale, nous suivons un protocole rigoureux garantissant la conformité.
+          </p>
+        </motion.div>
+
+        <motion.div 
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 relative"
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+        >
+          {steps.map((s, idx) => (
+            <motion.div 
+              key={idx}
+              variants={staggerItem}
+              className="bg-white p-6 border border-slate-200/80 rounded-sm relative hover:border-[#2271b1] transition-colors"
+            >
+              <div className="text-3xl font-extrabold text-[#2271b1]/10 mb-4 font-heading">{s.num}</div>
+              <h3 className="text-sm font-bold text-[#1d2327] mb-2">{s.title}</h3>
+              <p className="text-xs text-slate-500 leading-relaxed font-normal">{s.desc}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+/* ──────────────────────── Careers Section ──────────────────────── */
+
+function CareersSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  return (
+    <section 
+      ref={ref} 
+      className="relative bg-cover bg-center py-20 lg:py-28 text-white overflow-hidden" 
+      style={{ backgroundImage: 'url("/images/careers-bg.jpg")' }}
+      aria-labelledby="careers-title"
+    >
+      {/* Dark overlay mask */}
+      <div className="absolute inset-0 bg-slate-950/85 z-10" />
+
+      <div className="relative z-20 mx-auto max-w-[800px] px-6 text-center">
+        <motion.div
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeInUp}
+          className="flex flex-col items-center"
+        >
+          <span className="text-[11px] font-bold uppercase tracking-widest text-[#2271b1] mb-3">
+            Formation &amp; Recrutement
+          </span>
+          <h2 id="careers-title" className="font-heading text-3xl sm:text-4xl font-normal leading-tight mb-6">
+            Rejoignez l&apos;Excellence Technique
+          </h2>
+          <p className="text-sm text-slate-300 font-normal leading-relaxed mb-8 max-w-[620px]">
+            MCI SARL encourage la formation continue et le renforcement des compétences locales au Cameroun. Nous formons, accompagnons et recrutons régulièrement des techniciens et ingénieurs passionnés par le génie industriel, l&apos;automatisme et le solaire photovoltaïque.
+          </p>
+
+          <Link
+            to="/contact"
+            className="inline-flex items-center justify-center gap-2 rounded-none bg-bleu-marianne-clair hover:bg-blue-600 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors"
+          >
+            Nous contacter / Postuler
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
 /* ──────────────────────── Home Page ──────────────────────── */
 
 export default function Home({
@@ -797,6 +1096,11 @@ export default function Home({
       <ServicesSection />
       <SectorsSection />
       <NewsSection articles={mergedArticles} />
+      <MetricsSection />
+      <QualitySection />
+      <WorkshopSection />
+      <WorkflowSection />
+      <CareersSection />
     </>
   )
 }
