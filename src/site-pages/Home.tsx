@@ -396,6 +396,144 @@ function WhoWeAreSection() {
   )
 }
 
+/* ──────────────────────── Expertise Thermique Section ──────────────────────── */
+
+function ExpertiseThermiqueSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  return (
+    <section ref={ref} className="bg-slate-50 py-20 lg:py-32" aria-labelledby="thermique-title">
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+        <div className="bg-white rounded-2xl p-6 lg:py-10 lg:pl-10 lg:pr-0 border border-slate-200/60 shadow-sm">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Column: Text (Order 2 on mobile, Order 1 on Desktop) */}
+            <motion.div
+              className="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1"
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              variants={fadeInUp}
+            >
+              <span className="text-[11px] font-bold uppercase tracking-widest text-[#D16B0A] mb-3">
+                Centrales Thermiques
+              </span>
+              <h2
+                id="thermique-title"
+                className="font-heading text-[32px] font-bold leading-[1.1] tracking-tight text-[#1d2327] md:text-[40px]"
+              >
+                Puissance &amp; Fiabilité
+              </h2>
+              <p className="mt-6 text-base text-slate-600 leading-relaxed max-w-[620px]">
+                Notre expertise en ingénierie thermique nous permet de dimensionner, installer et maintenir des groupes électrogènes industriels de très haute capacité. Nous concevons des architectures redondantes pour sécuriser vos chaînes de production.
+              </p>
+              <ul className="mt-6 space-y-3">
+                {['Synchronisation & couplage de centrales', 'Inverseurs de sources automatiques (ATS)', 'Révision générale et réparation moteur'].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-3 text-sm text-slate-600 font-medium">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#D16B0A]" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-8">
+                <Link
+                  to="/services"
+                  className="inline-flex items-center justify-center gap-2 rounded-none bg-[#1d2327] hover:bg-[#D16B0A] px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors duration-300"
+                >
+                  Découvrir nos services
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Right Column: Image (Order 1 on mobile, Order 2 on Desktop) */}
+            <motion.div
+              className="lg:col-span-5 flex justify-center w-full items-center z-10 order-1 lg:order-2"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-xl border border-slate-100 bg-slate-100 lg:-my-24 z-20">
+                <img
+                  src="/images/generateur-industriel.jpg"
+                  alt="Centrale thermique et groupes électrogènes MCI"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ──────────────────────── Base Opérationnelle Section ──────────────────────── */
+
+function BaseOperationnelleSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  return (
+    <section ref={ref} className="bg-white py-20 lg:py-32" aria-labelledby="base-title">
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
+        <div className="bg-slate-900 rounded-2xl p-6 lg:py-10 lg:pr-10 lg:pl-0 border border-slate-800 shadow-2xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Column: Image */}
+            <motion.div
+              className="lg:col-span-5 flex justify-center w-full items-center z-10"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-2xl border border-slate-700 bg-slate-800 lg:-my-24 z-20">
+                <img
+                  src="/images/atelier-container.jpg"
+                  alt="Atelier mobile et logistique de chantier MCI"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+            </motion.div>
+
+            {/* Right Column: Text */}
+            <motion.div
+              className="lg:col-span-7 flex flex-col justify-center text-white"
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+              variants={fadeInUp}
+            >
+              <span className="text-[11px] font-bold uppercase tracking-widest text-[#2A5DB0] mb-3">
+                Logistique &amp; Déploiement
+              </span>
+              <h2
+                id="base-title"
+                className="font-heading text-[32px] font-bold leading-[1.1] tracking-tight text-white md:text-[40px]"
+              >
+                Base Opérationnelle Mobile
+              </h2>
+              <p className="mt-6 text-base text-slate-300 leading-relaxed max-w-[620px]">
+                Pour garantir une réactivité maximale sur les sites isolés ou industriels complexes, MCI déploie ses propres ateliers conteneurisés de 40 pieds. Ces bases logistiques autonomes sont entièrement équipées pour la chaudronnerie, la mécanique et le montage électrique directement sur site.
+              </p>
+              <div className="mt-8">
+                <Link
+                  to="/realisations"
+                  className="inline-flex items-center justify-center gap-2 rounded-none bg-[#2A5DB0] hover:bg-white hover:text-[#1d2327] px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors duration-300"
+                >
+                  Voir nos déploiements
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </motion.div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ──────────────────────── Vision Section ──────────────────────── */
 
 function VisionSection() {
@@ -1242,28 +1380,12 @@ function JoinUsSection() {
   return (
     <section ref={ref} className="bg-white py-20 lg:py-32" aria-labelledby="join-title">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-        <div className="bg-bleu-marianne/10 rounded-2xl p-6 lg:py-10 lg:pr-10 lg:pl-0 border border-bleu-marianne/20">
+        <div className="bg-bleu-marianne/10 rounded-2xl p-6 lg:py-10 lg:pl-10 lg:pr-0 border border-bleu-marianne/20">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            {/* Left Column: Image (Matching layout of WhoWeAreSection) */}
+            {/* Left Column: Text (Order 2 on mobile, Order 1 on Desktop) */}
             <motion.div
-              className="lg:col-span-5 flex justify-center w-full items-center z-10"
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-xl border border-slate-100 bg-slate-100 lg:-my-24 z-20">
-                <img
-                  src="/images/careers-bg.jpg"
-                  alt="Équipe technique et ingénieurs de MCI SARL"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </motion.div>
-
-            {/* Right Column: Text */}
-            <motion.div
-              className="lg:col-span-7 flex flex-col justify-center"
+              className="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1"
               initial="hidden"
               animate={isInView ? 'visible' : 'hidden'}
               variants={fadeInUp}
@@ -1289,6 +1411,22 @@ function JoinUsSection() {
                   Nous contacter / Postuler
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
+              </div>
+            </motion.div>
+
+            {/* Right Column: Image (Order 1 on mobile, Order 2 on Desktop) */}
+            <motion.div
+              className="lg:col-span-5 flex justify-center w-full items-center z-10 order-1 lg:order-2"
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-xl border border-slate-100 bg-slate-100 lg:-my-24 z-20">
+                <img
+                  src="/images/careers-bg.jpg"
+                  alt="Équipe technique et ingénieurs de MCI SARL"
+                  className="h-full w-full object-cover"
+                />
               </div>
             </motion.div>
 
@@ -1319,6 +1457,8 @@ export default function Home({
     <>
       <HeroSection settings={mergedSettings} />
       <WhoWeAreSection />
+      <ExpertiseThermiqueSection />
+      <BaseOperationnelleSection />
       <VisionSection />
       <ServicesSection />
       <SectorsSection />
