@@ -52,14 +52,14 @@ export default function AdminLoginPage() {
   return (
     <div className="min-h-screen bg-[#f0f0f1] flex flex-col items-center justify-center p-4 select-none font-sans text-[#2c3338]">
       <div className="w-full max-w-[320px] sm:max-w-[340px]">
-        {/* Logo ME2I en texte simple couleur primaire */}
+        {/* Logo MCI en texte simple couleur primaire */}
         <div className="text-center mb-6">
           <Link
             href="/"
             className="inline-block text-3xl font-bold tracking-tight text-[#1E3A5F] hover:opacity-80 transition-opacity"
-            title="Aller sur le site ME2I"
+            title="Aller sur le site MCI"
           >
-            ME2I
+            MCI
           </Link>
         </div>
 
@@ -157,7 +157,7 @@ export default function AdminLoginPage() {
         <div className="mt-4 space-y-2 text-xs text-[#2271b1]">
           <p>
             <Link href="/" className="hover:text-[#135e96] transition-colors">
-              &larr; Aller sur ME2I
+              &larr; Aller sur MCI
             </Link>
           </p>
         </div>

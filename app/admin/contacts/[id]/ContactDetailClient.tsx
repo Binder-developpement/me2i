@@ -114,7 +114,7 @@ export default function ContactDetailClient({ contact }: { contact: any }) {
 
               <div className="pt-2 border-t border-[#f0f0f1]">
                 <a
-                  href={`mailto:${contact.email}?subject=RE: ${encodeURIComponent(contact.subject || 'Demande ME2I')}`}
+                  href={`mailto:${contact.email}?subject=RE: ${encodeURIComponent(contact.subject || 'Demande MCI')}`}
                   onClick={() => handleStatusChange('replied')}
                   className="w-full inline-flex items-center justify-center gap-1.5 bg-[#2271b1] hover:bg-[#135e96] text-white text-xs font-normal py-2 rounded-sm transition-colors shadow-sm"
                 >

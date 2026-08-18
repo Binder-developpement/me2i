@@ -84,7 +84,7 @@ export default function RealisationDetail({
               {/* Description & Technical details (Rendered as HTML) */}
               <div className="space-y-4 pt-4 border-t border-[#f0f0f1]">
                 <h2 className="text-base font-normal uppercase tracking-wider text-[#1d2327]">
-                  Détail du projet &amp; Intervention ME2I
+                  Détail du projet &amp; Intervention MCI
                 </h2>
                 <div
                   className="prose prose-slate max-w-none text-sm text-[#50575e] font-normal leading-relaxed

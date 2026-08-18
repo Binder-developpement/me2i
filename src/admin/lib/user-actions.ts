@@ -9,7 +9,7 @@ const DEFAULT_USERS: AdminUser[] = [
   {
     id: 'usr-001',
     email: 'admin@me2i.cm',
-    full_name: 'Jean-Marc ME2I',
+    full_name: 'Jean-Marc MCI',
     role: 'super_admin',
     status: 'active',
     phone: '+237 699 00 11 22',
@@ -62,22 +62,67 @@ const DEFAULT_USERS: AdminUser[] = [
 let globalUsersStore: AdminUser[] = [...DEFAULT_USERS]
 
 export async function getUsersAction(): Promise<AdminUser[]> {
+  let list: AdminUser[] = []
+
   try {
     const supabase = await createServerClient()
+
+    // 1. Fetch current logged-in session user from Supabase Auth
+    const {
+      data: { user: authUser },
+    } = await supabase.auth.getUser()
+
+    // 2. Fetch users from DB table
     const { data, error } = await supabase
       .from('admin_users')
       .select('*')
       .order('created_at', { ascending: false })
 
-    if (error || !data || data.length === 0) {
-      return globalUsersStore
+    if (!error && data && data.length > 0) {
+      list = [...(data as AdminUser[])]
+    } else {
+      list = [...globalUsersStore]
     }
 
-    return data as AdminUser[]
+    // 3. Automatically inject current logged-in user if not already in list
+    if (authUser && authUser.email) {
+      const exists = list.some(
+        (u) => u.email.toLowerCase() === authUser.email?.toLowerCase() || u.id === authUser.id
+      )
+
+      if (!exists) {
+        const currentUserAdmin: AdminUser = {
+          id: authUser.id,
+          email: authUser.email,
+          full_name:
+            authUser.user_metadata?.full_name ||
+            authUser.user_metadata?.name ||
+            authUser.email.split('@')[0].toUpperCase() + ' (Vous)',
+          role: (authUser.user_metadata?.role as UserRole) || 'super_admin',
+          status: 'active',
+          last_login: new Date().toISOString(),
+          created_at: authUser.created_at || new Date().toISOString(),
+        }
+        list = [currentUserAdmin, ...list]
+      } else {
+        // Mark existing account with (Vous) and update last_login
+        list = list.map((u) => {
+          if (u.email.toLowerCase() === authUser.email?.toLowerCase() || u.id === authUser.id) {
+            return {
+              ...u,
+              last_login: new Date().toISOString(),
+            }
+          }
+          return u
+        })
+      }
+    }
   } catch (err) {
     console.error('Error fetching users from Supabase:', err)
-    return globalUsersStore
+    list = globalUsersStore
   }
+
+  return list
 }
 
 export async function createUserAction(formData: {

@@ -565,7 +565,7 @@ export default function ArticleListClient({
                               month: 'short',
                               year: 'numeric',
                             })
-                          : '—'}
+                          : '-'}
                       </td>
                     </tr>
                   ))

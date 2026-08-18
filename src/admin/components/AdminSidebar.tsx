@@ -105,7 +105,7 @@ export default function AdminSidebar({
         <div className="px-5 py-4 bg-black/15 flex items-center justify-between">
           <Link href="/admin" onClick={onCloseMobileMenu} className="block group">
             <span className="font-medium text-lg tracking-wider text-white/90 group-hover:text-[#72aee6] transition-colors block uppercase">
-              ME2I Admin
+              MCI Admin
             </span>
             <span className="block text-xs font-normal text-white/40 tracking-normal leading-tight mt-0.5 uppercase">
               Panneau de contrôle

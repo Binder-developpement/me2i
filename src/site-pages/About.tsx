@@ -126,7 +126,7 @@ export default function About({
 }: {
   settings?: Record<string, string>
 }) {
-  const companyName = settings.company_name || 'ME2I'
+  const companyName = settings.company_name || 'MCI'
   const tagline =
     settings.tagline || 'Maintenance Industrielle & Énergie sans Interruption'
   const address = settings.address || 'Douala / Yaoundé, Cameroun'
@@ -268,7 +268,7 @@ export default function About({
               </h2>
             </div>
             <p className="text-xs text-[#50575e] font-normal leading-relaxed mb-6">
-              ME2I accompagne un vaste réseau de partenaires publics et privés exigeant une haute disponibilité énergétique :
+              MCI accompagne un vaste réseau de partenaires publics et privés exigeant une haute disponibilité énergétique :
             </p>
             <div className="flex flex-wrap gap-2">
               {targetClients.map((client) => (
@@ -368,7 +368,7 @@ export default function About({
           <div className="flex items-center gap-2.5 pb-4 mb-6 border-b border-[#f0f0f1]">
             <Phone className="h-5 w-5 text-[#2271b1]" />
             <h2 className="text-base font-normal uppercase tracking-wider text-[#1d2327]">
-              Contact Officiel &amp; Support Technique ME2I
+              Contact Officiel &amp; Support Technique MCI
             </h2>
           </div>
 

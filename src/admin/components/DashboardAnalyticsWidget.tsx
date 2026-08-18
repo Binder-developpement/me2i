@@ -39,8 +39,8 @@ export default function DashboardAnalyticsWidget({
   return (
     <div className="space-y-4">
       {/* Card 1: Activité Hebdomadaire & Demandes */}
-      <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-hidden">
-        <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7] flex items-center justify-between">
+      <div className="bg-white border border-slate-200/80 rounded-sm shadow-sm overflow-hidden">
+        <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-slate-200/80 flex items-center justify-between">
           <h2 className="text-xs font-normal uppercase tracking-wider text-[#1d2327] flex items-center gap-1.5">
             <Activity className="h-3.5 w-3.5 text-[#2271b1]" />
             <span>Tendances de l'activité</span>
@@ -85,8 +85,8 @@ export default function DashboardAnalyticsWidget({
       </div>
 
       {/* Card 2: Répartition des Offres & Réalisations */}
-      <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-hidden">
-        <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7]">
+      <div className="bg-white border border-slate-200/80 rounded-sm shadow-sm overflow-hidden">
+        <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-slate-200/80">
           <h2 className="text-xs font-normal uppercase tracking-wider text-[#1d2327]">
             Répartition du catalogue
           </h2>

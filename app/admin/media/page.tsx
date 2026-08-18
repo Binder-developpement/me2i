@@ -2,7 +2,7 @@ import { requireAdminAuth } from '@/src/admin/lib/auth-guard'
 import MediaLibraryClient from '@/src/admin/components/MediaLibraryClient'
 
 export const metadata = {
-  title: 'Médiathèque - Administration ME2I',
+  title: 'Médiathèque - Administration MCI',
 }
 
 export default async function MediaPage() {

@@ -95,11 +95,11 @@ export default function ImageUpload({
         .upload(filePath, file)
 
       if (uploadError) {
-        // Fallback: Data URL if bucket upload fails
+        console.warn("Storage upload error:", uploadError)
+        toast.warning("Stocké en base de données. Pour la médiathèque Cloud, activez les règles RLS dans Supabase SQL Editor.")
         const reader = new FileReader()
         reader.onloadend = () => {
           onChange(reader.result as string)
-          toast.success('Image chargée avec succès')
           setUploading(false)
         }
         reader.readAsDataURL(file)
@@ -252,11 +252,10 @@ export default function ImageUpload({
                         setShowMediaPicker(false)
                         toast.success('Image sélectionnée')
                       }}
-                      className={`relative group aspect-square bg-[#f8fafc] border rounded-sm overflow-hidden cursor-pointer transition-all ${
-                        value === url
+                      className={`relative group aspect-square bg-[#f8fafc] border rounded-sm overflow-hidden cursor-pointer transition-all ${value === url
                           ? 'border-2 border-[#2271b1] ring-2 ring-[#2271b1]/20'
                           : 'border-[#c3c4c7] hover:border-[#2271b1]'
-                      }`}
+                        }`}
                     >
                       <img
                         src={url}

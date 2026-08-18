@@ -109,7 +109,7 @@ export default function OrderClient({ itemType, selectedItem }: OrderClientProps
           </div>
 
           <p className="text-xs text-gray-500 mb-6">
-            Un ingénieur ME2I vous contactera très rapidement au <strong className="text-gray-900">{customerPhone}</strong> pour valider l'intervention.
+            Un ingénieur MCI vous contactera très rapidement au <strong className="text-gray-900">{customerPhone}</strong> pour valider l'intervention.
           </p>
 
           <Link
@@ -312,7 +312,7 @@ export default function OrderClient({ itemType, selectedItem }: OrderClientProps
               </div>
 
               <div className="text-[11px] text-gray-500 leading-relaxed pt-2 border-t border-gray-200">
-                Un technicien expert ME2I examinera votre commande et vous délivrera un devis ferme sous 24h.
+                Un technicien expert MCI examinera votre commande et vous délivrera un devis ferme sous 24h.
               </div>
             </div>
           </div>

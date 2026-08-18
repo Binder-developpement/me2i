@@ -7,14 +7,14 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm';
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: "ME2I : Maintenance Industrielle & Énergie sans Interruption",
-    template: "%s | ME2I Cameroun",
+    default: "MCI : Maintenance Industrielle & Énergie sans Interruption",
+    template: "%s | MCI Cameroun",
   },
   description:
     "Expertise d'excellence au Cameroun en maintenance industrielle, groupes électrogènes, automatisme, armoires électriques et solutions d'énergie renouvelable 24h/7j.",
   keywords: [
     // Mots-clés Français
-    "ME2I",
+    "MCI",
     "maintenance industrielle",
     "maintenances industrielles",
     "maintenance de groupes électrogènes",
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
     "industrial energy solutions",
     "power plant maintenance Africa"
   ],
-  authors: [{ name: "ME2I Maintenance et Énergie" }],
-  creator: "ME2I",
-  publisher: "ME2I",
+  authors: [{ name: "MCI Maintenance et Énergie" }],
+  creator: "MCI",
+  publisher: "MCI",
   formatDetection: {
     email: false,
     address: false,
@@ -68,8 +68,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fr_FR",
     url: baseUrl,
-    siteName: "ME2I : Maintenance et Énergie",
-    title: "ME2I : Maintenance Industrielle & Énergie sans Interruption",
+    siteName: "MCI : Maintenance et Énergie",
+    title: "MCI : Maintenance Industrielle & Énergie sans Interruption",
     description:
       "Spécialiste de la maintenance industrielle, des groupes électrogènes, de l'automatisme et des installations électriques au Cameroun.",
     images: [
@@ -77,13 +77,13 @@ export const metadata: Metadata = {
         url: `${baseUrl}/og-preview.png`,
         width: 1200,
         height: 630,
-        alt: "ME2I Maintenance Industrielle et Énergie",
+        alt: "MCI Maintenance Industrielle et Énergie",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ME2I : Maintenance Industrielle & Énergie sans Interruption",
+    title: "MCI : Maintenance Industrielle & Énergie sans Interruption",
     description:
       "Spécialiste de la maintenance industrielle, des groupes électrogènes, de l'automatisme et des installations électriques au Cameroun.",
     images: [`${baseUrl}/og-preview.png`],
@@ -98,7 +98,7 @@ export default function RootLayout({
   const jsonLdOrganization = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "ME2I : Maintenance Industrielle & Énergie",
+    name: "MCI : Maintenance Industrielle & Énergie",
     url: baseUrl,
     logo: `${baseUrl}/og-preview.png`,
     contactPoint: {

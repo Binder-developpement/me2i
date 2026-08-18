@@ -23,7 +23,7 @@ export async function generateMetadata({
   }
 
   const imageUrl = item.image_url || item.image || `${baseUrl}/og-preview.png`
-  const description = item.excerpt || item.description || `Réalisation de maintenance industrielle ME2I : ${item.title}`
+  const description = item.excerpt || item.description || `Réalisation de maintenance industrielle MCI : ${item.title}`
 
   return {
     title: item.title,
@@ -32,7 +32,7 @@ export async function generateMetadata({
       "maintenance industrielle",
       "maintenances industrielles",
       "industrial maintenance project",
-      "réalisation ME2I",
+      "réalisation MCI",
       "ingénierie industrielle Cameroun",
       "installation groupe électrogène"
     ],
@@ -43,9 +43,9 @@ export async function generateMetadata({
       type: 'article',
       locale: 'fr_FR',
       url: `${baseUrl}/realisations/${id}`,
-      title: `${item.title} | ME2I Réalisations`,
+      title: `${item.title} | MCI Réalisations`,
       description: description,
-      siteName: 'ME2I : Maintenance et Énergie',
+      siteName: 'MCI : Maintenance et Énergie',
       images: [
         {
           url: imageUrl,

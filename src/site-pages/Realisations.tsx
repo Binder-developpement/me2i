@@ -51,7 +51,7 @@ export default function Realisations({
         {/* Document Header */}
         <div className="mb-12 text-center max-w-3xl mx-auto">
           <span className="inline-block px-3 py-1 bg-[#1E3A5F]/10 text-[#1E3A5F] text-xs font-semibold uppercase tracking-wider mb-3">
-            PORTFOLIO D'INGÉNIERIE ME2I
+            PORTFOLIO D'INGÉNIERIE MCI
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1d2327] tracking-tight mb-4 font-heading">
             Nos Réalisations &amp; Projets

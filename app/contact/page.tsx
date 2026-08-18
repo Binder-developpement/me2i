@@ -6,20 +6,20 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export const metadata: Metadata = {
-  title: 'Contactez-nous — Devis et Intervention rapide 24h/7j',
-  description: 'Besoin d\'une intervention ou d\'un devis gratuit au Cameroun ? Contactez les ingénieurs et techniciens ME2I à Douala et Yaoundé.',
+  title: 'Contactez-nous - Devis et Intervention rapide 24h/7j',
+  description: 'Besoin d\'une intervention ou d\'un devis gratuit au Cameroun ? Contactez les ingénieurs et techniciens MCI à Douala et Yaoundé.',
   alternates: {
     canonical: '/contact',
   },
   openGraph: {
-    title: 'Contactez ME2I | Maintenance & Devis gratuit au Cameroun',
+    title: 'Contactez MCI | Maintenance & Devis gratuit au Cameroun',
     description: 'Demande d\'intervention 24/7 pour groupes électrogènes, automatisme et installations électriques.',
   },
 }
 
 export default async function ContactPage() {
   let settingsMap: Record<string, string> = {
-    company_name: 'ME2I',
+    company_name: 'MCI',
     tagline: 'Maintenance Industrielle & Énergie sans Interruption',
     email: 'contact@me2i.cm',
     phone: '+237 699 00 00 00',

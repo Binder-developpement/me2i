@@ -21,7 +21,7 @@ export default function CompanySettingsClient({
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const [settings, setSettings] = useState({
-    company_name: initialSettings.company_name || 'ME2I',
+    company_name: initialSettings.company_name || 'MCI',
     tagline: initialSettings.tagline || 'Maintenance Industrielle & Énergie sans Interruption',
     email: initialSettings.email || 'contact@me2i.cm',
     phone: initialSettings.phone || '+237 699 00 00 00',
@@ -142,7 +142,7 @@ export default function CompanySettingsClient({
             value={settings.logo_url || null}
             onChange={(url) => handleChange('logo_url', url || '')}
             bucketName="company-assets"
-            label="Logo officiel ME2I"
+            label="Logo officiel MCI"
           />
         </div>
       </div>

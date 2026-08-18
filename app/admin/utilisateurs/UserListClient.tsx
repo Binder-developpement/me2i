@@ -192,8 +192,7 @@ export default function UserListClient({
       const updated = await toggleUserStatusAction(user.id, nextStatus)
       setUsers((prev) => prev.map((u) => (u.id === updated.id ? updated : u)))
       toast.success(
-        `Statut de "${user.full_name}" changé en ${
-          nextStatus === 'active' ? 'Actif' : 'Inactif'
+        `Statut de "${user.full_name}" changé en ${nextStatus === 'active' ? 'Actif' : 'Inactif'
         }`
       )
       router.refresh()
@@ -250,11 +249,10 @@ export default function UserListClient({
         <button
           type="button"
           onClick={() => setActiveMainTab('users')}
-          className={`pb-2.5 px-2 flex items-center gap-2 border-b-2 transition-colors ${
-            activeMainTab === 'users'
+          className={`pb-2.5 px-2 flex items-center gap-2 border-b-2 transition-colors ${activeMainTab === 'users'
               ? 'border-[#2271b1] text-[#2271b1] font-semibold'
               : 'border-transparent text-[#50575e] hover:text-[#2271b1]'
-          }`}
+            }`}
         >
           <Users className="h-4 w-4" />
           <span>Utilisateurs ({users.length})</span>
@@ -263,11 +261,10 @@ export default function UserListClient({
         <button
           type="button"
           onClick={() => setActiveMainTab('roles')}
-          className={`pb-2.5 px-2 flex items-center gap-2 border-b-2 transition-colors ${
-            activeMainTab === 'roles'
+          className={`pb-2.5 px-2 flex items-center gap-2 border-b-2 transition-colors ${activeMainTab === 'roles'
               ? 'border-[#2271b1] text-[#2271b1] font-semibold'
               : 'border-transparent text-[#50575e] hover:text-[#2271b1]'
-          }`}
+            }`}
         >
           <ShieldCheck className="h-4 w-4" />
           <span>Rôles &amp; Permissions</span>
@@ -276,11 +273,10 @@ export default function UserListClient({
         <button
           type="button"
           onClick={() => setActiveMainTab('security')}
-          className={`pb-2.5 px-2 flex items-center gap-2 border-b-2 transition-colors ${
-            activeMainTab === 'security'
+          className={`pb-2.5 px-2 flex items-center gap-2 border-b-2 transition-colors ${activeMainTab === 'security'
               ? 'border-[#2271b1] text-[#2271b1] font-semibold'
               : 'border-transparent text-[#50575e] hover:text-[#2271b1]'
-          }`}
+            }`}
         >
           <Lock className="h-4 w-4" />
           <span>Sécurité &amp; Audit</span>
@@ -297,11 +293,10 @@ export default function UserListClient({
               <button
                 type="button"
                 onClick={() => setActiveStatusFilter('all')}
-                className={`pb-1 px-1 font-normal transition-colors ${
-                  activeStatusFilter === 'all'
+                className={`pb-1 px-1 font-normal transition-colors ${activeStatusFilter === 'all'
                     ? 'text-[#1d2327] border-b-2 border-[#2271b1]'
                     : 'text-[#2271b1] hover:text-[#135e96]'
-                }`}
+                  }`}
               >
                 Tous <span className="text-[#646970]">({users.length})</span>
               </button>
@@ -309,11 +304,10 @@ export default function UserListClient({
               <button
                 type="button"
                 onClick={() => setActiveStatusFilter('active')}
-                className={`pb-1 px-1 font-normal transition-colors ${
-                  activeStatusFilter === 'active'
+                className={`pb-1 px-1 font-normal transition-colors ${activeStatusFilter === 'active'
                     ? 'text-[#1d2327] border-b-2 border-[#2271b1]'
                     : 'text-[#2271b1] hover:text-[#135e96]'
-                }`}
+                  }`}
               >
                 Actifs <span className="text-[#646970]">({users.filter((u) => u.status === 'active').length})</span>
               </button>
@@ -321,11 +315,10 @@ export default function UserListClient({
               <button
                 type="button"
                 onClick={() => setActiveStatusFilter('super_admin')}
-                className={`pb-1 px-1 font-normal transition-colors ${
-                  activeStatusFilter === 'super_admin'
+                className={`pb-1 px-1 font-normal transition-colors ${activeStatusFilter === 'super_admin'
                     ? 'text-[#1d2327] border-b-2 border-[#2271b1]'
                     : 'text-[#2271b1] hover:text-[#135e96]'
-                }`}
+                  }`}
               >
                 Super Admin <span className="text-[#646970]">({users.filter((u) => u.role === 'super_admin').length})</span>
               </button>
@@ -333,11 +326,10 @@ export default function UserListClient({
               <button
                 type="button"
                 onClick={() => setActiveStatusFilter('admin')}
-                className={`pb-1 px-1 font-normal transition-colors ${
-                  activeStatusFilter === 'admin'
+                className={`pb-1 px-1 font-normal transition-colors ${activeStatusFilter === 'admin'
                     ? 'text-[#1d2327] border-b-2 border-[#2271b1]'
                     : 'text-[#2271b1] hover:text-[#135e96]'
-                }`}
+                  }`}
               >
                 Admins <span className="text-[#646970]">({users.filter((u) => u.role === 'admin').length})</span>
               </button>
@@ -345,11 +337,10 @@ export default function UserListClient({
               <button
                 type="button"
                 onClick={() => setActiveStatusFilter('editor')}
-                className={`pb-1 px-1 font-normal transition-colors ${
-                  activeStatusFilter === 'editor'
+                className={`pb-1 px-1 font-normal transition-colors ${activeStatusFilter === 'editor'
                     ? 'text-[#1d2327] border-b-2 border-[#2271b1]'
                     : 'text-[#2271b1] hover:text-[#135e96]'
-                }`}
+                  }`}
               >
                 Éditeurs <span className="text-[#646970]">({users.filter((u) => u.role === 'editor').length})</span>
               </button>
@@ -373,9 +364,8 @@ export default function UserListClient({
                 <button
                   type="button"
                   onClick={() => setViewMode('table')}
-                  className={`p-1.5 flex items-center gap-1 text-xs font-normal transition-colors ${
-                    viewMode === 'table' ? 'bg-[#2271b1] text-white' : 'text-[#50575e] hover:bg-[#f0f0f1]'
-                  }`}
+                  className={`p-1.5 flex items-center gap-1 text-xs font-normal transition-colors ${viewMode === 'table' ? 'bg-[#2271b1] text-white' : 'text-[#50575e] hover:bg-[#f0f0f1]'
+                    }`}
                   title="Vue Tableau"
                 >
                   <List className="h-3.5 w-3.5" />
@@ -384,9 +374,8 @@ export default function UserListClient({
                 <button
                   type="button"
                   onClick={() => setViewMode('cards')}
-                  className={`p-1.5 flex items-center gap-1 text-xs font-normal transition-colors ${
-                    viewMode === 'cards' ? 'bg-[#2271b1] text-white' : 'text-[#50575e] hover:bg-[#f0f0f1]'
-                  }`}
+                  className={`p-1.5 flex items-center gap-1 text-xs font-normal transition-colors ${viewMode === 'cards' ? 'bg-[#2271b1] text-white' : 'text-[#50575e] hover:bg-[#f0f0f1]'
+                    }`}
                   title="Vue Cartes"
                 >
                   <LayoutGrid className="h-3.5 w-3.5" />
@@ -434,11 +423,10 @@ export default function UserListClient({
                         <div>{getRoleBadge(u.role)}</div>
 
                         <span
-                          className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm ${
-                            u.status === 'active'
+                          className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm ${u.status === 'active'
                               ? 'bg-emerald-100 text-emerald-800'
                               : 'bg-red-100 text-red-800'
-                          }`}
+                            }`}
                         >
                           {u.status === 'active' ? 'Actif' : 'Inactif'}
                         </span>
@@ -512,11 +500,10 @@ export default function UserListClient({
                       <div className="flex items-center justify-between text-xs text-[#646970] pt-1">
                         <span>Statut:</span>
                         <span
-                          className={`px-2 py-0.5 text-[10px] rounded-sm ${
-                            u.status === 'active'
+                          className={`px-2 py-0.5 text-[10px] rounded-sm ${u.status === 'active'
                               ? 'bg-emerald-100 text-emerald-800'
                               : 'bg-red-100 text-red-800'
-                          }`}
+                            }`}
                         >
                           {u.status === 'active' ? 'Actif' : 'Inactif'}
                         </span>
@@ -623,15 +610,14 @@ export default function UserListClient({
                               </button>
                             </div>
                           </td>
-                          <td className="p-3 text-[#50575e] font-normal">{u.phone || '—'}</td>
+                          <td className="p-3 text-[#50575e] font-normal">{u.phone || '-'}</td>
                           <td className="p-3">{getRoleBadge(u.role)}</td>
                           <td className="p-3">
                             <span
-                              className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm ${
-                                u.status === 'active'
+                              className={`inline-block px-2 py-0.5 text-[10px] font-normal rounded-sm ${u.status === 'active'
                                   ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
                                   : 'bg-red-100 text-red-800 border border-red-300'
-                              }`}
+                                }`}
                             >
                               {u.status === 'active' ? 'Actif' : 'Inactif'}
                             </span>
@@ -639,11 +625,11 @@ export default function UserListClient({
                           <td className="p-3 text-[#646970] font-normal">
                             {u.last_login
                               ? new Date(u.last_login).toLocaleDateString('fr-FR', {
-                                  day: 'numeric',
-                                  month: 'short',
-                                  hour: '2-digit',
-                                  minute: '2-digit',
-                                })
+                                day: 'numeric',
+                                month: 'short',
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              })
                               : 'Jamais'}
                           </td>
                         </tr>
@@ -759,7 +745,7 @@ export default function UserListClient({
               Politique de Sécurité &amp; Sessions
             </h2>
             <p className="text-xs text-[#646970] mt-1 font-normal">
-              Paramètres d'authentification et suivi des accès au back-office ME2I
+              Paramètres d'authentification et suivi des accès au back-office MCI
             </p>
           </div>
 

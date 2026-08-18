@@ -73,7 +73,7 @@ export async function generateMetadata({
       url: articleUrl,
       title: article.title,
       description: description,
-      siteName: 'ME2I : Maintenance et Énergie',
+      siteName: 'MCI : Maintenance et Énergie',
       publishedTime: article.created_at,
       modifiedTime: article.updated_at || article.created_at,
       images: [
@@ -153,11 +153,11 @@ export default async function SingleArticlePage({
     dateModified: article.updated_at || article.created_at,
     author: {
       '@type': 'Organization',
-      name: 'ME2I Maintenance et Énergie',
+      name: 'MCI Maintenance et Énergie',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'ME2I',
+      name: 'MCI',
       logo: {
         '@type': 'ImageObject',
         url: `${baseUrl}/og-preview.png`,
@@ -186,7 +186,7 @@ export default async function SingleArticlePage({
 
           {/* Breadcrumb on the RIGHT */}
           <div className="flex items-center gap-2 text-gray-500 truncate">
-            <Link href="/" className="hover:text-[#1E3A5F] transition-colors">ME2I</Link>
+            <Link href="/" className="hover:text-[#1E3A5F] transition-colors">MCI</Link>
             <span>/</span>
             <Link href="/blog" className="hover:text-[#1E3A5F] transition-colors">Blog et Articles</Link>
             <span>/</span>
@@ -217,7 +217,7 @@ export default async function SingleArticlePage({
                 </span>
                 <span className="flex items-center gap-1">
                   <User className="h-3.5 w-3.5 text-gray-400" />
-                  Par Équipe ME2I
+                  Par Équipe MCI
                 </span>
               </div>
 
@@ -283,16 +283,16 @@ export default async function SingleArticlePage({
 
           {/* RIGHT SIDEBAR (4 Cols - Widget Area Style) */}
           <aside className="lg:col-span-4 space-y-6">
-            {/* Widget 1: À propos de ME2I */}
+            {/* Widget 1: À propos de MCI */}
             <div className="bg-white border border-gray-200 rounded-sm p-5 shadow-sm">
               <div className="border-b border-gray-100 pb-3 mb-4 flex items-center gap-2">
                 <ShieldCheck className="h-4 w-4 text-[#1E3A5F]" />
                 <h3 className="text-xs font-normal uppercase tracking-wider text-[#1d2327]">
-                  À propos de ME2I
+                  À propos de MCI
                 </h3>
               </div>
               <p className="text-xs text-gray-600 leading-relaxed font-normal mb-4">
-                ME2I (Maintenance Industrielle et Énergie sans Interruption) est votre spécialiste au Cameroun pour la maintenance des groupes électrogènes, l'automatisme industriel et les énergies renouvelables.
+                MCI (Maintenance Industrielle et Énergie sans Interruption) est votre spécialiste au Cameroun pour la maintenance des groupes électrogènes, l'automatisme industriel et les énergies renouvelables.
               </p>
               <Link
                 href="/a-propos"

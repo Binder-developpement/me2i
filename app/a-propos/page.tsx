@@ -8,11 +8,11 @@ export const revalidate = 0
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm';
 
 export const metadata: Metadata = {
-  title: "À propos de ME2I : Expertise et Ingénierie Industrielle au Cameroun",
+  title: "À propos de MCI : Expertise et Ingénierie Industrielle au Cameroun",
   description:
-    "Découvrez l'histoire, la vision et l'équipe d'ingénieurs et techniciens de ME2I, référence en maintenance industrielle et ingénierie énergétique.",
+    "Découvrez l'histoire, la vision et l'équipe d'ingénieurs et techniciens de MCI, référence en maintenance industrielle et ingénierie énergétique.",
   keywords: [
-    "à propos ME2I",
+    "à propos MCI",
     "maintenance industrielle Cameroun",
     "maintenances industrielles",
     "industrial maintenance company",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     canonical: "/a-propos",
   },
   openGraph: {
-    title: "À propos de ME2I : Expertise et Ingénierie Industrielle au Cameroun",
+    title: "À propos de MCI : Expertise et Ingénierie Industrielle au Cameroun",
     description: "Découvrez notre entreprise et nos équipes d'ingénieurs en maintenance industrielle.",
     url: `${baseUrl}/a-propos`,
     images: [
@@ -32,13 +32,13 @@ export const metadata: Metadata = {
         url: `${baseUrl}/og-preview.png`,
         width: 1200,
         height: 630,
-        alt: "ME2I À propos",
+        alt: "MCI À propos",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "À propos de ME2I : Expertise et Ingénierie Industrielle au Cameroun",
+    title: "À propos de MCI : Expertise et Ingénierie Industrielle au Cameroun",
     description: "Découvrez notre entreprise et nos équipes d'ingénieurs en maintenance industrielle.",
     images: [`${baseUrl}/og-preview.png`],
   },
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 
 export default async function AboutPage() {
   let settingsMap: Record<string, string> = {
-    company_name: 'ME2I',
+    company_name: 'MCI',
     tagline: 'Maintenance Industrielle & Énergie sans Interruption',
     email: 'contact@me2i.cm',
     phone: '+237 699 00 00 00',

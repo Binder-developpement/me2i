@@ -503,8 +503,8 @@ export default function RealisationListClient({
                       </td>
                       <td className="py-2.5 px-3 text-[#50575e] font-normal align-top">{item.category}</td>
                       <td className="py-2.5 px-3 text-[#50575e] font-normal align-top">
-                        <div>{item.client || '—'}</div>
-                        <div className="text-[11px] text-[#646970]">{item.location || '—'}</div>
+                        <div>{item.client || '-'}</div>
+                        <div className="text-[11px] text-[#646970]">{item.location || '-'}</div>
                       </td>
                       <td className="py-2.5 px-3 align-top">
                         <span

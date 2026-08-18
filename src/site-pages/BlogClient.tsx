@@ -43,7 +43,7 @@ export default function BlogClient({ initialArticles }: { initialArticles: Artic
         <div className="mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-12 text-center">
           <div className="max-w-3xl mx-auto">
             <span className="inline-block px-3 py-1 bg-gray-100 text-[#1E3A5F] text-xs font-semibold uppercase tracking-wider mb-3 rounded-sm">
-              Blog & Actualités ME2I
+              Blog & Actualités MCI
             </span>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#1d2327] mb-4">
               Actualités & Insights Techniques

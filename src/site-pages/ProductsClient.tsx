@@ -39,7 +39,7 @@ export default function ProductsClient({ initialProducts }: { initialProducts: P
         {/* Header Title */}
         <div className="mb-12 text-center max-w-3xl mx-auto">
           <span className="inline-block px-3 py-1 rounded-none bg-[#1E3A5F]/10 text-[#1E3A5F] text-xs font-semibold uppercase tracking-wider mb-3">
-            Catalogue ME2I
+            Catalogue MCI
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight mb-4">
             Équipements, Moteurs & Pièces Détachées
@@ -85,7 +85,7 @@ export default function ProductsClient({ initialProducts }: { initialProducts: P
                     />
                   ) : (
                     <div className="w-full h-full bg-[#1E3A5F]/10 flex items-center justify-center text-[#1E3A5F] font-bold text-xl">
-                      ME2I
+                      MCI
                     </div>
                   )}
                 </div>

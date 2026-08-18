@@ -93,11 +93,11 @@ export default async function AdminDashboard() {
   return (
     <div className="space-y-4 w-full">
       {/* WordPress Top Header Card */}
-      <div className="bg-white border border-[#c3c4c7] rounded-sm p-4 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 w-full">
+      <div className="bg-white border border-slate-200/80 rounded-sm p-4 shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 w-full">
         <div>
           <h1 className="text-xl font-normal text-[#1d2327]">Tableau de bord</h1>
           <p className="text-xs text-[#646970] font-normal mt-0.5">
-            Bienvenue dans l'administration ME2I
+            Bienvenue dans l'administration MCI
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -123,7 +123,7 @@ export default async function AdminDashboard() {
         {/* Articles */}
         <Link
           href="/admin/articles"
-          className="bg-white border border-[#c3c4c7] hover:border-[#2271b1] rounded-sm p-3.5 shadow-sm transition-colors group flex flex-col justify-between"
+          className="bg-white border border-slate-200/80 hover:border-[#2271b1] rounded-sm p-3.5 shadow-sm transition-colors group flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-normal text-[#646970] uppercase">Articles</span>
@@ -140,7 +140,7 @@ export default async function AdminDashboard() {
         {/* Services */}
         <Link
           href="/admin/services"
-          className="bg-white border border-[#c3c4c7] hover:border-[#2271b1] rounded-sm p-3.5 shadow-sm transition-colors group flex flex-col justify-between"
+          className="bg-white border border-slate-200/80 hover:border-[#2271b1] rounded-sm p-3.5 shadow-sm transition-colors group flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-normal text-[#646970] uppercase">Services</span>
@@ -157,7 +157,7 @@ export default async function AdminDashboard() {
         {/* Produits */}
         <Link
           href="/admin/produits"
-          className="bg-white border border-[#c3c4c7] hover:border-[#2271b1] rounded-sm p-3.5 shadow-sm transition-colors group flex flex-col justify-between"
+          className="bg-white border border-slate-200/80 hover:border-[#2271b1] rounded-sm p-3.5 shadow-sm transition-colors group flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-normal text-[#646970] uppercase">Produits</span>
@@ -174,7 +174,7 @@ export default async function AdminDashboard() {
         {/* Réalisations */}
         <Link
           href="/admin/realisations"
-          className="bg-white border border-[#c3c4c7] hover:border-[#2271b1] rounded-sm p-3.5 shadow-sm transition-colors group flex flex-col justify-between"
+          className="bg-white border border-slate-200/80 hover:border-[#2271b1] rounded-sm p-3.5 shadow-sm transition-colors group flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-normal text-[#646970] uppercase">Réalisations</span>
@@ -191,7 +191,7 @@ export default async function AdminDashboard() {
         {/* Commandes */}
         <Link
           href="/admin/commandes"
-          className="bg-white border border-[#c3c4c7] hover:border-[#2271b1] rounded-sm p-3.5 shadow-sm transition-colors group flex flex-col justify-between"
+          className="bg-white border border-slate-200/80 hover:border-[#2271b1] rounded-sm p-3.5 shadow-sm transition-colors group flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-normal text-[#646970] uppercase">Commandes</span>
@@ -208,7 +208,7 @@ export default async function AdminDashboard() {
         {/* Messages */}
         <Link
           href="/admin/contacts"
-          className="bg-white border border-[#c3c4c7] hover:border-[#2271b1] rounded-sm p-3.5 shadow-sm transition-colors group flex flex-col justify-between"
+          className="bg-white border border-slate-200/80 hover:border-[#2271b1] rounded-sm p-3.5 shadow-sm transition-colors group flex flex-col justify-between"
         >
           <div className="flex items-center justify-between">
             <span className="text-[11px] font-normal text-[#646970] uppercase">Messages</span>
@@ -228,8 +228,8 @@ export default async function AdminDashboard() {
         {/* LEFT COLUMN: 3/4 Width (lg:col-span-3) */}
         <div className="lg:col-span-3 space-y-4">
           {/* Meta Box: D'un coup d'œil */}
-          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-hidden">
-            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7]">
+          <div className="bg-white border border-slate-200/80 rounded-sm shadow-sm overflow-hidden">
+            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-slate-200/80">
               <h2 className="text-xs font-normal uppercase tracking-wider text-[#1d2327]">
                 D'un coup d'œil
               </h2>
@@ -271,13 +271,13 @@ export default async function AdminDashboard() {
             </div>
 
             <div className="px-4 py-2 bg-[#f6f7f7] border-t border-[#f0f0f1] text-[11px] text-[#646970] font-normal">
-              ME2I Maintenance et Énergie : Propulsé par Next.js et Supabase Database
+              MCI Maintenance et Énergie : Propulsé par Next.js et Supabase Database
             </div>
           </div>
 
           {/* Meta Box: Activité Récente */}
-          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-hidden">
-            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7] flex items-center justify-between">
+          <div className="bg-white border border-slate-200/80 rounded-sm shadow-sm overflow-hidden">
+            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-slate-200/80 flex items-center justify-between">
               <h2 className="text-xs font-normal uppercase tracking-wider text-[#1d2327]">
                 Activité récente
               </h2>
@@ -375,8 +375,8 @@ export default async function AdminDashboard() {
           />
 
           {/* Meta Box: Brouillon rapide */}
-          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-hidden">
-            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7]">
+          <div className="bg-white border border-slate-200/80 rounded-sm shadow-sm overflow-hidden">
+            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-slate-200/80">
               <h2 className="text-xs font-normal uppercase tracking-wider text-[#1d2327]">
                 Brouillon rapide
               </h2>
@@ -385,7 +385,7 @@ export default async function AdminDashboard() {
             <QuickDraftWidget />
 
             {draftArticlesList.length > 0 && (
-              <div className="p-3 bg-[#f6f7f7] border-t border-[#c3c4c7] space-y-2 text-xs font-normal">
+              <div className="p-3 bg-[#f6f7f7] border-t border-slate-200/80 space-y-2 text-xs font-normal">
                 <div className="text-[10px] text-[#646970] uppercase tracking-wider">
                   Brouillons récents :
                 </div>
@@ -404,8 +404,8 @@ export default async function AdminDashboard() {
           </div>
 
           {/* Meta Box: Raccourcis Rapides */}
-          <div className="bg-white border border-[#c3c4c7] rounded-sm shadow-sm overflow-hidden">
-            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-[#c3c4c7]">
+          <div className="bg-white border border-slate-200/80 rounded-sm shadow-sm overflow-hidden">
+            <div className="px-4 py-2.5 bg-[#f6f7f7] border-b border-slate-200/80">
               <h2 className="text-xs font-normal uppercase tracking-wider text-[#1d2327]">
                 Raccourcis rapides
               </h2>

@@ -195,7 +195,7 @@ function HeroSection({ settings = {} }: { settings?: Record<string, string> }) {
   const ctaRef = useRef<HTMLDivElement>(null)
   const imageColumnRef = useRef<HTMLDivElement>(null)
 
-  const companyName = (settings.company_name || 'ME2I').toUpperCase()
+  const companyName = (settings.company_name || 'MCI').toUpperCase()
   const tagline = settings.tagline || 'Solutions Digitales & Industrie de Demain'
   const address = settings.address || 'Douala / Yaoundé, Cameroun'
   const email = settings.email || 'contact@me2i.cm'
@@ -373,7 +373,7 @@ function WhoWeAreSection() {
               <div className="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-xl border border-slate-100 bg-slate-100 lg:-my-24 z-20">
                 <img
                   src="/me2isolaire.jpg"
-                  alt="Installations solaires et continuité énergétique ME2I"
+                  alt="Installations solaires et continuité énergétique MCI"
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -396,7 +396,7 @@ function WhoWeAreSection() {
                 Qui sommes-nous ?
               </h2>
               <p className="mt-6 text-base text-slate-600 leading-relaxed max-w-[620px]">
-                <strong>ME2I (Maintenance Industrielle et Énergie sans Interruption)</strong> est une entreprise technique spécialisée dans les solutions énergétiques, la maintenance industrielle et l’automatisme. 
+                <strong>MCI (Maintenance Industrielle et Énergie sans Interruption)</strong> est une entreprise technique spécialisée dans les solutions énergétiques, la maintenance industrielle et l’automatisme. 
               </p>
               <p className="mt-4 text-base text-slate-600 leading-relaxed max-w-[620px]">
                 Notre mission est d’accompagner les entreprises, industries, hôpitaux, bâtiments publics et établissements privés dans la continuité énergétique et la fiabilité de leurs installations.
@@ -584,7 +584,7 @@ function SectorsSection() {
             Des solutions adaptées à votre domaine
           </h2>
           <p className="mt-4 text-base text-slate-500 font-normal leading-relaxed">
-            ME2I intervient dans de nombreux secteurs d'activité, apportant son expertise technique et sa rigueur opérationnelle à des clients variés.
+            MCI intervient dans de nombreux secteurs d'activité, apportant son expertise technique et sa rigueur opérationnelle à des clients variés.
           </p>
         </motion.div>
 
@@ -652,7 +652,7 @@ function SectorsSection() {
           variants={fadeInUp}
         >
           <p className="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed">
-            Quel que soit votre secteur, ME2I vous accompagne avec des solutions énergétiques adaptées à vos exigences opérationnelles.
+            Quel que soit votre secteur, MCI vous accompagne avec des solutions énergétiques adaptées à vos exigences opérationnelles.
           </p>
           <Link
             to="/contact"

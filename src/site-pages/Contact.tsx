@@ -10,7 +10,7 @@ export default function Contact({ settings = {} }: { settings?: Record<string, s
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
 
-  const companyName = settings.company_name || 'ME2I'
+  const companyName = settings.company_name || 'MCI'
   const email = settings.email || 'contact@me2i.cm'
   const phone = settings.phone || '+237 699 00 00 00'
   const emergencyPhone = settings.emergency_phone || '+237 677 00 00 00'

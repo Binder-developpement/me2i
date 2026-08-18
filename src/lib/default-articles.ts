@@ -26,7 +26,7 @@ export const fallbackLongArticles = [
       <p>Comprend la pompe à eau centrifuge, le calorstat (thermostat), le radiateur à eau avec faisceaux en cuivre/aluminium, le ventilateur débrayable ou entraîné par courroie et le réchauffeur de bloc moteur électrique. Ce dernier maintient le liquide de refroidissement entre 40°C et 50°C hors fonctionnement afin d'assurer une lubrification immédiate dès l'amorçage du moteur.</p>
 
       <div class="bg-blue-50 p-6 border-l-4 border-blue-600 my-6 text-slate-800 rounded-r shadow-sm">
-        <strong>Recommandation de l'expert ME2I :</strong> L'utilisation d'eau du robinet non traitée dans le circuit de refroidissement provoque le tartrage accéléré du radiateur et la corrosion de la chemise de cylindre. Utilisez exclusivement un liquide de refroidissement organique longue durée anticorrosion.
+        <strong>Recommandation de l'expert MCI :</strong> L'utilisation d'eau du robinet non traitée dans le circuit de refroidissement provoque le tartrage accéléré du radiateur et la corrosion de la chemise de cylindre. Utilisez exclusivement un liquide de refroidissement organique longue durée anticorrosion.
       </div>
 
       <h2>3. Arbre de décision et méthodologie de dépannage pas à pas</h2>
@@ -52,15 +52,15 @@ export const fallbackLongArticles = [
         <li><strong>Alarme défaut d'alternateur / Sous-fréquence :</strong> Si le moteur n'atteint pas 1500 tr/min dans le délai imparti (généralement 10 secondes), vérifier le régulateur de vitesse électronique (Actuateur et boîtier ESD).</li>
       </ul>
 
-      <h2>4. Maintenance prédictive et contrôles avancés ME2I</h2>
-      <p>Pour dépasser le simple dépannage réactif, ME2I déploie un programme de maintenance prédictive s'appuyant sur :</p>
+      <h2>4. Maintenance prédictive et contrôles avancés MCI</h2>
+      <p>Pour dépasser le simple dépannage réactif, MCI déploie un programme de maintenance prédictive s'appuyant sur :</p>
       <ul>
         <li><strong>L'analyse spectrométrique de l'huile moteur :</strong> Mesure des taux de silice, fer, cuivre et suie pour détecter le jeu des coussinets avant le coulage de bielle.</li>
         <li><strong>L'analyse vibratoire de l'accouplement :</strong> Détection du désalignement laser entre le vilebrequin et l'arbre de l'alternateur.</li>
         <li><strong>Le test périodique sous banc de charge :</strong> Simulation de charge réelle à 100% pendant 2 heures pour décrasser la ligne d'échappement et valider la régulation thermique.</li>
       </ul>
 
-      <p>Nos équipes d'ingénieurs et techniciens spécialisés ME2I interviennent H24 dans tout le Cameroun pour le diagnostic, l'entretien et la remise en état intégrale de vos centrales de production d'énergie.</p>
+      <p>Nos équipes d'ingénieurs et techniciens spécialisés MCI interviennent H24 dans tout le Cameroun pour le diagnostic, l'entretien et la remise en état intégrale de vos centrales de production d'énergie.</p>
     `
   },
   {
@@ -89,7 +89,7 @@ export const fallbackLongArticles = [
       </ul>
 
       <div class="bg-amber-50 p-6 border-l-4 border-amber-500 my-6 text-slate-800 rounded-r shadow-sm">
-        <strong>Règle de sécurité ME2I :</strong> Dans les environnements poussiéreux ou humides du Cameroun, optez au minimum pour un cloisonnement en Forme 3b avec un indice de protection IP54 pour éviter la propagation d'un arc électrique accidentel.
+        <strong>Règle de sécurité MCI :</strong> Dans les environnements poussiéreux ou humides du Cameroun, optez au minimum pour un cloisonnement en Forme 3b avec un indice de protection IP54 pour éviter la propagation d'un arc électrique accidentel.
       </div>
 
       <h2>3. Dimensionnement électrique et calculs de puissance</h2>
@@ -115,8 +115,8 @@ export const fallbackLongArticles = [
         <li><strong>Sélectivité logique (ZSI - Zone Selective Interlocking) :</strong> Communication filaire entre les déclencheurs électroniques qui s'échangent des signaux de blocage pour localiser la zone exacte du défaut et déclencher de manière instantanée.</li>
       </ul>
 
-      <h2>5. Fabrication et contrôle qualité dans les ateliers ME2I</h2>
-      <p>ME2I conçoit, câble et valide vos TGBT et armoires de distribution industrielle selon un processus certifié : plan de câblage CAD, pliage et poinçonnage des barres de cuivre sur machine CNC, serrage au tournevis dynamométrique des connexions avec marquage au vernis témoin, et essais d'isolement diélectrique à 2.5 kV.</p>
+      <h2>5. Fabrication et contrôle qualité dans les ateliers MCI</h2>
+      <p>MCI conçoit, câble et valide vos TGBT et armoires de distribution industrielle selon un processus certifié : plan de câblage CAD, pliage et poinçonnage des barres de cuivre sur machine CNC, serrage au tournevis dynamométrique des connexions avec marquage au vernis témoin, et essais d'isolement diélectrique à 2.5 kV.</p>
     `
   },
   {
@@ -144,7 +144,7 @@ export const fallbackLongArticles = [
       </ul>
 
       <div class="bg-emerald-50 p-6 border-l-4 border-emerald-600 my-6 text-slate-800 rounded-r shadow-sm">
-        <strong>Bonne pratique d'ingénierie ME2I :</strong> Nous appliquons la programmation orientée objet industrielle (PackML) qui sépare clairement les modes de marche (Auto, Manuel, Initialisation, Arrêt d'urgence) afin d'assurer une sécurité absolue des opérateurs.
+        <strong>Bonne pratique d'ingénierie MCI :</strong> Nous appliquons la programmation orientée objet industrielle (PackML) qui sépare clairement les modes de marche (Auto, Manuel, Initialisation, Arrêt d'urgence) afin d'assurer une sécurité absolue des opérateurs.
       </div>
 
       <h2>3. Les réseaux de communication industriels et bus de terrain</h2>
@@ -157,7 +157,7 @@ export const fallbackLongArticles = [
       <p>Le protocole universel le plus répandu pour l'intégration des centrales de mesure électriques, des cartes de contrôle DSE/ComAp de groupes électrogènes et des onduleurs. Sa simplicité de mise en œuvre en fait le standard incontournable pour la GTC/GTB.</p>
 
       <h2>4. Développement des systèmes de supervision SCADA et IHM</h2>
-      <p>Le système SCADA (Supervisory Control and Data Acquisition) constitue l'interface homme-machine (IHM) sur écran tactile ou poste PC centralisé dans la salle de commande. Un bon système SCADA conçu par ME2I intègre :</p>
+      <p>Le système SCADA (Supervisory Control and Data Acquisition) constitue l'interface homme-machine (IHM) sur écran tactile ou poste PC centralisé dans la salle de commande. Un bon système SCADA conçu par MCI intègre :</p>
 
       <ul>
         <li><strong>Des synoptiques d'animation clairs :</strong> Représentation dynamique en temps réel de l'état des vannes, pompes, tensions et températures.</li>
@@ -166,7 +166,7 @@ export const fallbackLongArticles = [
       </ul>
 
       <h2>5. Cybersécurité des réseaux industriels (OT)</h2>
-      <p>Avec l'ouverture des usines vers l'Internet des objets (IIoT), la protection des réseaux automates contre les cyberattaques devient prioritaire. ME2I met en place le cloisonnement par VLANs, des pare-feu industriels spécialisés (Hirschmann, Siemens Scalance) et la désactivation des ports non utilisés.</p>
+      <p>Avec l'ouverture des usines vers l'Internet des objets (IIoT), la protection des réseaux automates contre les cyberattaques devient prioritaire. MCI met en place le cloisonnement par VLANs, des pare-feu industriels spécialisés (Hirschmann, Siemens Scalance) et la désactivation des ports non utilisés.</p>
     `
   },
   {
@@ -193,20 +193,20 @@ export const fallbackLongArticles = [
         <li><strong>Ammoniac (NH3 / R-717) :</strong> Le fluide naturel idéal pour les très grandes capacités (au-delà de 300 kW). Efficacité thermodynamique imbattable mais nécessitant des mesures de sécurité strictes en raison de sa toxicité.</li>
       </ul>
 
-      <h2>3. Le protocole de maintenance préventive ME2I</h2>
+      <h2>3. Le protocole de maintenance préventive MCI</h2>
 
       <h3>3.1. Gestion de la sous-chauffe et réglage des détendeurs électroniques</h3>
       <p>La surchauffe à la sortie de l'évaporateur doit être ajustée entre 5 K et 8 K. Une surchauffe trop faible risque d'entraîner du fluide liquide jusqu'aux compresseurs (coup de liquide), ce qui détruit instantanément les clapets ou les vis. Une surchauffe trop élevée réduit la surface utile de l'évaporateur et dégrade le rendement thermique.</p>
 
       <h3>3.2. Analyse physico-chimique de l'huile compresseur et détection d'acidité</h3>
-      <p>L'huile assure la lubrification des roulements, l'étanchéité entre les vis et l'évacuation de la chaleur de compression. La dégradation de l'huile par humidité ou surchauffe génère des acides gras qui rongent le vernis des moteurs. ME2I réalise des prélèvements d'huile périodiques avec mesure du TAN (Total Acid Number) et remplacement des cartouches de filtres à huile.</p>
+      <p>L'huile assure la lubrification des roulements, l'étanchéité entre les vis et l'évacuation de la chaleur de compression. La dégradation de l'huile par humidité ou surchauffe génère des acides gras qui rongent le vernis des moteurs. MCI réalise des prélèvements d'huile périodiques avec mesure du TAN (Total Acid Number) et remplacement des cartouches de filtres à huile.</p>
 
       <div class="bg-amber-50 p-6 border-l-4 border-amber-500 my-6 text-slate-800 rounded-r shadow-sm">
         <strong>Vérification critique :</strong> Contrôler l'étanchéité des vannes d'inversion de gaz chaud et l'état des résistances électriques de dégivrage des bacs de condensats pour éviter la formation de blocs de glace qui détruisent les ventilateurs d'évaporateur.
       </div>
 
       <h2>4. Optimisation énergétique et régulation de pression de condensation</h2>
-      <p>Le poste frigorifique représente jusqu'à 60% de la facture d'électricité d'un site agroalimentaire. Les ingénieurs ME2I mettent en œuvre des leviers d'économie d'énergie majeurs :</p>
+      <p>Le poste frigorifique représente jusqu'à 60% de la facture d'électricité d'un site agroalimentaire. Les ingénieurs MCI mettent en œuvre des leviers d'économie d'énergie majeurs :</p>
 
       <ul>
         <li><strong>La Condensation Flottante :</strong> Ajustement dynamique de la consigne de pression HP en fonction de la température extérieure mesurée. Chaque degré de baisse de la température de condensation réduit la consommation électrique des compresseurs de 3%.</li>
@@ -214,7 +214,7 @@ export const fallbackLongArticles = [
         <li><strong>La Récupération de Chaleur :</strong> Exploitation des calories de désurchauffe du fluide frigo pour préchauffer l'eau sanitaire ou l'eau de lavage d'usine à 60°C.</li>
       </ul>
 
-      <p>Faites confiance aux experts frigoristes ME2I pour le dimensionnement, l'installation, la maintenance et l'optimisation énergétique de vos centrales frigorifiques au Cameroun.</p>
+      <p>Faites confiance aux experts frigoristes MCI pour le dimensionnement, l'installation, la maintenance et l'optimisation énergétique de vos centrales frigorifiques au Cameroun.</p>
     `
   },
   {
@@ -248,20 +248,20 @@ export const fallbackLongArticles = [
       </ul>
 
       <div class="bg-emerald-50 p-6 border-l-4 border-emerald-600 my-6 text-slate-800 rounded-r shadow-sm">
-        <strong>Gain d'exploitation validé ME2I :</strong> L'ajout d'une batterie Lithium LFP en mode Grid-Forming permet d'éteindre totalement les groupes électrogènes pendant 8 à 14 heures par jour, réduisant la consommation annuelle de gasoil de 55% à 72%.
+        <strong>Gain d'exploitation validé MCI :</strong> L'ajout d'une batterie Lithium LFP en mode Grid-Forming permet d'éteindre totalement les groupes électrogènes pendant 8 à 14 heures par jour, réduisant la consommation annuelle de gasoil de 55% à 72%.
       </div>
 
       <h2>4. Étude de cas financière : Retour sur investissement (ROI)</h2>
       <p>Pour une usine consommant 500 kW en continu avec un prix du gasoil rendu site de 750 FCFA / litre :</p>
       <ul>
         <li><strong>Consommation annuelle 100% Diesel :</strong> ~ 1 100 000 litres de gasoil = <strong>825 000 000 FCFA / an</strong>.</li>
-        <li><strong>Consommation avec Centrale Hybride ME2I (750 kWp PV + 1 MWh BESS) :</strong> ~ 350 000 litres = <strong>262 500 000 FCFA / an</strong>.</li>
+        <li><strong>Consommation avec Centrale Hybride MCI (750 kWp PV + 1 MWh BESS) :</strong> ~ 350 000 litres = <strong>262 500 000 FCFA / an</strong>.</li>
         <li><strong>Économie brute annuelle :</strong> <strong>562 500 000 FCFA / an</strong>.</li>
         <li><strong>Temps de retour sur investissement (Payback) :</strong> <strong>3.2 ans</strong> pour une durée de vie des équipements de 25 ans.</li>
       </ul>
 
-      <h2>5. Accompagnement clé en main par ME2I</h2>
-      <p>Du relevé de courbe de charge par analyseur de réseau jusqu'à la mise en service, ME2I assure l'ingénierie, la fourniture des conteneurs BESS, l'installation des structures solaires et la maintenance longue durée de vos centrales microgrid.</p>
+      <h2>5. Accompagnement clé en main par MCI</h2>
+      <p>Du relevé de courbe de charge par analyseur de réseau jusqu'à la mise en service, MCI assure l'ingénierie, la fourniture des conteneurs BESS, l'installation des structures solaires et la maintenance longue durée de vos centrales microgrid.</p>
     `
   },
   {
@@ -293,7 +293,7 @@ export const fallbackLongArticles = [
         <strong>Norme de référence :</strong> La norme EN 50160 et la CEI 61000-4-30 fixent le niveau de Taux de Dépollution Harmonique maximal en tension (THD-U) à 8% en milieu industriel. Au-delà, des actions de filtrage sont obligatoires.
       </div>
 
-      <h2>3. Les solutions de dépollution réseau déployées par ME2I</h2>
+      <h2>3. Les solutions de dépollution réseau déployées par MCI</h2>
 
       <h3>3.1. Les Filtres Actifs d'Harmoniques (AHF - Active Harmonic Filter)</h3>
       <p>Le filtre actif d'harmoniques est une électronique de puissance ultra-rapide connectée en parallèle sur le TGBT. Il mesure en temps réel les courants harmoniques déformés générés par les charges et réinjecte instantanément des courants harmoniques en opposition de phase parfaite. Le réseau amont ne voit plus qu'un courant sinusoïdal pur à 50 Hz avec un Cos Phi égal à 1.0.</p>
@@ -301,8 +301,8 @@ export const fallbackLongArticles = [
       <h3>3.2. Les compensateurs de creux de tension (DVR - Dynamic Voltage Restorer)</h3>
       <p>Dispositifs basés me sur des supercondensateurs ou des réserves d'énergie ultra-rapides capables d'injecter la tension manquante en moins de 2 millisecondes pour maintenir une tension de 400V constante lors des perturbations du réseau public.</p>
 
-      <h2>4. Campagne de mesure et diagnostic par ME2I</h2>
-      <p>ME2I dispose d'analyseurs de qualité d'énergie de classe A (Fluke 435-II et Chauvin Arnoux CA 8336). Nos ingénieurs réalisent des enregistrements sur 7 jours avec rapport de conformité IEEE 519 et préconisation des filtres actifs adaptés.</p>
+      <h2>4. Campagne de mesure et diagnostic par MCI</h2>
+      <p>MCI dispose d'analyseurs de qualité d'énergie de classe A (Fluke 435-II et Chauvin Arnoux CA 8336). Nos ingénieurs réalisent des enregistrements sur 7 jours avec rapport de conformité IEEE 519 et préconisation des filtres actifs adaptés.</p>
     `
   },
   {
@@ -350,8 +350,8 @@ export const fallbackLongArticles = [
       <h3>3.2. La ferrographie et l'analyse particulaire d'huile</h3>
       <p>Comptage des micro-particules métalliques en suspension dans l'huile d'un réducteur pour déterminer la vitesse d'usure des engrenages.</p>
 
-      <h2>4. Déploiement d'un programme prédictif par ME2I</h2>
-      <p>ME2I accompagne les industriels au Cameroun dans la mise en place de la maintenance prédictive : création de la base de données des machines, définition des points de mesure, rondes vibratoires mensuelles et rapports de santé d'équipement avec recommandations d'intervention.</p>
+      <h2>4. Déploiement d'un programme prédictif par MCI</h2>
+      <p>MCI accompagne les industriels au Cameroun dans la mise en place de la maintenance prédictive : création de la base de données des machines, définition des points de mesure, rondes vibratoires mensuelles et rapports de santé d'équipement avec recommandations d'intervention.</p>
     `
   },
   {
@@ -377,7 +377,7 @@ export const fallbackLongArticles = [
         <li>Présence de fumées bleues ou blanches intenses à l'échappement et perte de puissance importante.</li>
       </ul>
 
-      <h2>3. Les étapes méthodologiques du reconditionnement dans les ateliers ME2I</h2>
+      <h2>3. Les étapes méthodologiques du reconditionnement dans les ateliers MCI</h2>
 
       <h3>3.1. Démontage complet et nettoyage chimique ultrasonique</h3>
       <p>Le groupe est désaccouplé de l'alternateur. Le moteur est entièrement mis à nu. Le bloc moteur, les culasses, le vilebrequin et les bielles sont dégraissés et détartrés dans des bacs de nettoyage haute température.</p>
@@ -391,13 +391,13 @@ export const fallbackLongArticles = [
       </ul>
 
       <div class="bg-blue-50 p-6 border-l-4 border-blue-600 my-6 text-slate-800 rounded-r shadow-sm">
-        <strong>Remplacement systématique du kit de révision :</strong> Lors d'un Overhaul ME2I, les éléments suivants sont obligatoirement remplacés par des pièces neuves d'origine : chemises, pistons, segments, axes de pistons, coussinets de bielle et de palier, soupapes d'admission/échappement, guides et sièges de soupapes, pochette de joints complète, pompe à huile, pompe à eau, calorstats et turbocompresseurs.
+        <strong>Remplacement systématique du kit de révision :</strong> Lors d'un Overhaul MCI, les éléments suivants sont obligatoirement remplacés par des pièces neuves d'origine : chemises, pistons, segments, axes de pistons, coussinets de bielle et de palier, soupapes d'admission/échappement, guides et sièges de soupapes, pochette de joints complète, pompe à huile, pompe à eau, calorstats et turbocompresseurs.
       </div>
 
       <h3>3.3. Remontage au couple et rodage sous banc de charge</h3>
       <p>Le remontage est effectué sous environnement propre avec serrage des vis de culasse et de chapeaux de bielle au couple et à l'angle préconisés. Le moteur réassemblé est monté sur le banc de test pour un rodage progressif de 8 heures sous paliers de charge avec contrôle des pressions et de l'étanchéité.</p>
 
-      <p>Prolongez la durée de vie de vos investissements moteurs avec les révisions majeures certifiées par les ateliers ME2I à Douala.</p>
+      <p>Prolongez la durée de vie de vos investissements moteurs avec les révisions majeures certifiées par les ateliers MCI à Douala.</p>
     `
   },
   {
@@ -435,8 +435,8 @@ export const fallbackLongArticles = [
         <li><strong>Mode Isochrone avec ligne de bus de couplage (CANbus Share) :</strong> Les cartes de contrôle automatiques s'échangent des trames numériques à haute vitesse sur bus CAN dédié pour maintenir une fréquence rigoureusement fixe à 50.0 Hz quelle que soit la charge.</li>
       </ul>
 
-      <h2>4. Réalisation d'armoires de synchro-couplage par ME2I</h2>
-      <p>ME2I conçoit et fabrique des armoires de couplage et inverseurs automatiques sur mesure intégrant des disjoncteurs motorisés (Masterpact MTX/NT, ABB Emax2) et des modules de synchronisation numériques de pointe.</p>
+      <h2>4. Réalisation d'armoires de synchro-couplage par MCI</h2>
+      <p>MCI conçoit et fabrique des armoires de couplage et inverseurs automatiques sur mesure intégrant des disjoncteurs motorisés (Masterpact MTX/NT, ABB Emax2) et des modules de synchronisation numériques de pointe.</p>
     `
   },
   {
@@ -453,9 +453,9 @@ export const fallbackLongArticles = [
       <p>Dans de nombreuses installations industrielles et tertiaires au Cameroun, l'extension progressive des bâtiments sans révision du schéma directeur électrique entraîne des risques d'incendie dévastateurs, des risques d'électrocution pour le personnel et des pannes d'exploitation récurrentes.</p>
 
       <h2>2. Les référentiels normatifs internationaux applicables (NF C 15-100 et NF C 18-510)</h2>
-      <p>L'audit de sécurité réalisé par les ingénieurs d'études ME2I s'appuie sur les exigences des normes NF C 15-100 (conception des installations BT), NF C 18-510 (sécurité des personnes et habilitations électriques) et IEC 60364.</p>
+      <p>L'audit de sécurité réalisé par les ingénieurs d'études MCI s'appuie sur les exigences des normes NF C 15-100 (conception des installations BT), NF C 18-510 (sécurité des personnes et habilitations électriques) et IEC 60364.</p>
 
-      <h2>3. Les étapes d'un audit de sécurité électrique ME2I</h2>
+      <h2>3. Les étapes d'un audit de sécurité électrique MCI</h2>
 
       <h3>3.1. Mesure de la boucle de terre et continuité des masses</h3>
       <p>La prise de terre est l'élément fondamental de la sécurité. Sans une bonne prise de terre, les disjoncteurs différentiels ne peuvent pas fonctionner correctement.</p>
@@ -473,10 +473,10 @@ export const fallbackLongArticles = [
       </ul>
 
       <div class="bg-blue-50 p-6 border-l-4 border-blue-600 my-6 text-slate-800 rounded-r shadow-sm">
-        <strong>Livrable ME2I :</strong> À l'issue de l'audit, nous vous remettons un dossier de synthèse comprenant le schéma unifilaire remis à jour, la cartographie des anomalies classées par priorité de risque, et le devis estimatif des travaux de mise en conformité.
+        <strong>Livrable MCI :</strong> À l'issue de l'audit, nous vous remettons un dossier de synthèse comprenant le schéma unifilaire remis à jour, la cartographie des anomalies classées par priorité de risque, et le devis estimatif des travaux de mise en conformité.
       </div>
 
-      <p>Garantissez la sécurité de vos collaborateurs et la pérennité de votre outil industriel avec l'audit de sécurité électrique ME2I.</p>
+      <p>Garantissez la sécurité de vos collaborateurs et la pérennité de votre outil industriel avec l'audit de sécurité électrique MCI.</p>
     `
   }
 ]

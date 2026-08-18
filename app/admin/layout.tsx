@@ -5,7 +5,7 @@ import { headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
 export const metadata = {
-  title: 'Administration - ME2I',
+  title: 'Administration - MCI',
   robots: 'noindex, nofollow',
 }
 

@@ -41,7 +41,7 @@ export default function ServicesClient({ initialServices }: { initialServices: S
             Ingénierie & Services Industriels au Cameroun
           </h1>
           <p className="text-gray-600 text-base sm:text-lg">
-            ME2I accompagne les industriels, les mines et les infrastructures privées et publiques avec des prestations de haute précision.
+            MCI accompagne les industriels, les mines et les infrastructures privées et publiques avec des prestations de haute précision.
           </p>
         </div>
 
@@ -78,7 +78,7 @@ export default function ServicesClient({ initialServices }: { initialServices: S
                     {service.title}
                   </h3>
                   <p className="text-sm text-gray-600 leading-relaxed mb-6 font-normal">
-                    {service.description || 'Intervention rapide et expertise technique garantie par les ingénieurs ME2I.'}
+                    {service.description || 'Intervention rapide et expertise technique garantie par les ingénieurs MCI.'}
                   </p>
                 </div>
 

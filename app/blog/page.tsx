@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     canonical: '/blog',
   },
   openGraph: {
-    title: 'Blog et Articles d\'Expertise | ME2I Cameroun',
+    title: 'Blog et Articles d\'Expertise | MCI Cameroun',
     description: 'Guides pratiques et grands dossiers d\'ingénierie sur la maintenance industrielle et les groupes électrogènes au Cameroun.',
   },
 }

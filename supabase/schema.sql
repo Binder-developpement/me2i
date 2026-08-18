@@ -1,5 +1,5 @@
 -- ============================================================
--- ME2I Admin — Supabase Schema
+-- MCI Admin - Supabase Schema
 -- À exécuter dans Supabase Dashboard > SQL Editor
 -- ============================================================
 
@@ -89,12 +89,12 @@ CREATE TABLE IF NOT EXISTS company_settings (
 
 -- Insert default settings
 INSERT INTO company_settings (key, value) VALUES
-  ('company_name', 'ME2I'),
+  ('company_name', 'MCI'),
   ('tagline', 'Maintenance Industrielle & Énergie sans Interruption'),
   ('email', 'contact@me2i.cm'),
   ('phone', '+237 000 000 000'),
   ('emergency_phone', '+237 000 000 001'),
-  ('address', 'Cameroun — Afrique centrale'),
+  ('address', 'Cameroun - Afrique centrale'),
   ('linkedin_url', ''),
   ('facebook_url', ''),
   ('opening_hours', 'Lundi – Vendredi : 7h30 – 18h00'),

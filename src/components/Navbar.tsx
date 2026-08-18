@@ -59,10 +59,10 @@ export default function Navbar() {
       >
         <div className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-6 lg:px-12">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 shrink-0" aria-label="Accueil ME2I">
+          <Link to="/" className="flex items-center gap-3 shrink-0" aria-label="Accueil MCI">
             <div className="flex flex-col">
               <span className="text-[21px] font-semibold uppercase tracking-wider text-bleu-marianne leading-tight">
-                ME2I
+                MCI
               </span>
               <span className="text-[13px] font-medium text-gris-fonce leading-tight mt-0.5">
                 L'industrie du futur en action
@@ -167,7 +167,7 @@ export default function Navbar() {
                 </nav>
                 <div className="mt-auto">
                   <p className="text-slate-400 text-sm">
-                    ME2I
+                    MCI
                   </p>
                 </div>
               </div>

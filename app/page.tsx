@@ -8,7 +8,7 @@ export const revalidate = 0
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm';
 
 export const metadata: Metadata = {
-  title: "ME2I : Leader en Maintenance Industrielle et Énergie au Cameroun",
+  title: "MCI : Leader en Maintenance Industrielle et Énergie au Cameroun",
   description:
     "Expertise haut de gamme en maintenance industrielle, groupes électrogènes, automatisme, armoires électriques et installations solaires hybrides à Douala et Yaoundé.",
   keywords: [
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     canonical: "./",
   },
   openGraph: {
-    title: "ME2I : Leader en Maintenance Industrielle et Énergie au Cameroun",
+    title: "MCI : Leader en Maintenance Industrielle et Énergie au Cameroun",
     description: "Expertise en maintenance industrielle, groupes électrogènes, automatisme et installations électriques.",
     url: baseUrl,
     images: [
@@ -35,13 +35,13 @@ export const metadata: Metadata = {
         url: `${baseUrl}/og-preview.png`,
         width: 1200,
         height: 630,
-        alt: "ME2I Maintenance Industrielle et Énergie",
+        alt: "MCI Maintenance Industrielle et Énergie",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ME2I : Leader en Maintenance Industrielle et Énergie au Cameroun",
+    title: "MCI : Leader en Maintenance Industrielle et Énergie au Cameroun",
     description: "Expertise en maintenance industrielle, groupes électrogènes, automatisme et installations électriques.",
     images: [`${baseUrl}/og-preview.png`],
   },
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   let settingsMap: Record<string, string> = {
-    company_name: 'ME2I',
+    company_name: 'MCI',
     tagline: 'Maintenance Industrielle & Énergie sans Interruption',
     email: 'contact@me2i.cm',
     phone: '+237 699 00 00 00',
