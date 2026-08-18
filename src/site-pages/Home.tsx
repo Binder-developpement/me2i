@@ -777,49 +777,113 @@ function NewsSection({ articles = [] }: { articles?: ArticleItem[] }) {
   )
 }
 
-/* ──────────────────────── Metrics Section ──────────────────────── */
+/* ──────────────────────── Pôles d'Expertise Section ──────────────────────── */
 
-function MetricsSection() {
+function ExpertiseGridSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
-  const metrics = [
-    { target: 99, suffix: '.9%', label: 'Disponibilité Énergétique', desc: 'Assurée sur les sites critiques de nos partenaires industriels.', icon: Zap },
-    { target: 250, suffix: '+', label: 'Dépannages & Astreintes / an', desc: 'Interventions rapides en cas de panne critique.', icon: Clock },
-    { target: 15, suffix: '+', label: 'Ans d\'Expertise Collective', desc: 'Cumulés par notre équipe d\'ingénieurs et techniciens.', icon: Users },
-    { target: 50, suffix: '+', label: 'Sites Industriels Partenaires', desc: 'Entreprises qui nous confient la maintenance de leurs équipements.', icon: Factory }
+  const departments = [
+    {
+      title: 'Maintenance & Installation Industrielle',
+      color: 'border-t-[#1E3A5F] hover:shadow-[#1E3A5F]/5',
+      accentColor: 'text-[#1E3A5F]',
+      icon: Wrench,
+      items: [
+        'Électricité industrielle & solaire',
+        'Mécanique de précision',
+        'Entretien groupes électrogènes',
+        'Dépannage équipements industriels',
+        'Maintenance préventive contractuelle'
+      ]
+    },
+    {
+      title: 'Construction Industrielle',
+      color: 'border-t-[#D16B0A] hover:shadow-[#D16B0A]/5',
+      accentColor: 'text-[#D16B0A]',
+      icon: Settings,
+      items: [
+        'Conception mécanique assistée (CAO)',
+        'Fabrication mécanique',
+        'Chaudronnerie industrielle',
+        'Montage et tuyauterie sur site'
+      ]
+    },
+    {
+      title: 'Solutions Numériques & Contrôle d\'Accès',
+      color: 'border-t-[#27A658] hover:shadow-[#27A658]/5',
+      accentColor: 'text-[#27A658]',
+      icon: Shield,
+      items: [
+        'Architecture réseaux & systèmes',
+        'Systèmes de contrôle d\'accès',
+        'Vidéosurveillance IP industrielle',
+        'Support informatique & maintenance IT'
+      ]
+    },
+    {
+      title: 'Formation Technique',
+      color: 'border-t-[#7B3FA0] hover:shadow-[#7B3FA0]/5',
+      accentColor: 'text-[#7B3FA0]',
+      icon: BookOpen,
+      items: [
+        'Formations techniques qualifiantes',
+        'Renforcement des compétences locales',
+        'Accompagnement et transfert technologique'
+      ]
+    }
   ]
 
   return (
-    <section ref={ref} className="bg-slate-900 text-white py-16 lg:py-24" aria-labelledby="metrics-title">
+    <section ref={ref} className="bg-white py-20 lg:py-28" aria-labelledby="expertise-title">
       <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
-        <h2 id="metrics-title" className="sr-only">Chiffres clés de l&apos;entreprise</h2>
         <motion.div 
-          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
+          className="mb-16 text-center max-w-2xl mx-auto"
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeInUp}
+        >
+          <span className="text-[11px] font-bold uppercase tracking-widest text-[#2A5DB0] mb-2.5 block">
+            Départements techniques
+          </span>
+          <h2 id="expertise-title" className="font-heading text-3xl sm:text-4xl font-normal text-[#1d2327] tracking-tight">
+            Nos pôles d&apos;activité
+          </h2>
+          <p className="mt-4 text-xs sm:text-sm text-slate-500 font-normal leading-relaxed">
+            MCI déploie une expertise pluridisciplinaire au service de la performance industrielle et de la continuité énergétique de vos installations.
+          </p>
+        </motion.div>
+
+        <motion.div 
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-4"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
         >
-          {metrics.map((m, idx) => {
-            const Icon = m.icon
+          {departments.map((dept, idx) => {
+            const Icon = dept.icon
             return (
               <motion.div 
-                key={idx} 
+                key={idx}
                 variants={staggerItem}
-                className="flex flex-col items-center text-center p-6 bg-slate-800/40 border border-slate-700/40 rounded-sm hover:border-slate-600/60 transition-colors"
+                className={`bg-white border-t-4 ${dept.color} border border-slate-200/60 p-8 rounded-sm hover:-translate-y-1.5 hover:shadow-2xl hover:border-slate-200 transition-all duration-300 flex flex-col justify-between`}
               >
-                <div className="h-12 w-12 rounded-full bg-bleu-marianne-clair/10 flex items-center justify-center mb-4 text-[#2271b1]">
-                  <Icon className="h-6 w-6" />
+                <div>
+                  <div className={`h-12 w-12 rounded-full bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 ${dept.accentColor}`}>
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="text-base font-bold text-[#1d2327] leading-snug mb-5">
+                    {dept.title}
+                  </h3>
+                  <ul className="space-y-3">
+                    {dept.items.map((item, itemIdx) => (
+                      <li key={itemIdx} className="text-xs text-slate-500 font-normal leading-relaxed flex items-start gap-2">
+                        <span className={`inline-block mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-300`} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="flex items-baseline text-4xl lg:text-5xl font-bold tracking-tight text-white mb-2">
-                  <AnimatedCounter target={m.target} suffix={m.suffix} />
-                </div>
-                <div className="text-sm font-semibold uppercase tracking-wider text-white/90 mb-1">
-                  {m.label}
-                </div>
-                <p className="text-xs text-slate-400 font-normal leading-relaxed">
-                  {m.desc}
-                </p>
               </motion.div>
             )
           })}
@@ -829,69 +893,76 @@ function MetricsSection() {
   )
 }
 
-/* ──────────────────────── Quality Section ──────────────────────── */
+/* ──────────────────────── Engagements Section ──────────────────────── */
 
-function QualitySection() {
+function EngagementsSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
-  const qualities = [
+  const engagements = [
     {
-      title: "Disponibilité H24/J7",
-      desc: "Un service d'astreinte technique pour intervenir d'urgence sur vos équipements critiques.",
-      icon: Zap
+      title: "Assistance & Astreinte Technique",
+      desc: "Mobilisation réactive de nos équipes en cas de défaillance critique pour minimiser les arrêts de production.",
+      icon: Clock
     },
     {
-      title: "Pièces d'Origine (OEM)",
-      desc: "Garantie de longévité grâce à l'utilisation exclusive de pièces constructeurs certifiées.",
+      title: "Pièces d'Origine Constructeurs (OEM)",
+      desc: "Préservation de la garantie et de la fiabilité de vos machines grâce au choix exclusif de pièces d'origine.",
       icon: Settings
     },
     {
-      title: "Normes & Sécurité",
-      desc: "Conformité stricte aux exigences NFC 15-100 et standard IEC pour la protection de vos équipes.",
+      title: "Conformité Normative Rigoureuse",
+      desc: "Toutes nos prestations respectent strictement les standards internationaux de sécurité NFC 15-100 et IEC.",
       icon: Shield
     }
   ]
 
   return (
-    <section ref={ref} className="bg-[#f8fafc] py-16 lg:py-24 border-t border-b border-slate-200" aria-labelledby="quality-title">
+    <section ref={ref} className="bg-[#f8fafc] py-20 lg:py-28 border-t border-b border-slate-200/60" aria-labelledby="engagements-title">
       <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
         <motion.div 
-          className="mb-12 text-center max-w-2xl mx-auto"
+          className="mb-16 text-center max-w-2xl mx-auto"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={fadeInUp}
         >
-          <span className="text-[11px] font-bold uppercase tracking-widest text-[#2271b1] mb-2 block">Nos engagements</span>
-          <h2 id="quality-title" className="font-heading text-2xl sm:text-3xl font-normal text-[#1d2327]">
-            Rigueur, Normes &amp; Haute Disponibilité
+          <span className="text-[11px] font-bold uppercase tracking-widest text-[#2A5DB0] mb-2.5 block">
+            Charte d&apos;excellence
+          </span>
+          <h2 id="engagements-title" className="font-heading text-3xl sm:text-4xl font-normal text-[#1d2327] tracking-tight">
+            Engagements de Rigueur &amp; Qualité
           </h2>
-          <p className="mt-3 text-xs sm:text-sm text-slate-500 font-normal">
-            Notre philosophie repose sur le respect scrupuleux des normes de sécurité et la réactivité opérationnelle.
+          <p className="mt-4 text-xs sm:text-sm text-slate-500 font-normal leading-relaxed">
+            Chacune de nos interventions répond à des protocoles techniques stricts pour sécuriser vos investissements.
           </p>
         </motion.div>
 
         <motion.div 
-          className="grid gap-6 md:grid-cols-3"
+          className="grid gap-8 md:grid-cols-3"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
         >
-          {qualities.map((q, idx) => {
-            const Icon = q.icon
+          {engagements.map((eng, idx) => {
+            const Icon = eng.icon
             return (
               <motion.div 
                 key={idx}
                 variants={staggerItem}
-                className="bg-white p-8 border border-slate-200/80 rounded-sm hover:border-[#2271b1] transition-all hover:shadow-md duration-200 flex flex-col justify-between"
+                className="bg-white p-8 border border-slate-200/70 rounded-sm hover:border-[#2A5DB0]/50 hover:shadow-lg transition-all duration-300 flex flex-col justify-between relative group"
               >
                 <div>
-                  <div className="h-10 w-10 bg-slate-50 text-[#2271b1] border border-slate-100 flex items-center justify-center mb-6">
+                  <div className="h-10 w-10 bg-slate-50 text-[#2A5DB0] border border-slate-100 flex items-center justify-center mb-6 rounded-sm group-hover:scale-105 transition-transform duration-300">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h3 className="text-base font-bold text-[#1d2327] mb-3">{q.title}</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed font-normal">{q.desc}</p>
+                  <h3 className="text-base font-bold text-[#1d2327] mb-3 group-hover:text-[#2A5DB0] transition-colors duration-200">
+                    {eng.title}
+                  </h3>
+                  <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                    {eng.desc}
+                  </p>
                 </div>
+                <div className="absolute bottom-0 left-0 w-full h-[3px] bg-slate-100 group-hover:bg-[#2A5DB0] transition-colors duration-300 rounded-b-sm" />
               </motion.div>
             )
           })}
@@ -901,110 +972,57 @@ function QualitySection() {
   )
 }
 
-/* ──────────────────────── Workshop Section ──────────────────────── */
+/* ──────────────────────── Cycle Opérationnel Section (Timeline) ──────────────────────── */
 
-function WorkshopSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
-  return (
-    <section ref={ref} className="bg-white py-16 lg:py-24" aria-labelledby="workshop-title">
-      <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Image */}
-          <motion.div 
-            className="lg:col-span-6"
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="aspect-[16/10] overflow-hidden rounded-sm relative bg-slate-100 shadow-md border border-slate-200">
-              <img 
-                src="/images/atelier-container.jpg" 
-                alt="Atelier technique MCI sous conteneur" 
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-          </motion.div>
-
-          {/* Right Column: Text content */}
-          <motion.div 
-            className="lg:col-span-6 flex flex-col justify-center"
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-            variants={fadeInUp}
-          >
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[#2271b1] mb-2 block">
-              Infrastructures Modulaires
-            </span>
-            <h2 id="workshop-title" className="font-heading text-2xl sm:text-3xl font-normal text-[#1d2327] leading-snug">
-              Atelier Mobile &amp; Base Opérationnelle
-            </h2>
-            <p className="mt-4 text-xs sm:text-sm text-slate-500 font-normal leading-relaxed">
-              Pour assurer une réactivité maximale sur le terrain, MCI déploie des ateliers mobiles sous conteneurs de 20 pieds autonomes. Cette organisation rationnelle optimise nos opérations logistiques et techniques.
-            </p>
-
-            <div className="mt-6 grid grid-cols-2 gap-4 text-xs font-normal text-slate-600">
-              <div className="bg-slate-50 p-4 border border-slate-100 rounded-sm">
-                <span className="block font-bold text-[#1d2327] mb-1">Dans le conteneur</span>
-                <ul className="space-y-1.5 list-disc pl-4 text-slate-500">
-                  <li>Stock de pièces détachées</li>
-                  <li>Comptoir commercial</li>
-                  <li>Systèmes de programmation</li>
-                  <li>Composants électriques</li>
-                </ul>
-              </div>
-              <div className="bg-slate-50 p-4 border border-slate-100 rounded-sm">
-                <span className="block font-bold text-[#1d2327] mb-1">Sous toiture extérieure</span>
-                <ul className="space-y-1.5 list-disc pl-4 text-slate-500">
-                  <li>Poste à souder professionnel</li>
-                  <li>Perceuse à colonne</li>
-                  <li>Tour parallèle d&apos;usinage</li>
-                  <li>Établis et étaux de réglage</li>
-                </ul>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-/* ──────────────────────── Workflow Section ──────────────────────── */
-
-function WorkflowSection() {
+function TimelineSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const steps = [
-    { num: '01', title: 'Diagnostic & Mesure', desc: 'Campagne de mesures précises (thermographie, Fluke, vibrations) pour identifier la racine du problème.' },
-    { num: '02', title: 'Planification', desc: 'Rédaction d\'une proposition technique détaillée et chiffrée sous 24h ouvrées.' },
-    { num: '03', title: 'Intervention', desc: 'Déploiement immédiat de nos techniciens avec tout l\'outillage requis sur votre site.' },
-    { num: '04', title: 'Recette sous Charge', desc: 'Essais de validation en situation de charge réelle et signature du procès-verbal.' }
+    {
+      num: '01',
+      title: 'Diagnostic Instrumenté',
+      desc: 'Mesures ciblées (thermographie infrarouge, analyses réseau, tests vibratoires) pour poser un diagnostic exact.'
+    },
+    {
+      num: '02',
+      title: 'Ingénierie & Planification',
+      desc: 'Dimensionnement technique, calculs de charge et établissement d\'une offre claire sous 24h ouvrées.'
+    },
+    {
+      num: '03',
+      title: 'Déploiement Opérationnel',
+      desc: 'Réalisation des travaux sur votre site par nos ingénieurs et techniciens avec outillage professionnel.'
+    },
+    {
+      num: '04',
+      title: 'Recette sous Charge Réelle',
+      desc: 'Tests rigoureux de validation en fonctionnement réel et signature du procès-verbal de conformité.'
+    }
   ]
 
   return (
-    <section ref={ref} className="bg-[#f8fafc] py-16 lg:py-24 border-t border-b border-slate-200" aria-labelledby="workflow-title">
+    <section ref={ref} className="bg-white py-20 lg:py-28" aria-labelledby="timeline-title">
       <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
         <motion.div 
-          className="mb-14 text-center max-w-2xl mx-auto"
+          className="mb-20 text-center max-w-2xl mx-auto"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={fadeInUp}
         >
-          <span className="text-[11px] font-bold uppercase tracking-widest text-[#2271b1] mb-2 block">Méthodologie</span>
-          <h2 id="workflow-title" className="font-heading text-2xl sm:text-3xl font-normal text-[#1d2327]">
-            Notre Processus d&apos;Intervention
+          <span className="text-[11px] font-bold uppercase tracking-widest text-[#2A5DB0] mb-2.5 block">
+            Rigueur de méthode
+          </span>
+          <h2 id="timeline-title" className="font-heading text-3xl sm:text-4xl font-normal text-[#1d2327] tracking-tight">
+            Notre cycle d&apos;intervention
           </h2>
-          <p className="mt-3 text-xs sm:text-sm text-slate-500 font-normal">
-            De la détection initiale à la validation finale, nous suivons un protocole rigoureux garantissant la conformité.
+          <p className="mt-4 text-xs sm:text-sm text-slate-500 font-normal leading-relaxed">
+            Un processus structuré pour garantir la traçabilité et l&apos;efficacité technique de chaque projet.
           </p>
         </motion.div>
 
         <motion.div 
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 relative"
+          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 relative"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
@@ -1013,11 +1031,17 @@ function WorkflowSection() {
             <motion.div 
               key={idx}
               variants={staggerItem}
-              className="bg-white p-6 border border-slate-200/80 rounded-sm relative hover:border-[#2271b1] transition-colors"
+              className="bg-[#f8fafc] p-8 border border-slate-200/50 rounded-sm relative hover:border-[#2A5DB0]/35 transition-colors duration-300 group"
             >
-              <div className="text-3xl font-extrabold text-[#2271b1]/10 mb-4 font-heading">{s.num}</div>
-              <h3 className="text-sm font-bold text-[#1d2327] mb-2">{s.title}</h3>
-              <p className="text-xs text-slate-500 leading-relaxed font-normal">{s.desc}</p>
+              <div className="text-4xl font-black text-slate-200/80 mb-5 font-heading group-hover:text-[#2A5DB0]/15 transition-colors duration-300">
+                {s.num}
+              </div>
+              <h3 className="text-sm font-bold text-[#1d2327] mb-3">
+                {s.title}
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                {s.desc}
+              </p>
             </motion.div>
           ))}
         </motion.div>
@@ -1026,21 +1050,94 @@ function WorkflowSection() {
   )
 }
 
-/* ──────────────────────── Careers Section ──────────────────────── */
+/* ──────────────────────── Pillars Section (Pourquoi MCI - Fond Sombre) ──────────────────────── */
 
-function CareersSection() {
+function PillarsSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: '-100px' })
+
+  const pillars = [
+    {
+      title: 'Double compétence technique',
+      desc: 'Expertise croisée des systèmes thermiques (groupes électrogènes) et solaires photovoltaïques pour proposer des solutions hybrides performantes et fiables.'
+    },
+    {
+      title: 'Proximité & réactivité locale',
+      desc: 'Basés à Douala, au Cameroun, nous garantissons des temps de réponse courts et un support technique de proximité adapté aux réalités du terrain.'
+    },
+    {
+      title: 'Compétences certifiées',
+      desc: 'MCI investit continuellement dans le perfectionnement technique de ses techniciens et ingénieurs pour maintenir un niveau technique conforme aux exigences industrielles.'
+    }
+  ]
+
+  return (
+    <section ref={ref} className="bg-slate-950 text-white py-20 lg:py-28 relative overflow-hidden" aria-labelledby="pillars-title">
+      {/* Soft Ambient Light Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-[#2A5DB0]/10 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="mx-auto max-w-[1280px] px-6 lg:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          <motion.div 
+            className="lg:col-span-4"
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            variants={fadeInUp}
+          >
+            <span className="text-[11px] font-bold uppercase tracking-widest text-[#2A5DB0] mb-2.5 block">
+              Pourquoi nous faire confiance
+            </span>
+            <h2 id="pillars-title" className="font-heading text-3xl sm:text-4xl font-normal leading-tight tracking-tight text-white">
+              Les piliers de notre engagement
+            </h2>
+            <p className="mt-5 text-xs sm:text-sm text-slate-400 font-normal leading-relaxed">
+              MCI combine ingénierie de précision, réactivité logistique et adaptabilité technologique pour sécuriser la continuité de votre exploitation industrielle.
+            </p>
+          </motion.div>
+
+          <motion.div 
+            className="lg:col-span-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+            initial="hidden"
+            animate={isInView ? 'visible' : 'hidden'}
+            variants={staggerContainer}
+          >
+            {pillars.map((p, idx) => (
+              <motion.div 
+                key={idx}
+                variants={staggerItem}
+                className="bg-slate-900/40 border border-slate-800 p-6 rounded-sm hover:border-slate-700/60 transition-colors duration-300"
+              >
+                <h3 className="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#2A5DB0]" />
+                  {p.title}
+                </h3>
+                <p className="text-xs text-slate-400 leading-relaxed font-normal">
+                  {p.desc}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ──────────────────────── Join Us Section (Careers / HR) ──────────────────────── */
+
+function JoinUsSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
     <section 
       ref={ref} 
-      className="relative bg-cover bg-center py-20 lg:py-28 text-white overflow-hidden" 
+      className="relative bg-cover bg-center py-24 lg:py-32 text-white overflow-hidden" 
       style={{ backgroundImage: 'url("/images/careers-bg.jpg")' }}
-      aria-labelledby="careers-title"
+      aria-labelledby="join-title"
     >
-      {/* Dark overlay mask */}
-      <div className="absolute inset-0 bg-slate-950/85 z-10" />
+      {/* Rich dark gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/85 to-slate-950/90 z-10" />
 
       <div className="relative z-20 mx-auto max-w-[800px] px-6 text-center">
         <motion.div
@@ -1049,19 +1146,19 @@ function CareersSection() {
           variants={fadeInUp}
           className="flex flex-col items-center"
         >
-          <span className="text-[11px] font-bold uppercase tracking-widest text-[#2271b1] mb-3">
-            Formation &amp; Recrutement
+          <span className="text-[11px] font-bold uppercase tracking-widest text-[#2A5DB0] mb-3.5 block">
+            Formation &amp; Transfert de Compétences
           </span>
-          <h2 id="careers-title" className="font-heading text-3xl sm:text-4xl font-normal leading-tight mb-6">
-            Rejoignez l&apos;Excellence Technique
+          <h2 id="join-title" className="font-heading text-3xl sm:text-4xl font-normal leading-tight mb-6">
+            Développez Votre Potentiel Technique
           </h2>
-          <p className="text-sm text-slate-300 font-normal leading-relaxed mb-8 max-w-[620px]">
-            MCI SARL encourage la formation continue et le renforcement des compétences locales au Cameroun. Nous formons, accompagnons et recrutons régulièrement des techniciens et ingénieurs passionnés par le génie industriel, l&apos;automatisme et le solaire photovoltaïque.
+          <p className="text-xs sm:text-sm text-slate-300 font-normal leading-relaxed mb-8 max-w-[640px]">
+            MCI encourage le renforcement continu des compétences locales au Cameroun. Nous accompagnons et recrutons régulièrement des profils techniques qualifiés (techniciens et ingénieurs) passionnés par l&apos;électricité, l&apos;énergie et la construction industrielle.
           </p>
 
           <Link
             to="/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-none bg-bleu-marianne-clair hover:bg-blue-600 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors"
+            className="inline-flex items-center justify-center gap-2 rounded-none bg-bleu-marianne-clair hover:bg-blue-600 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors duration-200"
           >
             Nous contacter / Postuler
             <ArrowRight className="h-3.5 w-3.5" />
@@ -1096,11 +1193,11 @@ export default function Home({
       <ServicesSection />
       <SectorsSection />
       <NewsSection articles={mergedArticles} />
-      <MetricsSection />
-      <QualitySection />
-      <WorkshopSection />
-      <WorkflowSection />
-      <CareersSection />
+      <ExpertiseGridSection />
+      <EngagementsSection />
+      <TimelineSection />
+      <PillarsSection />
+      <JoinUsSection />
     </>
   )
 }
