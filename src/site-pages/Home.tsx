@@ -469,14 +469,14 @@ function ExpertiseThermiqueSection() {
   )
 }
 
-/* ──────────────────────── Base Opérationnelle Section ──────────────────────── */
+/* ──────────────────────── Atelier de Maintenance Section ──────────────────────── */
 
-function BaseOperationnelleSection() {
+function AtelierMaintenanceSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   return (
-    <section ref={ref} className="bg-white py-20 lg:py-32" aria-labelledby="base-title">
+    <section ref={ref} className="bg-white py-20 lg:py-32" aria-labelledby="atelier-title">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <div className="bg-slate-900 rounded-2xl p-6 lg:py-10 lg:pr-10 lg:pl-0 border border-slate-800 shadow-2xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -491,7 +491,7 @@ function BaseOperationnelleSection() {
               <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden shadow-2xl border border-slate-700 bg-slate-800 lg:-my-24 z-20">
                 <img
                   src="/images/atelier-container.jpg"
-                  alt="Atelier mobile et logistique de chantier MCI"
+                  alt="Atelier de maintenance mécanique et chaudronnerie MCI"
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -505,23 +505,23 @@ function BaseOperationnelleSection() {
               variants={fadeInUp}
             >
               <span className="text-[11px] font-bold uppercase tracking-widest text-[#2A5DB0] mb-3">
-                Logistique &amp; Déploiement
+                Chaudronnerie &amp; Mécanique
               </span>
               <h2
-                id="base-title"
+                id="atelier-title"
                 className="font-heading text-[32px] font-bold leading-[1.1] tracking-tight text-white md:text-[40px]"
               >
-                Base Opérationnelle Mobile
+                Atelier de Maintenance &amp; Réparation
               </h2>
               <p className="mt-6 text-base text-slate-300 leading-relaxed max-w-[620px]">
-                Pour garantir une réactivité maximale sur les sites isolés ou industriels complexes, MCI déploie ses propres ateliers conteneurisés de 40 pieds. Ces bases logistiques autonomes sont entièrement équipées pour la chaudronnerie, la mécanique et le montage électrique directement sur site.
+                Nos ateliers spécialisés sont équipés pour répondre à tous vos besoins en maintenance mécanique, tuyauterie industrielle et chaudronnerie lourde. Nous garantissons des interventions de haute précision pour réparer et prolonger la durée de vie de vos équipements de production.
               </p>
               <div className="mt-8">
                 <Link
-                  to="/realisations"
+                  to="/services"
                   className="inline-flex items-center justify-center gap-2 rounded-none bg-[#2A5DB0] hover:bg-white hover:text-[#1d2327] px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-colors duration-300"
                 >
-                  Voir nos déploiements
+                  Découvrir nos services
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>
@@ -918,107 +918,7 @@ function NewsSection({ articles = [] }: { articles?: ArticleItem[] }) {
   )
 }
 
-/* ──────────────────────── Solutions & Optimisation Section ──────────────────────── */
 
-function SolutionsSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
-  const solutions = [
-    {
-      title: "Audit Énergétique & Réseau",
-      benefit: "Économie de Facture",
-      percentage: "Jusqu'à -30%",
-      desc: "Analyse précise de la qualité d'énergie (Fluke), correction du facteur de puissance et élimination des pénalités d'énergie réactive.",
-      icon: Wrench,
-      accent: "text-[#1E3A5F] bg-[#1E3A5F]/5 border-[#1E3A5F]/10"
-    },
-    {
-      title: "Hybridation Solaire & Diesel",
-      benefit: "Économie de Carburant",
-      percentage: "Jusqu'à -40%",
-      desc: "Conception de centrales associant panneaux photovoltaïques et groupes électrogènes de secours avec automatisme de couplage avancé (ATS).",
-      icon: Zap,
-      accent: "text-[#D16B0A] bg-[#D16B0A]/5 border-[#D16B0A]/10"
-    },
-    {
-      title: "Maintenance Préventive",
-      benefit: "Réduction des Pannes",
-      percentage: "Jusqu'à -85%",
-      desc: "Suivi technique périodique rigoureux (analyse vibratoire, vidange, contrôles DSE) pour anticiper les défaillances machine majeures.",
-      icon: Clock,
-      accent: "text-[#27A658] bg-[#27A658]/5 border-[#27A658]/10"
-    }
-  ]
-
-  return (
-    <section ref={ref} className="bg-white py-20 lg:py-28" aria-labelledby="solutions-title">
-      <div className="mx-auto max-w-[1280px] px-6 lg:px-12">
-        <motion.div 
-          className="mb-16 text-center max-w-2xl mx-auto"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={fadeInUp}
-        >
-          <span className="text-[11px] font-bold uppercase tracking-widest text-[#2A5DB0] mb-2.5 block">
-            Rentabilité &amp; Efficacité
-          </span>
-          <h2 id="solutions-title" className="font-heading text-3xl sm:text-4xl font-normal text-[#1d2327] tracking-tight">
-            Optimisation Industrielle &amp; Énergétique
-          </h2>
-          <p className="mt-4 text-xs sm:text-sm text-slate-500 font-normal leading-relaxed">
-            MCI conçoit des solutions d&apos;ingénierie concrètes pour maximiser la disponibilité de vos équipements tout en réduisant vos coûts d&apos;exploitation.
-          </p>
-        </motion.div>
-
-        <motion.div 
-          className="grid gap-8 md:grid-cols-3"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerContainer}
-        >
-          {solutions.map((sol, idx) => {
-            const Icon = sol.icon
-            return (
-              <motion.div 
-                key={idx}
-                variants={staggerItem}
-                className="bg-[#f8fafc] border border-slate-200/50 p-8 rounded-sm hover:-translate-y-1.5 hover:shadow-xl hover:bg-white hover:border-[#2A5DB0]/30 transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className={`h-10 w-10 flex items-center justify-center rounded-sm border ${sol.accent}`}>
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#2A5DB0] bg-[#2A5DB0]/5 px-2.5 py-1 rounded-sm">
-                      {sol.benefit}
-                    </span>
-                  </div>
-                  <div className="text-2xl font-black text-[#1d2327] mb-2">
-                    {sol.percentage}
-                  </div>
-                  <h3 className="text-base font-bold text-[#1d2327] mb-3 leading-snug">
-                    {sol.title}
-                  </h3>
-                  <p className="text-xs text-slate-500 leading-relaxed font-normal mb-6">
-                    {sol.desc}
-                  </p>
-                </div>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-[#2A5DB0] hover:text-[#1E3A5F] transition-colors"
-                >
-                  <span>Demander une étude</span>
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
-              </motion.div>
-            )
-          })}
-        </motion.div>
-      </div>
-    </section>
-  )
-}
 
 /* ──────────────────────── Assistance Critique Section ──────────────────────── */
 
@@ -1298,7 +1198,7 @@ function TimelineSection() {
   )
 }
 
-/* ──────────────────────── Pillars Section (Pourquoi MCI - Thème Clair) ──────────────────────── */
+/* ──────────────────────── Pillars Section (Pourquoi MCI - Premium) ──────────────────────── */
 
 function PillarsSection() {
   const ref = useRef(null)
@@ -1307,65 +1207,72 @@ function PillarsSection() {
   const pillars = [
     {
       title: 'Double compétence technique',
-      desc: 'Expertise croisée des systèmes thermiques (groupes électrogènes) et solaires photovoltaïques pour proposer des solutions hybrides performantes et fiables.'
+      desc: 'Expertise croisée des systèmes thermiques (groupes électrogènes) et solaires photovoltaïques pour proposer des solutions hybrides performantes et fiables.',
+      icon: <Zap className="w-8 h-8 text-[#D16B0A]" />
     },
     {
-      title: 'Proximité & réactivité locale',
-      desc: 'Basés à Douala, au Cameroun, nous garantissons des temps de réponse courts et un support technique de proximité adapté aux réalités du terrain.'
+      title: 'Proximité & réactivité',
+      desc: 'Basés à Douala, au Cameroun, nous garantissons des temps de réponse courts et un support technique de proximité adapté aux réalités du terrain industriel africain.',
+      icon: <MapPin className="w-8 h-8 text-[#2A5DB0]" />
     },
     {
       title: 'Compétences certifiées',
-      desc: 'MCI investit continuellement dans le perfectionnement technique de ses techniciens et ingénieurs pour maintenir un niveau technique conforme aux exigences industrielles.'
+      desc: 'MCI investit continuellement dans le perfectionnement technique de ses ingénieurs pour maintenir un niveau technique conforme aux exigences industrielles internationales.',
+      icon: <Shield className="w-8 h-8 text-[#D16B0A]" />
     }
   ]
 
   return (
-    <section ref={ref} className="bg-slate-50 text-slate-800 py-20 lg:py-28 relative overflow-hidden" aria-labelledby="pillars-title">
-      {/* Soft Ambient Light Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-[#2A5DB0]/5 blur-[120px] rounded-full pointer-events-none" />
+    <section ref={ref} className="bg-[#0f172a] text-white py-24 lg:py-32 relative overflow-hidden" aria-labelledby="pillars-title">
+      {/* Decorative ambient lights */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#2A5DB0]/10 blur-[150px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#D16B0A]/10 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="mx-auto max-w-[1280px] px-6 lg:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          <motion.div 
-            className="lg:col-span-4"
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-            variants={fadeInUp}
-          >
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[#2A5DB0] mb-2.5 block">
-              Pourquoi nous faire confiance
-            </span>
-            <h2 id="pillars-title" className="font-heading text-3xl sm:text-4xl font-normal leading-tight tracking-tight text-[#1d2327]">
-              Les piliers de notre engagement
-            </h2>
-            <p className="mt-5 text-xs sm:text-sm text-slate-500 font-normal leading-relaxed">
-              MCI combine ingénierie de précision, réactivité logistique et adaptabilité technologique pour sécuriser la continuité de votre exploitation industrielle.
-            </p>
-          </motion.div>
+        <motion.div 
+          className="text-center max-w-2xl mx-auto mb-20"
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={fadeInUp}
+        >
+          <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400 mb-4 block">
+            Pourquoi nous faire confiance
+          </span>
+          <h2 id="pillars-title" className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-white mb-6">
+            Les piliers de notre <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#2A5DB0] to-[#D16B0A]">engagement</span>
+          </h2>
+          <p className="text-sm text-slate-400 font-normal leading-relaxed">
+            MCI combine ingénierie de précision, réactivité logistique et adaptabilité technologique pour sécuriser la continuité de votre exploitation industrielle.
+          </p>
+        </motion.div>
 
-          <motion.div 
-            className="lg:col-span-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
-            initial="hidden"
-            animate={isInView ? 'visible' : 'hidden'}
-            variants={staggerContainer}
-          >
-            {pillars.map((p, idx) => (
-              <motion.div 
-                key={idx}
-                variants={staggerItem}
-                className="bg-white border border-slate-200/60 p-6 rounded-sm hover:border-slate-300 hover:shadow-md transition-all duration-300"
-              >
-                <h3 className="text-sm font-semibold text-[#1d2327] mb-3 flex items-center gap-2">
-                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#2A5DB0]" />
-                  {p.title}
-                </h3>
-                <p className="text-xs text-slate-500 leading-relaxed font-normal">
-                  {p.desc}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
+        <motion.div 
+          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          initial="hidden"
+          animate={isInView ? 'visible' : 'hidden'}
+          variants={staggerContainer}
+        >
+          {pillars.map((p, idx) => (
+            <motion.div 
+              key={idx}
+              variants={staggerItem}
+              className="group relative bg-[#1e293b]/50 backdrop-blur-md border border-slate-700/50 p-8 lg:p-10 rounded-2xl hover:bg-[#1e293b] hover:border-slate-600 transition-all duration-500 overflow-hidden"
+            >
+              {/* Subtle hover gradient inside the card */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+              
+              <div className="mb-6 p-4 bg-slate-800/50 rounded-xl inline-block border border-slate-700/50 group-hover:scale-110 group-hover:border-slate-600 transition-all duration-500">
+                {p.icon}
+              </div>
+              <h3 className="text-lg font-bold text-white mb-4">
+                {p.title}
+              </h3>
+              <p className="text-sm text-slate-400 leading-relaxed font-normal">
+                {p.desc}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   )
@@ -1457,13 +1364,12 @@ export default function Home({
     <>
       <HeroSection settings={mergedSettings} />
       <WhoWeAreSection />
-      <ExpertiseThermiqueSection />
-      <BaseOperationnelleSection />
+      <AtelierMaintenanceSection />
       <VisionSection />
       <ServicesSection />
       <SectorsSection />
+      <ExpertiseThermiqueSection />
       <NewsSection articles={mergedArticles} />
-      <SolutionsSection />
       <CriticalAssistanceSection />
       <TimelineSection />
       <PillarsSection />
