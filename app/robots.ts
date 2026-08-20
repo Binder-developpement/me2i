@@ -1,11 +1,10 @@
 import { MetadataRoute } from 'next'
+import { SITE_URL } from '@/src/lib/seo'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm'
-
   return {
     rules: [
       {
@@ -14,24 +13,32 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin/', '/api/'],
       },
       {
-        userAgent: 'Googlebot',
+        userAgent: [
+          'Googlebot',
+          'Bingbot',
+          'Applebot',
+          'DuckDuckBot',
+          'YandexBot',
+        ],
         allow: '/',
         disallow: ['/admin/', '/api/'],
       },
       {
-        userAgent: 'Bingbot',
+        userAgent: [
+          'facebookexternalhit',
+          'Twitterbot',
+          'LinkedInBot',
+          'WhatsApp',
+          'TelegramBot',
+          'Slackbot',
+          'Pinterestbot',
+          'Discordbot',
+        ],
         allow: '/',
-        disallow: ['/admin/', '/api/'],
-      },
-      {
-        userAgent: 'Twitterbot',
-        allow: '/',
-      },
-      {
-        userAgent: 'facebookexternalhit',
-        allow: '/',
+        disallow: ['/admin/'],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   }
 }

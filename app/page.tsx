@@ -1,61 +1,34 @@
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import Home from '@/src/site-pages/Home'
 import type { Metadata } from 'next'
+import { constructMetadata } from '@/src/lib/seo'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm';
-
-export const metadata: Metadata = {
-  title: "MCI : Leader en Maintenance Industrielle et Énergie au Cameroun",
+export const metadata: Metadata = constructMetadata({
+  title: 'MCI - Leader en Maintenance Industrielle et Énergie au Cameroun',
   description:
-    "Expertise haut de gamme en maintenance industrielle, groupes électrogènes, automatisme, armoires électriques et installations solaires hybrides à Douala et Yaoundé.",
+    'Expertise haut de gamme en maintenance industrielle, groupes électrogènes, automatisme, armoires électriques et installations solaires hybrides à Douala et Yaoundé.',
+  path: '/',
   keywords: [
-    "maintenance industrielle",
-    "maintenances industrielles",
-    "industrial maintenance",
-    "generator maintenance",
-    "maintenance groupe électrogène Cameroun",
-    "automatisme industriel",
-    "industrial automation",
-    "onduleurs UPS",
-    "énergie sans interruption",
-    "electromechanical services"
+    'maintenance industrielle Cameroun',
+    'groupes électrogènes Douala Yaoundé',
+    'automatisme PLC',
+    'onduleurs UPS',
+    'énergie solaire industrielle',
   ],
-  alternates: {
-    canonical: "./",
-  },
-  openGraph: {
-    title: "MCI : Leader en Maintenance Industrielle et Énergie au Cameroun",
-    description: "Expertise en maintenance industrielle, groupes électrogènes, automatisme et installations électriques.",
-    url: baseUrl,
-    images: [
-      {
-        url: `${baseUrl}/og-preview.png`,
-        width: 1200,
-        height: 630,
-        alt: "MCI Maintenance Industrielle et Énergie",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "MCI : Leader en Maintenance Industrielle et Énergie au Cameroun",
-    description: "Expertise en maintenance industrielle, groupes électrogènes, automatisme et installations électriques.",
-    images: [`${baseUrl}/og-preview.png`],
-  },
-};
+})
 
 export default async function HomePage() {
   let settingsMap: Record<string, string> = {
     company_name: 'MCI',
     tagline: 'Maintenance & Construction Industrielle',
-    email: 'contact@me2i.cm',
+    email: 'contact@mci.cm',
     phone: '+237 699 00 00 00',
     emergency_phone: '+237 677 00 00 00',
     address: 'Douala / Yaoundé, Cameroun',
-    opening_hours: 'Lundi – Vendredi : 7h30 – 18h00',
+    opening_hours: 'Lundi - Vendredi : 7h30 - 18h00',
   }
   let dbArticles: any[] = []
 

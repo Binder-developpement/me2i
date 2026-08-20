@@ -1,50 +1,25 @@
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import ServicesClient from '@/src/site-pages/ServicesClient'
 import type { Metadata } from 'next'
+import { constructMetadata } from '@/src/lib/seo'
+import { BreadcrumbJsonLd, ServiceJsonLd } from '@/src/components/seo/JsonLd'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm';
-
-export const metadata: Metadata = {
+export const metadata: Metadata = constructMetadata({
   title: 'Nos Services et Solutions de Maintenance Industrielle',
-  description: 'Services d\'ingénierie MCI au Cameroun : maintenance industrielle, groupes électrogènes, automatisme, armoires électriques et installations UPS.',
+  description:
+    "Services d'ingénierie MCI au Cameroun : maintenance industrielle, groupes électrogènes, automatisme, armoires électriques et installations UPS.",
+  path: '/services',
   keywords: [
-    "maintenance industrielle",
-    "maintenances industrielles",
-    "industrial maintenance services",
-    "maintenance groupe électrogène",
-    "generator maintenance Africa",
-    "automatisme industriel",
-    "industrial automation services",
-    "onduleurs industriels",
-    "uninterruptible power supply",
-    "armoires électriques"
+    'services maintenance industrielle',
+    'contrat maintenance groupe électrogène',
+    'ingénierie électrique Douala',
+    'dépannage automates industriels',
+    'onduleurs de secours Cameroun',
   ],
-  alternates: {
-    canonical: `${baseUrl}/services`,
-  },
-  openGraph: {
-    title: 'Nos Services et Solutions de Maintenance Industrielle | MCI',
-    description: 'Maintenance des groupes électrogènes, automatisme et installations électriques industrielles au Cameroun.',
-    url: `${baseUrl}/services`,
-    images: [
-      {
-        url: `${baseUrl}/og-preview.png`,
-        width: 1200,
-        height: 630,
-        alt: "MCI Services et Expertises",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: 'Nos Services et Solutions de Maintenance Industrielle | MCI',
-    description: 'Maintenance des groupes électrogènes, automatisme et installations électriques industrielles au Cameroun.',
-    images: [`${baseUrl}/og-preview.png`],
-  },
-}
+})
 
 export default async function ServicesPage() {
   let servicesList: any[] = []
@@ -62,5 +37,24 @@ export default async function ServicesPage() {
     console.error('Erreur chargement services:', err)
   }
 
-  return <ServicesClient initialServices={servicesList} />
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Accueil', url: '/' },
+          { name: 'Services', url: '/services' },
+        ]}
+      />
+      {servicesList.map((service) => (
+        <ServiceJsonLd
+          key={service.id}
+          title={service.title}
+          description={service.description || service.title}
+          url={`/services#${service.slug || service.id}`}
+          image={service.cover_url}
+        />
+      ))}
+      <ServicesClient initialServices={servicesList} />
+    </>
+  )
 }

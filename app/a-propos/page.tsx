@@ -1,58 +1,34 @@
 import { createServerClient } from '@/src/admin/lib/supabase-server'
 import About from '@/src/site-pages/About'
 import type { Metadata } from 'next'
+import { constructMetadata } from '@/src/lib/seo'
+import { BreadcrumbJsonLd } from '@/src/components/seo/JsonLd'
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm';
-
-export const metadata: Metadata = {
-  title: "À propos de MCI : Expertise et Ingénierie Industrielle au Cameroun",
+export const metadata: Metadata = constructMetadata({
+  title: 'À propos de MCI - Expertise et Ingénierie Industrielle au Cameroun',
   description:
     "Découvrez l'histoire, la vision et l'équipe d'ingénieurs et techniciens de MCI, référence en maintenance industrielle et ingénierie énergétique.",
+  path: '/a-propos',
   keywords: [
-    "à propos MCI",
-    "maintenance industrielle Cameroun",
-    "maintenances industrielles",
-    "industrial maintenance company",
-    "ingénierie électrique Douala",
-    "experts groupes électrogènes",
-    "power engineering services"
+    'à propos MCI',
+    'société maintenance industrielle Cameroun',
+    'ingénieurs électromécanique Douala',
+    'équipe technique MCI',
   ],
-  alternates: {
-    canonical: "/a-propos",
-  },
-  openGraph: {
-    title: "À propos de MCI : Expertise et Ingénierie Industrielle au Cameroun",
-    description: "Découvrez notre entreprise et nos équipes d'ingénieurs en maintenance industrielle.",
-    url: `${baseUrl}/a-propos`,
-    images: [
-      {
-        url: `${baseUrl}/og-preview.png`,
-        width: 1200,
-        height: 630,
-        alt: "MCI À propos",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "À propos de MCI : Expertise et Ingénierie Industrielle au Cameroun",
-    description: "Découvrez notre entreprise et nos équipes d'ingénieurs en maintenance industrielle.",
-    images: [`${baseUrl}/og-preview.png`],
-  },
-};
+})
 
 export default async function AboutPage() {
   let settingsMap: Record<string, string> = {
     company_name: 'MCI',
     tagline: 'Maintenance & Construction Industrielle',
-    email: 'contact@me2i.cm',
+    email: 'contact@mci.cm',
     phone: '+237 699 00 00 00',
     emergency_phone: '+237 677 00 00 00',
     address: 'Douala / Yaoundé, Cameroun',
-    opening_hours: 'Lundi – Vendredi : 7h30 – 18h00',
+    opening_hours: 'Lundi - Vendredi : 7h30 - 18h00',
   }
 
   try {
@@ -70,5 +46,15 @@ export default async function AboutPage() {
     console.error('Erreur chargement parametres a-propos:', err)
   }
 
-  return <About settings={settingsMap} />
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Accueil', url: '/' },
+          { name: 'À propos', url: '/a-propos' },
+        ]}
+      />
+      <About settings={settingsMap} />
+    </>
+  )
 }

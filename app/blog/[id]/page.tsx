@@ -2,6 +2,8 @@ import { createServerClient } from '@/src/admin/lib/supabase-server'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
+import { constructMetadata, getAbsoluteUrl } from '@/src/lib/seo'
+import { BreadcrumbJsonLd, ArticleJsonLd } from '@/src/components/seo/JsonLd'
 import {
   ArrowLeft,
   Calendar,
@@ -56,42 +58,24 @@ export async function generateMetadata({
     }
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm'
-  const articleUrl = `${baseUrl}/blog/${article.slug || article.id}`
   const description = article.excerpt || article.title
-  const imageUrl = article.cover_url || `${baseUrl}/og-preview.png`
+  const path = `/blog/${article.slug || article.id}`
 
-  return {
+  return constructMetadata({
     title: article.title,
-    description: description,
-    alternates: {
-      canonical: articleUrl,
-    },
-    openGraph: {
-      type: 'article',
-      locale: 'fr_FR',
-      url: articleUrl,
-      title: article.title,
-      description: description,
-      siteName: 'MCI : Maintenance et Énergie',
-      publishedTime: article.created_at,
-      modifiedTime: article.updated_at || article.created_at,
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: article.title,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: article.title,
-      description: description,
-      images: [imageUrl],
-    },
-  }
+    description,
+    path,
+    image: article.cover_url,
+    type: 'article',
+    publishedTime: article.created_at,
+    modifiedTime: article.updated_at || article.created_at,
+    keywords: [
+      article.title,
+      article.category || 'Maintenance Industrielle',
+      'MCI blog technique',
+      'guide maintenance Cameroun',
+    ],
+  })
 }
 
 export default async function SingleArticlePage({
@@ -142,34 +126,23 @@ export default async function SingleArticlePage({
     cleanExcerptText.length > 0 &&
     (cleanContentText === cleanExcerptText || cleanContentText.startsWith(cleanExcerptText))
 
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://me2i.cm'
-  const jsonLdArticle = {
-    '@context': 'https://schema.org',
-    '@type': 'TechArticle',
-    headline: article.title,
-    description: article.excerpt || article.title,
-    image: article.cover_url ? [article.cover_url] : [],
-    datePublished: article.created_at,
-    dateModified: article.updated_at || article.created_at,
-    author: {
-      '@type': 'Organization',
-      name: 'MCI Maintenance et Énergie',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: 'MCI',
-      logo: {
-        '@type': 'ImageObject',
-        url: `${baseUrl}/og-preview.png`,
-      },
-    },
-  }
-
   return (
     <div className="pt-24 pb-20 min-h-screen bg-[#f8fafc] text-gray-800">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArticle) }}
+      <BreadcrumbJsonLd
+        items={[
+          { name: 'Accueil', url: '/' },
+          { name: 'Blog', url: '/blog' },
+          { name: article.title, url: `/blog/${article.slug || article.id}` },
+        ]}
+      />
+      <ArticleJsonLd
+        title={article.title}
+        description={article.excerpt || article.title}
+        url={`/blog/${article.slug || article.id}`}
+        image={article.cover_url}
+        datePublished={article.created_at}
+        dateModified={article.updated_at || article.created_at}
+        category={article.category}
       />
 
       {/* Top Bar with Back Link on the LEFT */}
